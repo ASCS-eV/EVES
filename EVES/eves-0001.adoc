@@ -1,0 +1,40 @@
+# 1 - EVES Purpose and Process
+
+[cols="1,5"]
+|===
+|EVES
+|1
+
+|Title
+|EVES Purpose and Process
+
+|Type
+|Process
+
+|Linked to
+|-
+
+|Status
+|Draft
+
+|Created
+|2024-04-09
+|===
+
+## Abstract
+
+
+## Motivation
+
+
+
+## Specification
+
+
+
+## Rationale
+
+
+
+## Implementation
+
