@@ -1,0 +1,42 @@
+# <No> - EVES Purpose and Process
+
+[cols="1,5"]
+|===
+|EVES
+|<No>
+
+|Title
+|<EVES Title>
+
+|Type
+|<EVES Type>
+
+|Linked to
+|<Link other EVES>
+
+|Status
+|<Current Status>
+
+|Created
+|2024-04-09
+|===
+
+## Abstract
+
+Write a short paragraph about the contents of the specification.
+
+## Motivation
+
+Describe what motivated you to write this specification. Why is it needed?
+
+## Specification
+
+This section shall contain the actual specification. It may have multiple subsections.
+
+## Rationale
+
+Add a reason of the specification. Why is it specified as written above?
+
+## Implementation
+
+Link examples to demonstrate the successful implementation of the specification.
