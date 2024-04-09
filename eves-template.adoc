@@ -25,6 +25,8 @@
 
 Write a short paragraph about the contents of the specification.
 
+[Wrong link to test linter](./points_to_nowhere.adoc)
+
 ## Motivation
 
 Describe what motivated you to write this specification. Why is it needed?
