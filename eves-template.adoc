@@ -27,6 +27,10 @@ Write a short paragraph about the contents of the specification.
 
 [Wrong link to test linter](./points_to_nowhere.adoc)
 
+https://opensource.org/[opensource]
+
+opensource[https://opensource.org/]
+
 Intoduce spelin errors.
 
 ## Motivation
