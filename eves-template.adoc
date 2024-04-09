@@ -27,9 +27,11 @@ Write a short paragraph about the contents of the specification.
 
 [Wrong link to test linter](./points_to_nowhere.adoc)
 
-https://opensource.org/[opensource]
+xref:points_to_nowhere.adoc[link to missing file]
 
-opensource[https://opensource.org/]
+https://opensource.org/[correct link]
+
+wrong link[https://opensource.org/]
 
 https://opensource.org/
 
