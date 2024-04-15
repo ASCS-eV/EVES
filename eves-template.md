@@ -9,15 +9,11 @@
 | Status | _Current Status_ |
 | Created | _yyyy-mm-dd_ |
 
-## Abstract
-
-Write a short paragraph about the contents of the specification.
-
-Intoduce spelin errors.
-
 ## Motivation
 
 Describe what motivated you to write this specification. Why is it needed?
+
+Intoduce spelin errors.
 
 ## Specification
 
@@ -26,6 +22,10 @@ This section shall contain the actual specification. It may have multiple subsec
 ## Rationale
 
 Add a reason of the specification. Why is it specified as written above?
+
+## Test Cases
+
+Write simple implementation of the specification as a test case.
 
 ## Implementation
 
