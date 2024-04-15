@@ -1,39 +1,17 @@
-# <No> - EVES Template
+# _No_ - EVES _Title_
 
-[cols="1,5"]
-|===
-|EVES
-|<No>
-
-|Title
-|<EVES Title>
-
-|Type
-|<EVES Type>
-
-|Linked to
-|<Link other EVES>
-
-|Status
-|<Current Status>
-
-|Created
-|2024-04-09
-|===
+| | |
+| --- | --- |
+| EVES | _No_ |
+| Title | _EVES Title_ |
+| Type | _EVES Type_ |
+| Linked to | _Link other EVES_ |
+| Status | _Current Status_ |
+| Created | _yyyy-mm-dd_ |
 
 ## Abstract
 
 Write a short paragraph about the contents of the specification.
-
-[Wrong link to test linter](./points_to_nowhere.adoc)
-
-xref:points_to_nowhere.adoc[link to missing file]
-
-https://opensource.org/[correct link]
-
-wrong link[https://opensource.org/]
-
-https://opensource.org/
 
 Intoduce spelin errors.
 

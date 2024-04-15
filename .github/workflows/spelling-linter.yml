@@ -1,4 +1,4 @@
-name: adoc-linter
+name: spelling-linter
 on: [pull_request]
 
 jobs:
