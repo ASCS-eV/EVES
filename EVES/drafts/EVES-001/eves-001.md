@@ -137,6 +137,7 @@ This process introduces new standards and does not conflict with prior procedure
 
 1. [Chain Agnostic Improvement Proposals (CAIPs)](https://github.com/ChainAgnostic/CAIPs)
 2. [OpenMSL Governance Rules](https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html)
+3. [IPFS Specifications](https://github.com/ipfs/specs)
 
 ## Implementation
 
