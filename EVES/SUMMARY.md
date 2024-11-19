@@ -2,7 +2,6 @@
 
 ## Introduction
 
-* [EVES Introduction](../README.md)
 * [EVES GitHub Structure](README.md)
 
 ## EVES
