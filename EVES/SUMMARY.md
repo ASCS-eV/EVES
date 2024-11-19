@@ -6,4 +6,4 @@
 
 ## EVES
 
-* [EVES 1](eves-0001.md)
+* [EVES-001](drafts/EVES-001/eves-001.md)
