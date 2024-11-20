@@ -77,6 +77,7 @@ The ENVITED-X Data Space implements a three-tiered privacy model:
 - Store *publicUser* metadata at `https://ipfs.envited-x.net/Asset-CID/Data-CID`.
 - Calculate CIDs for all `publicUser` data.
 - Create `tzip21_asset_manifest.json` by replacing relative paths in `manifest.json` with IPFS/envited-x.net URLs.
+- Replace `@id` from `manifest.json` with generated UUID in `tzip21_asset_manifest.json`.
 - Create `tzip21_token_metadata.json` and map metadata fields.
 
 #### Step 3: Preview Data
@@ -86,6 +87,7 @@ The ENVITED-X Data Space implements a three-tiered privacy model:
 
 #### Step 4: Mint Token
 
+- Requirement: Use signed CIDs for the upload to Pinata according to EIP-712.
 - Upload `publicUser` information and `tzip21_asset_manifest.json` to IPFS.
 - Verify that CIDs from Pinata returned the same CIDs then the pre-calculation.
 - Upload `tzip21_token_metadata.json` to IPFS.
@@ -102,7 +104,8 @@ The ENVITED-X Data Space implements a three-tiered privacy model:
 
 #### CID as the Primary Identifier
 
-- The CID of the uploaded `asset.zip` serves as the unique identifier connecting data across all systems.  
+- The CID of the uploaded `asset.zip` serves as the unique identifier connecting data across all systems.
+- The CIDs are signed by the user according to EIP-712.
 - An additional UUID MUST be generated pre-mint to link the asset with the ENVITED-X database securely.
 - The DID of the member associated with the user minting the asset MUST be known.
 
@@ -116,10 +119,9 @@ The synchronization between the smart contract and the ENVITED-X database relies
 
 1. The contract DID (current Ghostnet contract):  
    `did:tezos:NetXnHfVqm9iesp:KT1XC2fTBNqoafnrhEb7TuToRCzewgbHAhnA`
-2. Search CID of `tzip21_token_metadata.json` in database.
-3. Search the token owner in the database and compare with the owner in the smart contract.
-4. Replace `@id` in `manifest.json` with generated UUID in `tzip21_asset_manifest.json` and compare to database.
-5. Compare CID of the asset to avoid duplicates.
+2. Search `CID` of `tzip21_token_metadata.json` in database.
+3. Compare if signature on CID is a `user` belonging to the `member` and if member is owner of token.
+4. Check: Uniqueness of CID in database.
 
 #### TZIP-21 rich metadata mapping
 
@@ -162,3 +164,4 @@ This specification introduces new processes for asset uploads and is fully compa
 4. [RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels](https://datatracker.ietf.org/doc/html/rfc2119)
 5. [Gaia-X Policy Rules Compliance Document (Release 24.11)](https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/)
 6. [Reference Implementation](https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/metadata)
+7. [EIP-712](https://eips.ethereum.org/EIPS/eip-712)

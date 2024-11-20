@@ -4,6 +4,8 @@ Welcome to the [ENVITED Ecosystem Specifications (EVES) repository](https://gith
 This repository contains the official specifications for the ENVITED-X Data Space, maintained by the Automotive Solution Center for Simulation e.V. (ASCS).
 These specifications define and document implementation decisions, processes, and standards for the ecosystem.
 
+For more details on the EVES process, refer to [EVES-001](https://ascs-ev.github.io/EVES/drafts/EVES-001/eves-001.html).  
+
 ## Repository Structure
 
 The repository is organized into the following structure:
@@ -83,5 +85,4 @@ The repository is organized into the following structure:
 
 ---
 
-For more details on the EVES process, refer to [EVES-001](./draft/EVES-001/EVES-001.md).  
 Questions? Open an issue or join the discussion on GitHub!
