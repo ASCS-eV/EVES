@@ -12,6 +12,7 @@ The process on how to write, submit or change specifications in defined in [EVES
 
 | Number | Title | Type | Status |
 | ------ | ----- | ---- | ------ |
-| [001](./EVES/drafts/EVES-001/eves-001.md) | ENVITED Ecosystem Specification Process     | Process   | Draft |
-| [002](./EVES/drafts/EVES-002/eves-002.md) | ENVITED-X Data Space Architecture Overview  | Standards | Draft |
-| [003](./EVES/drafts/EVES-003/eves-003.md) | ENVITED Asset Definition and Upload Process | Standards | Draft |
+| [001](./EVES/drafts/EVES-001/eves-001.md) | ENVITED Ecosystem Specification Process            | Process   | Draft |
+| [002](./EVES/drafts/EVES-002/eves-002.md) | ENVITED-X Data Space Architecture Overview         | Standards | Draft |
+| [003](./EVES/drafts/EVES-003/eves-003.md) | ENVITED Asset Definition and Upload Process        | Standards | Draft |
+| [004](./EVES/drafts/EVES-004/eves-004.md) | ENVITED Roles and Responsibilities of EVES Editors | Process   | Draft |

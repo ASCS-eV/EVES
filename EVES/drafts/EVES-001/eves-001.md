@@ -79,13 +79,15 @@ Each EVES type must be specified in the document header under the "Type" field.
 
 #### EVES Editors
 
-- Members of the ENVITED Research Cluster within ASCS.
+- (Community-)Members of the ENVITED Research Cluster within ASCS.
 - Oversee formatting, process adherence, and editorial mediation.
 - Governed by the rules outlined [here](https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html).
+- Roles and responsibilities specified in [EVES-004](https://github.com/ASCS-eV/EVES/blob/main/drafts/EVES-001/EVES-001.md).
 
 #### Approvers
 
 - A designated body within ASCS ENVITED community responsible for final evaluation and adoption.
+- The body consists of EVES Editors with voting rights as full members of the ASCS e.V.
 
 ### 5. Reference Implementation
 
