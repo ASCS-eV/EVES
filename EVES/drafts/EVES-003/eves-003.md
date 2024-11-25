@@ -98,7 +98,9 @@ The ENVITED-X Data Space implements a three-tiered privacy model:
 
 - Use a listener to detect mint events and synchronize data with the ENVITED-X database.
 - Verify that data referenced in the token metadata is the same as stored in Step 2).
+- If asset is not yet in DB then mark it as foreign asset and add the `publisher`information to the DB.
 - Verify the asset in reverse order as in step 1).
+- Only public information of assets can be verified if uploaded through another application then ENVITED-X.
 
 ### 5. Database Synchronization
 
