@@ -1,6 +1,6 @@
 ---
 eves-identifier: 00X
-title: Name describing the EVES
+title: Name describing the EVES, prefixed with "ENVITED-X "
 author: Name (@GitHub user)
 discussions-to: https://github.com/ASCS-eV/EVES/issues/
 status: Draft

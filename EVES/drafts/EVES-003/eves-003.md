@@ -1,6 +1,6 @@
 ---
 eves-identifier: 003
-title: ENVITED Asset Definition and Upload Process
+title: ENVITED-X Asset Definition and Upload Process
 author: Carlo van Driesten (@jdsika)
 discussions-to: https://github.com/ASCS-eV/EVES/issues/4
 status: Draft
@@ -127,7 +127,8 @@ The synchronization between the smart contract and the ENVITED-X database relies
 
 #### TZIP-21 rich metadata mapping
 
-Attributes not in the table are static and the same for every mint. Examples are the first five tags or "publishers", which is always ENVITED-X and the ASCS as the mint is conducted through the website.
+Attributes not in the table are static and the same for every mint.
+Examples are the first five tags or "publishers", which is always ENVITED-X and the ASCS as the mint is conducted through the website.
 
 | TZIP-21            | EVES-003                                             | Comment                                                      |
 | -------------------| ---------------------------------------------------- | ------------------------------------------------------------ |
@@ -156,7 +157,8 @@ Attributes not in the table are static and the same for every mint. Examples are
 
 ## Backwards Compatibility
 
-This specification introduces new processes for asset uploads and is fully compatible with existing ENVITED-X systems. No retroactive changes to previous assets are required.
+This specification introduces new processes for asset uploads and is fully compatible with existing ENVITED-X systems.
+No retroactive changes to previous assets are required.
 
 ## References
 

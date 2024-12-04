@@ -1,6 +1,6 @@
 ---
 eves-identifier: 001
-title: ENVITED Ecosystem Specification Process
+title: ENVITED-X Ecosystem Specification Process
 author: Carlo van Driesten (@jdsika)
 discussions-to: https://github.com/ASCS-eV/EVES/issues/9
 status: Draft
@@ -17,7 +17,8 @@ These specifications standardize and document implementation decisions for the E
 
 ## Motivation
 
-A standardized process for EVES ensures clarity, inclusivity, and accountability in the evolution of the ENVITED ecosystem. By defining roles, responsibilities, and lifecycle stages, this process aligns with best practices from similar initiatives, such as Chain Agnostic Improvement Proposals (CAIPs).
+A standardized process for EVES ensures clarity, inclusivity, and accountability in the evolution of the ENVITED ecosystem.
+By defining roles, responsibilities, and lifecycle stages, this process aligns with best practices from similar initiatives, such as Chain Agnostic Improvement Proposals (CAIPs).
 
 ## Specification
 
@@ -129,7 +130,8 @@ All EVES documents must adhere to the following structure:
 
 ### 8. Governance
 
-The process emphasizes openness, inclusivity, and accountability. Discussions, decisions, and documentation are publicly accessible on the EVES GitHub repository. Governance rules for EVES Editors are defined [here](https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html).
+The process emphasizes openness, inclusivity, and accountability. Discussions, decisions, and documentation are publicly accessible on the EVES GitHub repository.
+Governance rules for EVES Editors are defined [here](https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html).
 
 ## Backwards Compatibility
 

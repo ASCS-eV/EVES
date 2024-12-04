@@ -1,6 +1,6 @@
 ---
 eves-identifier: 004
-title: Roles and Responsibilities of EVES Editors
+title: ENVITED-X Roles and Responsibilities of EVES Editors
 author: Carlo van Driesten (@jdsika)
 discussions-to:
 status: Draft
@@ -110,6 +110,7 @@ This specification provides clarity on the editors' tasks, empowering the commun
 #### 4.2 Providing Technical Designs or Implementations
 
 - Authors and contributors are solely responsible for technical designs and reference implementations.
+- Information about e.g designs and technical implementations are only exchanged for the purpose of defining the specification.
 
 #### 4.3 Advocating for Specific Proposals
 
@@ -127,8 +128,9 @@ This specification provides clarity on the editors' tasks, empowering the commun
 
 #### 4.6 Promoting or Ensuring Adoption of EVES
 
-- Editors are not tasked with promoting specific EVES or ensuring their adoption.  
-- Community members and stakeholders must drive the promotion and integration of Final EVES.
+- Editors are not tasked with promoting specific EVES or ensuring their adoption.
+- The adoption of EVES is the free choice of every community member.
+- Community members and stakeholders are solely responsible to drive the promotion and integration of Final EVES.
 
 #### 4.7 Maintaining Approved EVES
 
