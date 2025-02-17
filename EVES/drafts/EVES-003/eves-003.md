@@ -29,8 +29,8 @@ This EVES addresses the need for clear guidelines to onboard assets and synchron
 
 ### 1. Asset Definition
 
-An asset is defined by the [Gaia-X 4 PLC-AAD Manifest Ontology](https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/manifest/).
-The example implementation [here](https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/metadata) is based on release v0.1.6 from the [HD-Map Asset Example](https://github.com/GAIA-X4PLC-AAD/hd-map-asset-example).
+An asset is defined by the [Gaia-X 4 PLC-AAD Manifest Ontology](https://github.com/ASCS-eV/ontology-management-base/tree/main/manifest).
+The example implementation in the 📁 `metadata/` folder is based on release v0.1.8 of the [HD-Map Asset Example](https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.1.8).
 
 This EVES references the [Gaia-X Policy Rules Compliance Document (Release 24.11)](https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/). Compatibility with this release is **to be verified** in a future update of this EVES.
 
@@ -107,8 +107,8 @@ The ENVITED-X Data Space implements a three-tiered privacy model:
 #### CID as the Primary Identifier
 
 - The CID of the uploaded `asset.zip` serves as the unique identifier connecting data across all systems.
-- The CIDs are signed by the user according to EIP-712.
-- An additional UUID MUST be generated pre-mint to link the asset with the ENVITED-X database securely.
+- The CIDs MAY be signed by the user according to EIP-712.
+- A UUID MUST be generated pre-mint to link the asset with the ENVITED-X database securely.
 - The DID of the member associated with the user minting the asset MUST be known.
 
 #### Pre-Mint Information
@@ -120,7 +120,7 @@ If additional non-public information needs to be stored in the database before m
 The synchronization between the smart contract and the ENVITED-X database relies on:
 
 1. The contract DID (current Ghostnet contract):  
-   `did:tezos:NetXnHfVqm9iesp:KT1XC2fTBNqoafnrhEb7TuToRCzewgbHAhnA`
+   `did:tezos:NetXnHfVqm9iesp:KT1PCaD2kmgCHy15wQ1gpqZUy9RLxyBVJdTF`
 2. Search `CID` of `tzip21_token_metadata.json` in database.
 3. Compare if signature on CID is a `user` belonging to the `member` and if member is owner of token.
 4. Check: Uniqueness of CID in database.
@@ -162,10 +162,10 @@ No retroactive changes to previous assets are required.
 
 ## References
 
-1. [Gaia-X 4 PLC-AAD Manifest Ontology](https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/manifest/)
-2. [HD-Map Asset Example](https://github.com/GAIA-X4PLC-AAD/hd-map-asset-example)
+1. [Gaia-X 4 PLC-AAD Manifest Ontology](https://github.com/ASCS-eV/ontology-management-base/tree/main/manifest)
+2. [HD-Map Asset Example](https://github.com/ASCS-eV/hd-map-asset-example)
 3. [Pinata Documentation](https://docs.pinata.cloud/web3/pinning/pinata-metadata#pinataoptions)
 4. [RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels](https://datatracker.ietf.org/doc/html/rfc2119)
 5. [Gaia-X Policy Rules Compliance Document (Release 24.11)](https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/)
-6. [Reference Implementation](https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/metadata)
+6. [Reference Implementation](https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/)
 7. [EIP-712](https://eips.ethereum.org/EIPS/eip-712)

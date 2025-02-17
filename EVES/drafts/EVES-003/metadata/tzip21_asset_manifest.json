@@ -1,0 +1,155 @@
+{
+  "@context": {
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "gx": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "sh": "http://www.w3.org/ns/shacl#",
+    "manifest": "https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/manifest/"
+  },
+  "@id": "urn:uuid:896f0b9d-5626-4ddb-9d28-568f4af63603",
+  "@type": "manifest:Manifest",
+  "manifest:data": {
+    "@type": "manifest:Data",
+    "manifest:assetData": [
+      {
+        "@type": "manifest:Link",
+        "manifest:accessRole": "owner",
+        "manifest:type": "assetData",
+        "manifest:format": "xodr",
+        "manifest:path": {
+          "@value": "https://assets.envited-x.net/bafybeidhmknqn4cofjlphtrxpyvruur42t55bfmtcldyb74l2ob22kjjdu/data/TestfeldNiedersachsen_ALKS_ODR_sample.xodr",
+          "@type": "xsd:anyURI"
+        }
+      },
+      {
+        "@type": "manifest:Link",
+        "manifest:accessRole": "owner",
+        "manifest:type": "assetData",
+        "manifest:format": "xodr",
+        "manifest:path": {
+          "@value": "https://assets.envited-x.net/bafybeidhmknqn4cofjlphtrxpyvruur42t55bfmtcldyb74l2ob22kjjdu/data/TestfeldNiedersachsen_ALKS_ODR_sample_offset.xodr",
+          "@type": "xsd:anyURI"
+        }
+      }
+    ],
+    "manifest:contentData": [
+      {
+        "@type": "manifest:Link",
+        "manifest:accessRole": "publicUser",
+        "manifest:type": "metadata",
+        "manifest:format": "json",
+        "manifest:path": {
+          "@value": "ipfs://bafkreifsu25wkyq7oecmtam3mguuoov2zmjp6xi3chuf5plajagdjfoule",
+          "@type": "xsd:anyURI"
+        }
+      },
+      {
+        "@type": "manifest:Link",
+        "manifest:accessRole": "registeredUser",
+        "manifest:type": "documentation",
+        "manifest:format": "pdf",
+        "manifest:path": {
+          "@value": "https://metadata.envited-x.net/bafybeidhmknqn4cofjlphtrxpyvruur42t55bfmtcldyb74l2ob22kjjdu/documentation/TestfeldNiedersachsen_ALKS_ODR_sample_Documentation.pdf",
+          "@type": "xsd:anyURI"
+        }
+      },
+      {
+        "@type": "manifest:Link",
+        "manifest:accessRole": "registeredUser",
+        "manifest:type": "documentation",
+        "manifest:format": "txt",
+        "manifest:path": {
+          "@value": "https://metadata.envited-x.net/bafybeidhmknqn4cofjlphtrxpyvruur42t55bfmtcldyb74l2ob22kjjdu/documentation/TestfeldNiedersachsen_ALKS_ODR_sample_Documentation_stats.txt",
+          "@type": "xsd:anyURI"
+        }
+      },
+      {
+        "@type": "manifest:Link",
+        "manifest:accessRole": "registeredUser",
+        "manifest:type": "validation",
+        "manifest:format": "txt",
+        "manifest:path": {
+          "@value": "https://metadata.envited-x.net/bafybeidhmknqn4cofjlphtrxpyvruur42t55bfmtcldyb74l2ob22kjjdu/validation/qcReport.txt",
+          "@type": "xsd:anyURI"
+        }
+      },
+      {
+        "@type": "manifest:Link",
+        "manifest:accessRole": "publicUser",
+        "manifest:type": "visualization",
+        "manifest:format": "png",
+        "manifest:path": {
+          "@value": "ipfs://bafybeief5r2xgciehzhx6c4kbooifsnbjpiifjei36lpi3kzcdmpr2wvue",
+          "@type": "xsd:anyURI"
+        }
+      },
+      {
+        "@type": "manifest:Link",
+        "manifest:accessRole": "publicUser",
+        "manifest:type": "visualization",
+        "manifest:format": "png",
+        "manifest:path": {
+          "@value": "ipfs://bafybeiezbvlzqsawb3dkoie2ka4aawj6kf52prbsnap23q7x4z7j6aufwe",
+          "@type": "xsd:anyURI"
+        }
+      },
+      {
+        "@type": "manifest:Link",
+        "manifest:accessRole": "publicUser",
+        "manifest:type": "visualization",
+        "manifest:format": "png",
+        "manifest:path": {
+          "@value": "ipfs://bafkreidk4peygis2nnxjvvj5s4fl62uw3cglxj3jkavfzn3qffaorrydyi",
+          "@type": "xsd:anyURI"
+        }
+      },
+      {
+        "@type": "manifest:Link",
+        "manifest:accessRole": "publicUser",
+        "manifest:type": "visualization",
+        "manifest:format": "geojson",
+        "manifest:path": {
+          "@value": "ipfs://bafkreigszlzol72wvmge3lnlmjx7z6enkshoxrw6d32kuezgao2hllqbtm",
+          "@type": "xsd:anyURI"
+        }
+      },
+      {
+        "@type": "manifest:Link",
+        "manifest:accessRole": "publicUser",
+        "manifest:type": "visualization",
+        "manifest:format": "geojson",
+        "manifest:path": {
+          "@value": "ipfs://bafkreiakpb3ajhljq6cgwizcyirsk6uz322szaxd6ynmovcwuu5jkx5isa",
+          "@type": "xsd:anyURI"
+        }
+      },
+      {
+        "@type": "manifest:Link",
+        "manifest:accessRole": "registeredUser",
+        "manifest:type": "visualization",
+        "manifest:format": "geojson",
+        "manifest:path": {
+          "@value": "ipfs://bafkreia3od7e5yezmp2hv7gduqpv4x4ildseyqj5x5flijitskqojrtrpm",
+          "@type": "xsd:anyURI"
+        }
+      }
+    ]
+  },
+  "manifest:license": {
+    "@type": "manifest:License",
+    "manifest:spdxIdentifier": {
+      "@value": "MPL-2.0",
+      "@type": "xsd:string"
+    },
+    "manifest:licenseData": {
+      "@type": "manifest:Link",
+      "manifest:accessRole": "publicUser",
+      "manifest:type": "license",
+      "manifest:format": "html",
+      "manifest:path": {
+        "@value": "https://www.mozilla.org/en-US/MPL/2.0/",
+        "@type": "xsd:anyURI"
+      }
+    }
+  }
+}
