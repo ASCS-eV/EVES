@@ -234,8 +234,8 @@ It leverages existing standards, such as the Gaia-X 4 PLC-AAD Manifest Ontology,
 <p>This EVES addresses the need for clear guidelines to onboard assets and synchronize data with ENVITED-X systems.</p>
 <h2 id="specification">Specification</h2>
 <h3 id="1-asset-definition">1. Asset Definition</h3>
-<p>An asset is defined by the <a href="https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/manifest/" target="_blank">Gaia-X 4 PLC-AAD Manifest Ontology</a>.
-The example implementation <a href="https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/metadata" target="_blank">here</a> is based on release v0.1.6 from the <a href="https://github.com/GAIA-X4PLC-AAD/hd-map-asset-example" target="_blank">HD-Map Asset Example</a>.</p>
+<p>An asset is defined by the <a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/manifest" target="_blank">Gaia-X 4 PLC-AAD Manifest Ontology</a>.
+The example implementation in the &#x1F4C1; <code>metadata/</code> folder is based on release v0.1.8 of the <a href="https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.1.8" target="_blank">HD-Map Asset Example</a>.</p>
 <p>This EVES references the <a href="https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/" target="_blank">Gaia-X Policy Rules Compliance Document (Release 24.11)</a>. Compatibility with this release is <strong>to be verified</strong> in a future update of this EVES.</p>
 <h3 id="2-pinata-ipfs-and-cid-management">2. Pinata IPFS and CID Management</h3>
 <h4 id="cid-v1">CID v1</h4>
@@ -329,8 +329,8 @@ The example implementation <a href="https://github.com/ASCS-eV/smart-contracts/t
 <h4 id="cid-as-the-primary-identifier">CID as the Primary Identifier</h4>
 <ul>
 <li>The CID of the uploaded <code>asset.zip</code> serves as the unique identifier connecting data across all systems.</li>
-<li>The CIDs are signed by the user according to EIP-712.</li>
-<li>An additional UUID MUST be generated pre-mint to link the asset with the ENVITED-X database securely.</li>
+<li>The CIDs MAY be signed by the user according to EIP-712.</li>
+<li>A UUID MUST be generated pre-mint to link the asset with the ENVITED-X database securely.</li>
 <li>The DID of the member associated with the user minting the asset MUST be known.</li>
 </ul>
 <h4 id="pre-mint-information">Pre-Mint Information</h4>
@@ -338,7 +338,7 @@ The example implementation <a href="https://github.com/ASCS-eV/smart-contracts/t
 <h4 id="synchronization-and-security">Synchronization and Security</h4>
 <p>The synchronization between the smart contract and the ENVITED-X database relies on:</p>
 <ol>
-<li>The contract DID (current Ghostnet contract):<br><code>did:tezos:NetXnHfVqm9iesp:KT1XC2fTBNqoafnrhEb7TuToRCzewgbHAhnA</code></li>
+<li>The contract DID (current Ghostnet contract):<br><code>did:tezos:NetXnHfVqm9iesp:KT1PCaD2kmgCHy15wQ1gpqZUy9RLxyBVJdTF</code></li>
 <li>Search <code>CID</code> of <code>tzip21_token_metadata.json</code> in database.</li>
 <li>Compare if signature on CID is a <code>user</code> belonging to the <code>member</code> and if member is owner of token.</li>
 <li>Check: Uniqueness of CID in database.</li>
@@ -437,12 +437,12 @@ Examples are the first five tags or &quot;publishers&quot;, which is always ENVI
 No retroactive changes to previous assets are required.</p>
 <h2 id="references">References</h2>
 <ol>
-<li><a href="https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/manifest/" target="_blank">Gaia-X 4 PLC-AAD Manifest Ontology</a></li>
-<li><a href="https://github.com/GAIA-X4PLC-AAD/hd-map-asset-example" target="_blank">HD-Map Asset Example</a></li>
+<li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/manifest" target="_blank">Gaia-X 4 PLC-AAD Manifest Ontology</a></li>
+<li><a href="https://github.com/ASCS-eV/hd-map-asset-example" target="_blank">HD-Map Asset Example</a></li>
 <li><a href="https://docs.pinata.cloud/web3/pinning/pinata-metadata#pinataoptions" target="_blank">Pinata Documentation</a></li>
 <li><a href="https://datatracker.ietf.org/doc/html/rfc2119" target="_blank">RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels</a></li>
 <li><a href="https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/" target="_blank">Gaia-X Policy Rules Compliance Document (Release 24.11)</a></li>
-<li><a href="https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/metadata" target="_blank">Reference Implementation</a></li>
+<li><a href="https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/" target="_blank">Reference Implementation</a></li>
 <li><a href="https://eips.ethereum.org/EIPS/eip-712" target="_blank">EIP-712</a></li>
 </ol>
 
@@ -488,7 +488,7 @@ No retroactive changes to previous assets are required.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"created":"2024-11-19T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001"],"status":"Draft","eves-identifier":3,"title":"EVES-003: ENVITED-X Asset Definition and Upload Process","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/4","replaces":"None","level":"2.3","depth":1,"next":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"drafts/EVES-004/eves-004.md","ref":"drafts/EVES-004/eves-004.md","articles":[]},"previous":{"title":"EVES-002: ENVITED-X Data Space Architecture Overview","level":"2.2","depth":1,"path":"drafts/EVES-002/eves-002.md","ref":"drafts/EVES-002/eves-002.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"drafts/EVES-003/eves-003.md","mtime":"2024-12-04T16:05:04.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2024-12-04T16:06:23.737Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"created":"2024-11-19T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001"],"status":"Draft","eves-identifier":3,"title":"EVES-003: ENVITED-X Asset Definition and Upload Process","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/4","replaces":"None","level":"2.3","depth":1,"next":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"drafts/EVES-004/eves-004.md","ref":"drafts/EVES-004/eves-004.md","articles":[]},"previous":{"title":"EVES-002: ENVITED-X Data Space Architecture Overview","level":"2.2","depth":1,"path":"drafts/EVES-002/eves-002.md","ref":"drafts/EVES-002/eves-002.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"drafts/EVES-003/eves-003.md","mtime":"2025-02-17T13:50:58.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2025-02-17T13:52:18.041Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
