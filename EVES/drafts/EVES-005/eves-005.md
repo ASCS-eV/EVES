@@ -1,7 +1,7 @@
 ---
 eves-identifier: 005
 title: ENVITED-X Contract Negotiation Process
-author: Felix Hoops (@jfelixh), Carlo van Driesten (@jdsika)
+author: Felix Hoops (@jfelixh), Carlo van Driesten (@jdsika), Van Thanh Le(@levanthanh3005)
 discussions-to:
 status: Draft
 type: Process
@@ -37,7 +37,7 @@ The ENVITED-X Data Space place _operator_ provides and maintains the market plac
 The operator also acts as a trust anchor giving access and verifiable identities to participants.
 For these services, the operator collects fees from providers based on sales volume.
 
-The _provider_ is interested in selling an asset.
+The _provider_ is interested in selling an asset and collect fees from _consumer_.
 
 The _consumer_ is interesting in buying an asset.
 
@@ -76,10 +76,26 @@ The consumer uses metadata search or similar services to identify an asset of in
 
 At this point, the contract is fully settled and the consumer can use the asset.
 
-### 5. Fee Payment
+### 5. Fee and Payment Report
 
-On a regular basis, the providers send the accumulated fees to the operator.
-To ensure the fees are correctly calculated without publishing business statistics, a provider should construct a zero knowledge proof for the accumulated amount being correct based on the submitted hashes.
+#### 5.1. Asset Fee
+
+1. After a defined period, the provider compiles all completed contracts and generates a cumulative bill.
+2. The provider sends this bill to the respective customers.
+3. The customers review the bill and make payments.
+
+#### 5.2. Operator Fee
+
+In addition to handling customer payments, providers are responsible for paying the accumulated fees to the operator.
+
+To ensure accurate fee calculations while maintaining business confidentiality:
+
+1. Providers must construct a Zero-Knowledge Proof (ZKP) to verify the correctness of the accumulated fees based on submitted hashes.
+   These hashes should reference the cumulative bills issued to customers.
+   The ZKP should also validate that the fees align with the agreement between the provider and the operator.
+
+2. If the operator questions the reliability of the ZKP, they may request the provider to disclose the underlying financial report referenced in the ZKP.
+   The provider would then present the hashes and the original data used to construct these hashes, thereby proving the legitimacy of their actions.
 
 ### 6. Limitations and Discussion
 
