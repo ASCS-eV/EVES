@@ -1,0 +1,389 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>EVES-006: ENVITED-X Scaling Architecture · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="../EVES-005/eves-005.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Introduction</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../../">
+            
+                <a href="../../">
+            
+                    
+                    EVES GitHub Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">EVES</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../EVES-001/eves-001.html">
+            
+                <a href="../EVES-001/eves-001.html">
+            
+                    
+                    EVES-001: ENVITED-X Ecosystem Specification Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../EVES-002/eves-002.html">
+            
+                <a href="../EVES-002/eves-002.html">
+            
+                    
+                    EVES-002: ENVITED-X Data Space Architecture Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../EVES-003/eves-003.html">
+            
+                <a href="../EVES-003/eves-003.html">
+            
+                    
+                    EVES-003: ENVITED-X Asset Definition and Upload Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../EVES-004/eves-004.html">
+            
+                <a href="../EVES-004/eves-004.html">
+            
+                    
+                    EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../EVES-005/eves-005.html">
+            
+                <a href="../EVES-005/eves-005.html">
+            
+                    
+                    EVES-005: ENVITED-X Contract Negotiation Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.6" data-path="eves-006.html">
+            
+                <a href="eves-006.html">
+            
+                    
+                    EVES-006: ENVITED-X Scaling Architecture
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="../.." >EVES-006: ENVITED-X Scaling Architecture</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="abstract">Abstract</h2>
+<p>This specification defines the scaling architecture for the ENVITED-X Data Space.
+It outlines the integration of enshrined optimistic rollups with the Etherlink Layer 2 network, leveraging the Tezos ecosystem for scalable, secure, and cost-efficient transactions.
+This document details the bridging mechanism between Tezos Layer 1 and Etherlink, describing the role of FA2.1 tickets, smart rollups, and optimistic fraud proofs in ensuring trustless scalability.</p>
+<h2 id="motivation">Motivation</h2>
+<p>As the ENVITED-X Data Space grows, scalability becomes a critical requirement.
+The limitations of Tezos Layer 1, particularly transaction throughput and gas fees, necessitate a Layer 2 solution.
+Etherlink, an enshrined optimistic rollup, provides the following benefits:</p>
+<ul>
+<li><strong>Low-Cost Transactions</strong>: Reduced fees (nearly free) compared to Layer 1 Tezos.</li>
+<li><strong>High Throughput</strong>: Enables parallel execution and improved finality times.</li>
+<li><strong>Ethereum Compatibility</strong>: Supports EVM tooling, enhancing interoperability.</li>
+<li><strong>Trustless Bridging</strong>: Tezos tickets and rollup smart contracts ensure asset security without the need for multi-signature contracts.</li>
+<li><strong>On-Chain Security</strong>: The rollup is secured by Tezos Layer 1, inheriting its consensus guarantees.</li>
+</ul>
+<h2 id="specification">Specification</h2>
+<h3 id="1-scaling-with-etherlink">1. Scaling with Etherlink</h3>
+<p>Etherlink is an enshrined optimistic rollup within the Tezos ecosystem that enables scalable execution of smart contracts. Unlike external rollups, enshrined rollups benefit from direct protocol support, reducing costs and increasing security.</p>
+<ul>
+<li><strong>Batching Transactions</strong>: Multiple operations are aggregated and submitted as a single transaction to Tezos Layer 1.</li>
+<li><strong>Fraud Proofs</strong>: Optimistic execution ensures validity unless proven otherwise.</li>
+<li><strong>EVM Compatibility</strong>: Smart contracts can be deployed using Solidity, facilitating Ethereum ecosystem integration.</li>
+</ul>
+<h3 id="2-bridging-mechanism">2. Bridging Mechanism</h3>
+<h4 id="21-fa2-token-bridge">2.1 FA2 Token Bridge</h4>
+<p>ENVITED-X assets are tokenized using the FA2.1 standard on Tezos.
+The current bridge implementation allows for transfer of FA2 tokens as well which do not offer direct ticket export functionality.
+Bridging these tokens to Etherlink involves:</p>
+<ol>
+<li><strong>Depositing Tokens</strong>: Users send FA2 (FA2.1) tokens to a bridge contract on Tezos Layer 1.</li>
+<li><strong>Minting Tickets</strong>: The bridge contract issues tickets representing the deposited tokens.</li>
+<li><strong>Submitting to Rollup</strong>: The tickets are forwarded to Etherlink via the rollup inbox.</li>
+<li><strong>Minting on Layer 2</strong>: Equivalent tokens are created on Etherlink and assigned to the user&apos;s wallet.</li>
+</ol>
+<h4 id="22-withdrawing-tokens">2.2 Withdrawing Tokens</h4>
+<ol>
+<li><strong>Initiating Withdrawal</strong>: The user submits a withdrawal request on Etherlink.</li>
+<li><strong>Optimistic Challenge Period</strong>: The transaction remains open for dispute (fraud-proof verification).</li>
+<li><strong>Finalizing on Tezos</strong>: If no fraud is detected, the Tezos contract releases the original tokens.</li>
+</ol>
+<p>With the Rio upgrade, the withdrawal process from L2 to L1 will be significantly faster, improving efficiency for asset transitions.</p>
+<h3 id="3-integration-with-envited-x">3. Integration with ENVITED-X</h3>
+<h4 id="31-asset-marketplace">3.1 Asset Marketplace</h4>
+<ul>
+<li><strong>Asset Registration</strong>: Assets are initially registered on Tezos Layer 1 as FA2.1 tokens.</li>
+<li><strong>Cross-Layer Trading</strong>: Once bridged, assets can be transferred or traded within the Etherlink ecosystem.</li>
+<li><strong>Metadata Preservation</strong>: TZIP-21 metadata remains intact across layers.</li>
+<li><strong>Future Transition</strong>: At a later stage, all L1 tokens can be transitioned to L2 to maximize scalability, allowing existing contracts to function until scaling is necessary.</li>
+</ul>
+<h4 id="32-smart-contracts--indexing">3.2 Smart Contracts &amp; Indexing</h4>
+<ul>
+<li><strong>Marketplace Contracts</strong>: Implemented on both Tezos and Etherlink.</li>
+<li><strong>Indexer Support</strong>: Taquito and Etherlink-compatible indexers track asset movements.</li>
+<li><strong>Credential Validation</strong>: User credentials remain valid across both layers via Verifiable Credentials.</li>
+</ul>
+<h2 id="future-improvements">Future Improvements</h2>
+<h3 id="1-transition-to-erc-721-tokens">1. Transition to ERC-721 Tokens</h3>
+<p>Currently, the bridge implementation for Etherlink Layer 2 uses ERC-20 tokens. Future implementations should adopt ERC-721 token contracts for better asset representation and compatibility with NFT standards. <a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-721/" target="_blank">ERC-721 Standard</a></p>
+<h3 id="2-improvements-with-the-tezos-rio-protocol">2. Improvements with the Tezos Rio Protocol</h3>
+<p>The upcoming Tezos protocol &quot;Rio&quot; will introduce enhancements in bridging mechanisms and significantly reduce the bridging time from L2 to L1. More details can be found in the <a href="https://research-development.nomadic-labs.com/rio-announcement.html" target="_blank">Rio Protocol Announcement</a> and <a href="https://octez.tezos.com/docs/protocols/022_rio.html" target="_blank">Rio Protocol Changelog</a>.</p>
+<h3 id="3-full-transition-to-layer-2">3. Full Transition to Layer 2</h3>
+<p>At some point, all L1 tokens should be bridged to L2, allowing the system to fully transition to Layer 2 scaling while maintaining compatibility with existing contracts during the migration phase. The layer 1 contracts will then be read-only to not allow further token minting on layer 1.</p>
+<h3 id="4-fa21-ticket-export-functionality">4. FA2.1 Ticket Export Functionality</h3>
+<p>The FA2.1 contract contains a ticket export functionality that can be used to directly issue tickets. This can improve efficiency and user experience for cross-layer asset transfers.</p>
+<h2 id="backwards-compatibility">Backwards Compatibility</h2>
+<p>This specification extends ENVITED-X functionality without modifying existing contracts. All FA2.1 assets remain compatible with Tezos Layer 1, and bridging is optional until a full transition to L2 is enacted.</p>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://docs.etherlink.com/" target="_blank">Etherlink Documentation</a></li>
+<li><a href="https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-21/tzip-21.md" target="_blank">Tezos FA2.1 Standard</a></li>
+<li><a href="https://research.tezos.com/optimistic-rollups" target="_blank">Optimistic Rollups in Tezos</a></li>
+<li><a href="https://docs.etherlink.com/bridging/bridging-fa" target="_blank">Bridging FA Tokens on Etherlink</a></li>
+<li><a href="https://ethereum.org/en/developers/docs/standards/tokens/erc-721/" target="_blank">ERC-721 Standard</a></li>
+<li><a href="https://research-development.nomadic-labs.com/rio-announcement.html" target="_blank">Rio Protocol Announcement</a></li>
+<li><a href="https://octez.tezos.com/docs/protocols/022_rio.html" target="_blank">Rio Protocol Changelog</a></li>
+</ol>
+<h2 id="implementation">Implementation</h2>
+<p>The initial bridge implementation follows the setup documented in the <a href="https://github.com/ASCS-eV/smart-contracts/blob/main/etherlink-bridge/README.md" target="_blank">ASCS smart contracts repository</a>.
+Future iterations may include direct ticket issuance for improved efficiency, leveraging Rio protocol enhancements for streamlined bridging.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../EVES-005/eves-005.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: EVES-005: ENVITED-X Contract Negotiation Process">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"created":"2025-02-21T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-002","EVES-003"],"status":"Draft","eves-identifier":6,"title":"EVES-006: ENVITED-X Scaling Architecture","type":"Process","discussions-to":"https://github.com/ASCS-eV/smart-contracts/blob/main/etherlink-bridge/README.md","replaces":"None","level":"2.6","depth":1,"previous":{"title":"EVES-005: ENVITED-X Contract Negotiation Process","level":"2.5","depth":1,"path":"drafts/EVES-005/eves-005.md","ref":"drafts/EVES-005/eves-005.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"drafts/EVES-006/eves-006.md","mtime":"2025-02-21T15:31:37.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2025-02-21T15:33:07.670Z"},"basePath":"../..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../../gitbook/gitbook.js"></script>
+    <script src="../../gitbook/theme.js"></script>
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
