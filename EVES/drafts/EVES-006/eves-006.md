@@ -42,7 +42,7 @@ Etherlink is an enshrined optimistic rollup within the Tezos ecosystem that enab
 
 #### 2.1 FA2 Token Bridge
 
-ENVITED-X assets are tokenized using the FA2.1 standard on Tezos. 
+ENVITED-X assets are tokenized using the FA2.1 standard on Tezos.
 The current bridge implementation allows for transfer of FA2 tokens as well which do not offer direct ticket export functionality.
 Bridging these tokens to Etherlink involves:
 
@@ -108,4 +108,5 @@ This specification extends ENVITED-X functionality without modifying existing co
 
 ## Implementation
 
-The initial bridge implementation follows the setup documented in the [ASCS smart contracts repository](https://github.com/ASCS-eV/smart-contracts/blob/main/etherlink-bridge/README.md). Future iterations may include direct ticket issuance for improved efficiency, leveraging Rio protocol enhancements for streamlined bridging.
+The initial bridge implementation follows the setup documented in the [ASCS smart contracts repository](https://github.com/ASCS-eV/smart-contracts/blob/main/etherlink-bridge/README.md).
+Future iterations may include direct ticket issuance for improved efficiency, leveraging Rio protocol enhancements for streamlined bridging.
