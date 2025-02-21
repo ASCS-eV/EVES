@@ -11,3 +11,4 @@
 * [EVES-003: ENVITED-X Asset Definition and Upload Process](drafts/EVES-003/eves-003.md)
 * [EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors](drafts/EVES-004/eves-004.md)
 * [EVES-005: ENVITED-X Contract Negotiation Process](drafts/EVES-005/eves-005.md)
+* [EVES-006: ENVITED-X Scaling Architecture](drafts/EVES-006/eves-006.md)
