@@ -3,3 +3,4 @@
 .history/
 *.vsix
 .ionide
+.DS_Store
