@@ -235,83 +235,188 @@
                                 <section class="normal markdown-section">
                                 
                                 <h2 id="abstract">Abstract</h2>
-<p>A market place requires processes for publishing assets, negotiating contracts, and settling these contracts as a basis for services and billing.
-We focus on the negotiation process, since it influences all of the other mentioned steps.
-This document is not a technical specification, but rather a high-level process description.
-Data standards and specific technology choices must be settled separately.</p>
+<p>This specification defines a contract negotiation process for the ENVITED-X Data Space.
+In our approach, a contract is represented as a verifiable credential based on the SD-JWT VC specification, exchanged between a provider and a consumer via an encrypted inbox system
+(see <a href="https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-00.html" target="_blank">SD-JWT-based Verifiable Credentials (SD-JWT VC)</a> and <a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html" target="_blank">OpenID for Verifiable Credential Issuance - draft 15</a>).
+In the finalized state, the mutually signed VC serves as a provable contract that authorizes access to data only when both a valid VC and a valid registry entry are present.
+The decentralized registry on Etherlink (see <a href="../EVES-006/eves-006.html">EVES-006</a> and <a href="https://arxiv.org/pdf/2501.17089" target="_blank">CRSet: on-Interactive Verifiable Credential Revocation with Metadata Privacy for Issuers and Everyone Else</a>) contains the respective contract hash and UUID.</p>
 <h2 id="motivation">Motivation</h2>
-<p>Gaia-X specifications on the topic are high-level (refer to <a href="https://docs.gaia-x.eu/technical-committee/architecture-document/24.04/other_concepts/#computational-contracts" target="_blank">this</a>).
-Existing implementations like the Eclipse Dataspace Connector&apos;s <a href="https://github.com/eclipse-dataspace-protocol-base/DataspaceProtocol/blob/main/negotiation/contract.negotiation.protocol.md" target="_blank">negotiation</a> are complex.
-Beyond that, we have specific goals that are not fulfilled by any specification we are aware of at the time of writing:</p>
-<ol>
-<li>Ensure that the market place can mandate the use of pre-approved contract templates to ensure fairness and collect proportional fees.</li>
-<li>Finalize contracts in a way that makes them fully provable to third parties, including timestamp, to give legal security to participants.</li>
-<li>Limit the information that external parties or the market place operator have access to to a minimum required for safe operation.</li>
-<li>Allow providers to make individual contracts per consumer if desired.</li>
-<li>Represent the contracts as W3C Verifiable Credentials to leverage synergies with existing components in the decentralized ecosystem, specifically to easily make them usable for access control.</li>
-</ol>
-<h2 id="specification">Specification</h2>
-<h3 id="1-stakeholders">1. Stakeholders</h3>
-<p>The ENVITED-X Data Space place <em>operator</em> provides and maintains the market place infrastructure.
-The operator also acts as a trust anchor giving access and verifiable identities to participants.
-For these services, the operator collects fees from providers based on sales volume.</p>
-<p>The <em>provider</em> is interested in selling an asset.</p>
-<p>The <em>consumer</em> is interesting in buying an asset.</p>
-<h3 id="2-initial-setup">2. Initial Setup</h3>
-<p>The operator must set up a smart contract that allows anyone to retrieve a set of acceptable contract templates, which should have the form of ODRL policies.
-The operator must run a <em>settlement service</em> that can be used to settle contracts.
-Contract credentials are only considered valid once their hash has been submitted to this service, which publishes the hash (directly or indirectly) on a blockchain.
-We assume that the provider and consumer run a <em>negotiation service</em> that consists of frontend and backend.
-It could be a part of other infrastructure, such as the dataspace connector.
-This services takes over communication between provider and consumer.</p>
-<h3 id="3-asset-setup">3. Asset Setup</h3>
-<p>The provider must register an asset as described in EVES-003.</p>
-<h3 id="4-negotiation-process">4. Negotiation Process</h3>
-<p>The consumer uses metadata search or similar services to identify an asset of interest, before he contacts the provider to negotiate a contract.</p>
-<ol>
-<li>The consumer asks the provider for a contract offer (i.e., quote) for the asset.</li>
-<li>The provider creates a contract offer referencing a contract template.
-This offer contains specific data, such as pricing and usage requirements.</li>
-<li>The provider sends the contract offer to the consumer in the form of a Verifiable Credential.</li>
-<li>The consumer checks that the offer is correctly signed and that it references a valid contract template.
-The offer shall not conflict with the template.</li>
-<li>If the consumer accepts, he constructs a contract credential, which wraps the contract offer.</li>
-<li>The consumer sends this contract credential back to the provider, to ensure that both parties have the full contract without involving a third party.</li>
-<li>The provider validates the contract credential.
-In this step, the provider could also choose to ignore the contract.
-For example, if the offer has expired.</li>
-<li>The provider sends the hash of the contract credential to the operator&apos;s settlement service.</li>
-<li>The settlement service locally saves the hash and which provider sent it.
-Then, the service commits just the hash to the public blockchain.</li>
-<li>The consumer and provider monitor the blockchain to see if the contract has been settled.</li>
-</ol>
-<p>At this point, the contract is fully settled and the consumer can use the asset.</p>
-<h3 id="5-fee-payment">5. Fee Payment</h3>
-<p>On a regular basis, the providers send the accumulated fees to the operator.
-To ensure the fees are correctly calculated without publishing business statistics, a provider should construct a zero knowledge proof for the accumulated amount being correct based on the submitted hashes.</p>
-<h3 id="6-limitations-and-discussion">6. Limitations and Discussion</h3>
-<p>We assume that the provider and consumer have an interest in properly time-stamping their contract agreement.
-This interest ensures that the operator is aware of any transaction that may generate fees.
-Provider and consumer may add a status entry to their Verifiable Credentials to mark the contract or the offer in some way.
-This could be useful in the case of a legal dispute to give a contract a disputed status or even entirely revoke it.</p>
-<p>This negotiation process heavily limits data exposure, but some information beyond what what is exposed by necessity and design can still be learned:</p>
-<ol>
-<li><p>Third Party</p>
+<p>The <a href="https://github.com/eclipse-dataspace-protocol-base/DataspaceProtocol/tree/main/artifacts/src/main/resources/negotiation" target="_blank">Eclipse Dataspace Protocol</a> provides a robust and straightforward framework with an established state machine that meets our needs.<br>We build directly on this same state machine&#x2014;using the states REQUESTED, OFFERED, ACCEPTED, AGREED, VERIFIED, FINALIZED, and TERMINATED&#x2014;without adding extra steps that complicate the process.<br>Our enhancements, which incorporate signed verifiable credential contracts based on the SD-JWT specification and integration with the SSI-to-OIDC bridge, add legal security and streamline verification while preserving the original flow.<br>This approach improves security and verifiability without exposing excessive information or introducing unnecessary complexity.<br>Our process is designed to:</p>
 <ul>
-<li>Can read number of contract agreements happening on the entire market place in a given time period.</li>
+<li>Mandate the use of pre-approved, ODRL-compatible contract templates.</li>
+<li>Ensure legal security by finalizing contracts as signed VCs that are timestamped and stored in a blockchain registry.</li>
+<li>Minimize manual interaction through an encrypted inbox system (optionally encrypted with DID keys) and automated state transitions where possible.</li>
+<li>Enforce access control by requiring both a valid VC and a valid registry entry.</li>
+</ul>
+<h2 id="specification">Specification</h2>
+<h3 id="1-overview-of-the-contract-negotiation-flow">1. Overview of the Contract Negotiation Flow</h3>
+<p>The negotiation process follows the dataspace protocol state machine with the following states (note that some state transitions may be automated without direct user interaction):</p>
+<ul>
+<li><p><strong>REQUESTED:</strong><br>The consumer initiates a negotiation by sending a contract request (for example, to request a quote for an asset to purchase and download).
+This action is manually triggered by the consumer.</p>
+</li>
+<li><p><strong>OFFERED:</strong><br>The provider responds by generating a contract offer encapsulated as a VC.
+The provider signs this offer using its SD-JWT key and sends it via the encrypted inbox.
+<em>Automation is possible under preset conditions, but this step requires explicit user consent by default.</em></p>
+</li>
+<li><p><strong>ACCEPTED:</strong><br>The consumer verifies the providers&#x2019;s signature and reviews the offer payload.
+The consumer signs the VC to indicate acceptance.
+The signed VC is transmitted back to the provider.
+<em>Automation is possible under preset conditions, but this step requires explicit user consent by default.</em></p>
+</li>
+<li><p><strong>AGREED:</strong><br>The provider verifies the consumer&#x2019;s signature and the payload content.
+The acceptance is automated as the offer was already signed in the state OFFERED.
+Instead of adding an additional signature, the provider indicates agreement by recording a successful entry (with the hash and UUID of the signed VC) in the decentralized registry on Etherlink.
+This registry entry confirms the agreement and is the key to transitioning the process to the VERIFIED state.</p>
+</li>
+<li><p><strong>VERIFIED:</strong><br>The consumer, upon receiving confirmation that the provider has recorded the agreement in the registry, verifies that the registry entry exists and that all conditions are met.
+<em>This verification can be automated.</em></p>
+</li>
+<li><p><strong>FINALIZED:</strong><br>With both parties&#x2019; signatures in place and a successful registry entry confirming provider agreement, the contract negotiation is finalized.
+Both the provider and consumer can download the finalized signed VC as proof of contract.
+Access to the contracted asset is authorized only when the VC is valid and a corresponding registry entry is found and valid.</p>
+</li>
+<li><p><strong>TERMINATED:</strong><br>If any error occurs (e.g., invalid signatures, mismatched payloads, or a timeout) or if either party cancels the negotiation, the process transitions to the terminated state.</p>
+</li>
+</ul>
+<h3 id="2-detailed-process-flow-example">2. Detailed Process Flow Example</h3>
+<h4 id="example-scenario-purchase-and-download-of-an-asset">Example Scenario: Purchase and Download of an Asset</h4>
+<ol>
+<li><p><strong>Consumer Initiation (REQUESTED):</strong><br>The consumer sends a contract request for a specific asset (discovered via metadata search) using the application interface.
+This request is delivered to the provider&#x2019;s encrypted inbox.</p>
+</li>
+<li><p><strong>Provider Offer (OFFERED):</strong><br>The provider generates a contract offer that conforms to ODRL standards.
+The offer is encapsulated as an SD-JWT VC, signed by the provider, and sent back through the encrypted inbox.</p>
+</li>
+<li><p><strong>Consumer Acceptance (ACCEPTED):</strong><br>The consumer reviews the signed offer and, if the terms meet their requirements, signs the VC to indicate acceptance.
+The consumer&#x2019;s signed VC is returned to the provider via the secure channel.</p>
+</li>
+<li><p><strong>Provider Verification &amp; Registry Entry (AGREED):</strong><br>Upon receiving the consumer&#x2019;s signed VC, the provider verifies the signature and payload.
+The provider then records a successful entry in the decentralized registry on Etherlink &#x2014; this registry entry (comprising the VC&#x2019;s hash and UUID) confirms the agreement and allows the process to progress to the VERIFIED state.</p>
+</li>
+<li><p><strong>Consumer Verification of Registry Entry (VERIFIED):</strong>
+ The consumer verifies if the registry entry is correctly caught by the indexer automatically transitioning to the FINALIZED state.</p>
+</li>
+<li><p><strong>Finalization (FINALIZED):</strong><br>Once the registry entry is confirmed, both parties can download the finalized contract VC from their respective systems.
+This finalized VC, along with its corresponding registry entry, serves as proof of contract and authorizes access to the asset.</p>
+</li>
+<li><p><strong>Error or Cancellation (TERMINATED):</strong><br>If any step fails (for example, if signatures are invalid or a timeout occurs), the negotiation process is terminated.
+Both parties are notified of the termination, and no contract is recorded in the registry.</p>
+</li>
+</ol>
+<h3 id="3-technical-considerations">3. Technical Considerations</h3>
+<ul>
+<li><p><strong>Verifiable Credential Format:</strong><br>The contract VC conforms to the SD-JWT VC specification (see <a href="https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-00.html" target="_blank">SD-JWT-based Verifiable Credentials (SD-JWT VC)</a> and <a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html" target="_blank">OpenID for Verifiable Credential Issuance - draft 15</a>).
+It is intended for storage in wallets (e.g., Altme) and can be presented to endpoints running the <a href="https://github.com/GAIA-X4PLC-AAD/ssi-to-oidc-bridge" target="_blank">ssi-to-oidc-bridge</a>.</p>
+</li>
+<li><p><strong>Decentralized Registry and Scaling:</strong><br>Following the method outlined in <a href="../EVES-006/eves-006.html">EVES-006</a> and inspired by <a href="https://arxiv.org/pdf/2501.17089" target="_blank">this paper</a>, a blockchain-based registry on Etherlink is used to store the hash and UUID of finalized VCs.
+Authorization to access assets is granted only when the presented VC is valid and a valid corresponding registry entry exists.</p>
+</li>
+<li><p><strong>Automation and Encrypted Inbox:</strong><br>An encrypted inbox system &#x2014; optionally secured with DID keys  - is used to exchange contract-related VCs.
+The design minimizes manual interaction by automating transitions (e.g., from OFFERED to ACCEPTED under preset criteria) while still allowing explicit user confirmation when needed.</p>
+</li>
+<li><p><strong>State Machine Integration:</strong><br>The process adheres to the dataspace protocol state machine with the following states:<br><strong>REQUESTED &#x2192; OFFERED &#x2192; ACCEPTED &#x2192; AGREED &#x2192; VERIFIED &#x2192; FINALIZED &#x2192; TERMINATED.</strong><br>Each state transition may be executed automatically by the system if predefined conditions are met, reducing the need for continuous manual intervention.</p>
+</li>
+</ul>
+<h3 id="4-stakeholders">4. Stakeholders</h3>
+<p>The following stakeholders are involved in the contract negotiation process:</p>
+<ul>
+<li><p><strong>Consumer:</strong><br>Initiates contract requests, reviews offers, and signs contract VCs to indicate acceptance.</p>
+</li>
+<li><p><strong>Provider:</strong><br>Generates contract offers as signed VCs, verifies consumer signatures, and confirms agreement by recording a successful entry in the decentralized registry.</p>
+</li>
+<li><p><strong>ENVITED-X Data Space Operator:</strong><br>Oversees the marketplace infrastructure and the decentralized registry.
+The operator has the authority to review registry entries and, via selective disclosure, verify the fee amount due for each successful contract.
+This fee information is used for billing and service settlement purposes.</p>
+</li>
+</ul>
+<h2 id="5-fee-payment">5. Fee Payment</h2>
+<p>Each provider is responsible for cumulating the fees due for each finalized contract &#x2014; that is, for every contract VC that has a valid entry in the registry.
+Fees are calculated over a defined period (for example, yearly) and are submitted to the ENVITED-X Data Space Operator.
+Using selective disclosure and referencing the registry entry, the operator can verify the validity and accuracy of the fees reported.
+This mechanism ensures transparency, auditability, and accountability in fee payments.</p>
+<h3 id="6-privacy-considerations">6. Privacy Considerations</h3>
+<p>Privacy is a core aspect of the ENVITED-X contract negotiation process.
+Key privacy measures include:</p>
+<ul>
+<li><p><strong>Encrypted Communication:</strong><br>All contract-related messages are exchanged via an encrypted inbox system, optionally secured using DID keys.
+This ensures that sensitive contract data and personal identifiers are transmitted securely.</p>
+</li>
+<li><p><strong>Selective Disclosure in VCs:</strong><br>The verifiable credentials used in the process are designed for selective disclosure, allowing parties to reveal only the necessary attributes required for contract verification while keeping other details confidential.</p>
+</li>
+<li><p><strong>Minimal Data in the Registry:</strong><br>The decentralized registry on Etherlink stores only the hash and UUID of the finalized contract VC, rather than the full contents of the credential.
+This approach minimizes exposure of sensitive information while still enabling proof of contract.</p>
+</li>
+<li><p><strong>Access Control:</strong><br>Access to contracted assets is strictly regulated.
+Authorization requires both a valid, signed VC and a corresponding entry in the decentralized registry, ensuring that only authorized parties can access sensitive data.</p>
+</li>
+<li><p><strong>Operator Oversight with Privacy Safeguards:</strong><br>Although the ENVITED-X Data Space operator can review registry entries for fee calculation and auditing, the operator does not gain access to the full contract details.
+Selective disclosure mechanisms ensure that only the minimal required information is revealed during fee management and settlement.</p>
+</li>
+</ul>
+<h3 id="7-references">7. References</h3>
+<ol>
+<li><p><strong>Dataspace Protocol:</strong>  </p>
+<ul>
+<li><a href="https://docs.internationaldataspaces.org/ids-knowledgebase/dataspace-protocol" target="_blank">Dataspace Protocol &#x2013; Official Knowledgebase</a>  </li>
+<li><a href="https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol/" target="_blank">Eclipse Dataspace Protocol Editor&apos;s Draft</a></li>
 </ul>
 </li>
-<li><p>Operator</p>
+<li><p><strong>SD-JWT-based Verifiable Credentials:</strong>  </p>
 <ul>
-<li>Knows the number of contract agreements happening in a given time period for a given provider.</li>
+<li><a href="https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-00.html" target="_blank">SD-JWT Specification</a></li>
+</ul>
+</li>
+<li><p><strong>OpenID for VC Issuance:</strong>  </p>
+<ul>
+<li><a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html" target="_blank">OpenID for Verifiable Credential Issuance</a></li>
+</ul>
+</li>
+<li><p><strong>SSI-to-OIDC Bridge:</strong>  </p>
+<ul>
+<li><a href="https://github.com/GAIA-X4PLC-AAD/ssi-to-oidc-bridge" target="_blank">ssi-to-oidc-bridge Repository</a></li>
+</ul>
+</li>
+<li><p><strong>Scaling and Decentralized Registry:</strong>  </p>
+<ul>
+<li><a href="../EVES-006/eves-006.html">EVES-006: ENVITED-X Scaling Architecture</a>  </li>
+<li><a href="https://arxiv.org/pdf/2501.17089" target="_blank">Decentralized Registry Paper DRAFT</a></li>
+</ul>
+</li>
+<li><p><strong>ODRL Standard:</strong>  </p>
+<ul>
+<li><a href="https://www.w3.org/TR/odrl-model/" target="_blank">ODRL Information Model 2.2</a></li>
+</ul>
+</li>
+<li><p><strong>Additional Guidance:</strong>  </p>
+<ul>
+<li><a href="https://github.com/eclipse-dataspace-protocol-base/DataspaceProtocol/tree/main/artifacts/src/main/resources/negotiation" target="_blank">Eclipse Dataspace Protocol &#x2013; Contract Negotiation Protocol</a></li>
 </ul>
 </li>
 </ol>
 <h2 id="backwards-compatibility">Backwards Compatibility</h2>
-<p>This process does not conflict with prior EVES.</p>
-<h2 id="references">References</h2>
+<p>This process extends the existing ENVITED-X contract and asset procedures (refer to EVES-001 through EVES-003) without conflicting with previous specifications.
+It introduces a VC-based contract negotiation that interoperates with the dataspace protocol and blockchain registry mechanisms with an overview in <a href="../EVES-002/eves-002.html">EVES-002</a>.</p>
 <h2 id="implementation">Implementation</h2>
-<p>This process is not yet implemented.</p>
+<p>Initial implementation steps include:</p>
+<ol>
+<li><p><strong>Establishing the Encrypted Inbox:</strong><br>Set up a secure messaging channel (optionally encrypted with DID keys) to facilitate the VC exchange with minimal interaction.</p>
+</li>
+<li><p><strong>VC Generation and Signing:</strong><br>Implement services to generate SD-JWT VCs for contract offers and acceptances.
+Both provider and consumer systems must support signing operations and storage (e.g., in wallets like Altme).</p>
+</li>
+<li><p><strong>Blockchain Registry Integration:</strong><br>Integrate with the decentralized registry on Etherlink to store the hash and UUID of finalized contract VCs.
+The provider must record a registry entry to transition the state from AGREED to FINALIZED.</p>
+</li>
+<li><p><strong>Automated State Transitions:</strong><br>Where possible, automate state transitions (e.g., from OFFERED to ACCEPTED or AGREED) while allowing manual intervention if necessary.</p>
+</li>
+<li><p><strong>Operator Fee Management:</strong><br>The ENVITED-X Data Space operator reviews registry entries to verify successful contracts.
+Using selective disclosure mechanisms, the operator verifies the fee due reported by the provider for each successful contract, facilitating billing and settlement processes.</p>
+</li>
+<li><p><strong>Example Workflow Testing:</strong><br>Validate the process using a test scenario where a consumer requests a quote for an asset, receives a signed offer, accepts it, and both parties download the finalized contract VC as proof.
+The registry entry is then verified to authorize data access.</p>
+</li>
+</ol>
 
                                 
                                 </section>
@@ -355,7 +460,7 @@ This could be useful in the case of a legal dispute to give a contract a dispute
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"created":"2024-12-02T00:00:00.000Z","author":"Felix Hoops (@jfelixh), Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-002","EVES-003"],"status":"Draft","eves-identifier":5,"title":"EVES-005: ENVITED-X Contract Negotiation Process","type":"Process","discussions-to":null,"replaces":"None","level":"2.5","depth":1,"next":{"title":"EVES-006: ENVITED-X Scaling Architecture","level":"2.6","depth":1,"path":"drafts/EVES-006/eves-006.md","ref":"drafts/EVES-006/eves-006.md","articles":[]},"previous":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"drafts/EVES-004/eves-004.md","ref":"drafts/EVES-004/eves-004.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"drafts/EVES-005/eves-005.md","mtime":"2024-12-04T16:05:04.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2025-02-25T16:53:55.920Z"},"basePath":"../..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"created":"2024-12-02T00:00:00.000Z","author":"Felix Hoops (@jfelixh), Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-002","EVES-003","EVES-006"],"status":"Review","eves-identifier":5,"title":"EVES-005: ENVITED-X Contract Negotiation Process","type":"Process","discussions-to":"https://github.com/ASCS-eV/EVES/issues/","replaces":"None","level":"2.5","depth":1,"next":{"title":"EVES-006: ENVITED-X Scaling Architecture","level":"2.6","depth":1,"path":"drafts/EVES-006/eves-006.md","ref":"drafts/EVES-006/eves-006.md","articles":[]},"previous":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"drafts/EVES-004/eves-004.md","ref":"drafts/EVES-004/eves-004.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"drafts/EVES-005/eves-005.md","mtime":"2025-02-25T17:09:49.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2025-02-25T17:11:10.826Z"},"basePath":"../..","book":{"language":""}});
         });
     </script>
 </div>
