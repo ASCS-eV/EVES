@@ -171,13 +171,13 @@ This process introduces new clarity regarding EVES stages, references, and roles
 ## 10. References
 
 1. **EVES-004: Roles and Responsibilities of EVES Editors**  
-   [https://github.com/ASCS-eV/EVES/blob/main/drafts/EVES-004/EVES-004.md](https://github.com/ASCS-eV/EVES/blob/main/EVES/drafts/EVES-004/eves-004.md)
+   [https://github.com/ASCS-eV/EVES/blob/main/drafts/EVES-004/EVES-004.md](../EVES-004/eves-004.md)
 
 2. **RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels**  
    [https://www.rfc-editor.org/rfc/rfc2119](https://www.rfc-editor.org/rfc/rfc2119)
 
 3. **EVES Template & Style Guide**  
-   [../resources/](https://github.com/ASCS-eV/EVES/tree/main/EVES/resources)
+   [../../resources/](../../resources)
 
 4. **OpenMSL Governance Rules**  
    [https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html](https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html)
