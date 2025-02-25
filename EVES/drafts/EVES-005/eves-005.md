@@ -13,8 +13,10 @@ replaces: None
 ## Abstract
 
 This specification defines a contract negotiation process for the ENVITED-X Data Space.
-In our approach, a contract is represented as a verifiable credential (VC) based on SD-JWT (see [SD-JWT-based Verifiable Credentials (SD-JWT VC)](https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-00.html) and [OpenID for Verifiable Credential Issuance - draft 15](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html)), exchanged between a provider and a consumer via an encrypted inbox system.
- In the finalized state, the mutually signed VC — with its hash and UUID stored in a decentralized registry on Etherlink (see [EVES-006](../EVES-006/eves-006.md) and [CRSet: on-Interactive Verifiable Credential Revocation with Metadata Privacy for Issuers and Everyone Else](https://arxiv.org/pdf/2501.17089)) — serves as a provable contract that authorizes access to data only when both a valid VC and a valid registry entry are present.
+In our approach, a contract is represented as a verifiable credential based on the SD-JWT VC specification, exchanged between a provider and a consumer via an encrypted inbox system
+(see [SD-JWT-based Verifiable Credentials (SD-JWT VC)](https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-00.html) and [OpenID for Verifiable Credential Issuance - draft 15](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html)).
+In the finalized state, the mutually signed VC serves as a provable contract that authorizes access to data only when both a valid VC and a valid registry entry are present.
+The decentralized registry on Etherlink (see [EVES-006](../EVES-006/eves-006.md) and [CRSet: on-Interactive Verifiable Credential Revocation with Metadata Privacy for Issuers and Everyone Else](https://arxiv.org/pdf/2501.17089)) contains the respective contract hash and UUID.
 
 ## Motivation
 
