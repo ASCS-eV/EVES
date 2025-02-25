@@ -169,7 +169,9 @@ This modular governance ensures each role maintains focused responsibilities, th
 
 ## Backwards Compatibility
 
-This EVES clarifies and expands the editorial process defined in EVE[S-001](../EVES-001/eves-001.md) by adding the Approvers role. It does not invalidate any previous guidelines and remains fully compatible with existing EVES. No retroactive changes are required; any references to “Editors” in older documents may be read inclusively to account for the separate Approvers subset going forward.
+This EVES clarifies and expands the editorial process defined in EVE[S-001](../EVES-001/eves-001.md) by adding the Approvers role.
+It does not invalidate any previous guidelines and remains fully compatible with existing EVES.
+No retroactive changes are required; any references to “Editors” in older documents may be read inclusively to account for the separate Approvers subset going forward.
 
 ## References
 
