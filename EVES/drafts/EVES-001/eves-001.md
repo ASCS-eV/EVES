@@ -53,7 +53,7 @@ Each EVES must pass through the following stages:
    - Open for initial community feedback.
 
 2. **Review**:
-   - EVES Editors confirm compliance with required format (see Section 6 “Format”).  
+   - EVES Editors confirm compliance with required format (see Section 6 "Format").  
    - Community discusses proposal (GitHub issues, PR reviews).  
    - **Exit Criteria**: At least two Editor approvals + no unresolved blocking objections.
 
@@ -132,6 +132,7 @@ Each EVES must declare one of the following **type** fields in its YAML header:
 
 - If consensus cannot be reached at the Review or Candidate stage, Editors may escalate to an ASCS board vote.  
 - Authors can appeal Editor or Approver decisions by opening a dedicated issue in the repository with justification.
+
 ---
 
 ## 5. Reference Implementation
@@ -141,6 +142,7 @@ Each EVES must declare one of the following **type** fields in its YAML header:
 - **Community Validation**: Users are encouraged to test the reference implementation for real-world interoperability and consistency with the EVES specification.
 
 ---
+
 ## 6. Format
 
 All EVES documents **MUST** follow the structure below:
@@ -160,7 +162,7 @@ All EVES documents **MUST** follow the structure below:
 7. **References**  
    - List any relevant RFCs, W3C standards, or other external specs.
 
-EVES must use [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) key words (**“MUST,” “SHOULD,” “RECOMMENDED,”** etc.) appropriately for normative statements.
+EVES must use [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) key words ("MUST," "SHOULD," "RECOMMENDED," etc.) appropriately for normative statements.
 
 ---
 
@@ -184,12 +186,13 @@ ENVITED-X emphasizes openness, inclusivity, and accountability. Discussions, vot
 This process introduces new clarity regarding EVES stages, references, and roles without invalidating earlier procedures. Existing EVES in Draft need not restart unless their authors or Editors decide to re-align them with these updated guidelines.
 
 ---
+
 ## 10. References
 
 1. **EVES-004: Roles and Responsibilities of EVES Editors**  
    [https://github.com/ASCS-eV/EVES/blob/main/drafts/EVES-004/EVES-004.md](https://github.com/ASCS-eV/EVES/blob/main/EVES/drafts/EVES-004/eves-004.md)
 
-2. **RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels**  
+2. **RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels**  
    [https://www.rfc-editor.org/rfc/rfc2119](https://www.rfc-editor.org/rfc/rfc2119)
 
 3. **EVES Template & Style Guide**  
