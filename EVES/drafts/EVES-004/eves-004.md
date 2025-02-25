@@ -3,7 +3,7 @@ eves-identifier: 004
 title: ENVITED-X Roles and Responsibilities of EVES Editors
 author: Carlo van Driesten (@jdsika); Daniel Liebert (@dansan566)
 discussions-to:
-status: Draft
+status: Review
 type: Process
 created: 2024-11-24
 requires: ["EVES-001"]
@@ -62,7 +62,8 @@ This specification distinguishes between two formal roles: **Editors** and **App
 
 ### 2. Responsibilities of EVES Editors
 
-Editors maintain their established responsibilities while collaborating with the newly introduced Approvers. The following responsibilities apply to Editors throughout the EVES process, from Draft creation to Finalization or Rejection.
+Editors maintain their established responsibilities while collaborating with the newly introduced Approvers.
+The following responsibilities apply to Editors throughout the EVES process, from Draft creation to Finalization or Rejection.
 
 #### 2.1 Pre-Submission
 
@@ -88,7 +89,8 @@ Editors maintain their established responsibilities while collaborating with the
 #### 2.4 Advancement Through the EVES Lifecycle
 
 - Guide EVES through the Draft → Review → Candidate stages, ensuring the exit criteria are satisfied at each step.  
-- Work closely with Approvers to confirm readiness for Final. Although Editors facilitate the process, the final decision is subject to Approvers’ votes.
+- Work closely with Approvers to confirm readiness for Final.
+  Although Editors facilitate the process, the final decision is subject to Approvers’ votes.
 
 #### 2.5 Governance and Accountability
 
@@ -153,11 +155,14 @@ The following points clarify limits to the Editor and Approver roles:
 1. **Creation of New EVES**  
    - Neither Editors nor Approvers drive the creation of new EVES; the community identifies needs, and authors propose solutions.  
 2. **Technical Designs or Implementations**  
-   - They do not craft or own the underlying technical designs (e.g., code libraries). The community or EVES authors lead the design, while Editors and Approvers review it for feasibility.  
+   - They do not craft or own the underlying technical designs (e.g., code libraries).
+     The community or EVES authors lead the design, while Editors and Approvers review it for feasibility.  
 3. **Promotion or Adoption**  
-   - They are not tasked with marketing or ensuring the adoption of specific EVES. Deployment and integration lie with the community and stakeholders.  
+   - They are not tasked with marketing or ensuring the adoption of specific EVES.
+     Deployment and integration lie with the community and stakeholders.  
 4. **Post-Final Maintenance**  
-   - Once an EVES is Final, it falls to the original authors or relevant contributors to maintain or propose updates. Major changes require a new EVES, as stated in [EVES-001](../EVES-001/eves-001.md).
+   - Once an EVES is Final, it falls to the original authors or relevant contributors to maintain or propose updates.
+     Major changes require a new EVES, as stated in [EVES-001](../EVES-001/eves-001.md).
 
 ### 6. Modular Governance Model
 
@@ -178,8 +183,6 @@ No retroactive changes are required; any references to “Editors” in older do
 1. [EVES-001: EVES Process Definition](../EVES-001/eves-001.md)  
 2. [OpenMSL Governance Rules](https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html)  
 3. [EIP-1: Ethereum Improvement Proposal Process](https://eips.ethereum.org/EIPS/eip-1) (Inspiration for open standards processes)
-
----
 
 ## Implementation
 
