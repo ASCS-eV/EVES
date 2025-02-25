@@ -183,4 +183,6 @@ No retroactive changes are required; any references to “Editors” in older do
 
 ## Implementation
 
-No direct implementation is required for this EVES. However, existing Editors and Approvers are encouraged to adopt these clarifications immediately for all in-flight and future EVES proposals. The Github Team [EVES Editors](https://github.com/orgs/ASCS-eV/teams/eves-editors) and [EVES Approvers](https://github.com/orgs/ASCS-eV/teams/eves-approvers) are created in the ASCS gitHub organization.
+No direct implementation is required for this EVES.
+However, existing Editors and Approvers are encouraged to adopt these clarifications immediately for all in-flight and future EVES proposals.
+The Github Team [EVES Editors](https://github.com/orgs/ASCS-eV/teams/eves-editors) and [EVES Approvers](https://github.com/orgs/ASCS-eV/teams/eves-approvers) are created in the ASCS gitHub organization.
