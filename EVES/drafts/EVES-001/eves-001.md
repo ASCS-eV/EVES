@@ -12,141 +12,188 @@ replaces: None
 
 ## Abstract
 
-This specification establishes the formal process for creating, editing, and approving ENVITED Ecosystem Specifications (EVES).
-These specifications standardize and document implementation decisions for the ENVITED-X Data Space, promoting transparency, collaboration, and technical consistency within the ecosystem of the Automotive Solution Center for Simulation e.V. (ASCS).
+This document establishes the formal process for creating, editing, and approving ENVITED Ecosystem Specifications (EVES). 
+It describes how proposals progress through Draft, Review, Candidate, and Final stages, as well as how they may be Deferred or Rejected. 
+By defining clear entry/exit criteria, governance roles, and reference implementation requirements, this specification aligns the ENVITED-X Data Space with best practices for open standards.
+
+---
 
 ## Motivation
 
-A standardized process for EVES ensures clarity, inclusivity, and accountability in the evolution of the ENVITED ecosystem.
-By defining roles, responsibilities, and lifecycle stages, this process aligns with best practices from similar initiatives, such as Chain Agnostic Improvement Proposals (CAIPs).
+The ENVITED Ecosystem depends on shared standards and specifications to ensure interoperability, security, and transparency. 
+EVES-001 provides a clear, consensus-driven path for developing new specifications and revising existing ones. 
+Without a well-defined process, proposals can stall, consensus may be ambiguous, and implementation quality can suffer.
+
+---
 
 ## Specification
 
 ### 1. EVES Lifecycle
 
-The EVES lifecycle consists of the following stages:
+This section defines the stages an EVES must pass through, along with entry/exit criteria and outcomes.
 
-1. **Draft**:
-   - The EVES is created and submitted as a pull request to the GitHub repository.
-   - Initial feedback is gathered informally.
+### 1.1 Visual Overview
+
+```mermaid
+flowchart LR
+    D(Draft) --> R(Review)
+    R --> C(Candidate)
+    C --> F(Final)
+    R --> X(Rejected/Deferred)
+    C --> X(Rejected/Deferred)
+```
+
+### 1.2 EVES Lifecycle Stages
+
+Each EVES must pass through the following stages:
+
+1. **Draft**  
+   - Created via a Pull Request (PR).  
+   - Must follow the [EVES template](../resources/eves-template.md) and meet the requirements in the [Style Guide](../resources/style-guide.md).  
+   - Open for initial community feedback.
 
 2. **Review**:
-   - EVES Editors ensure compliance with format and process guidelines.
-   - The community provides input via GitHub discussions.
+   - EVES Editors confirm compliance with required format (see Section 6 “Format”).  
+   - Community discusses proposal (GitHub issues, PR reviews).  
+   - **Exit Criteria**: At least two Editor approvals + no unresolved blocking objections.
 
 3. **Candidate**:
-   - The EVES achieves community consensus.
-   - A reference implementation must be created to demonstrate feasibility and validate the proposal.
+   - Must include or reference a working proof of concept (Reference Implementation) demonstrating feasibility.  
+   - Community tests and refines details; any remaining concerns are addressed.  
+   - **Exit Criteria**: A stable implementation exists, and Approvers confirm readiness for final vote.
 
-4. **Final**:
-   - The EVES undergoes final review by designated Approvers.
-   - Upon approval, the EVES is merged and marked as Final.
+4. **Final**  
+   - The EVES is officially adopted.  
+   - **Future Changes**: Any major modification to a Final EVES restarts the lifecycle at Draft or Review, unless designated as a minor editorial update by Editors.
 
-5. **Deferred/Rejected**:
-   - Proposals not meeting the required criteria or consensus may be deferred for future consideration or rejected.
+5. **Deferred/Rejected**  
+   - **Deferred**: The EVES is paused for future discussion (e.g., lack of resources, overshadowed by another proposal).  
+   - **Rejected**: Consensus cannot be reached, or the specification is fundamentally misaligned with ENVITED-X goals.
+
+### 1.3 Entry/Exit Criteria Example
+
+| **Stage**    | **Entry**                                                                  | **Exit**                                                                             |
+|--------------|----------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
+| **Draft**    | PR opened; Adheres to template & style guide                               | Meets minimal clarity & format → **Review**                                          |
+| **Review**   | Editors confirm formatting; Community feedback in progress                 | ≥ 2 Editor approvals + no blocking objections → **Candidate**                        |
+| **Candidate**| Working reference implementation; Feasibility tested                       | Approvers confirm readiness → **Final** (if no further changes needed)               |
+| **Final**    | Officially adopted                                                         | Major change → Return to Draft/Review; Minor clarifications → Direct merges allowed  |
+| **Deferred** | N/A                                                                        | Revisited later by Authors/Editors when new progress is possible                     |
+| **Rejected** | N/A                                                                        | Terminal stage for unresolvable proposals                                            |      
+
+---
 
 ### 2. EVES Numbering
 
-EVES documents follow sequential numbering, starting from EVES-001, EVES-002, and so forth. This ensures easy identification and reference.
+- EVES documents follow sequential numbering, starting from EVES-001, EVES-002, and so on.  
+- Numbers must be unique and stable once assigned (i.e., no recycling of identifiers).
+
+---
 
 ### 3. EVES Types
 
-EVES documents can fall into one of the following types:
+Each EVES must declare one of the following **type** fields in its YAML header:
 
-1. **Standards**:
-   - Defines technical specifications or protocols that should be adopted by the ecosystem.
-   - Examples: data formats, communication protocols, APIs.
+1. **Standards**  
+   - Defines technical specifications or protocols recommended for ecosystem adoption (e.g., data formats, APIs).
 
-2. **Informational**:
-   - Provides general guidelines, explanations, or context for ecosystem participants.
-   - Examples: best practices, usage recommendations.
+2. **Informational**  
+   - Provides context, best practices, or reference material without strict normative requirements.
 
-3. **Process**:
-   - Outlines procedural or governance rules that apply to the ENVITED community.
-   - Examples: this EVES-001, editorial governance rules.
+3. **Process**  
+   - Outlines procedural or governance rules applicable to the ENVITED community (e.g., this EVES-001).
 
-Each EVES type must be specified in the document header under the "Type" field.
+---
 
 ### 4. Roles and Responsibilities
 
-#### Author
+### 4.1 Author
 
-- Any individual or group proposing an EVES.
-- Responsible for drafting, gathering feedback, and revising the proposal.
+- Any individual or group drafting an EVES.
+- Responsible for preparing the initial text, updating it based on feedback, and ensuring final clarity.
 
-#### Community
+### 4.2 Community
 
-- All stakeholders who discuss, review, and provide input on EVES.
+- All ENVITED stakeholders who participate in discussions and reviews, typically via GitHub issues and pull requests.
 
-#### EVES Editors
+### 4.3 EVES Editors
 
-- (Community-)Members of the ENVITED Research Cluster within ASCS.
-- Oversee formatting, process adherence, and editorial mediation.
-- Governed by the rules outlined [here](https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html).
-- Roles and responsibilities specified in [EVES-004](https://github.com/ASCS-eV/EVES/blob/main/drafts/EVES-001/EVES-001.md).
+- Oversee editorial reviews and confirm compliance with EVES format and style requirements.  
+- Remain neutral on technical content but ensure clarity, correctness, and adherence to process.  
+- Governed by [EVES-004 (Roles and Responsibilities of EVES Editors)](https://github.com/ASCS-eV/EVES/blob/main/drafts/EVES-004/EVES-004.md).
 
-#### Approvers
+### 4.4 Approvers
 
-- A designated body within ASCS ENVITED community responsible for final evaluation and adoption.
-- The body consists of EVES Editors with voting rights as full members of the ASCS e.V.
+- A subset of EVES Editors with voting rights as full ASCS e.V. members.  
+- Provide the final decision on moving an EVES from Candidate to Final.  
+- Must meet quorum requirements (e.g., at least two Approvers) to grant or deny Final status.
 
-### 5. Reference Implementation
+### 4.5 Conflict Resolution
 
-To proceed from Candidate to Final, a reference implementation must:
+- If consensus cannot be reached at the Review or Candidate stage, Editors may escalate to an ASCS board vote.  
+- Authors can appeal Editor or Approver decisions by opening a dedicated issue in the repository with justification.
+---
 
-- Validate the proposal’s feasibility,
-- Serve as a practical example for adoption,
-- Be submitted alongside the EVES documentation.
+## 5. Reference Implementation
 
-### 6. Format
+- **Requirement**: An EVES **MUST** demonstrate feasibility via a reference implementation before progressing from Review to Candidate.  
+- **Open/Closed Source**: An open-source example is strongly **RECOMMENDED**, though a closed-source reference is acceptable if sufficiently documented.  
+- **Community Validation**: Users are encouraged to test the reference implementation for real-world interoperability and consistency with the EVES specification.
 
-All EVES documents must adhere to the following structure:
+---
+## 6. Format
 
-1. **Title**: A descriptive and concise title.
-2. **Abstract**: A summary of the proposal.
-3. **Motivation**: The problem statement or justification for the proposal.
-4. **Specification**: Detailed technical and procedural content.
-5. **Rationale**: Explanation of the approach and alternatives considered.
-6. **Backwards Compatibility**: Analysis of how the proposal interacts with existing systems.
-7. **Implementation**: Guidelines or requirements for practical execution.
-8. **References**: Links to related documents or discussions.
+All EVES documents **MUST** follow the structure below:
 
-### 7. Process Flow
+1. **Header (YAML)**  
+   - eves-identifier, title, author, discussions-to, status, type, created, requires, replaces  
+2. **Abstract**  
+   - Brief summary (2–3 sentences) of the EVES.  
+3. **Motivation**  
+   - Context and explanation of why this EVES is needed.  
+4. **Specification**  
+   - Detailed technical or procedural requirements.  
+5. **Lifecycle**  
+   - If relevant, describe states or phases unique to this EVES.  
+6. **Backwards Compatibility**  
+   - Explain how this proposal interacts with existing implementations, if any.  
+7. **References**  
+   - List any relevant RFCs, W3C standards, or other external specs.
 
-1. **Submission**:
-   - Authors submit a pull request to the EVES GitHub repository.
+EVES must use [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) key words (**“MUST,” “SHOULD,” “RECOMMENDED,”** etc.) appropriately for normative statements.
 
-2. **Editorial Review**:
-   - EVES Editors review format and compliance with guidelines.
+---
 
-3. **Community Review**:
-   - Open discussions and feedback via GitHub and other forums.
+## 7. Revisions to Final EVES
 
-4. **Candidate Stage**:
-   - Achieve community consensus and provide a reference implementation.
+- Once an EVES reaches **Final** status, significant changes **MUST** be submitted via a new Pull Request.  
+- Editors will determine if proposed changes are major (functionality-altering) or minor (typos, clarifications).  
+  - **Major changes**: Return to Draft or Review.  
+  - **Minor changes**: Merged if unopposed, bypassing the full lifecycle.
 
-5. **Approval**:
-   - Approvers review and mark the EVES as Final.
+---
 
-### 8. Governance
+## 8. Governance
 
-The process emphasizes openness, inclusivity, and accountability. Discussions, decisions, and documentation are publicly accessible on the EVES GitHub repository.
-Governance rules for EVES Editors are defined [here](https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html).
+ENVITED-X emphasizes openness, inclusivity, and accountability. Discussions, votes, and final decisions regarding EVES are publicly visible on GitHub. Detailed governance rules, especially regarding EVES Editors, can be found in [OpenMSL Governance Rules](https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html).
 
-## Backwards Compatibility
+---
 
-This process introduces new standards and does not conflict with prior procedures, as it establishes a foundational framework.
+## 9. Backwards Compatibility
 
-## References
+This process introduces new clarity regarding EVES stages, references, and roles without invalidating earlier procedures. Existing EVES in Draft need not restart unless their authors or Editors decide to re-align them with these updated guidelines.
 
-1. [Chain Agnostic Improvement Proposals (CAIPs)](https://github.com/ChainAgnostic/CAIPs)
-2. [OpenMSL Governance Rules](https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html)
-3. [IPFS Specifications](https://github.com/ipfs/specs)
+---
+## 10. References
 
-## Implementation
+1. **EVES-004: Roles and Responsibilities of EVES Editors**  
+   [https://github.com/ASCS-eV/EVES/blob/main/drafts/EVES-004/EVES-004.md](https://github.com/ASCS-eV/EVES/blob/main/drafts/EVES-004/EVES-004.md)
 
-The initial implementation of EVES-001 involves:
+2. **RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels**  
+   [https://www.rfc-editor.org/rfc/rfc2119](https://www.rfc-editor.org/rfc/rfc2119)
 
-1. Setting up the GitHub repository [here](https://github.com/ASCS-eV/EVES).
-2. Establishing an editorial board from the ENVITED Research Cluster.
-3. Publishing this document as EVES-001.
+3. **EVES Template & Style Guide**  
+   [../resources/](../resources/)
+
+4. **OpenMSL Governance Rules**  
+   [https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html](https://openmsl.github.io/doc/OpenMSL/organization/governance_rules.html)
