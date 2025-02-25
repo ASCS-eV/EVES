@@ -4,17 +4,17 @@ Welcome to the [ENVITED Ecosystem Specifications (EVES) repository](https://gith
 This repository contains the official specifications for the ENVITED-X Data Space, maintained by the Automotive Solution Center for Simulation e.V. (ASCS).
 These specifications define and document implementation decisions, processes, and standards for the ecosystem.
 
-For more details on the EVES process, refer to [EVES-001](https://ascs-ev.github.io/EVES/drafts/EVES-001/eves-001.html).  
+For more details on the EVES process, refer to [EVES-001](https://ascs-ev.github.io/EVES/EVES-001/eves-001.html).  
 
 ## Repository Structure
 
 The repository is organized into the following structure:
 
-📁 `drafts/`  
-*-> Contains EVES in the Draft stage. Each proposal is under active discussion and subject to change.*
+📁 `./`  
+*-> Contains EVES in the all stages indicated by the status in the header of the specification document.*
 
-📁 `final/`  
-*-> Contains EVES that have been approved and finalized. These are the official and adopted specifications.*
+📁 `protocols/`  
+*-> contains the meeting minutes for decisions from Editiors and Approvers according to [EVES-004](https://ascs-ev.github.io/EVES/EVES-004/eves-004.html)*
 
 📁 `resources/`  
 *-> Contains additional files such as schemas, templates, and reference implementations related to specific EVES.*
@@ -24,9 +24,9 @@ The repository is organized into the following structure:
 
 ### Folder Structure Details
 
-#### Drafts Folder
+#### Root Folder
 
-📁 `drafts/`
+📁 `./`
 
 - 📁 `EVES-001/`  
   - 📄 `EVES-001.md` *(Specification in Draft stage)*  
@@ -36,19 +36,6 @@ The repository is organized into the following structure:
 
   - 📄 `EVES-002.md`  
   - 📄 `diagram.png` *(Optional: Diagrams or illustrations for the EVES)*  
-
-#### Final Folder
-
-📁 `final/`
-
-- 📁 `EVES-001/`
-
-  - 📄 `EVES-001.md` *(Finalized specification)*  
-  - 📄 `reference_implementation.zip` *(Optional: Associated reference implementation)*  
-
-- 📁 `EVES-002/`  
-  - 📄 `EVES-002.md`  
-  - 📄 `schema.json`  
 
 #### Resources Folder
 
@@ -62,12 +49,12 @@ The repository is organized into the following structure:
 ## How to Use This Repository
 
 1. **Explore Specifications**:  
-   - Navigate to `final/` to view adopted specifications.  
-   - Check `drafts/` for work in progress and contribute to discussions.
+   - Navigate to `SUMMARY.md` to view an overview of the specifications specifications.  
+   - Check the EVES `status` for work in progress and contribute to discussions.
 
 2. **Propose a New EVES**:  
    - Use the template in `resources/eves-template.md` to draft your proposal.  
-   - Follow the guidelines and [contribution rules](https://openmsl.github.io/doc/OpenMSL/organization/index.html) to submit your EVES as a pull request.
+   - Follow the guidelines and [general contribution rules](https://openmsl.github.io/doc/OpenMSL/organization/index.html) to submit your EVES as a pull request.
    - Follow the style guidelines.
 
 3. **Contribute to Drafts**:  
