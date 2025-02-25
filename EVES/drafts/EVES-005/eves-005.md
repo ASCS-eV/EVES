@@ -3,7 +3,7 @@ eves-identifier: 005
 title: ENVITED-X Contract Negotiation Process
 author: Felix Hoops (@jfelixh), Carlo van Driesten (@jdsika)
 discussions-to: https://github.com/ASCS-eV/EVES/issues/
-status: Draft
+status: Review
 type: Process
 created: 2024-12-02
 requires: ["EVES-001", "EVES-002", "EVES-003", "EVES-006"]
@@ -20,7 +20,10 @@ The decentralized registry on Etherlink (see [EVES-006](../EVES-006/eves-006.md)
 
 ## Motivation
 
-Traditional negotiation protocols (e.g., as described in the [Eclipse Dataspace Protocol](https://github.com/eclipse-dataspace-protocol-base/DataspaceProtocol/tree/main/artifacts/src/main/resources/negotiation)) are complex and tend to expose excessive information.
+The [Eclipse Dataspace Protocol](https://github.com/eclipse-dataspace-protocol-base/DataspaceProtocol/tree/main/artifacts/src/main/resources/negotiation) provides a robust and straightforward framework with an established state machine that meets our needs.  
+We build directly on this same state machine—using the states REQUESTED, OFFERED, ACCEPTED, AGREED, VERIFIED, FINALIZED, and TERMINATED—without adding extra steps that complicate the process.  
+Our enhancements, which incorporate signed verifiable credential contracts based on the SD-JWT specification and integration with the SSI-to-OIDC bridge, add legal security and streamline verification while preserving the original flow.  
+This approach improves security and verifiability without exposing excessive information or introducing unnecessary complexity.  
 Our process is designed to:
 
 - Mandate the use of pre-approved, ODRL-compatible contract templates.

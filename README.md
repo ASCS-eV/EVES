@@ -12,9 +12,9 @@ The process on how to write, submit or change specifications in defined in [EVES
 
 | Number | Title | Type | Status |
 | ------ | ----- | ---- | ------ |
-| [001](./EVES/drafts/EVES-001/eves-001.md) | ENVITED-X Ecosystem Specification Process            | Process   | Draft |
-| [002](./EVES/drafts/EVES-002/eves-002.md) | ENVITED-X Data Space Architecture Overview           | Standards | Draft |
-| [003](./EVES/drafts/EVES-003/eves-003.md) | ENVITED-X Asset Definition and Upload Process        | Standards | Draft |
-| [004](./EVES/drafts/EVES-004/eves-004.md) | ENVITED-X Roles and Responsibilities of EVES Editors | Process   | Draft |
-| [005](./EVES/drafts/EVES-005/eves-005.md) | ENVITED-X Contract Negotiation Process               | Process   | Draft |
-| [006](./EVES/drafts/EVES-006/eves-006.md) | ENVITED-X Scaling Architecture                       | Process   | Draft |
+| [001](./EVES/drafts/EVES-001/eves-001.md) | ENVITED-X Ecosystem Specification Process            | Process   | Review |
+| [002](./EVES/drafts/EVES-002/eves-002.md) | ENVITED-X Data Space Architecture Overview           | Standards | Draft  |
+| [003](./EVES/drafts/EVES-003/eves-003.md) | ENVITED-X Asset Definition and Upload Process        | Standards | Review |
+| [004](./EVES/drafts/EVES-004/eves-004.md) | ENVITED-X Roles and Responsibilities of EVES Editors | Process   | Draft  |
+| [005](./EVES/drafts/EVES-005/eves-005.md) | ENVITED-X Contract Negotiation Process               | Process   | Review |
+| [006](./EVES/drafts/EVES-006/eves-006.md) | ENVITED-X Scaling Architecture                       | Process   | Draft  |
