@@ -136,7 +136,7 @@ Approvers operate on top of the Editors’ responsibilities, taking an active ro
    - Tag the current editors group (e.g., `@eves-editors`) in the discussion for visibility.
 
 2. **Eligibility**:
-   - Applicants MUST demonstrate familiarity with the EVES process, template, and standards as defined in [EVES-001](../EVES-001/eves-001.md)) and this document.
+   - Applicants MUST demonstrate familiarity with the EVES process, template, and standards as defined in [EVES-001](../EVES-001/eves-001.md) and this document.
    - New editors are welcome, and all qualified contributors can join to support the collaborative effort.
 
 3. **Approval**:
@@ -169,7 +169,7 @@ This modular governance ensures each role maintains focused responsibilities, th
 
 ## Backwards Compatibility
 
-This EVES clarifies and expands the editorial process defined in EVE[S-001](../EVES-001/eves-001.md) by adding the Approvers role.
+This EVES clarifies and expands the editorial process defined in [EVES-001](../EVES-001/eves-001.md) by adding the Approvers role.
 It does not invalidate any previous guidelines and remains fully compatible with existing EVES.
 No retroactive changes are required; any references to “Editors” in older documents may be read inclusively to account for the separate Approvers subset going forward.
 
@@ -183,4 +183,4 @@ No retroactive changes are required; any references to “Editors” in older do
 
 ## Implementation
 
-No direct implementation is required for this EVES. However, existing Editors and Approvers are encouraged to adopt these clarifications immediately for all in-flight and future EVES proposals.
+No direct implementation is required for this EVES. However, existing Editors and Approvers are encouraged to adopt these clarifications immediately for all in-flight and future EVES proposals. The Github Team [EVES Editors](https://github.com/orgs/ASCS-eV/teams/eves-editors) and [EVES Approvers](https://github.com/orgs/ASCS-eV/teams/eves-approvers) are created in the ASCS gitHub organization.
