@@ -75,7 +75,7 @@ Each EVES must pass through the following stages:
 | **Candidate**| Working reference implementation; Feasibility tested                       | Approvers confirm readiness → **Final** (if no further changes needed)               |
 | **Final**    | Officially adopted                                                         | Major change → Return to Draft/Review; Minor clarifications → Direct merges allowed  |
 | **Deferred** | N/A                                                                        | Revisited later by Authors/Editors when new progress is possible                     |
-| **Rejected** | N/A                                                                        | Terminal stage for unresolvable proposals                                            |      
+| **Rejected** | N/A                                                                        | Terminal stage for unresolvable proposals                                            |
 
 ### 2. EVES Numbering
 
