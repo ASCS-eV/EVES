@@ -64,7 +64,7 @@ The ENVITED-X Data Space is built on the following core modules:
   - Ensure compliance with the TZIP-21 metadata standard to use open source libraries of the greater Tezos ecosystem.
 - **Key Features**:
   - Whitelisting through the registry contract's "view" entry point.
-  - Minting NFTs representing simulation assets defined in [EVES-003](https://github.com/ASCS-eV/EVES/blob/main/drafts/EVES-003/EVES-003.md).
+  - Minting NFTs representing simulation assets defined in [EVES-003](../EVES-003/eves-003.md).
 - **Standards**:
   - FA2.1 compliance for token creation and ticket-based interoperability.
 
@@ -144,7 +144,7 @@ Future EVES will provide detailed specifications for each module.
 2. [Altme Wallet](https://altme.io)
 3. [Tezos FA2.1 Standard](https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-21/tzip-21.md)
 4. [Etherlink Bridge](https://www.etherlinkbridge.com/bridge)
-5. [EVES-003: ENVITED Asset Definition and Upload Process](https://github.com/ASCS-eV/EVES/blob/main/drafts/EVES-003/EVES-003.md)
+5. [EVES-003: ENVITED Asset Definition and Upload Process](../EVES-003/eves-003.md)
 6. [Gaia-X Trust Framework](https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/)
 
 ## Implementation
