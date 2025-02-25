@@ -46,7 +46,7 @@ Each EVES must pass through the following stages:
 
 1. **Draft**  
    - Created via a Pull Request (PR).  
-   - Must follow the [EVES template](https://github.com/ASCS-eV/EVES/blob/main/EVES/resources/eves-template.md) and meet the requirements in the [Style Guide](https://github.com/ASCS-eV/EVES/blob/main/EVES/resources/style-guide.md).  
+   - Must follow the [EVES template](../../resources/eves-template.md) and meet the requirements in the [Style Guide](../../resources/style-guide.md).  
    - Open for initial community feedback.
 
 2. **Review**:
