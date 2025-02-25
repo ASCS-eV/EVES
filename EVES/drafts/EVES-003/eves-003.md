@@ -3,7 +3,7 @@ eves-identifier: 003
 title: ENVITED-X Asset Definition and Upload Process
 author: Carlo van Driesten (@jdsika)
 discussions-to: https://github.com/ASCS-eV/EVES/issues/4
-status: Draft
+status: Review
 type: Standards
 created: 2024-11-19
 requires: ["EVES-001"]
