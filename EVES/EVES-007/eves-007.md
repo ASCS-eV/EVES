@@ -51,11 +51,11 @@ urn:blockchain:{chain_namespace}:{chain_id}:contract:{contract_address}
 | **Ethereum (Mainnet)**  | `eip155`  | `1`               | `urn:blockchain:eip155:1:contract:0xABC123456789...`                                 |
 | **Etherlink (Layer 2)** | `eip155`  | `42793`           | `urn:blockchain:eip155:42793:contract:0x646B92C8f21e55DF67E766047E4bD7bEdF8DfA14`    |
 
-##### Notes
-
-- The **namespace** follows **CAIP-2** (e.g., `tezos`, `eip155` for Ethereum).
-- The **chain_id** follows **CAIP-10**, ensuring unique chain differentiation.
-- **Smart contracts (KT1, 0x) are explicitly named** under the `contract` identifier.
+> **_NOTE:_**
+>
+> - The **namespace** follows **CAIP-2** (e.g., `tezos`, `eip155` for Ethereum).
+> - The **chain_id** follows **CAIP-10**, ensuring unique chain differentiation.
+> - **Smart contracts (KT1, 0x) are explicitly named** under the `contract` identifier.
 
 #### 1.2 Transaction Hash Identifiers
 
@@ -73,10 +73,10 @@ urn:blockchain:{chain_namespace}:{chain_id}:tx:{transaction_hash}
 | **Ethereum (Mainnet)**  | `eip155`   | `1`               | `urn:blockchain:eip155:1:tx:0xad0fa6b98b66bc19ab4936d1181697ac7f1e19755e1501e4e250434200a32cba`     |
 | **Etherlink (Layer 2)** | `eip155`   | `42793`           | `urn:blockchain:eip155:42793:tx:0xad0fa6b98b66bc19ab4936d1181697ac7f1e19755e1501e4e250434200a32cba` |
 
-##### Notes
-
-- **Operation hashes on Tezos are prefixed with `tx:`**.
-- **Ethereum and Etherlink transactions follow the Keccak-256 hash format**.
+> **_NOTE:_**
+>
+> - **Operation hashes on Tezos are prefixed with `tx:`**.
+> - **Ethereum and Etherlink transactions follow the Keccak-256 hash format**.
 
 ### 2. Standardization Considerations
 
