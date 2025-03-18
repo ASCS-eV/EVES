@@ -103,6 +103,48 @@ urn:blockchain:{chain_namespace}:{chain_id}:tx:{transaction_hash}
 - **ENVITED-X Asset Tracking**
   - Standardized **contract and transaction tracking** across chains.
 
+### **4. MIME Type for Blockchain URNs**
+To ensure structured and standardized handling of **URN-based blockchain references**, this specification defines a MIME type for representing **contract and transaction identifiers** in a machine-readable format.  
+
+#### **4.1 MIME Type Definition**
+The following MIME type is introduced to denote **blockchain URNs** in JSON-based metadata and API responses:
+
+```json
+application/vnd.eves.blockchain-urn+json
+```
+
+#### **4.2 Rationale**
+- **`application/`** → Indicates structured data.  
+- **`vnd.eves.`** → Specifies the ENVITED-X standardization scope.  
+- **`blockchain-urn`** → Clearly identifies the content as a **URN-based blockchain reference**.  
+- **`+json`** → Specifies that the format is **compatible with JSON-based data structures**.
+
+#### **4.3 Example Usage**
+The MIME type is used in metadata files, API payloads, and verifiable credential documents where blockchain URN references are required.  
+
+##### **Example: NFT Metadata (TZIP-21, ERC-721)**
+```json
+{
+  "name": "Digital Twin Smart Contract",
+  "artifactUri": "ipfs://bafybeidhmknqn4co...",
+  "mimeType": "application/vnd.eves.blockchain-urn+json",
+  "contractURN": "urn:blockchain:tezos:NetXnHfVqm9iesp:contract:KT1PCaD2kmgCHy15wQ1gpqZUy9RLxyBVJdTF",
+  "mintingTx": "urn:blockchain:eip155:1:tx:0xad0fa6b98b66bc19ab4936d1181697ac7f1e19755e1501e4e250434200a32cba"
+}
+```
+Example: API Response
+
+```json
+{
+  "status": "success",
+  "data": {
+    "urn": "urn:blockchain:etherlink:ghostnet:contract:0xDEF987654321...",
+    "mimeType": "application/vnd.eves.blockchain-urn+json"
+  }
+}
+```
+This MIME type ensures interoperability across blockchain networks, metadata specifications (TZIP-21, ERC-721), and decentralized identity frameworks (DID:PKH, SD-JWT).
+
 ## Backwards Compatibility
 
 This EVES introduces a **new URN schema** but does not conflict with **existing CAIP-10, TZIP-21, or ERC-721 standards**.  
