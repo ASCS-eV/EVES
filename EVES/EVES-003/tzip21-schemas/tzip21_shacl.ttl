@@ -11,7 +11,7 @@ tzip21:AssetShape
   a sh:NodeShape ;
   rdfs:label "Rich Metadata Asset Shape" ;
   sh:targetClass tzip21:Asset ;
-  dcterms:conformsTo <https://gitlab.com/tezos/tzip/-/blob/master/proposals/tzip-07/tzip-07.md>,
+  dcterms:conformsTo <https://gitlab.com/tezos/tzip/-/blob/master/proposals/tzip-7/tzip-7.md>,
                       <https://gitlab.com/tezos/tzip/-/blob/master/proposals/tzip-12/tzip-12.md>,
                       <https://gitlab.com/tezos/tzip/-/blob/master/proposals/tzip-16/tzip-16.md>,
                       <https://gitlab.com/tezos/tzip/-/blob/master/proposals/tzip-21/tzip-21.md> ;

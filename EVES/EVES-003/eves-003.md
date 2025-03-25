@@ -30,9 +30,11 @@ This EVES addresses the need for clear guidelines to onboard assets and synchron
 ### 1. Asset Definition
 
 The EVES-003 Simulation Asset is defined by the [Gaia-X 4 PLC-AAD ENVITED-X Ontology](https://github.com/ASCS-eV/ontology-management-base/tree/main/envited-x) version `https://ontologies.envited-x.net/envited-x/v2/ontology#`.
-It is compliant with the [Gaia-X ontology and SHACL shapes 2210](https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/gx) which are derived from [GaiaX Trust Framework](https://registry.lab.gaia-x.eu/v1/api/trusted-schemas-registry/v2/schemas/gax-trust-framework) including the [https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#](https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#). A [GaiaX Compliant Claims Example](https://github.com/GAIA-X4PLC-AAD/gaia-x-compliant-claims-example) can be generated using the [GaiaX 4 PLC-AAD Claim Compliance Provider](https://github.com/GAIA-X4PLC-AAD/claim-compliance-provider).
+It shall be compliant with the [Gaia-X ontology and SHACL shapes 2210](https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/gx).
+The `gx` shacle shapes are derived from the [GaiaX Trust Framework](https://registry.lab.gaia-x.eu/v1/api/trusted-schemas-registry/v2/schemas/gax-trust-framework) including the [https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#](https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#).
+A [GaiaX Compliant Claims Example](https://github.com/GAIA-X4PLC-AAD/gaia-x-compliant-claims-example) can be generated using the [GaiaX 4 PLC-AAD Claim Compliance Provider](https://github.com/GAIA-X4PLC-AAD/claim-compliance-provider).
 
-The example implementation in the 📁 `metadata/` folder is based on release v0.2.3 of the [ASCS HD-Map Asset Example](https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.2.3).
+The example implementation in the 📁 `example/` folder is based on release v0.2.3 of the [ASCS HD-Map Asset Example](https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.2.3).
 
 Asset examples can be found in the following repositories:
 
@@ -137,22 +139,22 @@ The synchronization between the smart contract and the ENVITED-X database relies
 Attributes not in the table are static and the same for every mint.
 Examples are the first five tags or "publishers", which is always ENVITED-X and the ASCS as the mint is conducted through the website.
 
-| TZIP-21            | EVES-003                                             | Comment                                                      |
-| -------------------| ---------------------------------------------------- | ------------------------------------------------------------ |
-| "name"             | envited-x:DataResource:gx:name                       |                                                              |
-| "description"      | envited-x:DataResource:gx:description                |                                                              |
-| "tags"             | format:formatType + " " + format:version             | All tags static except for the format                        |
-| "minter"           | Member DID associated with user initiating the mint  | Returned by the View from the DEMIM revocation registry      |
-| "creators"         | Name of the company                                  | Taken from the company profile the user belongs to           |
-| "date"             | [System date-time][1]                                |                                                              |
-| "rights"           | "manifest:hasLicense:spdxIdentifier"                 | [SPDX identifier][2]                                         |
-| "rightsUri"        | "manifest:hasLicense:licenseData:manifest:path"      | Full os license text URL OR policy smart contract did        |
-| "artifactUri"      | <https://assets.envited-x.net/Asset-CID>             |                                                              |
-| "identifier"       | Asset-CID                                            |                                                              |
-| "externalUri"      | Uploaded domainMetadata.json to IPFS                 |                                                              |
-| "displayUri"       | "manifest:hasArtifacts:Link" of category "isMedia"   | Always use the first media image                             |
-| "formats"          | Add info for artifactUri, externalUri and displayUri |                                                              |
-| "attributes"       | Same as in example with IPFS CIDs+URL                | For other asset types hdmap would be exchanged               |
+| TZIP-21            | EVES-003                                                 | Comment                                                      |
+| -------------------| -------------------------------------------------------- | ------------------------------------------------------------ |
+| "name"             | envited-x:DataResource:gx:name                           |                                                              |
+| "description"      | envited-x:DataResource:gx:description                    |                                                              |
+| "tags"             | $TAG = format:formatType + " " + format:version          | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]    |
+| "minter"           | Member DID associated with user initiating the mint      | Returned by the View from the DEMIM revocation registry      |
+| "creators"         | Name of the company                                      | Taken from the company profile the user belongs to           |
+| "date"             | [System date-time][1]                                    |                                                              |
+| "rights"           | manifest:hasLicense:gx:license                           | [SPDX identifier][2]                                         |
+| "rightsUri"        | manifest:hasLicense:licenseData:hasFileMetadata:filePath | Full os license text URL OR policy smart contract did        |
+| "artifactUri"      | <https://assets.envited-x.net/Asset-CID>                 |                                                              |
+| "identifier"       | Simulation Asset @id                                     | Unique identifier from the domainMetadata.json               |
+| "externalUri"      | Uploaded domainMetadata.json to IPFS                     |                                                              |
+| "displayUri"       | "manifest:hasArtifacts:Link" of category "isMedia"       | Always use the first media image                             |
+| "formats"          | artifactUri, externalUri, displayUri, tzip21_manifest    |                                                              |
+| "attributes"       | Reverse domain notation for ontologies + URL             | All domain specific prefixes from the domainMetadata.json    |
 
 **>Note:** Some of the information need to be extracted from the `gx:LegalParticipant`.
 
@@ -175,7 +177,7 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 
 ## References
 
-1. [Gaia-X 4 PLC-AAD Manifest Ontology](https://github.com/ASCS-eV/ontology-management-base/tree/main/manifest)
+1. [Gaia-X 4 PLC-AAD ENVITED-X Ontology](https://github.com/ASCS-eV/ontology-management-base/tree/main/envited-x)
 2. [HD-Map Asset Example](https://github.com/ASCS-eV/hd-map-asset-example)
 3. [Pinata Documentation](https://docs.pinata.cloud/web3/pinning/pinata-metadata#pinataoptions)
 4. [RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels](https://datatracker.ietf.org/doc/html/rfc2119)
