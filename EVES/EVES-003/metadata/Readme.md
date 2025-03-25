@@ -8,19 +8,19 @@ This folder contains the reference example for the metadata specifications outli
 
 - 📄 `bafybeidhmknqn4cofjlphtrxpyvruur42t55bfmtcldyb74l2ob22kjjdu.zip`  
   *Example HD map renamed to CID v1.*
-- 📄 `tzip21_asset_manifest.json`  
+- 📄 `tzip21_manifest.json`  
   *Generated metadata file for IPFS referenced in the TZIP21 token metadata containing remote URLs.*
 - 📄 `tzip21_token_metadata-schema.json`  
   *TZIP21 json schema to validate the token metadata.*
 - 📄 `tzip21_token_metadata.json`  
   *Token metadata for minting assets.*
 
-The shacles can be found [here](https://github.com/ASCS-eV/hd-map-asset-example/tree/v0.1.8/shacls-and-ontologies/used-shacls):
+The shacles can be found [here](https://github.com/GAIA-X4PLC-AAD/ontology-management-base/releases/tag/v0.0.4):
 
 📁 `shacls-and-ontologies/used-shacls/`
 
 - 📄 `manifest_shacl.ttl`  
-  *SHACL file for validating the `manifest.json`.*  
+  *SHACL file for validating the `manifest_reference.json`.*  
 - 📄 `domainMetadata_shacl.ttl`  
   *SHACL file for validating the `domainMetadata.json`.*  
 
@@ -36,17 +36,17 @@ All assets and metadata files are identified using CID v1, ensuring interoperabi
 
 ### TZIP-21 Metadata
 
-The `tzip21_asset_manifest.json` and `tzip21_token_metadata.json` demonstrate the mapping of asset information to TZIP-21 token metadata standards, as detailed in [EVES-003](../eves-003.md).
+The `tzip21_manifest.json` and `tzip21_token_metadata.json` demonstrate the mapping of asset information to TZIP-21 token metadata standards, as detailed in [EVES-003](../eves-003.md).
 
 ## How to Use This Reference Implementation
 
 1. **Validate Metadata**:
-   - Use the referenced SHACL files in the `shacls-and-ontologies/used-shacls/` folder to validate `manifest.json` and `domainMetadata.json`.
+   - Use the referenced SHACL files in the `shacls-and-ontologies/used-shacls/` folder to validate `manifest_reference.json` and `domainMetadata.json`.
    - Ensure all required files and URLs referenced in the manifest are accessible.
 
 2. **Prepare Metadata for IPFS**:
-   - Upload the `tzip21_asset_manifest.json` and associated files to IPFS.
-   - Convert relative file paths in `manifest.json` to CID-based IPFS URLs using the `tzip21_asset_manifest.json`.
+   - Upload the `tzip21_manifest.json` and associated files to IPFS.
+   - Convert relative file paths in `manifest_reference.json` to CID-based IPFS URLs using the `tzip21_manifest.json`.
 
 3. **Integrate with ENVITED-X Data Space**:
    - Mint tokens using `tzip21_token_metadata.json`.

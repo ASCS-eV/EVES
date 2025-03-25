@@ -29,10 +29,17 @@ This EVES addresses the need for clear guidelines to onboard assets and synchron
 
 ### 1. Asset Definition
 
-An asset is defined by the [Gaia-X 4 PLC-AAD Manifest Ontology](https://github.com/ASCS-eV/ontology-management-base/tree/main/manifest).
-The example implementation in the 📁 `metadata/` folder is based on release v0.1.8 of the [HD-Map Asset Example](https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.1.8).
+The EVES-003 Simulation Asset is defined by the [Gaia-X 4 PLC-AAD ENVITED-X Ontology](https://github.com/ASCS-eV/ontology-management-base/tree/main/envited-x) version `https://ontologies.envited-x.net/envited-x/v2/ontology#`.
+It is compliant with the [Gaia-X ontology and SHACL shapes 2210](https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/gx) which are derived from [GaiaX Trust Framework](https://registry.lab.gaia-x.eu/v1/api/trusted-schemas-registry/v2/schemas/gax-trust-framework) including the [https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#](https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#). A [GaiaX Compliant Claims Example](https://github.com/GAIA-X4PLC-AAD/gaia-x-compliant-claims-example) can be generated using the [GaiaX 4 PLC-AAD Claim Compliance Provider](https://github.com/GAIA-X4PLC-AAD/claim-compliance-provider).
 
-This EVES references the [Gaia-X Policy Rules Compliance Document (Release 24.11)](https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/). Compatibility with this release is **to be verified** in a future update of this EVES.
+The example implementation in the 📁 `metadata/` folder is based on release v0.2.3 of the [ASCS HD-Map Asset Example](https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.2.3).
+
+Asset examples can be found in the following repositories:
+
+- [HD-Map Asset Example](https://github.com/ASCS-eV/hd-map-asset-example)
+- [Environment Asset Example](https://github.com/ASCS-eV/environment-model-asset-example)
+- [Scenario Asset Example](https://github.com/ASCS-eV/scenario-asset-example)
+- [OSI-Trace Asset Example](https://github.com/ASCS-eV/ositrace-asset-example/tree/main)
 
 ### 2. Pinata IPFS and CID Management
 
@@ -51,16 +58,16 @@ The ENVITED-X Data Space implements a three-tiered privacy model:
 
 | manifest:accessRole  | ENVITED-X Domain                                                      | Comment                               |
 | -------------------- | --------------------------------------------------------------------- | ------------------------------------- |
-| `owner`              | <https://assets.envited-x.net/Asset-CID>                              | CID v1, signed URLs, asset credential |
-| `registeredUser`     | <https://metadata.envited-x.net/Asset-CID>                            | CID v1, signed URLs, DEMIM credential |
-| `publicUser`         | <ipfs://Data-CID> to <https://ipfs.envited-x.net/Asset-CID/Data-CID>  | CID v1, public, indexer to new URL    |
+| `isOwner`            | <https://assets.envited-x.net/Asset-CID>                              | CID v1, signed URLs, asset credential |
+| `isRegistered`       | <https://metadata.envited-x.net/Asset-CID>                            | CID v1, signed URLs, DEMIM credential |
+| `isPublic`           | <ipfs://Data-CID> to <https://ipfs.envited-x.net/Asset-CID/Data-CID>  | CID v1, public, indexer to new URL    |
 
 ### 4. Asset Validation and Upload Process
 
 #### Step 1: Client-Side Pre-Validation
 
 - Drag and drop `asset.zip` into the upload field.
-- Validate the `manifest.json`:
+- Validate the `manifest_reference.json`:
   1. Ensure JSON structure matches the manifest SHACL constraints.
   2. Verify all referenced files exist locally or remotely as specified.
   3. Locate the `domainMetadata.json` file.
@@ -75,9 +82,9 @@ The ENVITED-X Data Space implements a three-tiered privacy model:
 - Rename `asset.zip` to `CID.zip` and store at `https://assets.envited-x.net/Asset-CID`.
 - Store *registeredUser* metadata at `https://metadata.envited-x.net/Asset-CID`.
 - Store *publicUser* metadata at `https://ipfs.envited-x.net/Asset-CID/Data-CID`.
-- Calculate CIDs for all `publicUser` data.
-- Create `tzip21_asset_manifest.json` by replacing relative paths in `manifest.json` with IPFS/envited-x.net URLs.
-- Replace `@id` from `manifest.json` with generated UUID in `tzip21_asset_manifest.json`.
+- Calculate CIDs for all `isPublic` data.
+- Create `tzip21_manifest.json` by replacing relative paths in `manifest_reference.json` with IPFS/envited-x.net URLs.
+- Replace `@id` from `manifest_reference.json` with generated UUID in `tzip21_manifest.json`.
 - Create `tzip21_token_metadata.json` and map metadata fields.
 
 #### Step 3: Preview Data
@@ -88,7 +95,7 @@ The ENVITED-X Data Space implements a three-tiered privacy model:
 #### Step 4: Mint Token
 
 - Requirement: Use signed CIDs for the upload to Pinata according to EIP-712.
-- Upload `publicUser` information and `tzip21_asset_manifest.json` to IPFS.
+- Upload `isPublic` information and `tzip21_manifest.json` to IPFS.
 - Verify that CIDs from Pinata returned the same CIDs then the pre-calculation.
 - Upload `tzip21_token_metadata.json` to IPFS.
 - Mint token with linked metadata.
@@ -134,7 +141,7 @@ Examples are the first five tags or "publishers", which is always ENVITED-X and 
 | -------------------| ---------------------------------------------------- | ------------------------------------------------------------ |
 | "name"             | envited-x:DataResource:gx:name                       |                                                              |
 | "description"      | envited-x:DataResource:gx:description                |                                                              |
-| "tags"             | hdmap:format:formatType + " " + hdmap:format:version | All tags static except for the format                        |
+| "tags"             | format:formatType + " " + format:version             | All tags static except for the format                        |
 | "minter"           | Member DID associated with user initiating the mint  | Returned by the View from the DEMIM revocation registry      |
 | "creators"         | Name of the company                                  | Taken from the company profile the user belongs to           |
 | "date"             | [System date-time][1]                                |                                                              |
@@ -143,9 +150,11 @@ Examples are the first five tags or "publishers", which is always ENVITED-X and 
 | "artifactUri"      | <https://assets.envited-x.net/Asset-CID>             |                                                              |
 | "identifier"       | Asset-CID                                            |                                                              |
 | "externalUri"      | Uploaded domainMetadata.json to IPFS                 |                                                              |
-| "displayUri"       | "manifest:contentData:meda         "                 | Always use the first media image                             |
+| "displayUri"       | "manifest:hasArtifacts:Link" of category "isMedia"   | Always use the first media image                             |
 | "formats"          | Add info for artifactUri, externalUri and displayUri |                                                              |
 | "attributes"       | Same as in example with IPFS CIDs+URL                | For other asset types hdmap would be exchanged               |
+
+**>Note:** Some of the information need to be extracted from the `gx:LegalParticipant`.
 
 ### Custom SPDX license identifier
 
@@ -159,6 +168,10 @@ Examples are the first five tags or "publishers", which is always ENVITED-X and 
 
 This specification introduces new processes for asset uploads and is fully compatible with existing ENVITED-X systems.
 No retroactive changes to previous assets are required.
+
+## Future Improvements
+
+The compatibility with the current release of the [Gaia-X Policy Rules Compliance Document (Release 24.11)](https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/) is **to be implemented** in a future update of this EVES.
 
 ## References
 
