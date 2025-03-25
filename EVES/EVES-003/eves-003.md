@@ -132,18 +132,18 @@ Examples are the first five tags or "publishers", which is always ENVITED-X and 
 
 | TZIP-21            | EVES-003                                             | Comment                                                      |
 | -------------------| ---------------------------------------------------- | ------------------------------------------------------------ |
-| "name"             | hdmap:general:name                                   |                                                              |
-| "description"      | hdmap:general:description                            |                                                              |
+| "name"             | envited-x:DataResource:gx:name                       |                                                              |
+| "description"      | envited-x:DataResource:gx:description                |                                                              |
 | "tags"             | hdmap:format:formatType + " " + hdmap:format:version | All tags static except for the format                        |
 | "minter"           | Member DID associated with user initiating the mint  | Returned by the View from the DEMIM revocation registry      |
 | "creators"         | Name of the company                                  | Taken from the company profile the user belongs to           |
 | "date"             | [System date-time][1]                                |                                                              |
-| "rights"           | "manifest:spdxIdentifier"                            | [SPDX identifier][2]                                         |
-| "rightsUri"        | "manifest:licenseData:manifest:path"                 | Full os license text URL OR policy smart contract did        |
+| "rights"           | "manifest:hasLicense:spdxIdentifier"                 | [SPDX identifier][2]                                         |
+| "rightsUri"        | "manifest:hasLicense:licenseData:manifest:path"      | Full os license text URL OR policy smart contract did        |
 | "artifactUri"      | <https://assets.envited-x.net/Asset-CID>             |                                                              |
 | "identifier"       | Asset-CID                                            |                                                              |
 | "externalUri"      | Uploaded domainMetadata.json to IPFS                 |                                                              |
-| "displayUri"       | "manifest:contentData:visualization"                 | Always use the first media image                             |
+| "displayUri"       | "manifest:contentData:meda         "                 | Always use the first media image                             |
 | "formats"          | Add info for artifactUri, externalUri and displayUri |                                                              |
 | "attributes"       | Same as in example with IPFS CIDs+URL                | For other asset types hdmap would be exchanged               |
 
