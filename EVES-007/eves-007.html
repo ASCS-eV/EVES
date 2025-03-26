@@ -1,0 +1,511 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>EVES-007: ENVITED-X Blockchain Identifier URN Schema · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="../EVES-006/eves-006.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Introduction</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    EVES GitHub Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">EVES</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../EVES-001/eves-001.html">
+            
+                <a href="../EVES-001/eves-001.html">
+            
+                    
+                    EVES-001: ENVITED-X Ecosystem Specification Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../EVES-002/eves-002.html">
+            
+                <a href="../EVES-002/eves-002.html">
+            
+                    
+                    EVES-002: ENVITED-X Data Space Architecture Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../EVES-003/eves-003.html">
+            
+                <a href="../EVES-003/eves-003.html">
+            
+                    
+                    EVES-003: ENVITED-X Asset Definition and Upload Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../EVES-004/eves-004.html">
+            
+                <a href="../EVES-004/eves-004.html">
+            
+                    
+                    EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../EVES-005/eves-005.html">
+            
+                <a href="../EVES-005/eves-005.html">
+            
+                    
+                    EVES-005: ENVITED-X Contract Negotiation Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../EVES-006/eves-006.html">
+            
+                <a href="../EVES-006/eves-006.html">
+            
+                    
+                    EVES-006: ENVITED-X Scaling Architecture
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.7" data-path="eves-007.html">
+            
+                <a href="eves-007.html">
+            
+                    
+                    EVES-007: ENVITED-X Blockchain Identifier URN Schema
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >EVES-007: ENVITED-X Blockchain Identifier URN Schema</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="abstract">Abstract</h2>
+<p>This specification defines a <strong>uniform resource name (URN) schema</strong> for uniquely identifying smart contracts and transaction hashes across multiple blockchains, including <strong>Tezos, Ethereum, and Etherlink</strong>.<br>It ensures <strong>compatibility with CAIP-10</strong>, <strong>DID:PKH</strong>, and other <strong>chain-agnostic specifications</strong> by referencing standard chain namespaces and <code>chain_id</code> definitions.<br>The URN schema provides a structured approach for <strong>interoperable cross-chain asset management</strong> and <strong>transaction referencing</strong>, aligning with the ENVITED-X Data Space architecture.</p>
+<h2 id="motivation">Motivation</h2>
+<p>In blockchain-based ecosystems such as ENVITED-X, referencing <strong>smart contracts</strong> and <strong>operations</strong> requires a <strong>standardized, human-readable, and resolvable format</strong>.<br>Existing solutions such as <strong>CAIP-10 (Chain Agnostic Improvement Proposal 10)</strong> define <strong>account identifiers</strong>, but they do not extend to <strong>contract addresses and transaction hashes</strong>.<br>The lack of a unified schema creates <strong>interoperability challenges</strong> when integrating <strong>Tezos (FA2.1, TZIP-21 metadata)</strong>, <strong>Ethereum (ERC-721, ERC-1155 NFTs)</strong>, and <strong>Etherlink (Optimistic Rollup Layer 2)</strong> into the ENVITED-X Data Space.</p>
+<p>This EVES addresses the gap by defining a <strong>URN schema</strong> that:</p>
+<ul>
+<li>Provides a <strong>consistent, chain-agnostic way</strong> to reference <strong>smart contracts and transactions</strong>.</li>
+<li>Aligns with <strong>CAIP-10 conventions</strong>, ensuring <strong>namespace compatibility</strong>.</li>
+<li>Supports <strong>Tezos implicit (tz1, tz2, tz3) and originated (KT1) accounts</strong>.</li>
+<li>Differentiates between <strong>Layer 1 (Tezos, Ethereum) and Layer 2 (Etherlink)</strong> transactions.</li>
+</ul>
+<h2 id="specification">Specification</h2>
+<h3 id="1-urn-schema-definition">1. URN Schema Definition</h3>
+<p>The URN schema follows a <strong>structured format</strong> using <strong>blockchain namespaces</strong>, ensuring <strong>consistency and interoperability</strong>.</p>
+<h4 id="11-smart-contract-identifiers">1.1 Smart Contract Identifiers</h4>
+<p>A <strong>smart contract</strong> is uniquely referenced using the following format:</p>
+<pre><code class="lang-json">urn:blockchain:{chain_namespace}:{chain_id}:contract:{contract_address}
+</code></pre>
+<h5 id="smart-contract-example-mappings">Smart Contract Example Mappings</h5>
+<table>
+<thead>
+<tr>
+<th>Blockchain</th>
+<th>Namespace</th>
+<th>Chain ID</th>
+<th>Example URN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tezos (Ghostnet)</strong></td>
+<td><code>tezos</code></td>
+<td><code>NetXnHfVqm9iesp</code></td>
+<td><code>urn:blockchain:tezos:NetXnHfVqm9iesp:contract:KT1PCaD2kmgCHy15wQ1gpqZUy9RLxyBVJdTF</code></td>
+</tr>
+<tr>
+<td><strong>Ethereum (Mainnet)</strong></td>
+<td><code>eip155</code></td>
+<td><code>1</code></td>
+<td><code>urn:blockchain:eip155:1:contract:0xABC123456789...</code></td>
+</tr>
+<tr>
+<td><strong>Etherlink (Layer 2)</strong></td>
+<td><code>eip155</code></td>
+<td><code>42793</code></td>
+<td><code>urn:blockchain:eip155:42793:contract:0x646B92C8f21e55DF67E766047E4bD7bEdF8DfA14</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong><em>NOTE:</em></strong></p>
+<ul>
+<li>The <strong>namespace</strong> follows <strong>CAIP-2</strong> (e.g., <code>tezos</code>, <code>eip155</code> for Ethereum).</li>
+<li>The <strong>chain_id</strong> follows <strong>CAIP-10</strong>, ensuring unique chain differentiation.</li>
+<li><strong>Smart contracts (KT1, 0x) are explicitly named</strong> under the <code>contract</code> identifier.</li>
+</ul>
+</blockquote>
+<h4 id="12-transaction-hash-identifiers">1.2 Transaction Hash Identifiers</h4>
+<p>A <strong>transaction (operation) hash</strong> is referenced using:</p>
+<pre><code class="lang-json">urn:blockchain:{chain_namespace}:{chain_id}:tx:{transaction_hash}
+</code></pre>
+<h5 id="transaction-example-mappings">Transaction Example Mappings</h5>
+<table>
+<thead>
+<tr>
+<th>Blockchain</th>
+<th>Namespace</th>
+<th>Chain ID</th>
+<th>Example URN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tezos (Ghostnet)</strong></td>
+<td><code>tezos</code></td>
+<td><code>NetXnHfVqm9iesp</code></td>
+<td><code>urn:blockchain:tezos:NetXnHfVqm9iesp:tx:oojtGLnHuS8og5WGf8jF8EoxTbegfrXvpxzvyPiW2GYZFGbFLaJ</code></td>
+</tr>
+<tr>
+<td><strong>Ethereum (Mainnet)</strong></td>
+<td><code>eip155</code></td>
+<td><code>1</code></td>
+<td><code>urn:blockchain:eip155:1:tx:0xad0fa6b98b66bc19ab4936d1181697ac7f1e19755e1501e4e250434200a32cba</code></td>
+</tr>
+<tr>
+<td><strong>Etherlink (Layer 2)</strong></td>
+<td><code>eip155</code></td>
+<td><code>42793</code></td>
+<td><code>urn:blockchain:eip155:42793:tx:0xad0fa6b98b66bc19ab4936d1181697ac7f1e19755e1501e4e250434200a32cba</code></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong><em>NOTE:</em></strong></p>
+<ul>
+<li><strong>Operation hashes on Tezos are prefixed with <code>tx:</code></strong>.</li>
+<li><strong>Ethereum and Etherlink transactions follow the Keccak-256 hash format</strong>.</li>
+</ul>
+</blockquote>
+<h3 id="2-standardization-considerations">2. Standardization Considerations</h3>
+<ul>
+<li><p><strong>CAIP-2 &amp; CAIP-10 Alignment</strong>:  </p>
+<ul>
+<li>The <code>chain_namespace</code> and <code>chain_id</code> <strong>strictly follow</strong> CAIP-2 &amp; CAIP-10 conventions.</li>
+<li><code>eip155</code>, <code>tezos</code> <strong>retain compatibility with existing tooling</strong>.</li>
+</ul>
+</li>
+<li><p><strong>Layer 2 Distinction</strong>:  </p>
+<ul>
+<li><strong>Etherlink URNs explicitly specify their Layer 2 chain ID</strong> (<code>ghostnet: 128123</code>, <code>mainnet: 42793</code>).</li>
+<li>This prevents <strong>collision between Layer 1 and Layer 2 assets</strong>.</li>
+</ul>
+</li>
+<li><p><strong>Human-Readable &amp; Resolvable</strong>:  </p>
+<ul>
+<li>This URN structure can be used in <strong>metadata files (TZIP-21, ERC-721)</strong>.</li>
+<li>Enables <strong>cross-chain verification of contracts and operations</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-use-cases">3. Use Cases</h3>
+<ul>
+<li><p><strong>NFT Metadata (TZIP-21, ERC-721, ERC-1155)</strong></p>
+<ul>
+<li>Store <strong>contract &amp; transaction references</strong> in <strong>token metadata</strong> crosschain.</li>
+</ul>
+</li>
+<li><p><strong>Cross-Chain Credential Verification (EVES-005, EVES-006)</strong></p>
+<ul>
+<li>Supports contract-based <strong>Verifiable Credentials (SD-JWT VC)</strong>.</li>
+</ul>
+</li>
+<li><p><strong>ENVITED-X Asset Tracking</strong></p>
+<ul>
+<li>Standardized <strong>contract and transaction tracking</strong> across chains.</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-mime-type-for-blockchain-urns"><strong>4. MIME Type for Blockchain URNs</strong></h3>
+<p>To ensure structured and standardized handling of <strong>URN-based blockchain references</strong>, this specification defines a MIME type for representing <strong>contract and transaction identifiers</strong> in a machine-readable format.  </p>
+<h4 id="41-mime-type-definition"><strong>4.1 MIME Type Definition</strong></h4>
+<p>The following MIME type is introduced to denote <strong>blockchain URNs</strong> in JSON-based metadata and API responses:</p>
+<pre><code class="lang-json">application/vnd.eves.blockchain-urn+json
+</code></pre>
+<h4 id="42-rationale"><strong>4.2 Rationale</strong></h4>
+<ul>
+<li><strong><code>application/</code></strong> &#x2192; Indicates structured data.  </li>
+<li><strong><code>vnd.eves.</code></strong> &#x2192; Specifies the ENVITED-X standardization scope.  </li>
+<li><strong><code>blockchain-urn</code></strong> &#x2192; Clearly identifies the content as a <strong>URN-based blockchain reference</strong>.  </li>
+<li><strong><code>+json</code></strong> &#x2192; Specifies that the format is <strong>compatible with JSON-based data structures</strong>.</li>
+</ul>
+<h4 id="43-example-usage"><strong>4.3 Example Usage</strong></h4>
+<p>The MIME type is used in metadata files, API payloads, and verifiable credential documents where blockchain URN references are required.  </p>
+<h5 id="example-nft-metadata-tzip-21-erc-721"><strong>Example: NFT Metadata (TZIP-21, ERC-721)</strong></h5>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Digital Twin Smart Contract&quot;</span>,
+  <span class="hljs-string">&quot;artifactUri&quot;</span>: <span class="hljs-string">&quot;ipfs://bafybeidhmknqn4co...&quot;</span>,
+  <span class="hljs-string">&quot;mimeType&quot;</span>: <span class="hljs-string">&quot;application/vnd.eves.blockchain-urn+json&quot;</span>,
+  <span class="hljs-string">&quot;contractURN&quot;</span>: <span class="hljs-string">&quot;urn:blockchain:tezos:NetXnHfVqm9iesp:contract:KT1PCaD2kmgCHy15wQ1gpqZUy9RLxyBVJdTF&quot;</span>,
+  <span class="hljs-string">&quot;mintingTx&quot;</span>: <span class="hljs-string">&quot;urn:blockchain:eip155:1:tx:0xad0fa6b98b66bc19ab4936d1181697ac7f1e19755e1501e4e250434200a32cba&quot;</span>
+}
+</code></pre>
+<p>Example: API Response</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;status&quot;</span>: <span class="hljs-string">&quot;success&quot;</span>,
+  <span class="hljs-string">&quot;data&quot;</span>: {
+    <span class="hljs-string">&quot;urn&quot;</span>: <span class="hljs-string">&quot;urn:blockchain:etherlink:ghostnet:contract:0xDEF987654321...&quot;</span>,
+    <span class="hljs-string">&quot;mimeType&quot;</span>: <span class="hljs-string">&quot;application/vnd.eves.blockchain-urn+json&quot;</span>
+  }
+}
+</code></pre>
+<p>This MIME type ensures interoperability across blockchain networks, metadata specifications (TZIP-21, ERC-721), and decentralized identity frameworks (DID:PKH, SD-JWT).</p>
+<h2 id="backwards-compatibility">Backwards Compatibility</h2>
+<p>This EVES introduces a <strong>new URN schema</strong> but does not conflict with <strong>existing CAIP-10, TZIP-21, or ERC-721 standards</strong>.<br>It is fully backward-compatible with Tezos, Ethereum, and Etherlink <strong>without requiring changes to current implementations</strong>.</p>
+<h2 id="references">References</h2>
+<ol>
+<li><a href="https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md" target="_blank">CAIP-2: Blockchain Namespace Specification</a></li>
+<li><a href="https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md" target="_blank">CAIP-10: Blockchain Account Specification</a></li>
+<li><a href="https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-21/tzip-21.md" target="_blank">Tezos TZIP-21</a></li>
+<li><a href="https://eips.ethereum.org/EIPS/eip-721" target="_blank">Ethereum ERC-721 Standard</a></li>
+<li><a href="https://docs.etherlink.com/" target="_blank">Etherlink Documentation</a></li>
+<li><a href="https://docs.etherlink.com/get-started/network-information/" target="_blank">Etherlink Network Information</a></li>
+</ol>
+<h2 id="implementation">Implementation</h2>
+<ul>
+<li>The ENVITED-X Data Space will <strong>adopt this URN schema</strong> in <strong>metadata specifications</strong> (see EVES-003, EVES-006).</li>
+<li>Future EVES will explore <strong>URN resolvers</strong> for cross-chain asset lookup.</li>
+</ul>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../EVES-006/eves-006.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: EVES-006: ENVITED-X Scaling Architecture">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"created":"2025-03-04T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-002","EVES-006"],"status":"Draft","eves-identifier":7,"title":"EVES-007: ENVITED-X Blockchain Identifier URN Schema","type":"Standards","discussions-to":null,"replaces":"None","level":"2.7","depth":1,"previous":{"title":"EVES-006: ENVITED-X Scaling Architecture","level":"2.6","depth":1,"path":"EVES-006/eves-006.md","ref":"./EVES-006/eves-006.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-007/eves-007.md","mtime":"2025-03-26T10:16:19.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2025-03-26T10:17:33.327Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
