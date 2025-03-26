@@ -94,7 +94,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - Calculate CIDs for all `isPublic` data.
 - Create `tzip21_manifest.json` by replacing relative paths in `manifest_reference.json` with IPFS/envited-x.net URLs.
 - Replace `@id` from `manifest_reference.json` with generated UUID in `tzip21_manifest.json`.
-- Create `tzip21_token_metadata.json` and map the metadata fields.
+- Create `tzip21_token_metadata.json` and map the metadata fields OPTIONALLY use an application/ld+json conform to the [tzip21 ontology][19].
 
 #### Step 3: Preview Data
 
@@ -216,3 +216,4 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 [16]: https://datatracker.ietf.org/doc/html/rfc2119
 [17]: https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/
 [18]: https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/
+[19]: https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/tzip21
