@@ -1,0 +1,87 @@
+{
+  "decimals": 0,
+  "isBooleanAmount": true,
+  "name": "TestfeldNiedersachsen_ALKS_ODR_sample",
+  "description": "simple hdmap example file on Testfeld Niedersachsen for ALKS scenario",
+  "tags": [
+    "GaiaX",
+    "ASCS",
+    "ENVITED-X",
+    "EVES",
+    "nft",
+    "ASAM OpenDRIVE 1.6"
+  ],
+  "minter": "tz1cZaiTjNSN7x4VZjTQGYBVz4p8eEcVcYkz",
+  "creators": [
+    "Automotive Solution Center for Simulation e.V."
+  ],
+  "publishers": [
+    "Automotive Solution Center for Simulation e.V.",
+    "ENVITED-X Data Space"
+  ],
+  "date": "2025-02-17T00:00:00+00:00",
+  "type": "EVES-003 https://github.com/ASCS-eV/EVES",
+  "rights": "MPL-2.0",
+  "rightsUri": "https://www.mozilla.org/en-US/MPL/2.0/",
+  "language": "en",
+  "artifactUri": "https://assets.envited-x.net/bafybeifo6ve5i6542vi6ruuflxdqtcmcisdtwlqefq2e5a33tljsaqxhpm",
+  "identifier": "did:web:registry.gaia-x.eu:HdMap:DjHgK5ErTBow1Ya3J05tW9l12skGWgZn6kA9",
+  "externalUri": "ipfs://bafkreicuwg3s4uvei2iu2p5eobozghdodtwhwoi6qiawhwqj3nflrk6dxi",
+  "displayUri": "ipfs://bafybeief5r2xgciehzhx6c4kbooifsnbjpiifjei36lpi3kzcdmpr2wvue",
+  "formats": [
+    {
+      "uri": "https://assets.envited-x.net/bafybeifo6ve5i6542vi6ruuflxdqtcmcisdtwlqefq2e5a33tljsaqxhpm",
+      "hash": "bafybeifo6ve5i6542vi6ruuflxdqtcmcisdtwlqefq2e5a33tljsaqxhpm",
+      "mimeType": "application/zip",
+      "fileSize": 7711664,
+      "fileName": "Testfeld_Niedersachsen_ALKS_xodr_sample.zip"
+    },
+    {
+      "uri": "ipfs://bafkreicuwg3s4uvei2iu2p5eobozghdodtwhwoi6qiawhwqj3nflrk6dxi",
+      "hash": "bafkreicuwg3s4uvei2iu2p5eobozghdodtwhwoi6qiawhwqj3nflrk6dxi",
+      "mimeType": "application/ld+json",
+      "fileSize": 6574,
+      "fileName": "hdmap_instance.json"
+    },
+    {
+      "uri": "ipfs://bafkreie2yjoudxlayordup63se7wbj6vroaoyqzcuixqcchpmd23ufno6u",
+      "hash": "bafkreie2yjoudxlayordup63se7wbj6vroaoyqzcuixqcchpmd23ufno6u",
+      "mimeType": "application/ld+json",
+      "fileSize": 5572,
+      "fileName": "tzip21_manifest.json"
+    },
+    {
+      "uri": "ipfs://bafybeief5r2xgciehzhx6c4kbooifsnbjpiifjei36lpi3kzcdmpr2wvue",
+      "hash": "bafybeief5r2xgciehzhx6c4kbooifsnbjpiifjei36lpi3kzcdmpr2wvue",
+      "mimeType": "image/png",
+      "dimensions": {
+        "value": "1095x850",
+        "unit": "px"
+      },
+      "fileSize": 2397906,
+      "fileName": "Testfeld_Niedersachsen_ALKS_..._impression-01.png"
+    }
+  ],
+  "attributes": [
+    {
+      "name": "de.gaiax4plcaad.ontology-management-base.hdmap.ontology",
+      "value": "https://ontologies.envited-x.net/hdmap/v4/ontology#",
+      "type": "uri"
+    },
+    {
+      "name": "de.gaiax4plcaad.ontology-management-base.envited-x.metadata",
+      "value": "https://ontologies.envited-x.net/envited-x/v2/ontology#",
+      "type": "uri"
+    },
+    {
+      "name": "de.gaiax4plcaad.ontology-management-base.manifest.ontology",
+      "value": "https://ontologies.envited-x.net/manifest/v4/ontology#",
+      "type": "uri"
+    },
+    {
+      "name": "de.gaiax4plcaad.ontology-management-base.georeference.metadata",
+      "value": "https://ontologies.envited-x.net/georeference/v3/ontology#",
+      "type": "uri"
+    }
+  ]
+}
