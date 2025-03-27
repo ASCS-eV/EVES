@@ -116,7 +116,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - Verify that data referenced in the token metadata is the same as stored in Step 2).
 - If asset is not yet in DB then mark it as foreign asset and add the `publisher` information to the DB.
 - Verify the asset in reverse order as in step 1).
-- Only public information of assets can be verified if uploaded through another application then ENVITED-X.
+- Only public information of assets can be verified if uploaded through another application than ENVITED-X.
 
 ### 5. Database Synchronization
 
@@ -143,7 +143,9 @@ The synchronization between the smart contract as in the [Marketplace Contract R
 3. Compare if signature on CID is a `user` belonging to the `member` and if member is owner of token.
 4. Check: Uniqueness of CID in database.
 
-#### TZIP-21 rich metadata mapping
+### TZIP-21 Token Metadata
+
+#### TZIP-21 Rich Metadata Mapping
 
 Attributes not in the table are static and the same for every mint as in the 📁 `example/tzip21_token_metadata.json`.
 Examples are the first five tags or "publishers", which is always ENVITED-X and the ASCS if the mint is conducted through the [website][12].
@@ -167,7 +169,7 @@ Examples are the first five tags or "publishers", which is always ENVITED-X and 
 
 **>Note:** Some of the information need to be extracted from the `gx:LegalParticipant`.
 
-### Custom SPDX license identifier
+#### Custom SPDX license identifier
 
 - Custom license in a LICENSE file in the asset.zip root folder: "LicenseRef-Custom-Commercial-Agreement"
 - Custom license in a smart contract as json-ld ODRL policy: "LicenseRef-Policy-Smart-Contract"
