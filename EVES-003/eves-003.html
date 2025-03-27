@@ -358,7 +358,7 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <li>Verify that data referenced in the token metadata is the same as stored in Step 2).</li>
 <li>If asset is not yet in DB then mark it as foreign asset and add the <code>publisher</code> information to the DB.</li>
 <li>Verify the asset in reverse order as in step 1).</li>
-<li>Only public information of assets can be verified if uploaded through another application then ENVITED-X.</li>
+<li>Only public information of assets can be verified if uploaded through another application than ENVITED-X.</li>
 </ul>
 <h3 id="5-database-synchronization">5. Database Synchronization</h3>
 <h4 id="id-and-cid-as-the-primary-identifier">@id and CID as the Primary Identifier</h4>
@@ -380,7 +380,8 @@ The synchronization between the smart contract as in the <a href="https://github
 <li>Compare if signature on CID is a <code>user</code> belonging to the <code>member</code> and if member is owner of token.</li>
 <li>Check: Uniqueness of CID in database.</li>
 </ol>
-<h4 id="tzip-21-rich-metadata-mapping">TZIP-21 rich metadata mapping</h4>
+<h3 id="tzip-21-token-metadata">TZIP-21 Token Metadata</h3>
+<h4 id="tzip-21-rich-metadata-mapping">TZIP-21 Rich Metadata Mapping</h4>
 <p>Attributes not in the table are static and the same for every mint as in the &#x1F4C1; <code>example/tzip21_token_metadata.json</code>.
 Examples are the first five tags or &quot;publishers&quot;, which is always ENVITED-X and the ASCS if the mint is conducted through the <a href="https://envited-x.net/" target="_blank">website</a>.</p>
 <table>
@@ -465,7 +466,7 @@ Examples are the first five tags or &quot;publishers&quot;, which is always ENVI
 </tbody>
 </table>
 <p><strong>&gt;Note:</strong> Some of the information need to be extracted from the <code>gx:LegalParticipant</code>.</p>
-<h3 id="custom-spdx-license-identifier">Custom SPDX license identifier</h3>
+<h4 id="custom-spdx-license-identifier">Custom SPDX license identifier</h4>
 <ul>
 <li>Custom license in a LICENSE file in the asset.zip root folder: &quot;LicenseRef-Custom-Commercial-Agreement&quot;</li>
 <li>Custom license in a smart contract as json-ld ODRL policy: &quot;LicenseRef-Policy-Smart-Contract&quot;</li>
@@ -535,7 +536,7 @@ No retroactive changes to previous assets are required.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"created":"2024-11-19T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001"],"status":"Review","eves-identifier":3,"title":"EVES-003: ENVITED-X Asset Definition and Upload Process","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/4","replaces":"None","level":"2.3","depth":1,"next":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"EVES-004/eves-004.md","ref":"./EVES-004/eves-004.md","articles":[]},"previous":{"title":"EVES-002: ENVITED-X Data Space Architecture Overview","level":"2.2","depth":1,"path":"EVES-002/eves-002.md","ref":"./EVES-002/eves-002.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-003/eves-003.md","mtime":"2025-03-26T11:38:58.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2025-03-26T11:40:19.459Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"created":"2024-11-19T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001"],"status":"Review","eves-identifier":3,"title":"EVES-003: ENVITED-X Asset Definition and Upload Process","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/4","replaces":"None","level":"2.3","depth":1,"next":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"EVES-004/eves-004.md","ref":"./EVES-004/eves-004.md","articles":[]},"previous":{"title":"EVES-002: ENVITED-X Data Space Architecture Overview","level":"2.2","depth":1,"path":"EVES-002/eves-002.md","ref":"./EVES-002/eves-002.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-003/eves-003.md","mtime":"2025-03-27T07:39:56.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2025-03-27T07:41:17.682Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
