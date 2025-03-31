@@ -83,6 +83,10 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - Validate the `domainMetadata.json`:
   1. Extract SHACL constraints from the `domainMetadata.json` context.
   2. Validate JSON structure against domain-specific SHACLs.
+- Validate if items in `hasReferencedArtifacts` are available:
+  1. Check if access role is `isPublic`, OPTIONALLY check if filePath resolves.
+  2. Check if access role is `isOwner` or `isRegistered` and if `@id` of asset is known in the database.
+  3. It is RECOMMENDED to warn the user if references do not exist.
 
 #### Step 2: Upload Asset to ENVITED-X Data Space
 
@@ -93,6 +97,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - Store `isPublic` metadata at `https://ipfs.envited-x.net/Asset-CID/Data-CID`.
 - Calculate CIDs for all `isPublic` data.
 - Create `tzip21_manifest.json` by replacing relative paths in `manifest_reference.json` with IPFS/envited-x.net URLs.
+- Replace the paths of items in `hasReferencedArtifacts` to the correct filePaths.
 - Replace `@id` from `manifest_reference.json` with generated database `UUID` in `tzip21_manifest.json`.
 - Create `tzip21_token_metadata.json` and map the metadata fields OPTIONALLY use an application/ld+json conform to the [tzip21 ontology][19].
 
@@ -116,7 +121,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - A data space like the ENVITED-X Data Space MUST check if the asset was uploaded through its respective portal:
   - `UUID` from step 2) has an entry in the database.
   - Confirm that `contract` + `CID` and `minter` of tzip21_token_metadata.json are the same as in the database.
-  - Confirm that entry is unique.
+  - Confirm that the entries `UUID` and `@id` of the asset are unique.
   - OPTIONALLY check if the EIP-712 signature of the tzip21_token_metadata.json matches the user who initiated the mint (SHALL only be known to the respective portal).
 - If the asset is not yet in DB OPTIONALLY mark it as foreign asset and add the `publisher` information to the DB.
 - It is RECOMMENDED to verify the asset in reverse order as in step 1).
