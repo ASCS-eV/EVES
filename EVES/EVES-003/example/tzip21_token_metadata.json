@@ -11,7 +11,7 @@
     "nft",
     "ASAM OpenDRIVE 1.6"
   ],
-  "minter": "tz1cZaiTjNSN7x4VZjTQGYBVz4p8eEcVcYkz",
+  "minter": "did:pkh:tezos:NetXnHfVqm9iesp:tz1cZaiTjNSN7x4VZjTQGYBVz4p8eEcVcYkz",
   "creators": [
     "Automotive Solution Center for Simulation e.V."
   ],
