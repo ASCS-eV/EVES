@@ -83,6 +83,10 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - Validate the `domainMetadata.json`:
   1. Extract SHACL constraints from the `domainMetadata.json` context.
   2. Validate JSON structure against domain-specific SHACLs.
+- Validate if items in `hasReferencedArtifacts` are available:
+  1. Check if access role is `isPublic`, OPTIONALLY check if filePath resolves.
+  2. Check if access role is `isOwner` or `isRegistered` and if `@id` of asset is known in the database.
+  3. It is RECOMMENDED to warn the user if references do not exist.
 
 #### Step 2: Upload Asset to ENVITED-X Data Space
 
@@ -93,7 +97,8 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - Store `isPublic` metadata at `https://ipfs.envited-x.net/Asset-CID/Data-CID`.
 - Calculate CIDs for all `isPublic` data.
 - Create `tzip21_manifest.json` by replacing relative paths in `manifest_reference.json` with IPFS/envited-x.net URLs.
-- Replace `@id` from `manifest_reference.json` with generated UUID in `tzip21_manifest.json`.
+- Replace the paths of items in `hasReferencedArtifacts` to the correct filePaths.
+- Replace `@id` from `manifest_reference.json` with generated database `UUID` in `tzip21_manifest.json`.
 - Create `tzip21_token_metadata.json` and map the metadata fields OPTIONALLY use an application/ld+json conform to the [tzip21 ontology][19].
 
 #### Step 3: Preview Data
@@ -113,10 +118,14 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 #### Step 5: Listener and Database Synchronization
 
 - Use a listener to detect mint events and synchronize data with the ENVITED-X Data Space portal database.
-- Verify that data referenced in the token metadata is the same as stored in Step 2).
-- If asset is not yet in DB then mark it as foreign asset and add the `publisher` information to the DB.
-- Verify the asset in reverse order as in step 1).
-- Only public information of assets can be verified if uploaded through another application than ENVITED-X.
+- A data space like the ENVITED-X Data Space MUST check if the asset was uploaded through its respective portal:
+  - `UUID` from step 2) has an entry in the database.
+  - Confirm that `contract` + `CID` and `minter` of tzip21_token_metadata.json are the same as in the database.
+  - Confirm that the entries `UUID` and `@id` of the asset are unique.
+  - OPTIONALLY check if the EIP-712 signature of the tzip21_token_metadata.json matches the user who initiated the mint (SHALL only be known to the respective portal).
+- If the asset is not yet in DB OPTIONALLY mark it as foreign asset and add the `publisher` information to the DB.
+- It is RECOMMENDED to verify the asset in reverse order as in step 1).
+- Only public information of assets can be verified if uploaded through another portal than ENVITED-X data space.
 
 ### 5. Database Synchronization
 
@@ -127,6 +136,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - The CIDs MAY be signed by the user according to EIP-712.
 - A UUID MUST be generated for the `tzip21_manifest.json` pre-mint to link the asset with the ENVITED-X database securely.
 - The DID of the member associated with the user minting the asset MUST be known.
+- DID of the user minting the asset SHALL be stored pre-mint in the database.
 
 #### Pre-Mint Information
 
@@ -155,10 +165,10 @@ Examples are the first five tags or "publishers", which is always ENVITED-X and 
 | "name"             | envited-x:DataResource:gx:name                           |                                                              |
 | "description"      | envited-x:DataResource:gx:description                    |                                                              |
 | "tags"             | $TAG = format:formatType + " " + format:version          | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]    |
-| "minter"           | Member DID associated with user initiating the mint      | Returned by the View from the DEMIM revocation registry      |
+| "minter"           | Member DID (CAIP-10) associated with user                | Returned by the View from the DEMIM revocation registry      |
 | "creators"         | Name of the company                                      | Taken from the company profile the user belongs to           |
-| "date"             | [System date-time][14]                                    |                                                              |
-| "rights"           | manifest:hasLicense:gx:license                           | [SPDX identifier][15]                                         |
+| "date"             | [System date-time][14]                                   |                                                              |
+| "rights"           | manifest:hasLicense:gx:license                           | [SPDX identifier][15]                                        |
 | "rightsUri"        | manifest:hasLicense:licenseData:hasFileMetadata:filePath | Full os license text URL OR policy smart contract did        |
 | "artifactUri"      | <https://assets.envited-x.net/Asset-CID>                 |                                                              |
 | "identifier"       | Simulation Asset @id                                     | Unique identifier from the domainMetadata.json               |
