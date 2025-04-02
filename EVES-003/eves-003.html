@@ -325,6 +325,12 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <li>Validate JSON structure against domain-specific SHACLs.</li>
 </ol>
 </li>
+<li>Validate if items in <code>hasReferencedArtifacts</code> are available:<ol>
+<li>Check if access role is <code>isPublic</code>, OPTIONALLY check if filePath resolves.</li>
+<li>Check if access role is <code>isOwner</code> or <code>isRegistered</code> and if <code>@id</code> of asset is known in the database.</li>
+<li>It is RECOMMENDED to warn the user if references do not exist.</li>
+</ol>
+</li>
 </ul>
 <h4 id="step-2-upload-asset-to-envited-x-data-space">Step 2: Upload Asset to ENVITED-X Data Space</h4>
 <ul>
@@ -335,7 +341,8 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <li>Store <code>isPublic</code> metadata at <code>https://ipfs.envited-x.net/Asset-CID/Data-CID</code>.</li>
 <li>Calculate CIDs for all <code>isPublic</code> data.</li>
 <li>Create <code>tzip21_manifest.json</code> by replacing relative paths in <code>manifest_reference.json</code> with IPFS/envited-x.net URLs.</li>
-<li>Replace <code>@id</code> from <code>manifest_reference.json</code> with generated UUID in <code>tzip21_manifest.json</code>.</li>
+<li>Replace the paths of items in <code>hasReferencedArtifacts</code> to the correct filePaths.</li>
+<li>Replace <code>@id</code> from <code>manifest_reference.json</code> with generated database <code>UUID</code> in <code>tzip21_manifest.json</code>.</li>
 <li>Create <code>tzip21_token_metadata.json</code> and map the metadata fields OPTIONALLY use an application/ld+json conform to the <a href="https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/tzip21" target="_blank">tzip21 ontology</a>.</li>
 </ul>
 <h4 id="step-3-preview-data">Step 3: Preview Data</h4>
@@ -355,10 +362,16 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <h4 id="step-5-listener-and-database-synchronization">Step 5: Listener and Database Synchronization</h4>
 <ul>
 <li>Use a listener to detect mint events and synchronize data with the ENVITED-X Data Space portal database.</li>
-<li>Verify that data referenced in the token metadata is the same as stored in Step 2).</li>
-<li>If asset is not yet in DB then mark it as foreign asset and add the <code>publisher</code> information to the DB.</li>
-<li>Verify the asset in reverse order as in step 1).</li>
-<li>Only public information of assets can be verified if uploaded through another application than ENVITED-X.</li>
+<li>A data space like the ENVITED-X Data Space MUST check if the asset was uploaded through its respective portal:<ul>
+<li><code>UUID</code> from step 2) has an entry in the database.</li>
+<li>Confirm that <code>contract</code> + <code>CID</code> and <code>minter</code> of tzip21_token_metadata.json are the same as in the database.</li>
+<li>Confirm that the entries <code>UUID</code> and <code>@id</code> of the asset are unique.</li>
+<li>OPTIONALLY check if the EIP-712 signature of the tzip21_token_metadata.json matches the user who initiated the mint (SHALL only be known to the respective portal).</li>
+</ul>
+</li>
+<li>If the asset is not yet in DB OPTIONALLY mark it as foreign asset and add the <code>publisher</code> information to the DB.</li>
+<li>It is RECOMMENDED to verify the asset in reverse order as in step 1).</li>
+<li>Only public information of assets can be verified if uploaded through another portal than ENVITED-X data space.</li>
 </ul>
 <h3 id="5-database-synchronization">5. Database Synchronization</h3>
 <h4 id="id-and-cid-as-the-primary-identifier">@id and CID as the Primary Identifier</h4>
@@ -368,6 +381,7 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <li>The CIDs MAY be signed by the user according to EIP-712.</li>
 <li>A UUID MUST be generated for the <code>tzip21_manifest.json</code> pre-mint to link the asset with the ENVITED-X database securely.</li>
 <li>The DID of the member associated with the user minting the asset MUST be known.</li>
+<li>DID of the user minting the asset SHALL be stored pre-mint in the database.</li>
 </ul>
 <h4 id="pre-mint-information">Pre-Mint Information</h4>
 <p>If additional non-public information needs to be stored in the database before minting, the CID can associate this data with the minted asset.</p>
@@ -410,7 +424,7 @@ Examples are the first five tags or &quot;publishers&quot;, which is always ENVI
 </tr>
 <tr>
 <td>&quot;minter&quot;</td>
-<td>Member DID associated with user initiating the mint</td>
+<td>Member DID (CAIP-10) associated with user</td>
 <td>Returned by the View from the DEMIM revocation registry</td>
 </tr>
 <tr>
@@ -536,7 +550,7 @@ No retroactive changes to previous assets are required.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"created":"2024-11-19T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001"],"status":"Review","eves-identifier":3,"title":"EVES-003: ENVITED-X Asset Definition and Upload Process","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/4","replaces":"None","level":"2.3","depth":1,"next":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"EVES-004/eves-004.md","ref":"./EVES-004/eves-004.md","articles":[]},"previous":{"title":"EVES-002: ENVITED-X Data Space Architecture Overview","level":"2.2","depth":1,"path":"EVES-002/eves-002.md","ref":"./EVES-002/eves-002.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-003/eves-003.md","mtime":"2025-03-27T07:39:56.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2025-03-27T07:41:17.682Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"created":"2024-11-19T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001"],"status":"Review","eves-identifier":3,"title":"EVES-003: ENVITED-X Asset Definition and Upload Process","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/4","replaces":"None","level":"2.3","depth":1,"next":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"EVES-004/eves-004.md","ref":"./EVES-004/eves-004.md","articles":[]},"previous":{"title":"EVES-002: ENVITED-X Data Space Architecture Overview","level":"2.2","depth":1,"path":"EVES-002/eves-002.md","ref":"./EVES-002/eves-002.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-003/eves-003.md","mtime":"2025-04-02T10:03:34.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2025-04-02T10:04:51.106Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
