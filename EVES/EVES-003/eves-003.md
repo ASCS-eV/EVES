@@ -81,12 +81,15 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
   2. Verify all referenced files exist locally or remotely as specified.
   3. Locate the `domainMetadata.json` file.
 - Validate the `domainMetadata.json`:
-  1. Extract SHACL constraints from the `domainMetadata.json` context.
-  2. Validate JSON structure against domain-specific SHACLs.
+  1. Extract SHACL constraints from the `domainMetadata.json` context,
+  2. Validate JSON structure against domain-specific SHACLs,
+  3. Check if the `@id` is unique within the ENVITED-X Data Space,
+  4. If the asset `@id` is already existing the validator SHALL throw an error.
 - Validate if items in `hasReferencedArtifacts` are available:
-  1. Check if access role is `isPublic`, OPTIONALLY check if filePath resolves.
-  2. Check if access role is `isOwner` or `isRegistered` and if `@id` of asset is known in the database.
-  3. It is RECOMMENDED to warn the user if references do not exist.
+  1. Check if `@id` of asset is known in the database,
+  2. OPTIONALLY check if filePath resolves if the access role is `isPublic`,
+  3. It is RECOMMENDED to warn the user if references do not exist,
+  4. It is strongly RECOMMENDED to add the `CID` as a user to the Manifest metadata.
 
 #### Step 2: Upload Asset to ENVITED-X Data Space
 
