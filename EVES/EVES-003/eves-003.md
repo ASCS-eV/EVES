@@ -101,7 +101,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - Calculate CIDs for all `isPublic` data.
 - Create `envited-x_manifest.json` by replacing relative paths in `manifest_reference.json` with IPFS/envited-x.net URLs.
 - Replace the paths of items in `hasReferencedArtifacts` to the correct filePaths.
-- Replace `@id` from `manifest_reference.json` with generated database `UUID` in `envited-x_manifest.json`.
+- Replace `@id` from `manifest_reference.json` with generated database `UUID` in `envited-x_manifest.json`. This also applies for referenced artifacts.
 - Create `tzip21_token_metadata.json` and map the metadata fields OPTIONALLY use an application/ld+json conform to the [tzip21 ontology][19].
 
 #### Step 3: Preview Data
