@@ -163,22 +163,22 @@ The synchronization between the smart contract as in the [Marketplace Contract R
 Attributes not in the table are static and the same for every mint as in the 📁 `example/tzip21_token_metadata.json`.
 Examples are the first five tags or "publishers", which is always ENVITED-X and the ASCS if the mint is conducted through the [website][12].
 
-| TZIP-21            | EVES-003                                                 | Comment                                                      |
-| -------------------| -------------------------------------------------------- | ------------------------------------------------------------ |
-| "name"             | envited-x:DataResource:gx:name                           |                                                              |
-| "description"      | envited-x:DataResource:gx:description                    |                                                              |
-| "tags"             | $TAG = format:formatType + " " + format:version          | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]    |
-| "minter"           | Member DID (CAIP-10) associated with user                | Returned by the View from the DEMIM revocation registry      |
-| "creators"         | Name of the company                                      | Taken from the company profile the user belongs to           |
-| "date"             | [System date-time][14]                                   |                                                              |
-| "rights"           | manifest:hasLicense:gx:license                           | [SPDX identifier][15]                                        |
-| "rightsUri"        | manifest:hasLicense:licenseData:hasFileMetadata:filePath | Full os license text URL OR policy smart contract did        |
-| "artifactUri"      | <https://assets.envited-x.net/Asset-CID>                 |                                                              |
-| "identifier"       | Simulation Asset @id                                     | Unique identifier from the domainMetadata.json               |
-| "externalUri"      | Uploaded domainMetadata.json to IPFS                     |                                                              |
-| "displayUri"       | "manifest:hasArtifacts:Link" of category "isMedia"       | Always use the first media image                             |
-| "formats"          | artifactUri, externalUri, displayUri, envited-x_manifest    |                                                              |
-| "attributes"       | Reverse domain notation for ontologies + URL             | All domain specific prefixes from the domainMetadata.json    |
+| TZIP-21            | EVES-003                                                 | Comment                                                                    |
+| -------------------| -------------------------------------------------------- | -------------------------------------------------------------------------- |
+| "name"             | envited-x:DataResource:gx:name                           |                                                                            |
+| "description"      | envited-x:DataResource:gx:description                    |                                                                            |
+| "tags"             | $TAG = format:formatType + " " + format:version          | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]                  |
+| "minter"           | Member DID (CAIP-10) associated with user                | Returned by the View from the DEMIM revocation registry                    |
+| "creators"         | Name of the company                                      | Taken from the company profile the user belongs to                         |
+| "date"             | [System date-time][14]                                   |                                                                            |
+| "rights"           | manifest:hasLicense:gx:license                           | [SPDX identifier][15]                                                      |
+| "rightsUri"        | manifest:hasLicense:licenseData:hasFileMetadata:filePath | Full os license text URL OR policy smart contract did                      |
+| "artifactUri"      | <https://assets.envited-x.net/Asset-CID>                 |                                                                            |
+| "identifier"       | Simulation Asset @id                                     | Unique identifier from the domainMetadata.json                             |
+| "externalUri"      | Uploaded domainMetadata.json to IPFS                     |                                                                            |
+| "displayUri"       | "manifest:hasArtifacts:Link" of category "isMedia"       | Always use the first media image                                           |
+| "formats"          | artifactUri, externalUri, displayUri, envited-x_manifest |                                                                            |
+| "attributes"       | Reverse domain notation for ontologies + URL             | All ontologies from top level nodes in files referenced in formats section |
 
 **>Note:** Some of the information need to be extracted from the `gx:LegalParticipant`.
 

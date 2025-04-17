@@ -44,6 +44,13 @@
       "fileName": "hdmap_instance.json"
     },
     {
+      "uri": "ipfs://bafkreigxkhnuuyjrb2nyduivdaqbrbuw7zcjf6aaslvlufvmgv5bfsh6u4",
+      "hash": "bafkreigxkhnuuyjrb2nyduivdaqbrbuw7zcjf6aaslvlufvmgv5bfsh6u4",
+      "mimeType": "application/ld+json",
+      "fileSize": 21630,
+      "fileName": "manifest_reference.json"
+    },
+    {
       "uri": "ipfs://bafkreie2yjoudxlayordup63se7wbj6vroaoyqzcuixqcchpmd23ufno6u",
       "hash": "bafkreie2yjoudxlayordup63se7wbj6vroaoyqzcuixqcchpmd23ufno6u",
       "mimeType": "application/ld+json",
@@ -71,16 +78,6 @@
     {
       "name": "de.gaiax4plcaad.ontology-management-base.envited-x.metadata",
       "value": "https://ontologies.envited-x.net/envited-x/v2/ontology#",
-      "type": "uri"
-    },
-    {
-      "name": "de.gaiax4plcaad.ontology-management-base.manifest.ontology",
-      "value": "https://ontologies.envited-x.net/manifest/v4/ontology#",
-      "type": "uri"
-    },
-    {
-      "name": "de.gaiax4plcaad.ontology-management-base.georeference.metadata",
-      "value": "https://ontologies.envited-x.net/georeference/v3/ontology#",
       "type": "uri"
     }
   ]
