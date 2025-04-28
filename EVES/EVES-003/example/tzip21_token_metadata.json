@@ -71,13 +71,13 @@
   ],
   "attributes": [
     {
-      "name": "de.gaiax4plcaad.ontology-management-base.hdmap.ontology",
-      "value": "https://ontologies.envited-x.net/hdmap/v4/ontology#",
+      "name": "https://ontologies.envited-x.net/hdmap/v4/ontology#",
+      "value": "https://github.com/GAIA-X4PLC-AAD/ontology-management-base/releases/tag/v0.0.4",
       "type": "uri"
     },
     {
-      "name": "de.gaiax4plcaad.ontology-management-base.envited-x.metadata",
-      "value": "https://ontologies.envited-x.net/envited-x/v2/ontology#",
+      "name": "https://ontologies.envited-x.net/envited-x/v2/ontology#",
+      "value": "https://github.com/GAIA-X4PLC-AAD/ontology-management-base/releases/tag/v0.0.4",
       "type": "uri"
     }
   ]
