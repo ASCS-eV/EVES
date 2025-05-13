@@ -63,7 +63,7 @@ Uploaded file names MUST exclude extensions (e.g., use `file` instead of `file.j
 
 The ENVITED-X Data Space implements a three-tiered privacy model:
 
-| envited-x:accessRole  | ENVITED-X Domain                                                      | Comment                               |
+| envited-x:accessRole | ENVITED-X Domain                                                      | Comment                               |
 | -------------------- | --------------------------------------------------------------------- | ------------------------------------- |
 | `isOwner`            | <https://assets.envited-x.net/Asset-CID>                              | CID v1, signed URLs, asset credential |
 | `isRegistered`       | <https://metadata.envited-x.net/Asset-CID>                            | CID v1, signed URLs, DEMIM credential |
@@ -81,12 +81,15 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
   2. Verify all referenced files exist locally or remotely as specified.
   3. Locate the `domainMetadata.json` file.
 - Validate the `domainMetadata.json`:
-  1. Extract SHACL constraints from the `domainMetadata.json` context.
-  2. Validate JSON structure against domain-specific SHACLs.
+  1. Extract SHACL constraints from the `domainMetadata.json` context,
+  2. Validate JSON structure against domain-specific SHACLs,
+  3. Check if the `@id` is unique within the ENVITED-X Data Space,
+  4. If the asset `@id` is already existing the validator SHALL throw an error.
 - Validate if items in `hasReferencedArtifacts` are available:
-  1. Check if access role is `isPublic`, OPTIONALLY check if filePath resolves.
-  2. Check if access role is `isOwner` or `isRegistered` and if `@id` of asset is known in the database.
-  3. It is RECOMMENDED to warn the user if references do not exist.
+  1. Check if `@id` of asset is known in the database,
+  2. OPTIONALLY check if filePath resolves if the access role is `isPublic`,
+  3. It is RECOMMENDED to warn the user if references do not exist,
+  4. It is strongly RECOMMENDED to add the `CID` as a user to the Manifest metadata.
 
 #### Step 2: Upload Asset to ENVITED-X Data Space
 
@@ -96,9 +99,9 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - Store `isRegistered` metadata at `https://metadata.envited-x.net/Asset-CID`.
 - Store `isPublic` metadata at `https://ipfs.envited-x.net/Asset-CID/Data-CID`.
 - Calculate CIDs for all `isPublic` data.
-- Create `tzip21_manifest.json` by replacing relative paths in `manifest_reference.json` with IPFS/envited-x.net URLs.
+- Create `envited-x_manifest.json` by replacing relative paths in `manifest_reference.json` with IPFS/envited-x.net URLs.
 - Replace the paths of items in `hasReferencedArtifacts` to the correct filePaths.
-- Replace `@id` from `manifest_reference.json` with generated database `UUID` in `tzip21_manifest.json`.
+- Replace `@id` from `manifest_reference.json` with generated database `UUID` in `envited-x_manifest.json`. This also applies for referenced artifacts.
 - Create `tzip21_token_metadata.json` and map the metadata fields OPTIONALLY use an application/ld+json conform to the [tzip21 ontology][19].
 
 #### Step 3: Preview Data
@@ -109,7 +112,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 #### Step 4: Mint Token
 
 - It is RECOMMENDED to use signed CIDs for the upload to IPFS according to [EIP-712][13].
-- Upload `isPublic` information and `tzip21_manifest.json` to IPFS.
+- Upload `isPublic` information and `envited-x_manifest.json` to IPFS.
 - It is RECOMMENDED to verify that CIDs from the IPFS service or software returns the same CIDs as the pre-calculation.
 - Upload `tzip21_token_metadata.json` to IPFS.
 - Mint token with linked metadata.
@@ -134,7 +137,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - The CID of the uploaded `asset.zip` serves as the unique identifier detecting identical datasets across all systems.
 - In addition the unique identifier `@id` of the `envied-x:SimulationAsset` in the `domainMetadata.json` SHALL be used for identification of the digital assets.
 - The CIDs MAY be signed by the user according to EIP-712.
-- A UUID MUST be generated for the `tzip21_manifest.json` pre-mint to link the asset with the ENVITED-X database securely.
+- A UUID MUST be generated for the `envited-x_manifest.json` pre-mint to link the asset with the ENVITED-X database securely.
 - The DID of the member associated with the user minting the asset MUST be known.
 - DID of the user minting the asset SHALL be stored pre-mint in the database.
 
@@ -160,22 +163,22 @@ The synchronization between the smart contract as in the [Marketplace Contract R
 Attributes not in the table are static and the same for every mint as in the 📁 `example/tzip21_token_metadata.json`.
 Examples are the first five tags or "publishers", which is always ENVITED-X and the ASCS if the mint is conducted through the [website][12].
 
-| TZIP-21            | EVES-003                                                 | Comment                                                      |
-| -------------------| -------------------------------------------------------- | ------------------------------------------------------------ |
-| "name"             | envited-x:DataResource:gx:name                           |                                                              |
-| "description"      | envited-x:DataResource:gx:description                    |                                                              |
-| "tags"             | $TAG = format:formatType + " " + format:version          | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]    |
-| "minter"           | Member DID (CAIP-10) associated with user                | Returned by the View from the DEMIM revocation registry      |
-| "creators"         | Name of the company                                      | Taken from the company profile the user belongs to           |
-| "date"             | [System date-time][14]                                   |                                                              |
-| "rights"           | manifest:hasLicense:gx:license                           | [SPDX identifier][15]                                        |
-| "rightsUri"        | manifest:hasLicense:licenseData:hasFileMetadata:filePath | Full os license text URL OR policy smart contract did        |
-| "artifactUri"      | <https://assets.envited-x.net/Asset-CID>                 |                                                              |
-| "identifier"       | Simulation Asset @id                                     | Unique identifier from the domainMetadata.json               |
-| "externalUri"      | Uploaded domainMetadata.json to IPFS                     |                                                              |
-| "displayUri"       | "manifest:hasArtifacts:Link" of category "isMedia"       | Always use the first media image                             |
-| "formats"          | artifactUri, externalUri, displayUri, tzip21_manifest    |                                                              |
-| "attributes"       | Reverse domain notation for ontologies + URL             | All domain specific prefixes from the domainMetadata.json    |
+| TZIP-21            | EVES-003                                                 | Comment                                                                    |
+| -------------------| -------------------------------------------------------- | -------------------------------------------------------------------------- |
+| "name"             | envited-x:DataResource:gx:name                           |                                                                            |
+| "description"      | envited-x:DataResource:gx:description                    |                                                                            |
+| "tags"             | $TAG = format:formatType + " " + format:version          | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]                  |
+| "minter"           | Member DID (CAIP-10) associated with user                | Returned by the View from the DEMIM revocation registry                    |
+| "creators"         | Name of the company                                      | Taken from the company profile the user belongs to                         |
+| "date"             | [System date-time][14]                                   |                                                                            |
+| "rights"           | manifest:hasLicense:gx:license                           | [SPDX identifier][15]                                                      |
+| "rightsUri"        | manifest:hasLicense:licenseData:hasFileMetadata:filePath | Full os license text URL OR policy smart contract did                      |
+| "artifactUri"      | <https://assets.envited-x.net/Asset-CID>                 |                                                                            |
+| "identifier"       | Simulation Asset @id                                     | Unique identifier from the domainMetadata.json                             |
+| "externalUri"      | Uploaded domainMetadata.json to IPFS                     |                                                                            |
+| "displayUri"       | "manifest:hasArtifacts:Link" of category "isMedia"       | Always use the first media image                                           |
+| "formats"          | artifactUri, externalUri, displayUri, envited-x_manifest |                                                                            |
+| "attributes"       | Reverse domain notation for ontologies + URL             | All ontologies from top level nodes in files referenced in formats section |
 
 **>Note:** Some of the information need to be extracted from the `gx:LegalParticipant`.
 

@@ -23,7 +23,7 @@
     "manifest:hasFileMetadata": {
       "@type": "manifest:FileMetadata",
       "manifest:filePath": {
-        "@value": "./tzip21_manifest.json",
+        "@value": "./envited-x_manifest.json",
         "@type": "xsd:anyURI"
       },
       "manifest:mimeType": {
