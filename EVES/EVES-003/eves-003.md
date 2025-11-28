@@ -63,11 +63,11 @@ Uploaded file names MUST exclude extensions (e.g., use `file` instead of `file.j
 
 The ENVITED-X Data Space implements a three-tiered privacy model:
 
-| envited-x:accessRole | ENVITED-X Domain                                                      | Comment                               |
-| -------------------- | --------------------------------------------------------------------- | ------------------------------------- |
-| `isOwner`            | <https://assets.envited-x.net/Asset-CID>                              | CID v1, signed URLs, asset credential |
-| `isRegistered`       | <https://metadata.envited-x.net/Asset-CID>                            | CID v1, signed URLs, DEMIM credential |
-| `isPublic`           | <ipfs://Data-CID> to <https://ipfs.envited-x.net/Asset-CID/Data-CID>  | CID v1, public, indexer to new URL    |
+| envited-x:accessRole | ENVITED-X Domain                                                      | Comment                                    |
+| -------------------- | --------------------------------------------------------------------- | ------------------------------------------ |
+| `isOwner`            | <https://assets.envited-x.net/Asset-CID>                              | CID v1, signed URLs, asset credential      |
+| `isRegistered`       | <https://metadata.envited-x.net/Asset-CID>                            | CID v1, signed URLs, SimpulseID credential |
+| `isPublic`           | <ipfs://Data-CID> to <https://ipfs.envited-x.net/Asset-CID/Data-CID>  | CID v1, public, indexer to new URL         |
 
 ### 4. Asset Validation and Upload Process
 
@@ -168,7 +168,7 @@ Examples are the first five tags or "publishers", which is always ENVITED-X and 
 | "name"             | envited-x:DataResource:gx:name                           |                                                                            |
 | "description"      | envited-x:DataResource:gx:description                    |                                                                            |
 | "tags"             | $TAG = format:formatType + " " + format:version          | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]                  |
-| "minter"           | Member DID (CAIP-10) associated with user                | Returned by the View from the DEMIM revocation registry                    |
+| "minter"           | Member DID (CAIP-10) associated with user                | Returned by the View from the SimpulseID revocation registry               |
 | "creators"         | Name of the company                                      | Taken from the company profile the user belongs to                         |
 | "date"             | [System date-time][14]                                   |                                                                            |
 | "rights"           | manifest:hasLicense:gx:license                           | [SPDX identifier][15]                                                      |
