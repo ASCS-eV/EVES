@@ -45,8 +45,8 @@ urn:blockchain:{chain_namespace}:{chain_id}:contract:{contract_address}
 
 ##### Smart Contract Example Mappings
 
-| Blockchain              | Namespace | Chain ID          | Example URN |
-|-------------------------|-----------|-------------------|--------------------------------------------------------------------------------------|
+| Blockchain              | Namespace | Chain ID          | Example URN                                                                          |
+| ----------------------- | --------- | ----------------- | ------------------------------------------------------------------------------------ |
 | **Tezos (Ghostnet)**    | `tezos`   | `NetXnHfVqm9iesp` | `urn:blockchain:tezos:NetXnHfVqm9iesp:contract:KT1PCaD2kmgCHy15wQ1gpqZUy9RLxyBVJdTF` |
 | **Ethereum (Mainnet)**  | `eip155`  | `1`               | `urn:blockchain:eip155:1:contract:0xABC123456789...`                                 |
 | **Etherlink (Layer 2)** | `eip155`  | `42793`           | `urn:blockchain:eip155:42793:contract:0x646B92C8f21e55DF67E766047E4bD7bEdF8DfA14`    |
@@ -67,11 +67,11 @@ urn:blockchain:{chain_namespace}:{chain_id}:tx:{transaction_hash}
 
 ##### Transaction Example Mappings
 
-| Blockchain              | Namespace  | Chain ID          | Example URN                                                                                         |
-|-------------------------|------------|-------------------|-----------------------------------------------------------------------------------------------------|
-| **Tezos (Ghostnet)**    | `tezos`    | `NetXnHfVqm9iesp` | `urn:blockchain:tezos:NetXnHfVqm9iesp:tx:oojtGLnHuS8og5WGf8jF8EoxTbegfrXvpxzvyPiW2GYZFGbFLaJ`       |
-| **Ethereum (Mainnet)**  | `eip155`   | `1`               | `urn:blockchain:eip155:1:tx:0xad0fa6b98b66bc19ab4936d1181697ac7f1e19755e1501e4e250434200a32cba`     |
-| **Etherlink (Layer 2)** | `eip155`   | `42793`           | `urn:blockchain:eip155:42793:tx:0xad0fa6b98b66bc19ab4936d1181697ac7f1e19755e1501e4e250434200a32cba` |
+| Blockchain              | Namespace | Chain ID          | Example URN                                                                                         |
+| ----------------------- | --------- | ----------------- | --------------------------------------------------------------------------------------------------- |
+| **Tezos (Ghostnet)**    | `tezos`   | `NetXnHfVqm9iesp` | `urn:blockchain:tezos:NetXnHfVqm9iesp:tx:oojtGLnHuS8og5WGf8jF8EoxTbegfrXvpxzvyPiW2GYZFGbFLaJ`       |
+| **Ethereum (Mainnet)**  | `eip155`  | `1`               | `urn:blockchain:eip155:1:tx:0xad0fa6b98b66bc19ab4936d1181697ac7f1e19755e1501e4e250434200a32cba`     |
+| **Etherlink (Layer 2)** | `eip155`  | `42793`           | `urn:blockchain:eip155:42793:tx:0xad0fa6b98b66bc19ab4936d1181697ac7f1e19755e1501e4e250434200a32cba` |
 
 > **_NOTE:_**
 >
@@ -80,24 +80,26 @@ urn:blockchain:{chain_namespace}:{chain_id}:tx:{transaction_hash}
 
 ### 2. Standardization Considerations
 
-- **CAIP-2 & CAIP-10 Alignment**:  
+- **CAIP-2 & CAIP-10 Alignment**:
   - The `chain_namespace` and `chain_id` **strictly follow** CAIP-2 & CAIP-10 conventions.
   - `eip155`, `tezos` **retain compatibility with existing tooling**.
-  
-- **Layer 2 Distinction**:  
+- **Layer 2 Distinction**:
+
   - **Etherlink URNs explicitly specify their Layer 2 chain ID** (`ghostnet: 128123`, `mainnet: 42793`).
   - This prevents **collision between Layer 1 and Layer 2 assets**.
 
-- **Human-Readable & Resolvable**:  
+- **Human-Readable & Resolvable**:
   - This URN structure can be used in **metadata files (TZIP-21, ERC-721)**.
   - Enables **cross-chain verification of contracts and operations**.
 
 ### 3. Use Cases
 
 - **NFT Metadata (TZIP-21, ERC-721, ERC-1155)**
+
   - Store **contract & transaction references** in **token metadata** crosschain.
 
 - **Cross-Chain Credential Verification (EVES-005, EVES-006)**
+
   - Supports contract-based **Verifiable Credentials (SD-JWT VC)**.
 
 - **ENVITED-X Asset Tracking**
@@ -105,7 +107,7 @@ urn:blockchain:{chain_namespace}:{chain_id}:tx:{transaction_hash}
 
 ### **4. MIME Type for Blockchain URNs**
 
-To ensure structured and standardized handling of **URN-based blockchain references**, this specification defines a MIME type for representing **contract and transaction identifiers** in a machine-readable format.  
+To ensure structured and standardized handling of **URN-based blockchain references**, this specification defines a MIME type for representing **contract and transaction identifiers** in a machine-readable format.
 
 #### **4.1 MIME Type Definition**
 
@@ -117,14 +119,14 @@ application/vnd.eves.blockchain-urn+json
 
 #### **4.2 Rationale**
 
-- **`application/`** → Indicates structured data.  
-- **`vnd.eves.`** → Specifies the ENVITED-X standardization scope.  
-- **`blockchain-urn`** → Clearly identifies the content as a **URN-based blockchain reference**.  
+- **`application/`** → Indicates structured data.
+- **`vnd.eves.`** → Specifies the ENVITED-X standardization scope.
+- **`blockchain-urn`** → Clearly identifies the content as a **URN-based blockchain reference**.
 - **`+json`** → Specifies that the format is **compatible with JSON-based data structures**.
 
 #### **4.3 Example Usage**
 
-The MIME type is used in metadata files, API payloads, and verifiable credential documents where blockchain URN references are required.  
+The MIME type is used in metadata files, API payloads, and verifiable credential documents where blockchain URN references are required.
 
 ##### **Example: NFT Metadata (TZIP-21, ERC-721)**
 
