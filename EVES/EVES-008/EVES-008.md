@@ -1,7 +1,7 @@
 ---
 eves-identifier: 008
 title: ENVITED-X On-Chain Identity & Revocation Management
-author: [Your Name] (@GitHub user)
+author: Sid Lamichhane (@sid030sid); Siyovush Hamidov (@siyovush-hamidov); Baki Berkay Uzel (@bakiberkay); Felix Hoops (@flhps); Carlo van Driesten (@jdsika) 
 discussions-to: https://github.com/ASCS-eV/EVES/issues/
 status: Draft
 type: Process
@@ -69,10 +69,5 @@ This specification enforces the replacement of undocumented identity mechanics w
 
 - [ERC-1056: Ethereum Lightweight Identity](https://eips.ethereum.org/EIPS/eip-1056)
 - [did:ethr Method Specification](https://github.com/decentralized-identity/ethr-did-resolver)
-- [OID4VCI & OID4VP Overview](https://openid.net/protocols/)
+- [OID4VCI & OID4VP Overview](https://openid.net/sg/openid4vc/)
 - [IPFS Content Addressing](https://docs.ipfs.tech/concepts/content-addressing/)
-
-## Template Instructions
-*(Remember to remove this section upon issuing a PR)*
-- Replace `[Your Name]` with your actual name or team identifier.
-- Ensure the reference to PRs/Discussions in the header points to the exact GitHub Issue.
