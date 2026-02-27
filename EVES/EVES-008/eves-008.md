@@ -1,13 +1,13 @@
 ---
 eves-identifier: 008
 title: ENVITED-X On-Chain Identity & Revocation Management
-author: Sid Lamichhane (@sid030sid); Siyovush Hamidov (@siyovush-hamidov); Baki Berkay Uzel (@bakiberkay); Felix Hoops (@flhps); Carlo van Driesten (@jdsika) 
+author: "`Sid Lamichhane` (@sid030sid); `Siyovush Hamidov` (@siyovush-hamidov); `Baki Berkay Uzel` (@bakiberkay); `Felix Hoops` (@flhps); `Carlo van Driesten` (@jdsika)"
 discussions-to: https://github.com/ASCS-eV/EVES/issues/
 status: Draft
 type: Process
 created: 2026-02-27
 requires: ["EVES-001"]
-replaces: None  
+replaces: None
 ---
 
 ## Abstract
