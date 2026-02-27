@@ -4,3 +4,8 @@
 *.vsix
 .ionide
 .DS_Store
+
+# Vale downloaded styles
+.github/styles/Google/
+.github/styles/proselint/
+.github/styles/write-good/
