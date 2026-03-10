@@ -45,6 +45,103 @@ Asset examples can be found in the following repositories:
 - [Scenario Asset Example](https://github.com/ASCS-eV/scenario-asset-example)
 - [OSI-Trace Asset Example](https://github.com/ASCS-eV/ositrace-asset-example/tree/main)
 
+### 1b. Asset Preparation
+
+Before uploading, an asset MUST be organized into a well-defined folder structure and described by an input manifest.
+Tooling such as the [ENVITED-X Simulation Asset Tools][20] MAY automate the creation of a conformant `asset.zip` from user-provided input files and an `input_manifest.json`.
+
+#### Folder Structure
+
+Every `asset.zip` MUST contain the following top-level folders mapped to `envited-x` artifact categories:
+
+| Folder | `envited-x` Category | Required | `envited-x` Access Role | Description |
+| --- | --- | --- | --- | --- |
+| `simulation-data/` | `envited-x:isSimulationData` | MUST | `envited-x:isOwner` | Core simulation data (e.g., `.xodr`, `.xosc`) |
+| `documentation/` | `envited-x:isDocumentation` | MUST | `envited-x:isPublic` | Documentation files (e.g., `.pdf`, `.txt`) |
+| `metadata/` | `envited-x:isMetadata` | MUST | `envited-x:isPublic` | Domain metadata (e.g., `hdmap_instance.json`) |
+| `media/` | `envited-x:isMedia` | MUST | `envited-x:isPublic` | Visualizations, images, GeoJSON, 3D previews |
+| `validation-reports/` | `envited-x:isValidationReport` | RECOMMENDED | `envited-x:isPublic` | Quality checker reports (e.g., `.xqar`, `.txt`) |
+| _(root)_ | `envited-x:isLicense` | MUST | `envited-x:isPublic` | LICENSE file at the asset root |
+| _(root)_ | `envited-x:isManifest` | MUST | `envited-x:isPublic` | `manifest_reference.json` at the asset root |
+
+> **Note:** The `envited-x` categories and access roles are formally defined in the [ENVITED-X Ontology][21] which extends the generic [Manifest Ontology][22].
+> The `envited-x:ExtendedLinkShape` constrains the allowed values for both `manifest:hasCategory` and `manifest:hasAccessRole`.
+
+#### Input Manifest (`input_manifest.json`)
+
+An `input_manifest.json` is a partial `envited-x:Manifest` in JSON-LD that describes the user-provided input files before the asset creation pipeline processes them.
+It uses the same vocabulary as the final `manifest_reference.json` but omits computed fields (`cid`, `fileSize`, `timestamp`, `hasDimensions`, `filename`).
+
+Each entry (a `manifest:Link`) MUST specify:
+
+- `manifest:hasCategory` — one of the categories defined in the `envited-x` ontology
+- `manifest:hasAccessRole` — one of the access roles defined in the `envited-x` ontology
+- `manifest:hasFileMetadata` — a `manifest:FileMetadata` node with at minimum:
+  - `manifest:filePath` (`xsd:anyURI`) — local file path or remote URL
+  - `manifest:mimeType` (`xsd:string`) — MIME type of the file
+
+##### Two-Stage Validation
+
+Asset creation tooling SHOULD implement a two-stage validation approach:
+
+1. **Input validation (fail fast):** Each `manifest:Link` in the `input_manifest.json` SHOULD be validated against `manifest:LinkShape` and `envited-x:ExtendedLinkShape` before the pipeline runs. This catches invalid categories, missing access roles, or malformed file metadata early.
+2. **Output validation (completeness):** The completed `manifest_reference.json` MUST be validated against the full `envited-x:ManifestShape`, which requires at least one artifact per core category (`isSimulationData`, `isDocumentation`, `isMetadata`, `isMedia`).
+
+##### Example `input_manifest.json`
+
+See 📁 `example/input_manifest.json` for a complete example.
+
+```json
+{
+  "@context": [
+    "https://w3id.org/ascs-ev/envited-x/manifest/v5/",
+    { "envited-x": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/" }
+  ],
+  "@id": "did:web:registry.gaia-x.eu:HdMap:example",
+  "@type": "envited-x:Manifest",
+  "hasArtifacts": [
+    {
+      "@type": "Link",
+      "hasCategory": { "@id": "envited-x:isSimulationData" },
+      "hasAccessRole": { "@id": "envited-x:isOwner" },
+      "hasFileMetadata": {
+        "@type": "FileMetadata",
+        "filePath": "my_map.xodr",
+        "mimeType": "application/xml"
+      }
+    },
+    {
+      "@type": "Link",
+      "hasCategory": { "@id": "envited-x:isMedia" },
+      "hasAccessRole": { "@id": "envited-x:isPublic" },
+      "hasFileMetadata": {
+        "@type": "FileMetadata",
+        "filePath": "impression-01.png",
+        "mimeType": "image/png"
+      }
+    }
+  ],
+  "hasLicense": {
+    "@type": "Link",
+    "hasCategory": { "@id": "envited-x:isLicense" },
+    "hasAccessRole": { "@id": "envited-x:isPublic" },
+    "hasFileMetadata": {
+      "@type": "FileMetadata",
+      "filePath": "LICENSE",
+      "mimeType": "text/plain"
+    }
+  }
+}
+```
+
+The asset creation pipeline enriches this into a full `manifest_reference.json` by:
+
+1. Computing `manifest:cid` (IPFS CIDv1) for each file
+2. Computing `manifest:fileSize` and `manifest:timestamp`
+3. Extracting `manifest:hasDimensions` for images
+4. Adding generated artifacts (documentation, metadata, validation reports)
+5. Adding the self-referencing `manifest:hasManifestReference` entry
+
 ### 2. Pinata IPFS and CID Management
 
 It is RECOMMENDED to use [IPFS][8] within the ENVITED-X Data Space for making public data available.
@@ -75,6 +172,8 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 
 #### Step 1: Client-Side Pre-Validation
 
+- Verify that an `input_manifest.json` was used during asset preparation (see [§1b](#1b-asset-preparation)):
+  1. Each `manifest:Link` in the input SHOULD have been validated against `manifest:LinkShape` and `envited-x:ExtendedLinkShape`.
 - Drag and drop `asset.zip` into the upload field.
 - Validate the `manifest_reference.json`:
   1. Ensure JSON structure matches the manifest SHACL constraints.
@@ -212,6 +311,12 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 - [RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels][16]
 - [Gaia-X Policy Rules Compliance Document (Release 24.11)][17]
 - [Marketplace Contract Reference Implementation][18]
+- [ENVITED-X Simulation Asset Tools][20]
+- [ENVITED-X Ontology][21]
+- [Manifest Ontology][22]
+- [ENVITED-X Simulation Asset Tools][20]
+- [ENVITED-X Ontology][21]
+- [Manifest Ontology][22]
 
 [1]: https://github.com/ASCS-eV/ontology-management-base/
 [2]: https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/gx
@@ -232,3 +337,6 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 [17]: https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/
 [18]: https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/
 [19]: https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/tzip21
+[20]: https://github.com/openMSL/sl-5-8-asset-tools
+[21]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/envited-x
+[22]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/manifest
