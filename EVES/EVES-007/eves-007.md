@@ -45,7 +45,7 @@ urn:blockchain:{chain_namespace}:{chain_id}:contract:{contract_address}
 
 ##### Smart Contract Example Mappings
 
-| Blockchain              | Namespace | Chain ID          | Example URN |
+| Blockchain              | Namespace | Chain ID          | Example URN                                                                          |
 |-------------------------|-----------|-------------------|--------------------------------------------------------------------------------------|
 | **Tezos (Ghostnet)**    | `tezos`   | `NetXnHfVqm9iesp` | `urn:blockchain:tezos:NetXnHfVqm9iesp:contract:KT1PCaD2kmgCHy15wQ1gpqZUy9RLxyBVJdTF` |
 | **Ethereum (Mainnet)**  | `eip155`  | `1`               | `urn:blockchain:eip155:1:contract:0xABC123456789...`                                 |
