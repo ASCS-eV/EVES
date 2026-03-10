@@ -274,6 +274,147 @@ A <a href="https://github.com/GAIA-X4PLC-AAD/gaia-x-compliant-claims-example" ta
 <li><a href="https://github.com/ASCS-eV/scenario-asset-example" target="_blank">Scenario Asset Example</a></li>
 <li><a href="https://github.com/ASCS-eV/ositrace-asset-example/tree/main" target="_blank">OSI-Trace Asset Example</a></li>
 </ul>
+<h3 id="1b-asset-preparation">1b. Asset Preparation</h3>
+<p>Before uploading, an asset MUST be organized into a well-defined folder structure and described by an input manifest.
+Tooling such as the <a href="https://github.com/openMSL/sl-5-8-asset-tools" target="_blank">ENVITED-X Simulation Asset Tools</a> MAY automate the creation of a conformant <code>asset.zip</code> from user-provided input files and an <code>input_manifest.json</code>.</p>
+<h4 id="folder-structure">Folder Structure</h4>
+<p>Every <code>asset.zip</code> MUST contain the following top-level folders mapped to <code>envited-x</code> artifact categories:</p>
+<table>
+<thead>
+<tr>
+<th>Folder</th>
+<th><code>envited-x</code> Category</th>
+<th>Required</th>
+<th><code>envited-x</code> Access Role</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>simulation-data/</code></td>
+<td><code>envited-x:isSimulationData</code></td>
+<td>MUST</td>
+<td><code>envited-x:isOwner</code></td>
+<td>Core simulation data (e.g., <code>.xodr</code>, <code>.xosc</code>)</td>
+</tr>
+<tr>
+<td><code>documentation/</code></td>
+<td><code>envited-x:isDocumentation</code></td>
+<td>MUST</td>
+<td><code>envited-x:isPublic</code></td>
+<td>Documentation files (e.g., <code>.pdf</code>, <code>.txt</code>)</td>
+</tr>
+<tr>
+<td><code>metadata/</code></td>
+<td><code>envited-x:isMetadata</code></td>
+<td>MUST</td>
+<td><code>envited-x:isPublic</code></td>
+<td>Domain metadata (e.g., <code>hdmap_instance.json</code>)</td>
+</tr>
+<tr>
+<td><code>media/</code></td>
+<td><code>envited-x:isMedia</code></td>
+<td>MUST</td>
+<td><code>envited-x:isPublic</code></td>
+<td>Visualizations, images, GeoJSON, 3D previews</td>
+</tr>
+<tr>
+<td><code>validation-reports/</code></td>
+<td><code>envited-x:isValidationReport</code></td>
+<td>RECOMMENDED</td>
+<td><code>envited-x:isPublic</code></td>
+<td>Quality checker reports (e.g., <code>.xqar</code>, <code>.txt</code>)</td>
+</tr>
+<tr>
+<td><em>(root)</em></td>
+<td><code>envited-x:isLicense</code></td>
+<td>MUST</td>
+<td><code>envited-x:isPublic</code></td>
+<td>LICENSE file at the asset root</td>
+</tr>
+<tr>
+<td><em>(root)</em></td>
+<td><code>envited-x:isManifest</code></td>
+<td>MUST</td>
+<td><code>envited-x:isPublic</code></td>
+<td><code>manifest_reference.json</code> at the asset root</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong> The <code>envited-x</code> categories and access roles are formally defined in the <a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/envited-x" target="_blank">ENVITED-X Ontology</a> which extends the generic <a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/manifest" target="_blank">Manifest Ontology</a>.
+The <code>envited-x:ExtendedLinkShape</code> constrains the allowed values for both <code>manifest:hasCategory</code> and <code>manifest:hasAccessRole</code>.</p>
+</blockquote>
+<h4 id="input-manifest-inputmanifestjson">Input Manifest (<code>input_manifest.json</code>)</h4>
+<p>An <code>input_manifest.json</code> is a partial <code>envited-x:Manifest</code> in JSON-LD that describes the user-provided input files before the asset creation pipeline processes them.
+It uses the same vocabulary as the final <code>manifest_reference.json</code> but omits computed fields (<code>cid</code>, <code>fileSize</code>, <code>timestamp</code>, <code>hasDimensions</code>, <code>filename</code>).</p>
+<p>Each entry (a <code>manifest:Link</code>) MUST specify:</p>
+<ul>
+<li><code>manifest:hasCategory</code> &#x2014; one of the categories defined in the <code>envited-x</code> ontology</li>
+<li><code>manifest:hasAccessRole</code> &#x2014; one of the access roles defined in the <code>envited-x</code> ontology</li>
+<li><code>manifest:hasFileMetadata</code> &#x2014; a <code>manifest:FileMetadata</code> node with at minimum:<ul>
+<li><code>manifest:filePath</code> (<code>xsd:anyURI</code>) &#x2014; local file path or remote URL</li>
+<li><code>manifest:mimeType</code> (<code>xsd:string</code>) &#x2014; MIME type of the file</li>
+</ul>
+</li>
+</ul>
+<h5 id="two-stage-validation">Two-Stage Validation</h5>
+<p>Asset creation tooling SHOULD implement a two-stage validation approach:</p>
+<ol>
+<li><strong>Input validation (fail fast):</strong> Each <code>manifest:Link</code> in the <code>input_manifest.json</code> SHOULD be validated against <code>manifest:LinkShape</code> and <code>envited-x:ExtendedLinkShape</code> before the pipeline runs. This catches invalid categories, missing access roles, or malformed file metadata early.</li>
+<li><strong>Output validation (completeness):</strong> The completed <code>manifest_reference.json</code> MUST be validated against the full <code>envited-x:ManifestShape</code>, which requires at least one artifact per core category (<code>isSimulationData</code>, <code>isDocumentation</code>, <code>isMetadata</code>, <code>isMedia</code>).</li>
+</ol>
+<h5 id="example-inputmanifestjson">Example <code>input_manifest.json</code></h5>
+<p>See &#x1F4C1; <code>example/input_manifest.json</code> for a complete example.</p>
+<pre><code class="lang-json">{
+  <span class="hljs-string">&quot;@context&quot;</span>: [
+    <span class="hljs-string">&quot;https://w3id.org/ascs-ev/envited-x/manifest/v5/&quot;</span>,
+    { <span class="hljs-string">&quot;envited-x&quot;</span>: <span class="hljs-string">&quot;https://w3id.org/ascs-ev/envited-x/envited-x/v3/&quot;</span> }
+  ],
+  <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;did:web:registry.gaia-x.eu:HdMap:example&quot;</span>,
+  <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;envited-x:Manifest&quot;</span>,
+  <span class="hljs-string">&quot;hasArtifacts&quot;</span>: [
+    {
+      <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;Link&quot;</span>,
+      <span class="hljs-string">&quot;hasCategory&quot;</span>: { <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isSimulationData&quot;</span> },
+      <span class="hljs-string">&quot;hasAccessRole&quot;</span>: { <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isOwner&quot;</span> },
+      <span class="hljs-string">&quot;hasFileMetadata&quot;</span>: {
+        <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;FileMetadata&quot;</span>,
+        <span class="hljs-string">&quot;filePath&quot;</span>: <span class="hljs-string">&quot;my_map.xodr&quot;</span>,
+        <span class="hljs-string">&quot;mimeType&quot;</span>: <span class="hljs-string">&quot;application/xml&quot;</span>
+      }
+    },
+    {
+      <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;Link&quot;</span>,
+      <span class="hljs-string">&quot;hasCategory&quot;</span>: { <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isMedia&quot;</span> },
+      <span class="hljs-string">&quot;hasAccessRole&quot;</span>: { <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isPublic&quot;</span> },
+      <span class="hljs-string">&quot;hasFileMetadata&quot;</span>: {
+        <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;FileMetadata&quot;</span>,
+        <span class="hljs-string">&quot;filePath&quot;</span>: <span class="hljs-string">&quot;impression-01.png&quot;</span>,
+        <span class="hljs-string">&quot;mimeType&quot;</span>: <span class="hljs-string">&quot;image/png&quot;</span>
+      }
+    }
+  ],
+  <span class="hljs-string">&quot;hasLicense&quot;</span>: {
+    <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;Link&quot;</span>,
+    <span class="hljs-string">&quot;hasCategory&quot;</span>: { <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isLicense&quot;</span> },
+    <span class="hljs-string">&quot;hasAccessRole&quot;</span>: { <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isPublic&quot;</span> },
+    <span class="hljs-string">&quot;hasFileMetadata&quot;</span>: {
+      <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;FileMetadata&quot;</span>,
+      <span class="hljs-string">&quot;filePath&quot;</span>: <span class="hljs-string">&quot;LICENSE&quot;</span>,
+      <span class="hljs-string">&quot;mimeType&quot;</span>: <span class="hljs-string">&quot;text/plain&quot;</span>
+    }
+  }
+}
+</code></pre>
+<p>The asset creation pipeline enriches this into a full <code>manifest_reference.json</code> by:</p>
+<ol>
+<li>Computing <code>manifest:cid</code> (IPFS CIDv1) for each file</li>
+<li>Computing <code>manifest:fileSize</code> and <code>manifest:timestamp</code></li>
+<li>Extracting <code>manifest:hasDimensions</code> for images</li>
+<li>Adding generated artifacts (documentation, metadata, validation reports)</li>
+<li>Adding the self-referencing <code>manifest:hasManifestReference</code> entry</li>
+</ol>
 <h3 id="2-pinata-ipfs-and-cid-management">2. Pinata IPFS and CID Management</h3>
 <p>It is RECOMMENDED to use <a href="https://ipfs.tech/" target="_blank">IPFS</a> within the ENVITED-X Data Space for making public data available.
 IPFS is a peer-to-peer content delivery network built around the innovation of content addressing: store, retrieve, and locate data based on the fingerprint of its actual content rather than its name or location.</p>
@@ -313,6 +454,10 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <p>The following process is implemented in the <a href="https://envited-x.net/" target="_blank">ENVITED-X Data Space</a> portal developed by the Automotive Solution Center for Simulation e.V.</p>
 <h4 id="step-1-client-side-pre-validation">Step 1: Client-Side Pre-Validation</h4>
 <ul>
+<li>Verify that an <code>input_manifest.json</code> was used during asset preparation (see <a href="#1b-asset-preparation">&#xA7;1b</a>):<ol>
+<li>Each <code>manifest:Link</code> in the input SHOULD have been validated against <code>manifest:LinkShape</code> and <code>envited-x:ExtendedLinkShape</code>.</li>
+</ol>
+</li>
 <li>Drag and drop <code>asset.zip</code> into the upload field.</li>
 <li>Validate the <code>manifest_reference.json</code>:<ol>
 <li>Ensure JSON structure matches the manifest SHACL constraints.</li>
@@ -509,6 +654,12 @@ No retroactive changes to previous assets are required.</p>
 <li><a href="https://datatracker.ietf.org/doc/html/rfc2119" target="_blank">RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels</a></li>
 <li><a href="https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/" target="_blank">Gaia-X Policy Rules Compliance Document (Release 24.11)</a></li>
 <li><a href="https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/" target="_blank">Marketplace Contract Reference Implementation</a></li>
+<li><a href="https://github.com/openMSL/sl-5-8-asset-tools" target="_blank">ENVITED-X Simulation Asset Tools</a></li>
+<li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/envited-x" target="_blank">ENVITED-X Ontology</a></li>
+<li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/manifest" target="_blank">Manifest Ontology</a></li>
+<li><a href="https://github.com/openMSL/sl-5-8-asset-tools" target="_blank">ENVITED-X Simulation Asset Tools</a></li>
+<li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/envited-x" target="_blank">ENVITED-X Ontology</a></li>
+<li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/manifest" target="_blank">Manifest Ontology</a></li>
 </ul>
 
                                 
@@ -553,7 +704,7 @@ No retroactive changes to previous assets are required.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"created":"2024-11-19T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001"],"status":"Review","eves-identifier":3,"title":"EVES-003: ENVITED-X Asset Definition and Upload Process","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/4","replaces":"None","level":"2.3","depth":1,"next":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"EVES-004/eves-004.md","ref":"./EVES-004/eves-004.md","articles":[]},"previous":{"title":"EVES-002: ENVITED-X Data Space Architecture Overview","level":"2.2","depth":1,"path":"EVES-002/eves-002.md","ref":"./EVES-002/eves-002.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-003/eves-003.md","mtime":"2025-05-13T10:54:24.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2025-05-13T10:55:58.587Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"created":"2024-11-19T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001"],"status":"Review","eves-identifier":3,"title":"EVES-003: ENVITED-X Asset Definition and Upload Process","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/4","replaces":"None","level":"2.3","depth":1,"next":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"EVES-004/eves-004.md","ref":"./EVES-004/eves-004.md","articles":[]},"previous":{"title":"EVES-002: ENVITED-X Data Space Architecture Overview","level":"2.2","depth":1,"path":"EVES-002/eves-002.md","ref":"./EVES-002/eves-002.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-003/eves-003.md","mtime":"2026-03-10T21:38:18.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-03-10T21:40:04.509Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
