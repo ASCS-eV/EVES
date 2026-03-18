@@ -19,3 +19,4 @@ The process on how to write, submit or change specifications in defined in [EVES
 | [005](./EVES/EVES-005/eves-005.md) | ENVITED-X Contract Negotiation Process               | Process   | Review |
 | [006](./EVES/EVES-006/eves-006.md) | ENVITED-X Scaling Architecture                       | Process   | Draft  |
 | [007](./EVES/EVES-007/eves-007.md) | ENVITED-X Blockchain Identifier URN Schema           | Standards | Draft  |
+| [009](./EVES/EVES-009/eves-009.md) | ENVITED-X Evidence-Based Consent Using Verifiable Presentations | Standards | Draft  |
