@@ -132,7 +132,7 @@ Every SimpulseID credential MUST include the following `@context` entries in ord
 | Harbour core context   | `https://w3id.org/reachhaven/harbour/core/v1/`        |
 | SimpulseID context     | `https://w3id.org/ascs-ev/simpulse-id/v1/`            |
 
-Context URLs are `w3id.org` persistent identifiers that redirect to the generated JSON-LD context files. Implementers MUST NOT hard-code alternative URLs.
+Context URLs are `w3id.org` persistent identifiers that redirect to the generated JSON-LD context files. Implementers MUST NOT hard-code alternative URLs. Note that the context path (`/simpulse-id/v1/`) differs from the LinkML schema identifier (`/simpulse-id/core/v1`) because the context is a generated artifact published at a separate redirect.
 
 The SimpulseID context uses `@vocab: simpulseid:` which resolves bare `@id` values to the `simpulseid:` namespace. W3C terms (e.g., `VerifiableCredential`, `issuer`, `validFrom`) remain bare; all domain types MUST use prefixed CURIEs (e.g., `simpulseid:ParticipantCredential`, `harbour:CRSetEntry`).
 
