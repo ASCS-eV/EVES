@@ -19,4 +19,4 @@ The process on how to write, submit or change specifications in defined in [EVES
 | [005](./EVES/EVES-005/eves-005.md) | ENVITED-X Contract Negotiation Process                 | Process   | Review |
 | [006](./EVES/EVES-006/eves-006.md) | ENVITED-X Scaling Architecture                         | Process   | Draft  |
 | [007](./EVES/EVES-007/eves-007.md) | ENVITED-X Blockchain Identifier URN Schema             | Standards | Draft  |
-| [008](./EVES/EVES-008/eves-008.md) | ENVITED-X SimpulseID Credential and Identity Framework | Process   | Draft  |
+| [008](./EVES/EVES-008/eves-008.md) | ENVITED-X SimpulseID Credential and Identity Framework | Standards | Draft  |
