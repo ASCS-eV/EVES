@@ -1,0 +1,72 @@
+{
+  "@context": [
+    "https://w3id.org/ascs-ev/envited-x/manifest/v5/",
+    {
+      "envited-x": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/"
+    }
+  ],
+  "@id": "did:web:registry.gaia-x.eu:HdMap:Testfeld_Niedersachsen_ALKS_xodr_sample_offset",
+  "@type": "envited-x:Manifest",
+  "hasArtifacts": [
+    {
+      "@type": "Link",
+      "hasCategory": { "@id": "envited-x:isSimulationData" },
+      "hasAccessRole": { "@id": "envited-x:isOwner" },
+      "hasFileMetadata": {
+        "@type": "FileMetadata",
+        "filePath": "Testfeld_Niedersachsen_ALKS_xodr_sample_offset.xodr",
+        "mimeType": "application/xml"
+      }
+    },
+    {
+      "@type": "Link",
+      "hasCategory": { "@id": "envited-x:isMedia" },
+      "hasAccessRole": { "@id": "envited-x:isPublic" },
+      "hasFileMetadata": {
+        "@type": "FileMetadata",
+        "filePath": "impression-01.png",
+        "mimeType": "image/png"
+      }
+    },
+    {
+      "@type": "Link",
+      "hasCategory": { "@id": "envited-x:isMedia" },
+      "hasAccessRole": { "@id": "envited-x:isPublic" },
+      "hasFileMetadata": {
+        "@type": "FileMetadata",
+        "filePath": "impression-02.png",
+        "mimeType": "image/png"
+      }
+    },
+    {
+      "@type": "Link",
+      "hasCategory": { "@id": "envited-x:isMedia" },
+      "hasAccessRole": { "@id": "envited-x:isPublic" },
+      "hasFileMetadata": {
+        "@type": "FileMetadata",
+        "filePath": "impression-03.png",
+        "mimeType": "image/png"
+      }
+    },
+    {
+      "@type": "Link",
+      "hasCategory": { "@id": "envited-x:isDocumentation" },
+      "hasAccessRole": { "@id": "envited-x:isPublic" },
+      "hasFileMetadata": {
+        "@type": "FileMetadata",
+        "filePath": "documentation.txt",
+        "mimeType": "text/plain"
+      }
+    }
+  ],
+  "hasLicense": {
+    "@type": "Link",
+    "hasCategory": { "@id": "envited-x:isLicense" },
+    "hasAccessRole": { "@id": "envited-x:isPublic" },
+    "hasFileMetadata": {
+      "@type": "FileMetadata",
+      "filePath": "https://www.mozilla.org/en-US/MPL/2.0/",
+      "mimeType": "text/html"
+    }
+  }
+}
