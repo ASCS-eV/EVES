@@ -57,6 +57,8 @@
     <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
 
     
+    <link rel="next" href="../EVES-008/eves-008.html" />
+    
     
     <link rel="prev" href="../EVES-006/eves-006.html" />
     
@@ -193,6 +195,19 @@
             
                     
                     EVES-007: ENVITED-X Blockchain Identifier URN Schema
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="../EVES-008/eves-008.html">
+            
+                <a href="../EVES-008/eves-008.html">
+            
+                    
+                    EVES-008: ENVITED-X SimpulseID Credential and Identity Framework
             
                 </a>
             
@@ -346,19 +361,18 @@
 </blockquote>
 <h3 id="2-standardization-considerations">2. Standardization Considerations</h3>
 <ul>
-<li><p><strong>CAIP-2 &amp; CAIP-10 Alignment</strong>:  </p>
-<ul>
+<li><strong>CAIP-2 &amp; CAIP-10 Alignment</strong>:<ul>
 <li>The <code>chain_namespace</code> and <code>chain_id</code> <strong>strictly follow</strong> CAIP-2 &amp; CAIP-10 conventions.</li>
 <li><code>eip155</code>, <code>tezos</code> <strong>retain compatibility with existing tooling</strong>.</li>
 </ul>
 </li>
-<li><p><strong>Layer 2 Distinction</strong>:  </p>
+<li><p><strong>Layer 2 Distinction</strong>:</p>
 <ul>
 <li><strong>Etherlink URNs explicitly specify their Layer 2 chain ID</strong> (<code>ghostnet: 128123</code>, <code>mainnet: 42793</code>).</li>
 <li>This prevents <strong>collision between Layer 1 and Layer 2 assets</strong>.</li>
 </ul>
 </li>
-<li><p><strong>Human-Readable &amp; Resolvable</strong>:  </p>
+<li><p><strong>Human-Readable &amp; Resolvable</strong>:</p>
 <ul>
 <li>This URN structure can be used in <strong>metadata files (TZIP-21, ERC-721)</strong>.</li>
 <li>Enables <strong>cross-chain verification of contracts and operations</strong>.</li>
@@ -384,20 +398,20 @@
 </li>
 </ul>
 <h3 id="4-mime-type-for-blockchain-urns"><strong>4. MIME Type for Blockchain URNs</strong></h3>
-<p>To ensure structured and standardized handling of <strong>URN-based blockchain references</strong>, this specification defines a MIME type for representing <strong>contract and transaction identifiers</strong> in a machine-readable format.  </p>
+<p>To ensure structured and standardized handling of <strong>URN-based blockchain references</strong>, this specification defines a MIME type for representing <strong>contract and transaction identifiers</strong> in a machine-readable format.</p>
 <h4 id="41-mime-type-definition"><strong>4.1 MIME Type Definition</strong></h4>
 <p>The following MIME type is introduced to denote <strong>blockchain URNs</strong> in JSON-based metadata and API responses:</p>
 <pre><code class="lang-json">application/vnd.eves.blockchain-urn+json
 </code></pre>
 <h4 id="42-rationale"><strong>4.2 Rationale</strong></h4>
 <ul>
-<li><strong><code>application/</code></strong> &#x2192; Indicates structured data.  </li>
-<li><strong><code>vnd.eves.</code></strong> &#x2192; Specifies the ENVITED-X standardization scope.  </li>
-<li><strong><code>blockchain-urn</code></strong> &#x2192; Clearly identifies the content as a <strong>URN-based blockchain reference</strong>.  </li>
+<li><strong><code>application/</code></strong> &#x2192; Indicates structured data.</li>
+<li><strong><code>vnd.eves.</code></strong> &#x2192; Specifies the ENVITED-X standardization scope.</li>
+<li><strong><code>blockchain-urn</code></strong> &#x2192; Clearly identifies the content as a <strong>URN-based blockchain reference</strong>.</li>
 <li><strong><code>+json</code></strong> &#x2192; Specifies that the format is <strong>compatible with JSON-based data structures</strong>.</li>
 </ul>
 <h4 id="43-example-usage"><strong>4.3 Example Usage</strong></h4>
-<p>The MIME type is used in metadata files, API payloads, and verifiable credential documents where blockchain URN references are required.  </p>
+<p>The MIME type is used in metadata files, API payloads, and verifiable credential documents where blockchain URN references are required.</p>
 <h5 id="example-nft-metadata-tzip-21-erc-721"><strong>Example: NFT Metadata (TZIP-21, ERC-721)</strong></h5>
 <pre><code class="lang-json">{
   <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Digital Twin Smart Contract&quot;</span>,
@@ -460,10 +474,14 @@
 
             
                 
-                <a href="../EVES-006/eves-006.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: EVES-006: ENVITED-X Scaling Architecture">
+                <a href="../EVES-006/eves-006.html" class="navigation navigation-prev " aria-label="Previous page: EVES-006: ENVITED-X Scaling Architecture">
                     <i class="fa fa-angle-left"></i>
                 </a>
                 
+                
+                <a href="../EVES-008/eves-008.html" class="navigation navigation-next " aria-label="Next page: EVES-008: ENVITED-X SimpulseID Credential and Identity Framework">
+                    <i class="fa fa-angle-right"></i>
+                </a>
                 
             
         
@@ -472,7 +490,7 @@
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"created":"2025-03-04T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-002","EVES-006"],"status":"Draft","eves-identifier":7,"title":"EVES-007: ENVITED-X Blockchain Identifier URN Schema","type":"Standards","discussions-to":null,"replaces":"None","level":"2.7","depth":1,"previous":{"title":"EVES-006: ENVITED-X Scaling Architecture","level":"2.6","depth":1,"path":"EVES-006/eves-006.md","ref":"./EVES-006/eves-006.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-007/eves-007.md","mtime":"2026-03-10T21:38:18.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-03-10T21:40:04.509Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"created":"2025-03-04T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-002","EVES-006"],"status":"Draft","eves-identifier":7,"title":"EVES-007: ENVITED-X Blockchain Identifier URN Schema","type":"Standards","discussions-to":null,"replaces":"None","level":"2.7","depth":1,"next":{"title":"EVES-008: ENVITED-X SimpulseID Credential and Identity Framework","level":"2.8","depth":1,"path":"EVES-008/eves-008.md","ref":"./EVES-008/eves-008.md","articles":[]},"previous":{"title":"EVES-006: ENVITED-X Scaling Architecture","level":"2.6","depth":1,"path":"EVES-006/eves-006.md","ref":"./EVES-006/eves-006.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-007/eves-007.md","mtime":"2026-04-04T12:34:14.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-04-04T12:35:30.567Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
