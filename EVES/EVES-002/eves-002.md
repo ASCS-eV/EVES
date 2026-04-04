@@ -38,7 +38,7 @@ The ENVITED-X Data Space is built on the following core modules:
   - Establish trust by verifying user and organization identities.
   - Enable permission management (e.g., membership validation, terms of service acceptance).
 - **Key Features**:
-  - Credentials are issued via [DEMIM](https://staging.identity.ascs.digital) and stored in W3C-compliant wallets like [Altme](https://altme.io).
+  - Credentials are issued via [SimpulseID](https://identity.ascs.digital) and stored in W3C-compliant wallets like [Altme](https://altme.io).
   - Future support for contract-based credentials (e.g., purchase or download permissions).
 - **Standards**:
   - Gaia-X Trust Framework.
@@ -97,7 +97,7 @@ The ENVITED-X Data Space is built on the following core modules:
 The interaction between modules can be summarized as follows:
 
 1. **Credential Issuance**:
-   - A user or organization requests a credential via DEMIM.
+   - A user or organization requests a credential via SimpulseID following the process in EVES-008.
    - Credential metadata includes identity, permissions, and additional attributes.
    - Credential is stored in a wallet (e.g., Altme) and referenced by uuid in the registry contract.
 
@@ -140,7 +140,7 @@ Future EVES will provide detailed specifications for each module.
 
 ## References
 
-1. [DEMIM](https://staging.identity.ascs.digital)
+1. [SimpulseID](https://identity.ascs.digital)
 2. [Altme Wallet](https://altme.io)
 3. [Tezos FA2.1 Standard](https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-21/tzip-21.md)
 4. [Etherlink Bridge](https://www.etherlinkbridge.com/bridge)
