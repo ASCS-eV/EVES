@@ -13,3 +13,4 @@
 * [EVES-005: ENVITED-X Contract Negotiation Process](./EVES-005/eves-005.md)
 * [EVES-006: ENVITED-X Scaling Architecture](./EVES-006/eves-006.md)
 * [EVES-007: ENVITED-X Blockchain Identifier URN Schema](./EVES-007/eves-007.md)
+* [EVES-008: ENVITED-X SimpulseID Credential and Identity Framework](./EVES-008/eves-008.md)
