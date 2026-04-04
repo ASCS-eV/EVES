@@ -114,6 +114,12 @@ Entity types and their DID patterns:
 
 **Key management**: Signing DID documents MUST expose P-256 keys as `JsonWebKey` verification methods. The primary signing key is published as `#controller`; optional secondary keys appear as `#delegate-N`. Non-signing DIDs (services, programs) MUST use the DID Core `controller` property to reference the governing participant DID rather than synthesising local signing keys.
 
+**DID document structure**:
+
+- Signing DIDs (participants, natural persons) MUST include `verificationMethod` with at least one P-256 `JsonWebKey`. The key MUST be referenced from both `authentication` and `assertionMethod` arrays.
+- Signing DIDs MUST NOT have a document-level `controller` property (they are self-sovereign).
+- Non-signing DIDs (programs, services) MUST have a document-level `controller` referencing the governing participant DID. They MUST NOT include `verificationMethod` (authority is delegated via the controller).
+
 **Signature algorithm**: All credential signatures MUST use ES256 (ECDSA over P-256).
 
 **Evidence holders**: Ephemeral evidence VP holders MAY use `did:key` for self-certifying identity. See [EVES-009](../EVES-009/eves-009.md) for the evidence protocol.
@@ -134,6 +140,18 @@ Every SimpulseID credential MUST include the following `@context` entries in ord
 
 Context URLs are `w3id.org` persistent identifiers that redirect to the generated JSON-LD context files. Implementers MUST NOT hard-code alternative URLs. Note that the context path (`/simpulse-id/v1/`) differs from the LinkML schema identifier (`/simpulse-id/core/v1`) because the context is a generated artifact published at a separate redirect.
 
+Example credential `@context`:
+
+```json
+{
+  "@context": [
+    "https://www.w3.org/ns/credentials/v2",
+    "https://w3id.org/reachhaven/harbour/core/v1/",
+    "https://w3id.org/ascs-ev/simpulse-id/v1/"
+  ]
+}
+```
+
 The SimpulseID context uses `@vocab: simpulseid:` which resolves bare `@id` values to the `simpulseid:` namespace. W3C terms (e.g., `VerifiableCredential`, `issuer`, `validFrom`) remain bare; all domain types MUST use prefixed CURIEs (e.g., `simpulseid:ParticipantCredential`, `harbour:CRSetEntry`).
 
 #### 3.3 Schema and Ontology
@@ -149,11 +167,22 @@ The SimpulseID schema is defined in [LinkML](https://linkml.io/) as the single s
 
 The schema defines:
 
-- **Subject classes**: `simpulseid:Participant`, `simpulseid:Administrator`, `simpulseid:User`, `simpulseid:AscsBaseMembership`, `simpulseid:AscsEnvitedMembership`
+- **Subject classes**: `simpulseid:OrganizationParticipant`, `simpulseid:Administrator`, `simpulseid:User`, `simpulseid:AscsBaseMembership`, `simpulseid:AscsEnvitedMembership`
 - **Credential classes**: `simpulseid:ParticipantCredential`, `simpulseid:AdministratorCredential`, `simpulseid:UserCredential`, `simpulseid:AscsBaseMembershipCredential`, `simpulseid:AscsEnvitedMembershipCredential`
-- **Key properties**: `simpulseid:harbourCredential` (mandatory IRI), `simpulseid:legalForm` (enum), `simpulseid:baseMembershipCredential` (prerequisite IRI), `simpulseid:articlesOfAssociation`, `simpulseid:contributionRules`
+- **Key properties**: `simpulseid:harbourCredential` (mandatory IRI), `simpulseid:legalForm` (enum — see below), `simpulseid:baseMembershipCredential` (prerequisite IRI), `simpulseid:articlesOfAssociation`, `simpulseid:contributionRules`
 - **Schema.org mappings**: `sdo:member`, `sdo:memberOf`, `sdo:programName`, `sdo:hostingOrganization`, `sdo:memberSince`, `sdo:publisher`
 - **Gaia-X alignment**: `gx:LegalPerson`, `gx:NaturalPerson`, `gx:Address`, `gx:RegistrationNumber`, `gx:TermsAndConditions`
+
+The `simpulseid:legalForm` enum constrains the legal form of participant organizations. Permissible values are enforced via `sh:in` in the generated SHACL shapes:
+
+| Value | Jurisdiction | Description |
+| ----- | ------------ | ----------- |
+| `GmbH`, `AG`, `UG`, `KG`, `OHG`, `GbR`, `Einzelunternehmen` | DE | German legal forms |
+| `LLC`, `Corporation`, `LimitedPartnership`, `NonprofitCorporation` | US | United States legal forms |
+| `LimitedCompany`, `LLP`, `CIC`, `CIO`, `SoleTrader`, `Partnership`, `Trust`, `UnincorporatedAssociation`, `CooperativeSociety`, `BenCom` | UK | United Kingdom legal forms |
+| `other` | — | Fallback for jurisdictions not listed above |
+
+> **Note:** The `OrganizationParticipant` subject class was renamed from `Participant` to avoid a JSON-LD context collision with `gx:Participant` from the Gaia-X imports. The bare term "Participant" is claimed by Gaia-X, so the prefixed class URI `simpulseid:OrganizationParticipant` ensures correct RDF type resolution.
 
 Implementers SHOULD use the generated SHACL shapes to validate credential payloads before issuance.
 
