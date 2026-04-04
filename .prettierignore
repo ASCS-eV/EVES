@@ -1,0 +1,5 @@
+node_modules/
+EVES/EVES-003/example/
+EVES/EVES-003/tzip21-schemas/
+.github/styles/
+*.zip

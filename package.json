@@ -1,0 +1,18 @@
+{
+  "private": true,
+  "name": "eves-specs",
+  "description": "ENVITED Ecosystem Specifications - development tooling",
+  "scripts": {
+    "lint:md": "markdownlint '**/*.md' --config .markdownlint.json --ignore node_modules",
+    "lint:md:fix": "markdownlint '**/*.md' --config .markdownlint.json --ignore node_modules --fix",
+    "lint:links": "lychee --no-progress '**/*.md'",
+    "lint:frontmatter": "node scripts/validate-frontmatter.mjs",
+    "format": "prettier --write '**/*.md' '**/*.json' '**/*.yml' --ignore-path .prettierignore",
+    "format:check": "prettier --check '**/*.md' '**/*.json' '**/*.yml' --ignore-path .prettierignore"
+  },
+  "devDependencies": {
+    "gray-matter": "^4.0.3",
+    "markdownlint-cli": "^0.44.0",
+    "prettier": "^3.5.0"
+  }
+}

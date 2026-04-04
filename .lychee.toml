@@ -1,0 +1,13 @@
+# Lychee link checker configuration
+cache = true
+max_concurrency = 5
+timeout = 30
+accept = [200, 204, 301, 302, 429]
+exclude_loopback = true
+include_fragments = true
+
+# Exclude patterns
+exclude = [
+  "https://staging.envited-x.net/",
+  "localhost",
+]

@@ -1,0 +1,9 @@
+{
+  "recommendations": [
+    "DavidAnson.vscode-markdownlint",
+    "esbenp.prettier-vscode",
+    "EditorConfig.EditorConfig",
+    "errata-ai.vale-vscode",
+    "yzhang.markdown-all-in-one"
+  ]
+}

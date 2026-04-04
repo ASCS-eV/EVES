@@ -1,6 +1,28 @@
+### Node ###
+node_modules/
+package-lock.json
+
+### Pre-commit ###
+.pre-commit-cache/
+
+### Lychee ###
+.lycheecache
+
+### Vale (downloaded packages) ###
+.github/styles/Google/
+.github/styles/proselint/
+.github/styles/write-good/
+
+### OS ###
+.DS_Store
+Thumbs.db
+
 ### Visual Studio Code ###
 .vscode/*
+!.vscode/extensions.json
 .history/
 *.vsix
 .ionide
-.DS_Store
+
+### JetBrains ###
+.idea/

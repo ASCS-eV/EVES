@@ -91,7 +91,7 @@ The negotiation process follows the dataspace protocol state machine with the fo
    The provider then records a successful entry in the decentralized registry on Etherlink — this registry entry (comprising the VC’s hash and UUID) confirms the agreement and allows the process to progress to the VERIFIED state.
 
 5. **Consumer Verification of Registry Entry (VERIFIED):**
-    The consumer verifies if the registry entry is correctly caught by the indexer automatically transitioning to the FINALIZED state.
+   The consumer verifies if the registry entry is correctly caught by the indexer automatically transitioning to the FINALIZED state.
 
 6. **Finalization (FINALIZED):**  
    Once the registry entry is confirmed, both parties can download the finalized contract VC from their respective systems.
@@ -112,7 +112,7 @@ The negotiation process follows the dataspace protocol state machine with the fo
   Authorization to access assets is granted only when the presented VC is valid and a valid corresponding registry entry exists.
 
 - **Automation and Encrypted Inbox:**  
-  An encrypted inbox system — optionally secured with DID keys  - is used to exchange contract-related VCs.
+  An encrypted inbox system — optionally secured with DID keys - is used to exchange contract-related VCs.
   The design minimizes manual interaction by automating transitions (e.g., from OFFERED to ACCEPTED under preset criteria) while still allowing explicit user confirmation when needed.
 
 - **State Machine Integration:**  
@@ -168,27 +168,27 @@ Key privacy measures include:
 
 ### 7. References
 
-1. **Dataspace Protocol:**  
-   - [Dataspace Protocol – Official Knowledgebase](https://docs.internationaldataspaces.org/ids-knowledgebase/dataspace-protocol)  
+1. **Dataspace Protocol:**
+   - [Dataspace Protocol – Official Knowledgebase](https://docs.internationaldataspaces.org/ids-knowledgebase/dataspace-protocol)
    - [Eclipse Dataspace Protocol Editor's Draft](https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol/)
 
-2. **SD-JWT-based Verifiable Credentials:**  
+2. **SD-JWT-based Verifiable Credentials:**
    - [SD-JWT Specification](https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-00.html)
 
-3. **OpenID for VC Issuance:**  
+3. **OpenID for VC Issuance:**
    - [OpenID for Verifiable Credential Issuance](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html)
 
-4. **SSI-to-OIDC Bridge:**  
+4. **SSI-to-OIDC Bridge:**
    - [ssi-to-oidc-bridge Repository](https://github.com/GAIA-X4PLC-AAD/ssi-to-oidc-bridge)
 
-5. **Scaling and Decentralized Registry:**  
-   - [EVES-006: ENVITED-X Scaling Architecture](../EVES-006/eves-006.md)  
+5. **Scaling and Decentralized Registry:**
+   - [EVES-006: ENVITED-X Scaling Architecture](../EVES-006/eves-006.md)
    - [Decentralized Registry Paper DRAFT](https://arxiv.org/pdf/2501.17089)
 
-6. **ODRL Standard:**  
+6. **ODRL Standard:**
    - [ODRL Information Model 2.2](https://www.w3.org/TR/odrl-model/)
 
-7. **Additional Guidance:**  
+7. **Additional Guidance:**
    - [Eclipse Dataspace Protocol – Contract Negotiation Protocol](https://github.com/eclipse-dataspace-protocol-base/DataspaceProtocol/tree/main/artifacts/src/main/resources/negotiation)
 
 ## Backwards Compatibility

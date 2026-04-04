@@ -91,10 +91,10 @@ ASCS issues **User Credentials** to natural persons. The credential subject is t
 
 All ENVITED entities MUST use `did:ethr` identifiers anchored on Base via an [ERC-1056](https://eips.ethereum.org/EIPS/eip-1056) deployment and project-specific resolver.
 
-| Network       | Chain ID | Hex        |
-| ------------- | -------- | ---------- |
-| Base Sepolia  | 84532    | `0x14a34`  |
-| Base Mainnet  | 8453     | `0x2105`   |
+| Network      | Chain ID | Hex       |
+| ------------ | -------- | --------- |
+| Base Sepolia | 84532    | `0x14a34` |
+| Base Mainnet | 8453     | `0x2105`  |
 
 DID format:
 
@@ -104,15 +104,17 @@ did:ethr:<chainIdHex>:<ethereum-address>
 
 Entity types and their DID patterns:
 
-| Entity                 | Example DID                                              |
-| ---------------------- | -------------------------------------------------------- |
-| Participant (ASCS)     | `did:ethr:0x14a34:0x5091...bb03`                         |
-| Participant (e.g. BMW) | `did:ethr:0x14a34:0x9d27...1048`                         |
-| Natural person         | `did:ethr:0x14a34:0xb2F7...b39a`                         |
-| Infrastructure service | `did:ethr:0x14a34:0x4612...46d1`                         |
-| Program definition     | `did:ethr:0x14a34:0x28b9...422D`                         |
+| Entity                 | Example DID                      |
+| ---------------------- | -------------------------------- |
+| Participant (ASCS)     | `did:ethr:0x14a34:0x5091...bb03` |
+| Participant (e.g. BMW) | `did:ethr:0x14a34:0x9d27...1048` |
+| Natural person         | `did:ethr:0x14a34:0xb2F7...b39a` |
+| Infrastructure service | `did:ethr:0x14a34:0x4612...46d1` |
+| Program definition     | `did:ethr:0x14a34:0x28b9...422D` |
 
-**Key management**: Signing DID documents MUST expose P-256 keys as `JsonWebKey` verification methods. The primary signing key is published as `#controller`; optional secondary keys appear as `#delegate-N`. Non-signing DIDs (services, programs) MUST use the DID Core `controller` property to reference the governing participant DID rather than synthesising local signing keys.
+**Key management**: Signing DID documents MUST expose P-256 keys as `JsonWebKey` verification methods.
+The primary signing key is published as `#controller`; optional secondary keys appear as `#delegate-N`.
+Non-signing DIDs (services, programs) MUST use the DID Core `controller` property to reference the governing participant DID rather than synthesising local signing keys.
 
 **DID document structure**:
 
@@ -132,23 +134,20 @@ Entity types and their DID patterns:
 
 Every SimpulseID credential MUST include the following `@context` entries in order:
 
-| Context                | URL                                                   |
-| ---------------------- | ----------------------------------------------------- |
-| W3C VC Data Model v2   | `https://www.w3.org/ns/credentials/v2`                |
-| Harbour core context   | `https://w3id.org/reachhaven/harbour/core/v1/`        |
-| SimpulseID context     | `https://w3id.org/ascs-ev/simpulse-id/v1/`            |
+| Context              | URL                                            |
+| -------------------- | ---------------------------------------------- |
+| W3C VC Data Model v2 | `https://www.w3.org/ns/credentials/v2`         |
+| Harbour core context | `https://w3id.org/reachhaven/harbour/core/v1/` |
+| SimpulseID context   | `https://w3id.org/ascs-ev/simpulse-id/v1/`     |
 
-Context URLs are `w3id.org` persistent identifiers that redirect to the generated JSON-LD context files. Implementers MUST NOT hard-code alternative URLs. Note that the context path (`/simpulse-id/v1/`) differs from the LinkML schema identifier (`/simpulse-id/core/v1`) because the context is a generated artifact published at a separate redirect.
+Context URLs are `w3id.org` persistent identifiers that redirect to the generated JSON-LD context files. Implementers MUST NOT hard-code alternative URLs.
+Note that the context path (`/simpulse-id/v1/`) differs from the LinkML schema identifier (`/simpulse-id/core/v1`) because the context is a generated artifact published at a separate redirect.
 
 Example credential `@context`:
 
 ```json
 {
-  "@context": [
-    "https://www.w3.org/ns/credentials/v2",
-    "https://w3id.org/reachhaven/harbour/core/v1/",
-    "https://w3id.org/ascs-ev/simpulse-id/v1/"
-  ]
+  "@context": ["https://www.w3.org/ns/credentials/v2", "https://w3id.org/reachhaven/harbour/core/v1/", "https://w3id.org/ascs-ev/simpulse-id/v1/"]
 }
 ```
 
@@ -158,12 +157,12 @@ The SimpulseID context uses `@vocab: simpulseid:` which resolves bare `@id` valu
 
 The SimpulseID schema is defined in [LinkML](https://linkml.io/) as the single source of truth:
 
-| Artifact                | Source / ID                                            |
-| ----------------------- | ------------------------------------------------------ |
-| LinkML schema           | `https://w3id.org/ascs-ev/simpulse-id/core/v1`        |
-| Generated JSON-LD context | Derived via LinkML `ContextGenerator`                |
-| Generated OWL ontology  | Derived via LinkML `OwlSchemaGenerator`                |
-| Generated SHACL shapes  | Derived via LinkML `ShaclGenerator`                    |
+| Artifact                  | Source / ID                                    |
+| ------------------------- | ---------------------------------------------- |
+| LinkML schema             | `https://w3id.org/ascs-ev/simpulse-id/core/v1` |
+| Generated JSON-LD context | Derived via LinkML `ContextGenerator`          |
+| Generated OWL ontology    | Derived via LinkML `OwlSchemaGenerator`        |
+| Generated SHACL shapes    | Derived via LinkML `ShaclGenerator`            |
 
 The schema defines:
 
@@ -175,14 +174,15 @@ The schema defines:
 
 The `simpulseid:legalForm` enum constrains the legal form of participant organizations. Permissible values are enforced via `sh:in` in the generated SHACL shapes:
 
-| Value | Jurisdiction | Description |
-| ----- | ------------ | ----------- |
-| `GmbH`, `AG`, `UG`, `KG`, `OHG`, `GbR`, `Einzelunternehmen` | DE | German legal forms |
-| `LLC`, `Corporation`, `LimitedPartnership`, `NonprofitCorporation` | US | United States legal forms |
-| `LimitedCompany`, `LLP`, `CIC`, `CIO`, `SoleTrader`, `Partnership`, `Trust`, `UnincorporatedAssociation`, `CooperativeSociety`, `BenCom` | UK | United Kingdom legal forms |
-| `other` | — | Fallback for jurisdictions not listed above |
+| Value                                                                                                                                    | Jurisdiction | Description                                 |
+| ---------------------------------------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------------- |
+| `GmbH`, `AG`, `UG`, `KG`, `OHG`, `GbR`, `Einzelunternehmen`                                                                              | DE           | German legal forms                          |
+| `LLC`, `Corporation`, `LimitedPartnership`, `NonprofitCorporation`                                                                       | US           | United States legal forms                   |
+| `LimitedCompany`, `LLP`, `CIC`, `CIO`, `SoleTrader`, `Partnership`, `Trust`, `UnincorporatedAssociation`, `CooperativeSociety`, `BenCom` | UK           | United Kingdom legal forms                  |
+| `other`                                                                                                                                  | —            | Fallback for jurisdictions not listed above |
 
-> **Note:** The `OrganizationParticipant` subject class was renamed from `Participant` to avoid a JSON-LD context collision with `gx:Participant` from the Gaia-X imports. The bare term "Participant" is claimed by Gaia-X, so the prefixed class URI `simpulseid:OrganizationParticipant` ensures correct RDF type resolution.
+> **Note:** The `OrganizationParticipant` subject class was renamed from `Participant` to avoid a JSON-LD context collision with `gx:Participant` from the Gaia-X imports.
+> The bare term "Participant" is claimed by Gaia-X, so the prefixed class URI `simpulseid:OrganizationParticipant` ensures correct RDF type resolution.
 
 Implementers SHOULD use the generated SHACL shapes to validate credential payloads before issuance.
 
@@ -190,13 +190,13 @@ Implementers SHOULD use the generated SHACL shapes to validate credential payloa
 
 Credential subjects use two distinct identity patterns:
 
-| Credential                       | `credentialSubject.id`   | Rationale                                                  |
-| -------------------------------- | ------------------------ | ---------------------------------------------------------- |
-| ParticipantCredential            | Organization `did:ethr`  | The subject IS the organization                            |
-| AdministratorCredential          | Person `did:ethr`        | The subject IS the natural person                          |
-| UserCredential                   | Person `did:ethr`        | The subject IS the natural person                          |
-| AscsBaseMembershipCredential     | `urn:uuid:<unique-id>`   | The subject is a membership relationship, not an entity    |
-| AscsEnvitedMembershipCredential  | `urn:uuid:<unique-id>`   | The subject is a membership relationship, not an entity    |
+| Credential                      | `credentialSubject.id`  | Rationale                                               |
+| ------------------------------- | ----------------------- | ------------------------------------------------------- |
+| ParticipantCredential           | Organization `did:ethr` | The subject IS the organization                         |
+| AdministratorCredential         | Person `did:ethr`       | The subject IS the natural person                       |
+| UserCredential                  | Person `did:ethr`       | The subject IS the natural person                       |
+| AscsBaseMembershipCredential    | `urn:uuid:<unique-id>`  | The subject is a membership relationship, not an entity |
+| AscsEnvitedMembershipCredential | `urn:uuid:<unique-id>`  | The subject is a membership relationship, not an entity |
 
 Membership credentials MUST use `urn:uuid:` identifiers to avoid RDF graph merge conflicts. If two membership credentials shared a participant DID as `credentialSubject.id`, loading both into one graph would merge all properties onto a single node.
 
