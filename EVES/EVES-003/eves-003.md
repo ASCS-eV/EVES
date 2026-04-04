@@ -54,15 +54,15 @@ Tooling such as the [ENVITED-X Simulation Asset Tools][20] MAY automate the crea
 
 Every `asset.zip` MUST contain the following top-level folders mapped to `envited-x` artifact categories:
 
-| Folder | `envited-x` Category | Required | `envited-x` Access Role | Description |
-| --- | --- | --- | --- | --- |
-| `simulation-data/` | `envited-x:isSimulationData` | MUST | `envited-x:isOwner` | Core simulation data (e.g., `.xodr`, `.xosc`) |
-| `documentation/` | `envited-x:isDocumentation` | MUST | `envited-x:isPublic` | Documentation files (e.g., `.pdf`, `.txt`) |
-| `metadata/` | `envited-x:isMetadata` | MUST | `envited-x:isPublic` | Domain metadata (e.g., `hdmap_instance.json`) |
-| `media/` | `envited-x:isMedia` | MUST | `envited-x:isPublic` | Visualizations, images, GeoJSON, 3D previews |
-| `validation-reports/` | `envited-x:isValidationReport` | RECOMMENDED | `envited-x:isPublic` | Quality checker reports (e.g., `.xqar`, `.txt`) |
-| _(root)_ | `envited-x:isLicense` | MUST | `envited-x:isPublic` | LICENSE file at the asset root |
-| _(root)_ | `envited-x:isManifest` | MUST | `envited-x:isPublic` | `manifest_reference.json` at the asset root |
+| Folder                | `envited-x` Category           | Required    | `envited-x` Access Role | Description                                     |
+| --------------------- | ------------------------------ | ----------- | ----------------------- | ----------------------------------------------- |
+| `simulation-data/`    | `envited-x:isSimulationData`   | MUST        | `envited-x:isOwner`     | Core simulation data (e.g., `.xodr`, `.xosc`)   |
+| `documentation/`      | `envited-x:isDocumentation`    | MUST        | `envited-x:isPublic`    | Documentation files (e.g., `.pdf`, `.txt`)      |
+| `metadata/`           | `envited-x:isMetadata`         | MUST        | `envited-x:isPublic`    | Domain metadata (e.g., `hdmap_instance.json`)   |
+| `media/`              | `envited-x:isMedia`            | MUST        | `envited-x:isPublic`    | Visualizations, images, GeoJSON, 3D previews    |
+| `validation-reports/` | `envited-x:isValidationReport` | RECOMMENDED | `envited-x:isPublic`    | Quality checker reports (e.g., `.xqar`, `.txt`) |
+| _(root)_              | `envited-x:isLicense`          | MUST        | `envited-x:isPublic`    | LICENSE file at the asset root                  |
+| _(root)_              | `envited-x:isManifest`         | MUST        | `envited-x:isPublic`    | `manifest_reference.json` at the asset root     |
 
 > **Note:** The `envited-x` categories and access roles are formally defined in the [ENVITED-X Ontology][21] which extends the generic [Manifest Ontology][22].
 > The `envited-x:ExtendedLinkShape` constrains the allowed values for both `manifest:hasCategory` and `manifest:hasAccessRole`.
@@ -93,10 +93,7 @@ See 📁 `example/input_manifest.json` for a complete example.
 
 ```json
 {
-  "@context": [
-    "https://w3id.org/ascs-ev/envited-x/manifest/v5/",
-    { "envited-x": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/" }
-  ],
+  "@context": ["https://w3id.org/ascs-ev/envited-x/manifest/v5/", { "envited-x": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/" }],
   "@id": "did:web:registry.gaia-x.eu:HdMap:example",
   "@type": "envited-x:Manifest",
   "hasArtifacts": [
@@ -160,11 +157,11 @@ Uploaded file names MUST exclude extensions (e.g., use `file` instead of `file.j
 
 The ENVITED-X Data Space implements a three-tiered privacy model:
 
-| envited-x:accessRole | ENVITED-X Domain                                                      | Comment                                    |
-| -------------------- | --------------------------------------------------------------------- | ------------------------------------------ |
-| `isOwner`            | <https://assets.envited-x.net/Asset-CID>                              | CID v1, signed URLs, asset credential      |
-| `isRegistered`       | <https://metadata.envited-x.net/Asset-CID>                            | CID v1, signed URLs, SimpulseID credential |
-| `isPublic`           | <ipfs://Data-CID> to <https://ipfs.envited-x.net/Asset-CID/Data-CID>  | CID v1, public, indexer to new URL         |
+| envited-x:accessRole | ENVITED-X Domain                                                     | Comment                                    |
+| -------------------- | -------------------------------------------------------------------- | ------------------------------------------ |
+| `isOwner`            | <https://assets.envited-x.net/Asset-CID>                             | CID v1, signed URLs, asset credential      |
+| `isRegistered`       | <https://metadata.envited-x.net/Asset-CID>                           | CID v1, signed URLs, SimpulseID credential |
+| `isPublic`           | <ipfs://Data-CID> to <https://ipfs.envited-x.net/Asset-CID/Data-CID> | CID v1, public, indexer to new URL         |
 
 ### 4. Asset Validation and Upload Process
 
@@ -262,22 +259,22 @@ The synchronization between the smart contract as in the [Marketplace Contract R
 Attributes not in the table are static and the same for every mint as in the 📁 `example/tzip21_token_metadata.json`.
 Examples are the first five tags or "publishers", which is always ENVITED-X and the ASCS if the mint is conducted through the [website][12].
 
-| TZIP-21            | EVES-003                                                 | Comment                                                                    |
-| -------------------| -------------------------------------------------------- | -------------------------------------------------------------------------- |
-| "name"             | envited-x:DataResource:gx:name                           |                                                                            |
-| "description"      | envited-x:DataResource:gx:description                    |                                                                            |
-| "tags"             | $TAG = format:formatType + " " + format:version          | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]                  |
-| "minter"           | Member DID (CAIP-10) associated with user                | Returned by the View from the SimpulseID revocation registry               |
-| "creators"         | Name of the company                                      | Taken from the company profile the user belongs to                         |
-| "date"             | [System date-time][14]                                   |                                                                            |
-| "rights"           | manifest:hasLicense:gx:license                           | [SPDX identifier][15]                                                      |
-| "rightsUri"        | manifest:hasLicense:licenseData:hasFileMetadata:filePath | Full os license text URL OR policy smart contract did                      |
-| "artifactUri"      | <https://assets.envited-x.net/Asset-CID>                 |                                                                            |
-| "identifier"       | Simulation Asset @id                                     | Unique identifier from the domainMetadata.json                             |
-| "externalUri"      | Uploaded domainMetadata.json to IPFS                     |                                                                            |
-| "displayUri"       | "manifest:hasArtifacts:Link" of category "isMedia"       | Always use the first media image                                           |
-| "formats"          | artifactUri, externalUri, displayUri, envited-x_manifest |                                                                            |
-| "attributes"       | Reverse domain notation for ontologies + URL             | All ontologies from top level nodes in files referenced in formats section |
+| TZIP-21       | EVES-003                                                 | Comment                                                                    |
+| ------------- | -------------------------------------------------------- | -------------------------------------------------------------------------- |
+| "name"        | envited-x:DataResource:gx:name                           |                                                                            |
+| "description" | envited-x:DataResource:gx:description                    |                                                                            |
+| "tags"        | $TAG = format:formatType + " " + format:version          | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]                  |
+| "minter"      | Member DID (CAIP-10) associated with user                | Returned by the View from the SimpulseID revocation registry               |
+| "creators"    | Name of the company                                      | Taken from the company profile the user belongs to                         |
+| "date"        | [System date-time][14]                                   |                                                                            |
+| "rights"      | manifest:hasLicense:gx:license                           | [SPDX identifier][15]                                                      |
+| "rightsUri"   | manifest:hasLicense:licenseData:hasFileMetadata:filePath | Full os license text URL OR policy smart contract did                      |
+| "artifactUri" | <https://assets.envited-x.net/Asset-CID>                 |                                                                            |
+| "identifier"  | Simulation Asset @id                                     | Unique identifier from the domainMetadata.json                             |
+| "externalUri" | Uploaded domainMetadata.json to IPFS                     |                                                                            |
+| "displayUri"  | "manifest:hasArtifacts:Link" of category "isMedia"       | Always use the first media image                                           |
+| "formats"     | artifactUri, externalUri, displayUri, envited-x_manifest |                                                                            |
+| "attributes"  | Reverse domain notation for ontologies + URL             | All ontologies from top level nodes in files referenced in formats section |
 
 **>Note:** Some of the information need to be extracted from the `gx:LegalParticipant`.
 

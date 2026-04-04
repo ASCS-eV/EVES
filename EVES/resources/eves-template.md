@@ -6,45 +6,45 @@ discussions-to: https://github.com/ASCS-eV/EVES/issues/
 status: Draft
 type: Process
 created: YYYY-MM-DD
-requires: ["EVES-001"]  
-replaces: None  
+requires: ["EVES-001"]
+replaces: None
 ---
 
 ## Abstract
 
-*Provide a brief overview of the EVES. This section should summarize the purpose and scope of the specification in 2-3 sentences.*
+_Provide a brief overview of the EVES. This section should summarize the purpose and scope of the specification in 2-3 sentences._
 
 ## Motivation
 
-*Explain the problem or need that this EVES addresses. Why is this specification necessary? Include context, challenges, or gaps in the current ecosystem.*
+_Explain the problem or need that this EVES addresses. Why is this specification necessary? Include context, challenges, or gaps in the current ecosystem._
 
 ## Specification
 
-*Provide the detailed technical or procedural content of the EVES. This section should include everything needed to understand and implement the specification.*
+_Provide the detailed technical or procedural content of the EVES. This section should include everything needed to understand and implement the specification._
 
 ### 1. Lifecycle (if applicable)
 
-*Define the lifecycle or steps related to the EVES, e.g., stages for a process or implementation details for standards.*
+_Define the lifecycle or steps related to the EVES, e.g., stages for a process or implementation details for standards._
 
 ### 2. Key Definitions or Components (if applicable)
 
-*List and describe any specific terms, components, or roles relevant to the EVES.*
+_List and describe any specific terms, components, or roles relevant to the EVES._
 
 ### 3. Reference Implementation (if applicable)
 
-*If a reference implementation is required, describe its purpose and what it should demonstrate.*
+_If a reference implementation is required, describe its purpose and what it should demonstrate._
 
 ## Backwards Compatibility
 
-*Discuss whether and how the proposed specification affects existing systems, processes, or standards. Specify if it’s compatible with prior implementations.*
+_Discuss whether and how the proposed specification affects existing systems, processes, or standards. Specify if it’s compatible with prior implementations._
 
 ## References
 
-*List sources, inspirations, or links to relevant documentation that support this EVES. For example, related specifications, academic papers, or industry standards.*
+_List sources, inspirations, or links to relevant documentation that support this EVES. For example, related specifications, academic papers, or industry standards._
 
 ## Implementation
 
-*Provide guidelines or requirements for how this EVES will be implemented, if applicable. Include tools, repositories, or other resources that stakeholders will need.*
+_Provide guidelines or requirements for how this EVES will be implemented, if applicable. Include tools, repositories, or other resources that stakeholders will need._
 
 ## Template Instructions
 

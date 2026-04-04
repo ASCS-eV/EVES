@@ -84,7 +84,6 @@ urn:blockchain:{chain_namespace}:{chain_id}:tx:{transaction_hash}
   - The `chain_namespace` and `chain_id` **strictly follow** CAIP-2 & CAIP-10 conventions.
   - `eip155`, `tezos` **retain compatibility with existing tooling**.
 - **Layer 2 Distinction**:
-
   - **Etherlink URNs explicitly specify their Layer 2 chain ID** (`ghostnet: 128123`, `mainnet: 42793`).
   - This prevents **collision between Layer 1 and Layer 2 assets**.
 
@@ -95,11 +94,9 @@ urn:blockchain:{chain_namespace}:{chain_id}:tx:{transaction_hash}
 ### 3. Use Cases
 
 - **NFT Metadata (TZIP-21, ERC-721, ERC-1155)**
-
   - Store **contract & transaction references** in **token metadata** crosschain.
 
 - **Cross-Chain Credential Verification (EVES-005, EVES-006)**
-
   - Supports contract-based **Verifiable Credentials (SD-JWT VC)**.
 
 - **ENVITED-X Asset Tracking**

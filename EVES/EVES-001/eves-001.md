@@ -5,9 +5,9 @@ author: Carlo van Driesten (@jdsika); Daniel Liebert (@dansan566)
 discussions-to: https://github.com/ASCS-eV/EVES/issues/9
 status: Review
 type: Process
-created: 19.11.2024
-requires: None  
-replaces: None  
+created: 2024-11-19
+requires: None
+replaces: None
 ---
 
 ## Abstract
@@ -44,60 +44,60 @@ flowchart LR
 
 Each EVES must pass through the following stages:
 
-1. **Draft**  
-   - Created via a Pull Request (PR).  
-   - Must follow the [EVES template](../resources/eves-template.md) and meet the requirements in the [Style Guide](../resources/style-guide.md).  
+1. **Draft**
+   - Created via a Pull Request (PR).
+   - Must follow the [EVES template](../resources/eves-template.md) and meet the requirements in the [Style Guide](../resources/style-guide.md).
    - Open for initial community feedback.
 
 2. **Review**:
-   - EVES Editors confirm compliance with required format (see Section 6 "Format").  
-   - Community discusses proposal (GitHub issues, PR reviews).  
+   - EVES Editors confirm compliance with required format (see Section 6 "Format").
+   - Community discusses proposal (GitHub issues, PR reviews).
    - **Exit Criteria**: At least two Editor approvals + no unresolved blocking objections.
 
 3. **Candidate**:
-   - Must include or reference a working proof of concept (Reference Implementation) demonstrating feasibility.  
-   - Community tests and refines details; any remaining concerns are addressed.  
+   - Must include or reference a working proof of concept (Reference Implementation) demonstrating feasibility.
+   - Community tests and refines details; any remaining concerns are addressed.
    - **Exit Criteria**: A stable implementation exists, and Approvers confirm readiness for final vote.
 
-4. **Final**  
-   - The EVES is officially adopted.  
+4. **Final**
+   - The EVES is officially adopted.
    - **Future Changes**: Only changes designated as a minor editorial update by Editors are allowed in this stage.
 
-5. **Deferred/Rejected**  
-   - **Deferred**: The EVES is paused for future discussion (e.g., lack of resources, overshadowed by another proposal).  
+5. **Deferred/Rejected**
+   - **Deferred**: The EVES is paused for future discussion (e.g., lack of resources, overshadowed by another proposal).
    - **Rejected**: Consensus cannot be reached, or the specification is fundamentally misaligned with ENVITED-X goals.
 
-6. **Superseded**  
+6. **Superseded**
    - A necessary major change to a **Final** EVES will result in a new **Draft** document with a unique identifier.
    - With the new EVES document reaching the **Final** state the predecessor receives the status **Superseded**.
 
 ### 1.3 Entry/Exit Criteria Example
 
-| **Stage**    | **Entry**                                                                  | **Exit**                                                                             |
-|--------------|----------------------------------------------------------------------------|--------------------------------------------------------------------------------------|
-| **Draft**    | PR opened; Adheres to template & style guide                               | Meets minimal clarity & format → **Review**                                          |
-| **Review**   | Editors confirm formatting; Community feedback in progress                 | ≥ 2 Editor approvals + no blocking objections → **Candidate**                        |
-| **Candidate**| Working reference implementation; Feasibility tested                       | Approvers confirm readiness → **Final** (if no further changes needed)               |
-| **Final**    | Officially adopted                                                         | Major change → New EVES draft; Minor clarifications → Direct merges allowed          |
-| **Deferred** | N/A                                                                        | Revisited later by Authors/Editors when new progress is possible                     |
-| **Rejected** | N/A                                                                        | Terminal stage for unresolvable proposals                                            |
+| **Stage**     | **Entry**                                                  | **Exit**                                                                    |
+| ------------- | ---------------------------------------------------------- | --------------------------------------------------------------------------- |
+| **Draft**     | PR opened; Adheres to template & style guide               | Meets minimal clarity & format → **Review**                                 |
+| **Review**    | Editors confirm formatting; Community feedback in progress | ≥ 2 Editor approvals + no blocking objections → **Candidate**               |
+| **Candidate** | Working reference implementation; Feasibility tested       | Approvers confirm readiness → **Final** (if no further changes needed)      |
+| **Final**     | Officially adopted                                         | Major change → New EVES draft; Minor clarifications → Direct merges allowed |
+| **Deferred**  | N/A                                                        | Revisited later by Authors/Editors when new progress is possible            |
+| **Rejected**  | N/A                                                        | Terminal stage for unresolvable proposals                                   |
 
 ### 2. EVES Numbering
 
-- EVES documents follow sequential numbering, starting from EVES-001, EVES-002, and so on.  
+- EVES documents follow sequential numbering, starting from EVES-001, EVES-002, and so on.
 - Numbers must be unique and stable once assigned (i.e., no recycling of identifiers).
 
 ### 3. EVES Types
 
 Each EVES must declare one of the following **type** fields in its YAML header:
 
-1. **Standards**  
+1. **Standards**
    - Defines technical specifications or protocols recommended for ecosystem adoption (e.g., data formats, APIs).
 
-2. **Informational**  
+2. **Informational**
    - Provides context, best practices, or reference material without strict normative requirements.
 
-3. **Process**  
+3. **Process**
    - Outlines procedural or governance rules applicable to the ENVITED community (e.g., this EVES-001).
 
 ### 4. Roles and Responsibilities
@@ -113,52 +113,52 @@ Each EVES must declare one of the following **type** fields in its YAML header:
 
 ### 4.3 EVES Editors
 
-- Oversee editorial reviews and confirm compliance with EVES format and style requirements.  
-- Remain neutral on technical content but ensure clarity, correctness, and adherence to process.  
+- Oversee editorial reviews and confirm compliance with EVES format and style requirements.
+- Remain neutral on technical content but ensure clarity, correctness, and adherence to process.
 - Governed by [EVES-004 (Roles and Responsibilities of EVES Editors)](../EVES-004/eves-004.md).
 
 ### 4.4 Approvers
 
-- A subset of EVES Editors with voting rights as full ASCS e.V. ENVITED members.  
-- Provide the final decision on moving an EVES from Candidate to Final.  
+- A subset of EVES Editors with voting rights as full ASCS e.V. ENVITED members.
+- Provide the final decision on moving an EVES from Candidate to Final.
 - Must meet quorum requirements (e.g., at least two Approvers) to grant or deny Final status.
 
 ### 4.5 Conflict Resolution
 
-- If consensus cannot be reached at the Review or Candidate stage, Editors may escalate to an ASCS ENVITED TSC or finally an ASCS board vote.  
+- If consensus cannot be reached at the Review or Candidate stage, Editors may escalate to an ASCS ENVITED TSC or finally an ASCS board vote.
 - Authors can appeal Editor or Approver decisions by opening a dedicated issue in the repository with justification.
 
 ## 5. Reference Implementation
 
-- **Requirement**: An EVES **MUST** demonstrate feasibility via a reference implementation before progressing from Review to Candidate.  
-- **Open/Closed Source**: An open-source example is strongly **RECOMMENDED**, though a closed-source reference is acceptable if sufficiently documented.  
+- **Requirement**: An EVES **MUST** demonstrate feasibility via a reference implementation before progressing from Review to Candidate.
+- **Open/Closed Source**: An open-source example is strongly **RECOMMENDED**, though a closed-source reference is acceptable if sufficiently documented.
 - **Community Validation**: Users are encouraged to test the reference implementation for real-world interoperability and consistency with the EVES specification.
 
 ## 6. Format
 
 All EVES documents **MUST** follow the structure below:
 
-1. **Header (YAML)**  
-   - eves-identifier, title, author, discussions-to, status, type, created, requires, replaces  
-2. **Abstract**  
-   - Brief summary (2–3 sentences) of the EVES.  
-3. **Motivation**  
-   - Context and explanation of why this EVES is needed.  
-4. **Specification**  
-   - Detailed technical or procedural requirements.  
-5. **Lifecycle**  
-   - If relevant, describe states or phases unique to this EVES.  
-6. **Backwards Compatibility**  
-   - Explain how this proposal interacts with existing implementations, if any.  
-7. **References**  
+1. **Header (YAML)**
+   - eves-identifier, title, author, discussions-to, status, type, created, requires, replaces
+2. **Abstract**
+   - Brief summary (2–3 sentences) of the EVES.
+3. **Motivation**
+   - Context and explanation of why this EVES is needed.
+4. **Specification**
+   - Detailed technical or procedural requirements.
+5. **Lifecycle**
+   - If relevant, describe states or phases unique to this EVES.
+6. **Backwards Compatibility**
+   - Explain how this proposal interacts with existing implementations, if any.
+7. **References**
    - List any relevant RFCs, W3C standards, or other external specs.
 
 EVES must use [RFC 2119](https://www.rfc-editor.org/rfc/rfc2119) key words ("MUST," "SHOULD," "RECOMMENDED," etc.) appropriately for normative statements.
 
 ## 7. Revisions to Final EVES
 
-- Once an EVES reaches **Final** status, significant changes **MUST** be submitted via a new EVES draft.  
-- Editors will determine if proposed changes are major (functionality-altering) or minor (typos, clarifications).  
+- Once an EVES reaches **Final** status, significant changes **MUST** be submitted via a new EVES draft.
+- Editors will determine if proposed changes are major (functionality-altering) or minor (typos, clarifications).
 
 ## 8. Governance
 
