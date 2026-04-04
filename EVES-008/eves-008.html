@@ -377,7 +377,9 @@ SimpulseID addresses these issues by providing:</p>
 </tr>
 </tbody>
 </table>
-<p><strong>Key management</strong>: Signing DID documents MUST expose P-256 keys as <code>JsonWebKey</code> verification methods. The primary signing key is published as <code>#controller</code>; optional secondary keys appear as <code>#delegate-N</code>. Non-signing DIDs (services, programs) MUST use the DID Core <code>controller</code> property to reference the governing participant DID rather than synthesising local signing keys.</p>
+<p><strong>Key management</strong>: Signing DID documents MUST expose P-256 keys as <code>JsonWebKey</code> verification methods.
+The primary signing key is published as <code>#controller</code>; optional secondary keys appear as <code>#delegate-N</code>.
+Non-signing DIDs (services, programs) MUST use the DID Core <code>controller</code> property to reference the governing participant DID rather than synthesising local signing keys.</p>
 <p><strong>DID document structure</strong>:</p>
 <ul>
 <li>Signing DIDs (participants, natural persons) MUST include <code>verificationMethod</code> with at least one P-256 <code>JsonWebKey</code>. The key MUST be referenced from both <code>authentication</code> and <code>assertionMethod</code> arrays.</li>
@@ -412,14 +414,11 @@ SimpulseID addresses these issues by providing:</p>
 </tr>
 </tbody>
 </table>
-<p>Context URLs are <code>w3id.org</code> persistent identifiers that redirect to the generated JSON-LD context files. Implementers MUST NOT hard-code alternative URLs. Note that the context path (<code>/simpulse-id/v1/</code>) differs from the LinkML schema identifier (<code>/simpulse-id/core/v1</code>) because the context is a generated artifact published at a separate redirect.</p>
+<p>Context URLs are <code>w3id.org</code> persistent identifiers that redirect to the generated JSON-LD context files. Implementers MUST NOT hard-code alternative URLs.
+Note that the context path (<code>/simpulse-id/v1/</code>) differs from the LinkML schema identifier (<code>/simpulse-id/core/v1</code>) because the context is a generated artifact published at a separate redirect.</p>
 <p>Example credential <code>@context</code>:</p>
 <pre><code class="lang-json">{
-  <span class="hljs-string">&quot;@context&quot;</span>: [
-    <span class="hljs-string">&quot;https://www.w3.org/ns/credentials/v2&quot;</span>,
-    <span class="hljs-string">&quot;https://w3id.org/reachhaven/harbour/core/v1/&quot;</span>,
-    <span class="hljs-string">&quot;https://w3id.org/ascs-ev/simpulse-id/v1/&quot;</span>
-  ]
+  <span class="hljs-string">&quot;@context&quot;</span>: [<span class="hljs-string">&quot;https://www.w3.org/ns/credentials/v2&quot;</span>, <span class="hljs-string">&quot;https://w3id.org/reachhaven/harbour/core/v1/&quot;</span>, <span class="hljs-string">&quot;https://w3id.org/ascs-ev/simpulse-id/v1/&quot;</span>]
 }
 </code></pre>
 <p>The SimpulseID context uses <code>@vocab: simpulseid:</code> which resolves bare <code>@id</code> values to the <code>simpulseid:</code> namespace. W3C terms (e.g., <code>VerifiableCredential</code>, <code>issuer</code>, <code>validFrom</code>) remain bare; all domain types MUST use prefixed CURIEs (e.g., <code>simpulseid:ParticipantCredential</code>, <code>harbour:CRSetEntry</code>).</p>
@@ -492,7 +491,8 @@ SimpulseID addresses these issues by providing:</p>
 </tbody>
 </table>
 <blockquote>
-<p><strong>Note:</strong> The <code>OrganizationParticipant</code> subject class was renamed from <code>Participant</code> to avoid a JSON-LD context collision with <code>gx:Participant</code> from the Gaia-X imports. The bare term &quot;Participant&quot; is claimed by Gaia-X, so the prefixed class URI <code>simpulseid:OrganizationParticipant</code> ensures correct RDF type resolution.</p>
+<p><strong>Note:</strong> The <code>OrganizationParticipant</code> subject class was renamed from <code>Participant</code> to avoid a JSON-LD context collision with <code>gx:Participant</code> from the Gaia-X imports.
+The bare term &quot;Participant&quot; is claimed by Gaia-X, so the prefixed class URI <code>simpulseid:OrganizationParticipant</code> ensures correct RDF type resolution.</p>
 </blockquote>
 <p>Implementers SHOULD use the generated SHACL shapes to validate credential payloads before issuance.</p>
 <h4 id="34-credential-subject-semantics">3.4 Credential Subject Semantics</h4>
@@ -647,7 +647,7 @@ SimpulseID addresses these issues by providing:</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"created":"2025-11-28T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-002","EVES-007","EVES-009"],"status":"Draft","eves-identifier":"008","title":"EVES-008: ENVITED-X SimpulseID Credential and Identity Framework","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues","replaces":"None","level":"2.8","depth":1,"previous":{"title":"EVES-007: ENVITED-X Blockchain Identifier URN Schema","level":"2.7","depth":1,"path":"EVES-007/eves-007.md","ref":"./EVES-007/eves-007.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-008/eves-008.md","mtime":"2026-04-04T12:34:14.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-04-04T12:35:30.567Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"created":"2025-11-28T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-002","EVES-007","EVES-009"],"status":"Draft","eves-identifier":"008","title":"EVES-008: ENVITED-X SimpulseID Credential and Identity Framework","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues","replaces":"None","level":"2.8","depth":1,"previous":{"title":"EVES-007: ENVITED-X Blockchain Identifier URN Schema","level":"2.7","depth":1,"path":"EVES-007/eves-007.md","ref":"./EVES-007/eves-007.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-008/eves-008.md","mtime":"2026-04-04T19:37:41.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-04-04T19:39:06.393Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
