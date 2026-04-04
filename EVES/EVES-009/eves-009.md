@@ -14,7 +14,7 @@ replaces: None
 
 This specification defines a protocol for generating and verifying cryptographic evidence of user consent in the ENVITED-X Data Space.
 It uses Verifiable Presentations (VPs) via OID4VP as the evidence format, binding consent to a specific action through a challenge-response mechanism.
-The protocol enables services to act on behalf of users (e.g., for example, submitting blockchain transactions or finalizing contracts) while providing independently verifiable proof that the user authorized the action.
+The protocol enables services to act on behalf of users (e.g., submitting blockchain transactions or finalizing contracts) while providing independently verifiable proof that the user authorized the action.
 
 ## Motivation
 
@@ -64,7 +64,7 @@ The message format is not prescribed by this specification.
 Implementations SHOULD include at minimum:
 
 - A human-readable description of the action
-- A domain or origin identifying the Requester
+- A domain, origin, or DID identifying the Requester
 - A unique nonce ensuring the message is not reused
 - A timestamp indicating when the message was created
 
@@ -76,21 +76,25 @@ Future EVES MAY define additional evidence types with different signature object
 
 This specification defines the first concrete evidence type using Verifiable Presentations:
 
-- The **challenge** is the cryptographic hash of the serialized message (e.g., `SHA-256(serialize(message))`).
-- The **signature object** is a Verifiable Presentation (VP) where the challenge is embedded in the VP's `nonce` or challenge field.
-- The VP contains one or more Verifiable Credentials (VCs) proving the Holder's identity and attributes.
+- The **challenge** is the cryptographic hash of the canonically serialized message. Implementations MUST use SHA-256 as the hash function. The message MUST be serialized using [RFC 8785 (JSON Canonicalization Scheme)](https://www.rfc-editor.org/rfc/rfc8785) or an equivalent deterministic serialization (sorted keys, no whitespace: `json.dumps(sort_keys=True, separators=(",",":"))`).
+- The **signature object** is a Verifiable Presentation (VP) where the challenge is bound to the VP. The binding mechanism depends on the VP format (see below).
+- The VP contains zero or more Verifiable Credentials (VCs). When VCs are present, they prove the Holder's identity and attributes. When no VCs are included, the VP serves as a pure consent proof — the Holder's DID binding alone demonstrates authorization.
+
+The challenge binding mechanism depends on the VP format:
+
+- **Simple VP (VC-JOSE-COSE)**: The challenge SHOULD be embedded in the VP's `nonce` field directly (e.g., `nonce = hash(message)` or a composite format like `<random> <action_type> <hash>`).
+- **SD-JWT VP**: The challenge is bound via the KB-JWT `transaction_data_hashes` array per [OID4VP Appendix B.3.3](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html). The VP `nonce` field carries a random value for replay prevention. This dual-binding approach separates replay prevention from message binding and supports multiple evidence items per VP.
 
 The VC format is not prescribed.
-SD-JWT VCs (see [SD-JWT-based Verifiable Credentials](https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-00.html)) are RECOMMENDED because selective disclosure allows Holders to redact unnecessary claims, minimizing personal data contained in the evidence.
+SD-JWT VCs (see [SD-JWT-based Verifiable Credentials (RFC 9901)](https://www.rfc-editor.org/rfc/rfc9901)) are RECOMMENDED because selective disclosure allows Holders to redact unnecessary claims, minimizing personal data contained in the evidence.
 Other VC formats conforming to the [W3C Verifiable Credentials Data Model](https://www.w3.org/TR/vc-data-model/) are also valid.
-
-All VP formats include a challenge field (commonly `nonce`) that can carry the message hash.
-This is the binding mechanism that ties the VP to the specific action.
 
 A key advantage of VP-based evidence is that the VP can include VCs carrying authorization-related data.
 For example, a VC might prove that the Holder's key is affiliated with a specific organization, or that the Holder holds a particular role.
 This means evidence does not just prove consent — it proves _authorized_ consent.
 The Requester communicates what VCs are needed as part of the standard OID4VP flow.
+
+A single VP MAY contain evidence for multiple actions. In this case, the binding mechanism MUST support binding to multiple messages (e.g., the KB-JWT `transaction_data_hashes` array contains one hash per action).
 
 ### 3. Evidence Creation Flow
 
@@ -107,11 +111,11 @@ The Requester communicates what VCs are needed as part of the standard OID4VP fl
 
 The following sequence describes the VP-based evidence creation flow using [OpenID for Verifiable Presentations (OID4VP)](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html):
 
-1. The Requester displays a **message**, the **challenge** derived form it, and a way to verify this challenge. He also provides an OID4VP Authorization Request. Usually via QR-Code.
-2. The Holder ingests the request and his wallet downloads the request object containing the **challenge** and requested VCs.
+1. The Requester displays a **message**, the **challenge** derived from it, and a way to verify this challenge. The Requester also provides an OID4VP Authorization Request, usually via QR-Code.
+2. The Holder ingests the request and the Holder's wallet downloads the request object containing the **challenge** and requested VCs.
 3. The Holder selects matching VCs, reviews the challenge, and provides consent.
 4. The wallet creates a VP with the challenge as the `nonce` and submits it via `direct_post` to the Requester.
-5. The VP is stored as evidence by the requester and may be used to trigger further actions.
+5. The VP is stored as evidence by the Requester and may be used to trigger further actions.
 
 ```mermaid
 sequenceDiagram
@@ -120,7 +124,7 @@ sequenceDiagram
 
     R->>R: Construct message + policy
     R->>R: challenge = hash(message)
-    R->>H: OID4VP request (nonce=challenge, credentail request)
+    R->>H: OID4VP request (nonce=challenge, credential request)
     H->>H: Select VCs, review action
     H->>H: Create VP (nonce=challenge)
     H->>R: POST vp_token (direct_post)
@@ -135,7 +139,7 @@ A Verifier MUST confirm the following for evidence to be considered valid:
 
 1. The **signature object** was produced by the claimed Holder.
 2. The **signature object** is bound to the claimed message via the challenge.
-3. The **credential requirements** specified in the policy are met.
+3. The **credential requirements** specified in the policy are met (when VCs are present).
 
 If any of these checks fail, the evidence MUST be considered invalid.
 
@@ -144,9 +148,9 @@ If any of these checks fail, the evidence MUST be considered invalid.
 For VP-based evidence, the Verifier MUST perform the following checks:
 
 1. **VP signature verification**: The VP signature is verified against the Holder's DID (see [W3C Decentralized Identifiers](https://www.w3.org/TR/did-core/)).
-2. **Credential verification**: Each VC inside the VP is independently verified, including issuer signature validation and format-specific integrity checks.
-3. **VC requirement check**: The VCs in the VP satisfy the requirements that the Requester specified in the OID4VP request.
-4. **Challenge binding**: The VP's `nonce` MUST equal `hash(message)`. This binds the evidence to the specific action.
+2. **Credential verification**: Each VC inside the VP is independently verified, including issuer signature validation and format-specific integrity checks. For SD-JWT VCs, this includes disclosure hash validation per [RFC 9901](https://www.rfc-editor.org/rfc/rfc9901).
+3. **VC requirement check**: When VCs are present, they MUST satisfy the requirements that the Requester specified in the OID4VP request. When no VCs are present (pure consent VP), this check is skipped.
+4. **Challenge binding**: The VP MUST be bound to the claimed message. This binding MAY be achieved by setting the VP's `nonce` equal to `hash(message)`, or by using the OID4VP `transaction_data` mechanism ([Appendix B.3.3](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html)) where the KB-JWT `transaction_data_hashes` array contains `hash(transaction_data_param)`. For SD-JWT VPs, the KB-JWT `sd_hash` binding (RFC 9901 §4.3.1) MUST also be verified.
 5. **Holder verification** (OPTIONAL): If a specific Holder was expected, the VP subject MUST match the expected Holder's identifier.
 
 If any check fails, the evidence MUST be considered invalid.
@@ -155,6 +159,7 @@ If any check fails, the evidence MUST be considered invalid.
 
 - **Replay prevention**: Each message MUST include a unique nonce, ensuring that the derived challenge is unique per action. This prevents a signature object from being replayed for a different action with an identical message.
 - **Message integrity**: The deterministic hash binding between message and challenge ensures that any modification to the message invalidates the evidence.
+- **Canonical serialization**: Implementations MUST use a deterministic serialization for message hashing. Failure to canonicalize messages means two implementations could produce different challenges for the same logical message, breaking interoperability.
 - **Time-bounding**: Implementations SHOULD set an expiration on evidence requests to prevent stale requests from being fulfilled after an unreasonable delay.
 - **Holder binding**: The Requester MAY specify an expected Holder. If specified, the Verifier MUST check that the VP subject matches the expected Holder.
 - **Policy immutability**: The policy associated with an evidence request MUST NOT be modified after the request is created. Changing the policy after the Holder has consented would invalidate the relationship between what was requested and what was approved.
@@ -165,6 +170,7 @@ If any check fails, the evidence MUST be considered invalid.
 
 - **Minimal disclosure**: Policies SHOULD request only the claims necessary for the specific action. Over-requesting claims exposes unnecessary personal data.
 - **Selective disclosure with SD-JWT VCs**: When SD-JWT VCs are used, Holders present only the claims required by the policy. All other claims are redacted from the presentation. This is the RECOMMENDED approach for new implementations.
+- **Consent-only evidence**: When the policy does not require identity attributes, implementations SHOULD use zero-VC VPs to minimize data exposure. The Holder's DID binding alone provides proof of consent.
 - **Storage protection**: Stored evidence contains credential data and MUST be protected with appropriate access controls. Access to stored evidence SHOULD be limited to authorized parties on a need-to-know basis.
 
 ## Backwards Compatibility
@@ -181,8 +187,15 @@ It is compatible with the existing VC, DID, and wallet infrastructure described 
 5. **W3C Decentralized Identifiers (DIDs)**: [Specification](https://www.w3.org/TR/did-core/)
 6. **EIP-4361 (Sign-In with Ethereum / SIWE)**: [Specification](https://eips.ethereum.org/EIPS/eip-4361)
 7. **RFC 2119**: [Key words for use in RFCs to Indicate Requirement Levels](https://www.rfc-editor.org/rfc/rfc2119)
-8. **SD-JWT-based Verifiable Credentials**: [Specification](https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-00.html)
+8. **RFC 9901 (SD-JWT-based Verifiable Credentials)**: [Specification](https://www.rfc-editor.org/rfc/rfc9901)
+9. **RFC 8785 (JSON Canonicalization Scheme)**: [Specification](https://www.rfc-editor.org/rfc/rfc8785)
+10. **OID4VP Appendix B.3.3 (Transaction Data)**: [Specification](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html)
 
 ## Implementation
 
-An initial implementation is planned for the [ENVITED-X Data Space](https://staging.envited-x.net).
+Reference implementations exist in the following repositories:
+
+- **[harbour-credentials](https://github.com/reachhaven/harbour-credentials)** — Cryptographic library implementing the delegation challenge protocol, SD-JWT VP issuance and verification, and KB-JWT transaction data binding. Provides both Python and TypeScript implementations with feature parity.
+- **[simpulse-id-credentials](https://github.com/ASCS-eV/simpulse-id-credentials)** — Domain-specific credential framework for the ENVITED-X Data Space, using harbour-credentials for evidence VP creation with the `credential.issue` action type.
+
+The evidence protocol is deployed in the [ENVITED-X Data Space](https://staging.envited-x.net).
