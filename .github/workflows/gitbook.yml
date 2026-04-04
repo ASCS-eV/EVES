@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
 
       - name: Gitbook Action
-        uses: ZanderZhao/gitbook-action@v1.2.4
+        uses: ZanderZhao/gitbook-action@v1.06
         with:
           token: ${{ secrets.PERSONAL_TOKEN }}
           time_zone: Europe/Berlin
