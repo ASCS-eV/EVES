@@ -6,7 +6,7 @@ discussions-to: https://github.com/ASCS-eV/EVES/issues/4
 status: Review
 type: Standards
 created: 2024-11-19
-requires: ["EVES-001"]
+requires: ["EVES-001", "EVES-007", "EVES-008"]
 replaces: None
 ---
 
@@ -31,10 +31,10 @@ This EVES addresses the need for clear guidelines to onboard assets and synchron
 ### 1. Digital Asset Definition
 
 The `envited-x:SimulationAsset` defines a digital asset within the domain of simulation including the core simulation data and all necessary files for describing, evaluating, and visualizing the dataset.
-All simulation assets MUST be derived from a common `envited-x` ontology defined in the [Gaia-X 4 PLC-AAD Ontology Management Base][1].
+All simulation assets MUST be derived from a common `envited-x` ontology defined in the [ASCS Ontology Management Base][1].
 A data space portal SHALL display the currently supported version of the ontologies such as: `https://w3id.org/ascs-ev/envited-x/envited-x/v3/`.
 Each simulation asset SHALL be compliant with the [Gaia-X Ontology and SHACL shapes 2210][2].
-The `gx` turtle shacle shapes are derived from the [Gaia-X Trust Framework Schema][3] and the respective application/ld+json [Gaia-X Trust Framework Shapes][4].
+The `gx` turtle SHACL shapes are derived from the [Gaia-X Trust Framework Schema][3] and the respective application/ld+json [Gaia-X Trust Framework Shapes][4].
 A [GaiaX Compliant Claims Example][5] MAY be generated using the [GaiaX 4 PLC-AAD Claim Compliance Provider][6].
 
 The example implementation in the 📁 `example/` folder is based on release v0.2.3 of the [ASCS HD-Map Asset Example][7].
@@ -238,7 +238,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 #### @id and CID as the Primary Identifier
 
 - The CID of the uploaded `asset.zip` serves as the unique identifier detecting identical datasets across all systems.
-- In addition the unique identifier `@id` of the `envied-x:SimulationAsset` in the `domainMetadata.json` SHALL be used for identification of the digital assets.
+- In addition the unique identifier `@id` of the `envited-x:SimulationAsset` in the `domainMetadata.json` SHALL be used for identification of the digital assets.
 - The CIDs MAY be signed by the user according to EIP-712.
 - A UUID MUST be generated for the `envited-x_manifest.json` pre-mint to link the asset with the ENVITED-X database securely.
 - The DID of the member associated with the user minting the asset MUST be known.
@@ -262,59 +262,65 @@ The synchronization between the smart contract as in the [Marketplace Contract R
 3. Compare if signature on CID is a `user` belonging to the `member` and if member is owner of token.
 4. Check: Uniqueness of CID in database.
 
-### Token Metadata
+### 6. Token Metadata
 
 <a id="tzip-21-token-metadata"></a>
 
+The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in [RFC 2119][16].
+
 This section defines how EVES-003 asset metadata is mapped to chain-specific token metadata formats.
 The core EVES-003 fields (derived from the ENVITED-X manifest and domain metadata) are identical regardless of target chain; only the serialization format differs.
+
+The minter MUST be a `simpulseid:OrganizationParticipant` (LegalEntity) identified by their `did:ethr` DID as defined in [EVES-008][28].
+The natural person performing the mint is linked to the organization through the `memberOf` credential property.
 
 #### TZIP-21 Rich Metadata (Tezos)
 
 Attributes not in the table are static and the same for every mint as in the 📁 `example/tzip21_token_metadata.json`.
 Examples are the first five tags or "publishers", which is always ENVITED-X and the ASCS if the mint is conducted through the [website][12].
 
-| TZIP-21       | EVES-003                                                 | Comment                                                                                           |
-| ------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| "name"        | envited-x:ResourceDescription:gx:name                    |                                                                                                   |
-| "description" | envited-x:ResourceDescription:gx:description             |                                                                                                   |
-| "tags"        | $TAG = format:formatType + " " + format:version          | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]                                         |
-| "minter"      | Member DID (CAIP-10) associated with user                | did:pkh:tezos:NetXnHfVqm9iesp:tz1... Returned by the View from the SimpulseID revocation registry |
-| "creators"    | Name of the company                                      | Taken from the company profile the user belongs to                                                |
-| "date"        | [System date-time][14]                                   |                                                                                                   |
-| "rights"      | manifest:hasLicense:gx:license                           | [SPDX identifier][15]                                                                             |
-| "rightsUri"   | manifest:hasLicense:licenseData:hasFileMetadata:filePath | Full license text URL OR policy smart contract DID                                                |
-| "artifactUri" | <https://assets.envited-x.net/Asset-CID>                 |                                                                                                   |
-| "identifier"  | Simulation Asset @id                                     | Unique identifier from the domainMetadata.json                                                    |
-| "externalUri" | Uploaded domainMetadata.json to IPFS                     |                                                                                                   |
-| "displayUri"  | "manifest:hasArtifacts:Link" of category "isMedia"       | Always use the first media image                                                                  |
-| "formats"     | artifactUri, externalUri, displayUri, envited-x_manifest |                                                                                                   |
-| "attributes"  | Reverse domain notation for ontologies + URL             | All ontologies from top level nodes in files referenced in formats section                        |
+| TZIP-21       | EVES-003                                                  | Comment                                                            |
+| ------------- | --------------------------------------------------------- | ------------------------------------------------------------------ |
+| "name"        | envited-x:hasResourceDescription → gx:name                |                                                                    |
+| "description" | envited-x:hasResourceDescription → gx:description         |                                                                    |
+| "tags"        | $TAG = format:formatType + " " + format:version           | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]          |
+| "minter"      | LegalEntity DID from [EVES-008][28]                       | did:ethr:\<chainIdHex\>:\<address\> of the OrganizationParticipant |
+| "creators"    | Name of the company                                       | Taken from the company profile the user belongs to                 |
+| "date"        | [System date-time][14]                                    |                                                                    |
+| "rights"      | envited-x:hasResourceDescription → gx:license             | [SPDX identifier][15]                                              |
+| "rightsUri"   | manifest:hasLicense → manifest:hasFileMetadata → filePath | Full license text URL OR policy smart contract DID                 |
+| "artifactUri" | <https://assets.envited-x.net/Asset-CID>                  |                                                                    |
+| "identifier"  | Simulation Asset @id                                      | Unique identifier from the domainMetadata.json                     |
+| "externalUri" | Uploaded domainMetadata.json to IPFS                      |                                                                    |
+| "displayUri"  | manifest:hasArtifacts → Link of category "isMedia"        | Always use the first media image                                   |
+| "formats"     | artifactUri, externalUri, displayUri, envited-x_manifest  |                                                                    |
+| "attributes"  | Reverse domain notation for ontologies + URL              | All ontologies from top level nodes in files referenced in formats |
 
-> **Note:** Some of the information need to be extracted from the `gx:LegalParticipant`.
+> **Note:** Some of the information needs to be extracted from the `gx:LegalParticipant` via the SimpulseID `ParticipantCredential`.
 
 #### ERC-721 Metadata (EVM)
 
 ERC-721 token metadata follows the [OpenSea Metadata Standards][23] which extend the minimal [ERC-721][26] `tokenURI()` JSON schema with additional fields.
 Attributes not in the table are static and the same for every mint as in the 📁 `example/erc721_token_metadata.json`.
 
-| ERC-721 / OpenSea | EVES-003                                                 | Comment                                                             |
-| ----------------- | -------------------------------------------------------- | ------------------------------------------------------------------- |
-| "name"            | envited-x:ResourceDescription:gx:name                    |                                                                     |
-| "description"     | envited-x:ResourceDescription:gx:description             |                                                                     |
-| "image"           | "manifest:hasArtifacts:Link" of category "isMedia"       | Always use the first media image. Maps to TZIP-21 "displayUri"      |
-| "animation_url"   | <https://assets.envited-x.net/Asset-CID>                 | Maps to TZIP-21 "artifactUri"                                       |
-| "external_url"    | Uploaded domainMetadata.json to IPFS                     | Maps to TZIP-21 "externalUri"                                       |
-| "attributes"      | Tags + ontology attributes as trait_type/value pairs     | See mapping note below                                              |
-| "minter"          | Member DID (CAIP-10) associated with user                | did:pkh:eip155:\<chain-id\>:0x... (EVES extension)                  |
-| "creators"        | Name of the company                                      | Taken from the company profile the user belongs to (EVES extension) |
-| "publishers"      | Name of the publishing organizations                     | (EVES extension)                                                    |
-| "date"            | [System date-time][14]                                   | (EVES extension)                                                    |
-| "type"            | "EVES-003" + EVES URL                                    | (EVES extension)                                                    |
-| "rights"          | manifest:hasLicense:gx:license                           | [SPDX identifier][15] (EVES extension)                              |
-| "rights_uri"      | manifest:hasLicense:licenseData:hasFileMetadata:filePath | Full license text URL OR policy smart contract DID (EVES extension) |
-| "identifier"      | Simulation Asset @id                                     | Unique identifier from the domainMetadata.json (EVES extension)     |
-| "formats"         | artifactUri, externalUri, displayUri, envited-x_manifest | (EVES extension, same structure as TZIP-21)                         |
+| ERC-721 / OpenSea | EVES-003                                                  | Comment                                                             |
+| ----------------- | --------------------------------------------------------- | ------------------------------------------------------------------- |
+| "name"            | envited-x:hasResourceDescription → gx:name                |                                                                     |
+| "description"     | envited-x:hasResourceDescription → gx:description         |                                                                     |
+| "image"           | manifest:hasArtifacts → Link of category "isMedia"        | Always use the first media image. Maps to TZIP-21 "displayUri"      |
+| "animation_url"   | <https://assets.envited-x.net/Asset-CID>                  | Maps to TZIP-21 "artifactUri"                                       |
+| "external_url"    | Uploaded domainMetadata.json to IPFS                      | Maps to TZIP-21 "externalUri"                                       |
+| "attributes"      | Tags + ontology attributes as trait_type/value pairs      | See mapping note below                                              |
+| "minter"          | LegalEntity DID from [EVES-008][28]                       | did:ethr:\<chainIdHex\>:\<address\> (EVES extension)                |
+| "creators"        | Name of the company                                       | Taken from the company profile (EVES extension)                     |
+| "publishers"      | Name of the publishing organizations                      | (EVES extension)                                                    |
+| "date"            | [System date-time][14]                                    | (EVES extension)                                                    |
+| "type"            | "EVES-003" + EVES URL                                     | (EVES extension)                                                    |
+| "language"        | Language of the asset content                             | [RFC 1766][16] language tag (EVES extension)                        |
+| "rights"          | envited-x:hasResourceDescription → gx:license             | [SPDX identifier][15] (EVES extension)                              |
+| "rights_uri"      | manifest:hasLicense → manifest:hasFileMetadata → filePath | Full license text URL OR policy smart contract DID (EVES extension) |
+| "identifier"      | Simulation Asset @id                                      | Unique identifier from the domainMetadata.json (EVES extension)     |
+| "formats"         | artifactUri, externalUri, displayUri, envited-x_manifest  | (EVES extension, same structure as TZIP-21)                         |
 
 **Attributes mapping note:** TZIP-21 uses a flat `"tags"` string array and a separate `"attributes"` array with `name`/`value`/`type` objects.
 In ERC-721, both are merged into the OpenSea-style `"attributes"` array using `"trait_type"`/`"value"` objects.
@@ -360,20 +366,24 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 
 ## References
 
-- [Gaia-X 4 PLC-AAD Ontology Management Base][1]
-- [Gaia-X Ontology and SHACL shapes 2210][2]
+- [ASCS Ontology Management Base][1]
+- [Gaia-X Ontology and SHACL shapes][2]
 - [Gaia-X Trust Framework Schema][3]
 - [Gaia-X Trust Framework Shapes][4]
 - [GaiaX Compliant Claims Example][5]
-- [GaiaX 4 PLC-AAD Claim Compliance Provider][6]
+- [GaiaX Claim Compliance Provider][6]
 - [ASCS HD-Map Asset Example][7]
 - [IPFS][8]
-- [Pinata Documentation][10]
+- [Pinata][9]
+- [Pinata API Documentation][10]
+- [CID v1 Content Addressing][11]
 - [ENVITED-X Data Space Portal][12]
 - [EIP-712][13]
+- [SPDX License List][15]
 - [RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels][16]
 - [Gaia-X Policy Rules Compliance Document (Release 24.11)][17]
 - [Marketplace Contract Reference Implementation][18]
+- [TZIP-21 Ontology][19]
 - [ENVITED-X Simulation Asset Tools][20]
 - [ENVITED-X Ontology][21]
 - [Manifest Ontology][22]
@@ -382,6 +392,7 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 - [ERC-5192: Minimal Soulbound NFTs][25]
 - [ERC-721: Non-Fungible Token Standard][26]
 - [ERC-7572: Contract-Level Metadata via contractURI()][27]
+- [EVES-008: ENVITED-X Identity and Credential Framework][28]
 
 [1]: https://github.com/ASCS-eV/ontology-management-base/
 [2]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/gx
@@ -397,7 +408,7 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 [12]: https://envited-x.net/
 [13]: https://eips.ethereum.org/EIPS/eip-712
 [14]: https://json-schema.org/understanding-json-schema/reference/string#dates-and-times
-[15]: https://softwareengineering.stackexchange.com/a/450839/443441
+[15]: https://spdx.org/licenses/
 [16]: https://datatracker.ietf.org/doc/html/rfc2119
 [17]: https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/
 [18]: https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/
@@ -410,3 +421,4 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 [25]: https://eips.ethereum.org/EIPS/eip-5192
 [26]: https://eips.ethereum.org/EIPS/eip-721
 [27]: https://eips.ethereum.org/EIPS/eip-7572
+[28]: ../EVES-008/eves-008.md

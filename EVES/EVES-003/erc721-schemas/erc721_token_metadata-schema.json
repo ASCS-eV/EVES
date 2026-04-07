@@ -41,7 +41,7 @@
         },
         "minter": {
           "type": "string",
-          "description": "The DID of the account responsible for minting the asset (e.g. did:pkh:eip155:<chain-id>:0x...). EVES extension."
+          "description": "The DID of the LegalEntity (OrganizationParticipant) responsible for minting the asset, as defined in EVES-008 (e.g. did:ethr:<chainIdHex>:<address>). EVES extension."
         },
         "creators": {
           "type": "array",

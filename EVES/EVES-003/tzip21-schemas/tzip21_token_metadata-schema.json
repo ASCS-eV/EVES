@@ -6,6 +6,7 @@
     "asset": {
       "type": "object",
       "additionalProperties": true,
+      "required": ["name"],
       "properties": {
         "description": {
           "type": "string",
@@ -13,8 +14,7 @@
         },
         "minter": {
           "type": "string",
-          "format": "tzaddress",
-          "description": "The tz address responsible for minting the asset."
+          "description": "The DID of the LegalEntity (OrganizationParticipant) responsible for minting the asset, as defined in EVES-008 (e.g. did:ethr:<chainIdHex>:<address>)."
         },
         "creators": {
           "type": "array",
@@ -72,7 +72,7 @@
         "language": {
           "type": "string",
           "format": "https://tools.ietf.org/html/rfc1766",
-          "description": "The language of the intellectual content of the asset as defined in RFC 1776."
+          "description": "The language of the intellectual content of the asset as defined in RFC 1766."
         },
         "identifier": {
           "type": "string",

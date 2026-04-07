@@ -38,7 +38,7 @@
       "value": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/"
     }
   ],
-  "minter": "did:pkh:eip155:42793:0xAa9De953e5C50dbfF35B43C60bdCb5E1ceCcFD58",
+  "minter": "did:ethr:0x14a34:0x50916c8e454722d2357916d4250500102288bb03",
   "creators": [
     "Automotive Solution Center for Simulation e.V."
   ],
@@ -48,6 +48,7 @@
   ],
   "date": "2025-02-17T00:00:00+00:00",
   "type": "EVES-003 https://github.com/ASCS-eV/EVES",
+  "language": "en",
   "rights": "MPL-2.0",
   "rights_uri": "https://www.mozilla.org/en-US/MPL/2.0/",
   "identifier": "did:web:registry.gaia-x.eu:HdMap:DjHgK5ErTBow1Ya3J05tW9l12skGWgZn6kA9",
