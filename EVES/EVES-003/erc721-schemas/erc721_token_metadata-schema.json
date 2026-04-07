@@ -1,0 +1,205 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$ref": "#/definitions/asset",
+  "title": "ERC-721 Token Metadata",
+  "definitions": {
+    "asset": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "name",
+        "image"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Identifies the asset to which this NFT represents."
+        },
+        "description": {
+          "type": "string",
+          "description": "Describes the asset to which this NFT represents."
+        },
+        "image": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "A URI pointing to a resource with mime type image/* representing the asset. Maps to TZIP-21 displayUri."
+        },
+        "animation_url": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "A URI pointing to the actual asset content (e.g. asset.zip download URL). Maps to TZIP-21 artifactUri."
+        },
+        "external_url": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "A URI pointing to an external page with additional information about the asset (e.g. domain metadata on IPFS). Maps to TZIP-21 externalUri."
+        },
+        "background_color": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{6}$",
+          "description": "Background color of the item on OpenSea. Must be a six-character hexadecimal without a pre-pended #."
+        },
+        "minter": {
+          "type": "string",
+          "description": "The DID of the account responsible for minting the asset (e.g. did:pkh:eip155:<chain-id>:0x...). EVES extension."
+        },
+        "creators": {
+          "type": "array",
+          "description": "The primary person, people, or organization(s) responsible for creating the intellectual content of the asset.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "contributors": {
+          "type": "array",
+          "description": "The person, people, or organization(s) that have made substantial creative contributions to the asset.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "publishers": {
+          "type": "array",
+          "description": "The person, people, or organization(s) primarily responsible for distributing or making the asset available to others in its present form.",
+          "uniqueItems": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "A date associated with the creation or availability of the asset."
+        },
+        "type": {
+          "type": "string",
+          "description": "A broad definition of the type of content of the asset."
+        },
+        "rights": {
+          "type": "string",
+          "description": "A statement about the asset rights, e.g. an SPDX license identifier."
+        },
+        "rights_uri": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "Links to a statement of rights (e.g. full license text or smart contract DID). Maps to TZIP-21 rightsUri. EVES extension."
+        },
+        "identifier": {
+          "type": "string",
+          "description": "A string or number used to uniquely identify the asset. Ex. URL, URN, UUID, ISBN, DID, etc."
+        },
+        "formats": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/format"
+          }
+        },
+        "attributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/attribute"
+          },
+          "description": "OpenSea-style attributes describing traits of the asset."
+        }
+      }
+    },
+    "format": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "A URI to the asset represented in this format."
+        },
+        "hash": {
+          "type": "string",
+          "description": "A checksum hash of the content of the asset in this format."
+        },
+        "mimeType": {
+          "type": "string",
+          "description": "Media (MIME) type of the format."
+        },
+        "fileSize": {
+          "type": "integer",
+          "description": "Size in bytes of the content of the asset in this format."
+        },
+        "fileName": {
+          "type": "string",
+          "description": "Filename for the asset in this format. For display purposes."
+        },
+        "duration": {
+          "type": "string",
+          "format": "time",
+          "description": "Time duration of the content of the asset in this format."
+        },
+        "dimensions": {
+          "$ref": "#/definitions/dimensions",
+          "description": "Dimensions of the content of the asset in this format."
+        },
+        "dataRate": {
+          "$ref": "#/definitions/dataRate",
+          "description": "Data rate which the content of the asset in this format was captured at."
+        }
+      }
+    },
+    "attribute": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "trait_type": {
+          "type": "string",
+          "description": "Name of the trait."
+        },
+        "value": {
+          "description": "Value of the trait.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "number" }
+          ]
+        },
+        "display_type": {
+          "type": "string",
+          "description": "Display type hint for the trait (e.g. number, boost_percentage, boost_number, date)."
+        }
+      },
+      "required": [
+        "trait_type",
+        "value"
+      ]
+    },
+    "dataRate": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "integer"
+        },
+        "unit": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit",
+        "value"
+      ]
+    },
+    "dimensions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "unit": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "unit",
+        "value"
+      ]
+    }
+  }
+}
