@@ -71,12 +71,12 @@
   ],
   "attributes": [
     {
-      "name": "https://ontologies.envited-x.net/hdmap/v4/ontology#",
+      "name": "https://w3id.org/ascs-ev/envited-x/hdmap/v6/",
       "value": "https://github.com/GAIA-X4PLC-AAD/ontology-management-base/releases/tag/v0.0.4",
       "type": "uri"
     },
     {
-      "name": "https://ontologies.envited-x.net/envited-x/v2/ontology#",
+      "name": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/",
       "value": "https://github.com/GAIA-X4PLC-AAD/ontology-management-base/releases/tag/v0.0.4",
       "type": "uri"
     }

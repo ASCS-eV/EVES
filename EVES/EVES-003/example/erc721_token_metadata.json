@@ -31,11 +31,11 @@
     },
     {
       "trait_type": "Ontology",
-      "value": "https://ontologies.envited-x.net/hdmap/v4/ontology#"
+      "value": "https://w3id.org/ascs-ev/envited-x/hdmap/v6/"
     },
     {
       "trait_type": "Ontology",
-      "value": "https://ontologies.envited-x.net/envited-x/v2/ontology#"
+      "value": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/"
     }
   ],
   "minter": "did:pkh:eip155:42793:0xAa9De953e5C50dbfF35B43C60bdCb5E1ceCcFD58",

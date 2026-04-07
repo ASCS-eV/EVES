@@ -1,7 +1,7 @@
 {
   "@context": {
-    "envited-x": "https://ontologies.envited-x.net/envited-x/v2/ontology#",
-    "manifest": "https://ontologies.envited-x.net/manifest/v4/ontology#",
+    "envited-x": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/",
+    "manifest": "https://w3id.org/ascs-ev/envited-x/manifest/v5/",
     "gx": "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#",
     "sh": "http://www.w3.org/ns/shacl#",
     "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
@@ -192,7 +192,7 @@
       },
       "sh:conformsTo": [
         {
-          "@id": "https://ontologies.envited-x.net/hdmap/v3/ontology"
+          "@id": "https://w3id.org/ascs-ev/envited-x/hdmap/v6/"
         }
       ],
       "manifest:hasAccessRole": {

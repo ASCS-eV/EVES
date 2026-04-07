@@ -32,7 +32,7 @@ This EVES addresses the need for clear guidelines to onboard assets and synchron
 
 The `envited-x:SimulationAsset` defines a digital asset within the domain of simulation including the core simulation data and all necessary files for describing, evaluating, and visualizing the dataset.
 All simulation assets MUST be derived from a common `envited-x` ontology defined in the [Gaia-X 4 PLC-AAD Ontology Management Base][1].
-A data space portal SHALL display the currently supported version of the ontologies such as: `https://ontologies.envited-x.net/envited-x/v2/ontology#`.
+A data space portal SHALL display the currently supported version of the ontologies such as: `https://w3id.org/ascs-ev/envited-x/envited-x/v3/`.
 Each simulation asset SHALL be compliant with the [Gaia-X Ontology and SHACL shapes 2210][2].
 The `gx` turtle shacle shapes are derived from the [Gaia-X Trust Framework Schema][3] and the respective application/ld+json [Gaia-X Trust Framework Shapes][4].
 A [GaiaX Compliant Claims Example][5] MAY be generated using the [GaiaX 4 PLC-AAD Claim Compliance Provider][6].
@@ -320,7 +320,7 @@ Attributes not in the table are static and the same for every mint as in the ðŸ“
 In ERC-721, both are merged into the OpenSea-style `"attributes"` array using `"trait_type"`/`"value"` objects.
 Each TZIP-21 tag becomes an attribute (for example, `{"trait_type": "Format", "value": "ASAM OpenDRIVE 1.6"}`),
 and each TZIP-21 attribute's `name`/`value` maps to `trait_type`/`value`
-(for example, `{"trait_type": "Ontology", "value": "https://ontologies.envited-x.net/hdmap/v4/ontology#"}`).
+(for example, `{"trait_type": "Ontology", "value": "https://w3id.org/ascs-ev/envited-x/hdmap/v6/"}`).
 
 > **Note:** Fields marked as "(EVES extension)" are not part of the base ERC-721 or OpenSea standard but are defined by EVES-003
 > for interoperability with the ENVITED-X Data Space.
