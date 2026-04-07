@@ -94,7 +94,10 @@ See 📁 `example/input_manifest.json` for a complete example.
 
 ```json
 {
-  "@context": ["https://w3id.org/ascs-ev/envited-x/manifest/v5/", { "envited-x": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/" }],
+  "@context": [
+    "https://w3id.org/ascs-ev/envited-x/manifest/v5/",
+    { "envited-x": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/" }
+  ],
   "@id": "did:web:registry.gaia-x.eu:HdMap:example",
   "@type": "envited-x:Manifest",
   "hasArtifacts": [
@@ -276,8 +279,8 @@ Examples are the first five tags or "publishers", which is always ENVITED-X and 
 
 | TZIP-21       | EVES-003                                                 | Comment                                                                                           |
 | ------------- | -------------------------------------------------------- | ------------------------------------------------------------------------------------------------- |
-| "name"        | envited-x:DataResource:gx:name                           |                                                                                                   |
-| "description" | envited-x:DataResource:gx:description                    |                                                                                                   |
+| "name"        | envited-x:ResourceDescription:gx:name                    |                                                                                                   |
+| "description" | envited-x:ResourceDescription:gx:description             |                                                                                                   |
 | "tags"        | $TAG = format:formatType + " " + format:version          | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]                                         |
 | "minter"      | Member DID (CAIP-10) associated with user                | did:pkh:tezos:NetXnHfVqm9iesp:tz1... Returned by the View from the SimpulseID revocation registry |
 | "creators"    | Name of the company                                      | Taken from the company profile the user belongs to                                                |
@@ -300,8 +303,8 @@ Attributes not in the table are static and the same for every mint as in the �
 
 | ERC-721 / OpenSea | EVES-003                                                 | Comment                                                             |
 | ----------------- | -------------------------------------------------------- | ------------------------------------------------------------------- |
-| "name"            | envited-x:DataResource:gx:name                           |                                                                     |
-| "description"     | envited-x:DataResource:gx:description                    |                                                                     |
+| "name"            | envited-x:ResourceDescription:gx:name                    |                                                                     |
+| "description"     | envited-x:ResourceDescription:gx:description             |                                                                     |
 | "image"           | "manifest:hasArtifacts:Link" of category "isMedia"       | Always use the first media image. Maps to TZIP-21 "displayUri"      |
 | "animation_url"   | <https://assets.envited-x.net/Asset-CID>                 | Maps to TZIP-21 "artifactUri"                                       |
 | "external_url"    | Uploaded domainMetadata.json to IPFS                     | Maps to TZIP-21 "externalUri"                                       |
@@ -318,9 +321,9 @@ Attributes not in the table are static and the same for every mint as in the �
 
 **Attributes mapping note:** TZIP-21 uses a flat `"tags"` string array and a separate `"attributes"` array with `name`/`value`/`type` objects.
 In ERC-721, both are merged into the OpenSea-style `"attributes"` array using `"trait_type"`/`"value"` objects.
-Each TZIP-21 tag becomes an attribute (e.g., `{"trait_type": "Format", "value": "ASAM OpenDRIVE 1.6"}`),
+Each TZIP-21 tag becomes an attribute (for example, `{"trait_type": "Format", "value": "ASAM OpenDRIVE 1.6"}`),
 and each TZIP-21 attribute's `name`/`value` maps to `trait_type`/`value`
-(e.g., `{"trait_type": "Ontology", "value": "https://ontologies.envited-x.net/hdmap/v4/ontology#"}`).
+(for example, `{"trait_type": "Ontology", "value": "https://ontologies.envited-x.net/hdmap/v4/ontology#"}`).
 
 > **Note:** Fields marked as "(EVES extension)" are not part of the base ERC-721 or OpenSea standard but are defined by EVES-003
 > for interoperability with the ENVITED-X Data Space.
@@ -335,10 +338,10 @@ This has no TZIP-21 equivalent as Tezos handles collection-level metadata differ
 
 The `contractURI()` response SHOULD include at minimum:
 
-- `name` — The collection name (e.g., "ENVITED-X Simulation Assets")
-- `description` — A description of the collection
-- `image` — A collection image/logo URI
-- `external_link` — URL to the ENVITED-X Data Space portal
+- `name`: the collection name (for example, "ENVITED-X Simulation Assets")
+- `description`: a description of the collection
+- `image`: a collection image/logo URI
+- `external_link`: URL to the ENVITED-X Data Space portal
 
 The contract SHOULD emit a `ContractURIUpdated()` event as defined in [ERC-7572][27] when the contract-level metadata is changed.
 
