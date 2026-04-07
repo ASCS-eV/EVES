@@ -142,7 +142,7 @@ Future EVES will provide detailed specifications for each module.
 
 1. [SimpulseID](https://identity.ascs.digital)
 2. [Altme Wallet](https://altme.io)
-3. [Tezos FA2.1 Standard](https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-21/tzip-21.md)
+3. [Tezos FA2.1 Standard](https://gitlab.com/tezos/tzip/-/blob/master/proposals/tzip-21/tzip-21.md)
 4. [Etherlink Bridge](https://www.etherlinkbridge.com/bridge)
 5. [EVES-003: ENVITED Asset Definition and Upload Process](../EVES-003/eves-003.md)
 6. [Gaia-X Trust Framework](https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/)

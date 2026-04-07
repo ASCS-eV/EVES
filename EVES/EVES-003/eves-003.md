@@ -384,7 +384,7 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 - [ERC-7572: Contract-Level Metadata via contractURI()][27]
 
 [1]: https://github.com/ASCS-eV/ontology-management-base/
-[2]: https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/gx
+[2]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/gx
 [3]: https://registry.lab.gaia-x.eu/v1/api/trusted-schemas-registry/v2/schemas/gax-trust-framework
 [4]: https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#
 [5]: https://github.com/GAIA-X4PLC-AAD/gaia-x-compliant-claims-example
@@ -392,7 +392,7 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 [7]: https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.2.3
 [8]: https://ipfs.tech/
 [9]: https://pinata.cloud/
-[10]: https://docs.pinata.cloud/web3/pinning/pinata-metadata#pinataoptions
+[10]: https://docs.pinata.cloud/api-reference/endpoint/ipfs/pin-file-to-ipfs
 [11]: https://docs.ipfs.tech/concepts/content-addressing/#version-1-v1
 [12]: https://envited-x.net/
 [13]: https://eips.ethereum.org/EIPS/eip-712
@@ -401,7 +401,7 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 [16]: https://datatracker.ietf.org/doc/html/rfc2119
 [17]: https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/
 [18]: https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/
-[19]: https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/tzip21
+[19]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/tzip21
 [20]: https://github.com/openMSL/sl-5-8-asset-tools
 [21]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/envited-x
 [22]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/manifest
