@@ -147,11 +147,7 @@ Example credential `@context`:
 
 ```json
 {
-  "@context": [
-    "https://www.w3.org/ns/credentials/v2",
-    "https://w3id.org/reachhaven/harbour/core/v1/",
-    "https://w3id.org/ascs-ev/simpulse-id/v1/"
-  ]
+  "@context": ["https://www.w3.org/ns/credentials/v2", "https://w3id.org/reachhaven/harbour/core/v1/", "https://w3id.org/ascs-ev/simpulse-id/v1/"]
 }
 ```
 

@@ -94,10 +94,7 @@ See 📁 `example/input_manifest.json` for a complete example.
 
 ```json
 {
-  "@context": [
-    "https://w3id.org/ascs-ev/envited-x/manifest/v5/",
-    { "envited-x": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/" }
-  ],
+  "@context": ["https://w3id.org/ascs-ev/envited-x/manifest/v5/", { "envited-x": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/" }],
   "@id": "did:web:registry.gaia-x.eu:HdMap:example",
   "@type": "envited-x:Manifest",
   "hasArtifacts": [
