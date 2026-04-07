@@ -6,8 +6,5 @@ https://assets.envited-x.net/
 https://metadata.envited-x.net/
 https://ipfs.envited-x.net/
 
-# External sites that are intermittently unreachable from CI
-https://research.tezos.com/
-
 # GitLab blocks automated requests with 403
 https://gitlab.com/tezos/tzip/

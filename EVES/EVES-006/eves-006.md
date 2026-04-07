@@ -100,7 +100,7 @@ This specification extends ENVITED-X functionality without modifying existing co
 
 1. [Etherlink Documentation](https://docs.etherlink.com/)
 2. [Tezos FA2.1 Standard](https://gitlab.com/tezos/tzip/-/blob/master/proposals/tzip-21/tzip-21.md)
-3. [Optimistic Rollups in Tezos](https://research.tezos.com/optimistic-rollups)
+3. [Smart Optimistic Rollups in Tezos](https://docs.tezos.com/architecture/smart-rollups)
 4. [Bridging FA Tokens on Etherlink](https://docs.etherlink.com/bridging/bridging-fa)
 5. [ERC-721 Standard](https://ethereum.org/en/developers/docs/standards/tokens/erc-721/)
 6. [Rio Protocol Announcement](https://research-development.nomadic-labs.com/rio-announcement.html)
