@@ -32,7 +32,7 @@ This EVES addresses the need for clear guidelines to onboard assets and synchron
 
 The `envited-x:SimulationAsset` defines a digital asset within the domain of simulation including the core simulation data and all necessary files for describing, evaluating, and visualizing the dataset.
 All simulation assets MUST be derived from a common `envited-x` ontology defined in the [Gaia-X 4 PLC-AAD Ontology Management Base][1].
-A data space portal SHALL display the currently supported version of the ontologies like e.g.: `https://ontologies.envited-x.net/envited-x/v2/ontology#`.
+A data space portal SHALL display the currently supported version of the ontologies such as: `https://ontologies.envited-x.net/envited-x/v2/ontology#`.
 Each simulation asset SHALL be compliant with the [Gaia-X Ontology and SHACL shapes 2210][2].
 The `gx` turtle shacle shapes are derived from the [Gaia-X Trust Framework Schema][3] and the respective application/ld+json [Gaia-X Trust Framework Shapes][4].
 A [GaiaX Compliant Claims Example][5] MAY be generated using the [GaiaX 4 PLC-AAD Claim Compliance Provider][6].
@@ -55,15 +55,15 @@ Tooling such as the [ENVITED-X Simulation Asset Tools][20] MAY automate the crea
 
 Every `asset.zip` MUST contain the following top-level folders mapped to `envited-x` artifact categories:
 
-| Folder                | `envited-x` Category           | Required    | `envited-x` Access Role | Description                                     |
-| --------------------- | ------------------------------ | ----------- | ----------------------- | ----------------------------------------------- |
-| `simulation-data/`    | `envited-x:isSimulationData`   | MUST        | `envited-x:isOwner`     | Core simulation data (e.g., `.xodr`, `.xosc`)   |
-| `documentation/`      | `envited-x:isDocumentation`    | MUST        | `envited-x:isPublic`    | Documentation files (e.g., `.pdf`, `.txt`)      |
-| `metadata/`           | `envited-x:isMetadata`         | MUST        | `envited-x:isPublic`    | Domain metadata (e.g., `hdmap_instance.json`)   |
-| `media/`              | `envited-x:isMedia`            | MUST        | `envited-x:isPublic`    | Visualizations, images, GeoJSON, 3D previews    |
-| `validation-reports/` | `envited-x:isValidationReport` | RECOMMENDED | `envited-x:isPublic`    | Quality checker reports (e.g., `.xqar`, `.txt`) |
-| _(root)_              | `envited-x:isLicense`          | MUST        | `envited-x:isPublic`    | LICENSE file at the asset root                  |
-| _(root)_              | `envited-x:isManifest`         | MUST        | `envited-x:isPublic`    | `manifest_reference.json` at the asset root     |
+| Folder                | `envited-x` Category           | Required    | `envited-x` Access Role | Description                                            |
+| --------------------- | ------------------------------ | ----------- | ----------------------- | ------------------------------------------------------ |
+| `simulation-data/`    | `envited-x:isSimulationData`   | MUST        | `envited-x:isOwner`     | Core simulation data (for example, `.xodr`, `.xosc`)   |
+| `documentation/`      | `envited-x:isDocumentation`    | MUST        | `envited-x:isPublic`    | Documentation files (for example, `.pdf`, `.txt`)      |
+| `metadata/`           | `envited-x:isMetadata`         | MUST        | `envited-x:isPublic`    | Domain metadata (for example, `hdmap_instance.json`)   |
+| `media/`              | `envited-x:isMedia`            | MUST        | `envited-x:isPublic`    | Visualizations, images, GeoJSON, 3D previews           |
+| `validation-reports/` | `envited-x:isValidationReport` | RECOMMENDED | `envited-x:isPublic`    | Quality checker reports (for example, `.xqar`, `.txt`) |
+| _(root)_              | `envited-x:isLicense`          | MUST        | `envited-x:isPublic`    | LICENSE file at the asset root                         |
+| _(root)_              | `envited-x:isManifest`         | MUST        | `envited-x:isPublic`    | `manifest_reference.json` at the asset root            |
 
 > **Note:** The `envited-x` categories and access roles are formally defined in the [ENVITED-X Ontology][21] which extends the generic [Manifest Ontology][22].
 > The `envited-x:ExtendedLinkShape` constrains the allowed values for both `manifest:hasCategory` and `manifest:hasAccessRole`.
@@ -150,12 +150,12 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 
 #### CID v1
 
-Artifacts uploaded to IPFS e.g. using services like [Pinata][9] MUST use the content identifier version [CID v1][11].  
+Artifacts uploaded to IPFS, for example using services like [Pinata][9] MUST use the content identifier version [CID v1][11].  
 In Pinata this is achievable through the API using the `pinataOptions` parameter, as outlined in the [documentation][10].
 
 #### File Naming
 
-Uploaded file names MUST exclude extensions (e.g., use `file` instead of `file.json`) to avoid issues such as double extensions during downloads (e.g., `file.json.json`).
+Uploaded file names MUST exclude extensions (for example, use `file` instead of `file.json`) to avoid issues such as double extensions during downloads (for example, `file.json.json`).
 
 ### 3. Privacy Layer
 

@@ -20,4 +20,10 @@ repos:
     hooks:
       - id: prettier
         types_or: [markdown, json, yaml]
-        args: ["--prose-wrap", "preserve"]
+
+  - repo: https://github.com/errata-ai/vale
+    rev: v3.9.6
+    hooks:
+      - id: vale
+        args: ["--no-exit"]
+        types: [markdown]

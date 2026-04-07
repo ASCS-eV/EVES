@@ -53,7 +53,7 @@ urn:blockchain:{chain_namespace}:{chain_id}:contract:{contract_address}
 
 > **_NOTE:_**
 >
-> - The **namespace** follows **CAIP-2** (e.g., `tezos`, `eip155` for Ethereum).
+> - The **namespace** follows **CAIP-2** (for example, `tezos`, `eip155` for Ethereum).
 > - The **chain_id** follows **CAIP-10**, ensuring unique chain differentiation.
 > - **Smart contracts (KT1, 0x) are explicitly named** under the `contract` identifier.
 

@@ -27,11 +27,12 @@ CI additionally runs Vale prose linting (`spelling_linter.yml`) and link checkin
 
 ### Vale prose lint rules
 
-The project uses Vale with Google, proselint, and write-good styles (see `.vale.ini`). Key rules that cause CI failures:
+The project uses Vale with Google, proselint, and write-good styles (see `.vale.ini`).
+Several rules are disabled because they conflict with technical specification conventions (see comments in `.vale.ini`).
+
+Key active rule that causes CI failures:
 
 - Use "for example" instead of "e.g." or "i.e." (`Google.Latin`)
-- Do not put spaces around em-dashes (`Google.EmDash`); use colons or rewrite instead
-- Use sentence-style capitalization in headings (`Google.Headings`)
 
 To run Vale locally: install [Vale](https://vale.sh/docs/install), then `vale sync && vale EVES/`.
 

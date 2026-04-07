@@ -36,10 +36,10 @@ The ENVITED-X Data Space is built on the following core modules:
 
 - **Purpose**:
   - Establish trust by verifying user and organization identities.
-  - Enable permission management (e.g., membership validation, terms of service acceptance).
+  - Enable permission management (for example, membership validation, terms of service acceptance).
 - **Key Features**:
   - Credentials are issued via [SimpulseID](https://identity.ascs.digital) and stored in W3C-compliant wallets like [Altme](https://altme.io).
-  - Future support for contract-based credentials (e.g., purchase or download permissions).
+  - Future support for contract-based credentials (for example, purchase or download permissions).
 - **Standards**:
   - Gaia-X Trust Framework.
   - W3C Verifiable Credentials and DIDs.
@@ -52,7 +52,7 @@ The ENVITED-X Data Space is built on the following core modules:
   - Enable real-time credential checks during system interactions.
 - **Functionality**:
   - Tracks the **uuid** of credentials to ensure privacy.
-  - Manages credential statuses (e.g., active/inactive for revocation).
+  - Manages credential statuses (for example, active/inactive for revocation).
 - **Use Cases**:
   - Credential validation during login.
   - Whitelisting users for minting and accessing assets.
@@ -99,11 +99,11 @@ The interaction between modules can be summarized as follows:
 1. **Credential Issuance**:
    - A user or organization requests a credential via SimpulseID following the process in EVES-008.
    - Credential metadata includes identity, permissions, and additional attributes.
-   - Credential is stored in a wallet (e.g., Altme) and referenced by uuid in the registry contract.
+   - Credential is stored in a wallet (for example, Altme) and referenced by uuid in the registry contract.
 
 2. **Login and Validation**:
    - User logs in to ENVITED-X.
-   - The system validates the credential (e.g., membership status) via the registry contract.
+   - The system validates the credential (for example, membership status) via the registry contract.
 
 3. **Asset Registration**:
    - User uploads simulation assets to ENVITED-X following the process in EVES-003.

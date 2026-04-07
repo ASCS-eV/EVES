@@ -32,7 +32,7 @@ All EVES must adhere to the following structure, as defined in EVES-001:
    status: [Draft/Final/Other]
    type: [Process/Standards/Informational]
    created: YYYY-MM-DD
-   requires: [List of EVES this depends on, e.g., "EVES-001"]
+   requires: [List of EVES this depends on, for example, "EVES-001"]
    replaces: None
    ---
    ```
