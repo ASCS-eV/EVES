@@ -1,2 +1,10 @@
 # Forward references to EVES specs not yet written
 EVES-009/eves-009.md
+
+# Placeholder/example URLs used in spec text (not real endpoints)
+https://assets.envited-x.net/
+https://metadata.envited-x.net/
+https://ipfs.envited-x.net/
+
+# External sites that are intermittently unreachable from CI
+https://research.tezos.com/
