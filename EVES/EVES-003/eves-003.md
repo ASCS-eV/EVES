@@ -13,7 +13,7 @@ replaces: None
 ## Abstract
 
 This specification defines the structure of an asset in the ENVITED-X Data Space and outlines the process for uploading assets to ensure compliance, security, and interoperability.
-It leverages existing specifications, such as the Gaia-X Trust Framework, the Gaia-X 4 PLC-AAD Ontologies, and implements privacy layers, validation, and metadata mapping aligned with
+It leverages existing specifications, such as the Gaia-X Trust Framework, the ENVITED-X Ontologies, and implements privacy layers, validation, and metadata mapping aligned with
 [Tezos TZIP-21](https://docs.tezos.com/architecture/governance/improvement-process#tzip-21-rich-contract-metadata) and [ERC-721][26] token metadata following the [OpenSea Metadata Standards][23].
 
 ## Motivation

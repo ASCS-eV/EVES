@@ -76,6 +76,10 @@
           "type": "string",
           "description": "A broad definition of the type of content of the asset."
         },
+        "language": {
+          "type": "string",
+          "description": "The language of the intellectual content of the asset as defined in RFC 1766. EVES extension."
+        },
         "rights": {
           "type": "string",
           "description": "A statement about the asset rights, e.g. an SPDX license identifier."
