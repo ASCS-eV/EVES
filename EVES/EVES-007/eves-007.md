@@ -53,7 +53,7 @@ urn:blockchain:{chain_namespace}:{chain_id}:contract:{contract_address}
 
 > **_NOTE:_**
 >
-> - The **namespace** follows **CAIP-2** (e.g., `tezos`, `eip155` for Ethereum).
+> - The **namespace** follows **CAIP-2** (for example, `tezos`, `eip155` for Ethereum).
 > - The **chain_id** follows **CAIP-10**, ensuring unique chain differentiation.
 > - **Smart contracts (KT1, 0x) are explicitly named** under the `contract` identifier.
 
@@ -160,7 +160,7 @@ It is fully backward-compatible with Tezos, Ethereum, and Etherlink **without re
 
 1. [CAIP-2: Blockchain Namespace Specification](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
 2. [CAIP-10: Blockchain Account Specification](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-10.md)
-3. [Tezos TZIP-21](https://gitlab.com/tzip/tzip/-/blob/master/proposals/tzip-21/tzip-21.md)
+3. [Tezos TZIP-21](https://gitlab.com/tezos/tzip/-/blob/master/proposals/tzip-21/tzip-21.md)
 4. [Ethereum ERC-721 Standard](https://eips.ethereum.org/EIPS/eip-721)
 5. [Etherlink Documentation](https://docs.etherlink.com/)
 6. [Etherlink Network Information](https://docs.etherlink.com/get-started/network-information/)

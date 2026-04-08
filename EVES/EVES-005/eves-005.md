@@ -68,7 +68,7 @@ The negotiation process follows the dataspace protocol state machine with the fo
   Access to the contracted asset is authorized only when the VC is valid and a corresponding registry entry is found and valid.
 
 - **TERMINATED:**  
-  If any error occurs (e.g., invalid signatures, mismatched payloads, or a timeout) or if either party cancels the negotiation, the process transitions to the terminated state.
+  If any error occurs (for example, invalid signatures, mismatched payloads, or a timeout) or if either party cancels the negotiation, the process transitions to the terminated state.
 
 ### 2. Detailed Process Flow Example
 
@@ -105,7 +105,7 @@ The negotiation process follows the dataspace protocol state machine with the fo
 
 - **Verifiable Credential Format:**  
   The contract VC conforms to the SD-JWT VC specification (see [SD-JWT-based Verifiable Credentials (SD-JWT VC)](https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-00.html) and [OpenID for Verifiable Credential Issuance - draft 15](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html)).
-  It is intended for storage in wallets (e.g., Altme) and can be presented to endpoints running the [ssi-to-oidc-bridge](https://github.com/GAIA-X4PLC-AAD/ssi-to-oidc-bridge).
+  It is intended for storage in wallets (for example, Altme) and can be presented to endpoints running the [ssi-to-oidc-bridge](https://github.com/GAIA-X4PLC-AAD/ssi-to-oidc-bridge).
 
 - **Decentralized Registry and Scaling:**  
   Following the method outlined in [EVES-006](../EVES-006/eves-006.md) and inspired by [this paper](https://arxiv.org/pdf/2501.17089), a blockchain-based registry on Etherlink is used to store the hash and UUID of finalized VCs.
@@ -113,7 +113,7 @@ The negotiation process follows the dataspace protocol state machine with the fo
 
 - **Automation and Encrypted Inbox:**  
   An encrypted inbox system — optionally secured with DID keys - is used to exchange contract-related VCs.
-  The design minimizes manual interaction by automating transitions (e.g., from OFFERED to ACCEPTED under preset criteria) while still allowing explicit user confirmation when needed.
+  The design minimizes manual interaction by automating transitions (for example, from OFFERED to ACCEPTED under preset criteria) while still allowing explicit user confirmation when needed.
 
 - **State Machine Integration:**  
   The process adheres to the dataspace protocol state machine with the following states:  
@@ -205,14 +205,14 @@ Initial implementation steps include:
 
 2. **VC Generation and Signing:**  
    Implement services to generate SD-JWT VCs for contract offers and acceptances.
-   Both provider and consumer systems must support signing operations and storage (e.g., in wallets like Altme).
+   Both provider and consumer systems must support signing operations and storage (for example, in wallets like Altme).
 
 3. **Blockchain Registry Integration:**  
    Integrate with the decentralized registry on Etherlink to store the hash and UUID of finalized contract VCs.
    The provider must record a registry entry to transition the state from AGREED to FINALIZED.
 
 4. **Automated State Transitions:**  
-   Where possible, automate state transitions (e.g., from OFFERED to ACCEPTED or AGREED) while allowing manual intervention if necessary.
+   Where possible, automate state transitions (for example, from OFFERED to ACCEPTED or AGREED) while allowing manual intervention if necessary.
 
 5. **Operator Fee Management:**  
    The ENVITED-X Data Space operator reviews registry entries to verify successful contracts.

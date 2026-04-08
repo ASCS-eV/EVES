@@ -29,3 +29,4 @@ DPoP
 SPARQL
 SSI
 Catena-X
+e\.V\.
