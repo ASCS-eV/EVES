@@ -275,8 +275,8 @@ It leverages existing specifications, such as the Gaia-X Trust Framework, the Ga
 <h3 id="1-digital-asset-definition">1. Digital Asset Definition</h3>
 <p>The <code>envited-x:SimulationAsset</code> defines a digital asset within the domain of simulation including the core simulation data and all necessary files for describing, evaluating, and visualizing the dataset.
 All simulation assets MUST be derived from a common <code>envited-x</code> ontology defined in the <a href="https://github.com/ASCS-eV/ontology-management-base/" target="_blank">Gaia-X 4 PLC-AAD Ontology Management Base</a>.
-A data space portal SHALL display the currently supported version of the ontologies like e.g.: <code>https://ontologies.envited-x.net/envited-x/v2/ontology#</code>.
-Each simulation asset SHALL be compliant with the <a href="https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/gx" target="_blank">Gaia-X Ontology and SHACL shapes 2210</a>.
+A data space portal SHALL display the currently supported version of the ontologies such as: <code>https://ontologies.envited-x.net/envited-x/v2/ontology#</code>.
+Each simulation asset SHALL be compliant with the <a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/gx" target="_blank">Gaia-X Ontology and SHACL shapes 2210</a>.
 The <code>gx</code> turtle shacle shapes are derived from the <a href="https://registry.lab.gaia-x.eu/v1/api/trusted-schemas-registry/v2/schemas/gax-trust-framework" target="_blank">Gaia-X Trust Framework Schema</a> and the respective application/ld+json <a href="https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#" target="_blank">Gaia-X Trust Framework Shapes</a>.
 A <a href="https://github.com/GAIA-X4PLC-AAD/gaia-x-compliant-claims-example" target="_blank">GaiaX Compliant Claims Example</a> MAY be generated using the <a href="https://github.com/GAIA-X4PLC-AAD/claim-compliance-provider" target="_blank">GaiaX 4 PLC-AAD Claim Compliance Provider</a>.</p>
 <p>The example implementation in the &#x1F4C1; <code>example/</code> folder is based on release v0.2.3 of the <a href="https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.2.3" target="_blank">ASCS HD-Map Asset Example</a>.</p>
@@ -308,21 +308,21 @@ Tooling such as the <a href="https://github.com/openMSL/sl-5-8-asset-tools" targ
 <td><code>envited-x:isSimulationData</code></td>
 <td>MUST</td>
 <td><code>envited-x:isOwner</code></td>
-<td>Core simulation data (e.g., <code>.xodr</code>, <code>.xosc</code>)</td>
+<td>Core simulation data (for example, <code>.xodr</code>, <code>.xosc</code>)</td>
 </tr>
 <tr>
 <td><code>documentation/</code></td>
 <td><code>envited-x:isDocumentation</code></td>
 <td>MUST</td>
 <td><code>envited-x:isPublic</code></td>
-<td>Documentation files (e.g., <code>.pdf</code>, <code>.txt</code>)</td>
+<td>Documentation files (for example, <code>.pdf</code>, <code>.txt</code>)</td>
 </tr>
 <tr>
 <td><code>metadata/</code></td>
 <td><code>envited-x:isMetadata</code></td>
 <td>MUST</td>
 <td><code>envited-x:isPublic</code></td>
-<td>Domain metadata (e.g., <code>hdmap_instance.json</code>)</td>
+<td>Domain metadata (for example, <code>hdmap_instance.json</code>)</td>
 </tr>
 <tr>
 <td><code>media/</code></td>
@@ -336,7 +336,7 @@ Tooling such as the <a href="https://github.com/openMSL/sl-5-8-asset-tools" targ
 <td><code>envited-x:isValidationReport</code></td>
 <td>RECOMMENDED</td>
 <td><code>envited-x:isPublic</code></td>
-<td>Quality checker reports (e.g., <code>.xqar</code>, <code>.txt</code>)</td>
+<td>Quality checker reports (for example, <code>.xqar</code>, <code>.txt</code>)</td>
 </tr>
 <tr>
 <td><em>(root)</em></td>
@@ -429,9 +429,9 @@ It uses the same vocabulary as the final <code>manifest_reference.json</code> bu
 <p>It is RECOMMENDED to use <a href="https://ipfs.tech/" target="_blank">IPFS</a> within the ENVITED-X Data Space for making public data available.
 IPFS is a peer-to-peer content delivery network built around the innovation of content addressing: store, retrieve, and locate data based on the fingerprint of its actual content rather than its name or location.</p>
 <h4 id="cid-v1">CID v1</h4>
-<p>Artifacts uploaded to IPFS e.g. using services like <a href="https://pinata.cloud/" target="_blank">Pinata</a> MUST use the content identifier version <a href="https://docs.ipfs.tech/concepts/content-addressing/#version-1-v1" target="_blank">CID v1</a>.<br>In Pinata this is achievable through the API using the <code>pinataOptions</code> parameter, as outlined in the <a href="https://docs.pinata.cloud/web3/pinning/pinata-metadata#pinataoptions" target="_blank">documentation</a>.</p>
+<p>Artifacts uploaded to IPFS, for example using services like <a href="https://pinata.cloud/" target="_blank">Pinata</a> MUST use the content identifier version <a href="https://docs.ipfs.tech/concepts/content-addressing/#version-1-v1" target="_blank">CID v1</a>.<br>In Pinata this is achievable through the API using the <code>pinataOptions</code> parameter, as outlined in the <a href="https://docs.pinata.cloud/api-reference/endpoint/ipfs/pin-file-to-ipfs" target="_blank">documentation</a>.</p>
 <h4 id="file-naming">File Naming</h4>
-<p>Uploaded file names MUST exclude extensions (e.g., use <code>file</code> instead of <code>file.json</code>) to avoid issues such as double extensions during downloads (e.g., <code>file.json.json</code>).</p>
+<p>Uploaded file names MUST exclude extensions (for example, use <code>file</code> instead of <code>file.json</code>) to avoid issues such as double extensions during downloads (for example, <code>file.json.json</code>).</p>
 <h3 id="3-privacy-layer">3. Privacy Layer</h3>
 <p>The ENVITED-X Data Space implements a three-tiered privacy model:</p>
 <table>
@@ -501,7 +501,7 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <li>Create <code>envited-x_manifest.json</code> by replacing relative paths in <code>manifest_reference.json</code> with IPFS/envited-x.net URLs.</li>
 <li>Replace the paths of items in <code>hasReferencedArtifacts</code> to the correct filePaths.</li>
 <li>Replace <code>@id</code> from <code>manifest_reference.json</code> with generated database <code>UUID</code> in <code>envited-x_manifest.json</code>. This also applies for referenced artifacts.</li>
-<li>Create <code>tzip21_token_metadata.json</code> and map the metadata fields OPTIONALLY use an application/ld+json conform to the <a href="https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/tzip21" target="_blank">tzip21 ontology</a>.</li>
+<li>Create <code>tzip21_token_metadata.json</code> and map the metadata fields OPTIONALLY use an application/ld+json conform to the <a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/tzip21" target="_blank">tzip21 ontology</a>.</li>
 </ul>
 <h4 id="step-3-preview-data">Step 3: Preview Data</h4>
 <ul>
@@ -598,7 +598,7 @@ Examples are the first five tags or &quot;publishers&quot;, which is always ENVI
 <tr>
 <td>&quot;rights&quot;</td>
 <td>manifest:hasLicense:gx:license</td>
-<td><a href="https://softwareengineering.stackexchange.com/a/450839/443441" target="_blank">SPDX identifier</a></td>
+<td><a href="https://spdx.org/licenses/" target="_blank">SPDX identifier</a></td>
 </tr>
 <tr>
 <td>&quot;rightsUri&quot;</td>
@@ -650,23 +650,24 @@ No retroactive changes to previous assets are required.</p>
 <p>The compatibility with the current release of the <a href="https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/" target="_blank">Gaia-X Policy Rules Compliance Document (Release 24.11)</a> is <strong>to be implemented</strong> in a future update of this EVES.</p>
 <h2 id="references">References</h2>
 <ul>
-<li><a href="https://github.com/ASCS-eV/ontology-management-base/" target="_blank">Gaia-X 4 PLC-AAD Ontology Management Base</a></li>
-<li><a href="https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/gx" target="_blank">Gaia-X Ontology and SHACL shapes 2210</a></li>
+<li><a href="https://github.com/ASCS-eV/ontology-management-base/" target="_blank">ASCS Ontology Management Base</a></li>
+<li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/gx" target="_blank">Gaia-X Ontology and SHACL shapes</a></li>
 <li><a href="https://registry.lab.gaia-x.eu/v1/api/trusted-schemas-registry/v2/schemas/gax-trust-framework" target="_blank">Gaia-X Trust Framework Schema</a></li>
 <li><a href="https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#" target="_blank">Gaia-X Trust Framework Shapes</a></li>
 <li><a href="https://github.com/GAIA-X4PLC-AAD/gaia-x-compliant-claims-example" target="_blank">GaiaX Compliant Claims Example</a></li>
-<li><a href="https://github.com/GAIA-X4PLC-AAD/claim-compliance-provider" target="_blank">GaiaX 4 PLC-AAD Claim Compliance Provider</a></li>
+<li><a href="https://github.com/GAIA-X4PLC-AAD/claim-compliance-provider" target="_blank">GaiaX Claim Compliance Provider</a></li>
 <li><a href="https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.2.3" target="_blank">ASCS HD-Map Asset Example</a></li>
 <li><a href="https://ipfs.tech/" target="_blank">IPFS</a></li>
-<li><a href="https://docs.pinata.cloud/web3/pinning/pinata-metadata#pinataoptions" target="_blank">Pinata Documentation</a></li>
+<li><a href="https://pinata.cloud/" target="_blank">Pinata</a></li>
+<li><a href="https://docs.pinata.cloud/api-reference/endpoint/ipfs/pin-file-to-ipfs" target="_blank">Pinata API Documentation</a></li>
+<li><a href="https://docs.ipfs.tech/concepts/content-addressing/#version-1-v1" target="_blank">CID v1 Content Addressing</a></li>
 <li><a href="https://envited-x.net/" target="_blank">ENVITED-X Data Space Portal</a></li>
 <li><a href="https://eips.ethereum.org/EIPS/eip-712" target="_blank">EIP-712</a></li>
+<li><a href="https://spdx.org/licenses/" target="_blank">SPDX License List</a></li>
 <li><a href="https://datatracker.ietf.org/doc/html/rfc2119" target="_blank">RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels</a></li>
 <li><a href="https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/" target="_blank">Gaia-X Policy Rules Compliance Document (Release 24.11)</a></li>
 <li><a href="https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/" target="_blank">Marketplace Contract Reference Implementation</a></li>
-<li><a href="https://github.com/openMSL/sl-5-8-asset-tools" target="_blank">ENVITED-X Simulation Asset Tools</a></li>
-<li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/envited-x" target="_blank">ENVITED-X Ontology</a></li>
-<li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/manifest" target="_blank">Manifest Ontology</a></li>
+<li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/tzip21" target="_blank">TZIP-21 Ontology</a></li>
 <li><a href="https://github.com/openMSL/sl-5-8-asset-tools" target="_blank">ENVITED-X Simulation Asset Tools</a></li>
 <li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/envited-x" target="_blank">ENVITED-X Ontology</a></li>
 <li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/manifest" target="_blank">Manifest Ontology</a></li>
@@ -714,7 +715,7 @@ No retroactive changes to previous assets are required.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"created":"2024-11-19T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001"],"status":"Review","eves-identifier":3,"title":"EVES-003: ENVITED-X Asset Definition and Upload Process","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/4","replaces":"None","level":"2.3","depth":1,"next":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"EVES-004/eves-004.md","ref":"./EVES-004/eves-004.md","articles":[]},"previous":{"title":"EVES-002: ENVITED-X Data Space Architecture Overview","level":"2.2","depth":1,"path":"EVES-002/eves-002.md","ref":"./EVES-002/eves-002.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-003/eves-003.md","mtime":"2026-04-04T19:37:41.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-04-04T20:23:27.731Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"created":"2024-11-19T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001"],"status":"Review","eves-identifier":3,"title":"EVES-003: ENVITED-X Asset Definition and Upload Process","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/4","replaces":"None","level":"2.3","depth":1,"next":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"EVES-004/eves-004.md","ref":"./EVES-004/eves-004.md","articles":[]},"previous":{"title":"EVES-002: ENVITED-X Data Space Architecture Overview","level":"2.2","depth":1,"path":"EVES-002/eves-002.md","ref":"./EVES-002/eves-002.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-003/eves-003.md","mtime":"2026-04-08T08:38:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-04-08T08:40:12.465Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

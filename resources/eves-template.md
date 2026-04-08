@@ -24,7 +24,7 @@ _Provide the detailed technical or procedural content of the EVES. This section 
 
 ### 1. Lifecycle (if applicable)
 
-_Define the lifecycle or steps related to the EVES, e.g., stages for a process or implementation details for standards._
+_Define the lifecycle or steps related to the EVES, for example, stages for a process or implementation details for standards._
 
 ### 2. Key Definitions or Components (if applicable)
 
@@ -48,7 +48,7 @@ _Provide guidelines or requirements for how this EVES will be implemented, if ap
 
 ## Template Instructions
 
-- Replace `00X` with the EVES number (e.g., `001`, `002`).
+- Replace `00X` with the EVES number (for example, `001`, `002`).
 - Replace placeholder text (in square brackets `[]`) with actual content.
 - Delete this section ("Template Instructions") after completing the document.
 - Use consistent formatting to align with repository standards.

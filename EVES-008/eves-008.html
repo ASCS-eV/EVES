@@ -360,7 +360,7 @@ SimpulseID addresses these issues by providing:</p>
 <td><code>did:ethr:0x14a34:0x5091...bb03</code></td>
 </tr>
 <tr>
-<td>Participant (e.g. BMW)</td>
+<td>Participant (for example, BMW)</td>
 <td><code>did:ethr:0x14a34:0x9d27...1048</code></td>
 </tr>
 <tr>
@@ -421,7 +421,7 @@ Note that the context path (<code>/simpulse-id/v1/</code>) differs from the Link
   <span class="hljs-string">&quot;@context&quot;</span>: [<span class="hljs-string">&quot;https://www.w3.org/ns/credentials/v2&quot;</span>, <span class="hljs-string">&quot;https://w3id.org/reachhaven/harbour/core/v1/&quot;</span>, <span class="hljs-string">&quot;https://w3id.org/ascs-ev/simpulse-id/v1/&quot;</span>]
 }
 </code></pre>
-<p>The SimpulseID context uses <code>@vocab: simpulseid:</code> which resolves bare <code>@id</code> values to the <code>simpulseid:</code> namespace. W3C terms (e.g., <code>VerifiableCredential</code>, <code>issuer</code>, <code>validFrom</code>) remain bare; all domain types MUST use prefixed CURIEs (e.g., <code>simpulseid:ParticipantCredential</code>, <code>harbour:CRSetEntry</code>).</p>
+<p>The SimpulseID context uses <code>@vocab: simpulseid:</code> which resolves bare <code>@id</code> values to the <code>simpulseid:</code> namespace. W3C terms (for example, <code>VerifiableCredential</code>, <code>issuer</code>, <code>validFrom</code>) remain bare; all domain types MUST use prefixed CURIEs (for example, <code>simpulseid:ParticipantCredential</code>, <code>harbour:CRSetEntry</code>).</p>
 <h4 id="33-schema-and-ontology">3.3 Schema and Ontology</h4>
 <p>The SimpulseID schema is defined in <a href="https://linkml.io/" target="_blank">LinkML</a> as the single source of truth:</p>
 <table>
@@ -536,8 +536,8 @@ The bare term &quot;Participant&quot; is claimed by Gaia-X, so the prefixed clas
 <p>Membership credentials MUST use <code>urn:uuid:</code> identifiers to avoid RDF graph merge conflicts. If two membership credentials shared a participant DID as <code>credentialSubject.id</code>, loading both into one graph would merge all properties onto a single node.</p>
 <p><strong><code>member</code> vs <code>memberOf</code> convention</strong>:</p>
 <ul>
-<li><code>schema:member</code> is used <strong>on the membership object</strong>, pointing <strong>to the member</strong> (e.g., <code>AscsBaseMembership.member = &lt;BMW DID&gt;</code>).</li>
-<li><code>schema:memberOf</code> is used <strong>on the person</strong>, pointing <strong>to the organization</strong> they belong to (e.g., <code>Administrator.memberOf = [&lt;BMW DID&gt;]</code>).</li>
+<li><code>schema:member</code> is used <strong>on the membership object</strong>, pointing <strong>to the member</strong> (for example, <code>AscsBaseMembership.member = &lt;BMW DID&gt;</code>).</li>
+<li><code>schema:memberOf</code> is used <strong>on the person</strong>, pointing <strong>to the organization</strong> they belong to (for example, <code>Administrator.memberOf = [&lt;BMW DID&gt;]</code>).</li>
 </ul>
 <p>Implementers MUST NOT interchange these properties.</p>
 <h4 id="35-revocation">3.5 Revocation</h4>
@@ -647,7 +647,7 @@ The bare term &quot;Participant&quot; is claimed by Gaia-X, so the prefixed clas
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"created":"2025-11-28T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-002","EVES-007","EVES-009"],"status":"Draft","eves-identifier":"008","title":"EVES-008: ENVITED-X SimpulseID Credential and Identity Framework","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues","replaces":"None","level":"2.8","depth":1,"previous":{"title":"EVES-007: ENVITED-X Blockchain Identifier URN Schema","level":"2.7","depth":1,"path":"EVES-007/eves-007.md","ref":"./EVES-007/eves-007.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-008/eves-008.md","mtime":"2026-04-04T19:37:41.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-04-04T20:23:27.731Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"created":"2025-11-28T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-002","EVES-007","EVES-009"],"status":"Draft","eves-identifier":"008","title":"EVES-008: ENVITED-X SimpulseID Credential and Identity Framework","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues","replaces":"None","level":"2.8","depth":1,"previous":{"title":"EVES-007: ENVITED-X Blockchain Identifier URN Schema","level":"2.7","depth":1,"path":"EVES-007/eves-007.md","ref":"./EVES-007/eves-007.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-008/eves-008.md","mtime":"2026-04-08T08:38:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-04-08T08:40:12.465Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>

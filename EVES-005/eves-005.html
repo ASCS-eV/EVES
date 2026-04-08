@@ -302,7 +302,7 @@ This registry entry confirms the agreement and is the key to transitioning the p
 Both the provider and consumer can download the finalized signed VC as proof of contract.
 Access to the contracted asset is authorized only when the VC is valid and a corresponding registry entry is found and valid.</p>
 </li>
-<li><p><strong>TERMINATED:</strong><br>If any error occurs (e.g., invalid signatures, mismatched payloads, or a timeout) or if either party cancels the negotiation, the process transitions to the terminated state.</p>
+<li><p><strong>TERMINATED:</strong><br>If any error occurs (for example, invalid signatures, mismatched payloads, or a timeout) or if either party cancels the negotiation, the process transitions to the terminated state.</p>
 </li>
 </ul>
 <h3 id="2-detailed-process-flow-example">2. Detailed Process Flow Example</h3>
@@ -333,13 +333,13 @@ Both parties are notified of the termination, and no contract is recorded in the
 <h3 id="3-technical-considerations">3. Technical Considerations</h3>
 <ul>
 <li><p><strong>Verifiable Credential Format:</strong><br>The contract VC conforms to the SD-JWT VC specification (see <a href="https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-00.html" target="_blank">SD-JWT-based Verifiable Credentials (SD-JWT VC)</a> and <a href="https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html" target="_blank">OpenID for Verifiable Credential Issuance - draft 15</a>).
-It is intended for storage in wallets (e.g., Altme) and can be presented to endpoints running the <a href="https://github.com/GAIA-X4PLC-AAD/ssi-to-oidc-bridge" target="_blank">ssi-to-oidc-bridge</a>.</p>
+It is intended for storage in wallets (for example, Altme) and can be presented to endpoints running the <a href="https://github.com/GAIA-X4PLC-AAD/ssi-to-oidc-bridge" target="_blank">ssi-to-oidc-bridge</a>.</p>
 </li>
 <li><p><strong>Decentralized Registry and Scaling:</strong><br>Following the method outlined in <a href="../EVES-006/eves-006.html">EVES-006</a> and inspired by <a href="https://arxiv.org/pdf/2501.17089" target="_blank">this paper</a>, a blockchain-based registry on Etherlink is used to store the hash and UUID of finalized VCs.
 Authorization to access assets is granted only when the presented VC is valid and a valid corresponding registry entry exists.</p>
 </li>
 <li><p><strong>Automation and Encrypted Inbox:</strong><br>An encrypted inbox system &#x2014; optionally secured with DID keys - is used to exchange contract-related VCs.
-The design minimizes manual interaction by automating transitions (e.g., from OFFERED to ACCEPTED under preset criteria) while still allowing explicit user confirmation when needed.</p>
+The design minimizes manual interaction by automating transitions (for example, from OFFERED to ACCEPTED under preset criteria) while still allowing explicit user confirmation when needed.</p>
 </li>
 <li><p><strong>State Machine Integration:</strong><br>The process adheres to the dataspace protocol state machine with the following states:<br><strong>REQUESTED &#x2192; OFFERED &#x2192; ACCEPTED &#x2192; AGREED &#x2192; VERIFIED &#x2192; FINALIZED &#x2192; TERMINATED.</strong><br>Each state transition may be executed automatically by the system if predefined conditions are met, reducing the need for continuous manual intervention.</p>
 </li>
@@ -429,12 +429,12 @@ It introduces a VC-based contract negotiation that interoperates with the datasp
 <li><p><strong>Establishing the Encrypted Inbox:</strong><br>Set up a secure messaging channel (optionally encrypted with DID keys) to facilitate the VC exchange with minimal interaction.</p>
 </li>
 <li><p><strong>VC Generation and Signing:</strong><br>Implement services to generate SD-JWT VCs for contract offers and acceptances.
-Both provider and consumer systems must support signing operations and storage (e.g., in wallets like Altme).</p>
+Both provider and consumer systems must support signing operations and storage (for example, in wallets like Altme).</p>
 </li>
 <li><p><strong>Blockchain Registry Integration:</strong><br>Integrate with the decentralized registry on Etherlink to store the hash and UUID of finalized contract VCs.
 The provider must record a registry entry to transition the state from AGREED to FINALIZED.</p>
 </li>
-<li><p><strong>Automated State Transitions:</strong><br>Where possible, automate state transitions (e.g., from OFFERED to ACCEPTED or AGREED) while allowing manual intervention if necessary.</p>
+<li><p><strong>Automated State Transitions:</strong><br>Where possible, automate state transitions (for example, from OFFERED to ACCEPTED or AGREED) while allowing manual intervention if necessary.</p>
 </li>
 <li><p><strong>Operator Fee Management:</strong><br>The ENVITED-X Data Space operator reviews registry entries to verify successful contracts.
 Using selective disclosure mechanisms, the operator verifies the fee due reported by the provider for each successful contract, facilitating billing and settlement processes.</p>
@@ -486,7 +486,7 @@ The registry entry is then verified to authorize data access.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"created":"2024-12-02T00:00:00.000Z","author":"Felix Hoops (@jfelixh), Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-002","EVES-003","EVES-006"],"status":"Review","eves-identifier":5,"title":"EVES-005: ENVITED-X Contract Negotiation Process","type":"Process","discussions-to":"https://github.com/ASCS-eV/EVES/issues/","replaces":"None","level":"2.5","depth":1,"next":{"title":"EVES-006: ENVITED-X Scaling Architecture","level":"2.6","depth":1,"path":"EVES-006/eves-006.md","ref":"./EVES-006/eves-006.md","articles":[]},"previous":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"EVES-004/eves-004.md","ref":"./EVES-004/eves-004.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-005/eves-005.md","mtime":"2026-04-04T19:37:41.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-04-04T20:23:27.731Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"created":"2024-12-02T00:00:00.000Z","author":"Felix Hoops (@jfelixh), Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-002","EVES-003","EVES-006"],"status":"Review","eves-identifier":5,"title":"EVES-005: ENVITED-X Contract Negotiation Process","type":"Process","discussions-to":"https://github.com/ASCS-eV/EVES/issues/","replaces":"None","level":"2.5","depth":1,"next":{"title":"EVES-006: ENVITED-X Scaling Architecture","level":"2.6","depth":1,"path":"EVES-006/eves-006.md","ref":"./EVES-006/eves-006.md","articles":[]},"previous":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"EVES-004/eves-004.md","ref":"./EVES-004/eves-004.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-005/eves-005.md","mtime":"2026-04-08T08:38:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-04-08T08:40:12.465Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
