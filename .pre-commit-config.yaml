@@ -15,9 +15,16 @@ repos:
       - id: markdownlint
         args: ["--config", ".markdownlint.json"]
 
-  - repo: https://github.com/pre-commit/mirrors-prettier
-    rev: v4.0.0-alpha.8
+  - repo: local
     hooks:
       - id: prettier
+        name: prettier
+        entry: npx prettier --check --ignore-path .prettierignore
+        language: system
         types_or: [markdown, json, yaml]
-        args: ["--prose-wrap", "preserve"]
+
+  - repo: https://github.com/errata-ai/vale
+    rev: v3.9.6
+    hooks:
+      - id: vale
+        types: [markdown]

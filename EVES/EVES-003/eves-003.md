@@ -31,7 +31,7 @@ This EVES addresses the need for clear guidelines to onboard assets and synchron
 
 The `envited-x:SimulationAsset` defines a digital asset within the domain of simulation including the core simulation data and all necessary files for describing, evaluating, and visualizing the dataset.
 All simulation assets MUST be derived from a common `envited-x` ontology defined in the [Gaia-X 4 PLC-AAD Ontology Management Base][1].
-A data space portal SHALL display the currently supported version of the ontologies like e.g.: `https://ontologies.envited-x.net/envited-x/v2/ontology#`.
+A data space portal SHALL display the currently supported version of the ontologies such as: `https://ontologies.envited-x.net/envited-x/v2/ontology#`.
 Each simulation asset SHALL be compliant with the [Gaia-X Ontology and SHACL shapes 2210][2].
 The `gx` turtle shacle shapes are derived from the [Gaia-X Trust Framework Schema][3] and the respective application/ld+json [Gaia-X Trust Framework Shapes][4].
 A [GaiaX Compliant Claims Example][5] MAY be generated using the [GaiaX 4 PLC-AAD Claim Compliance Provider][6].
@@ -54,15 +54,15 @@ Tooling such as the [ENVITED-X Simulation Asset Tools][20] MAY automate the crea
 
 Every `asset.zip` MUST contain the following top-level folders mapped to `envited-x` artifact categories:
 
-| Folder                | `envited-x` Category           | Required    | `envited-x` Access Role | Description                                     |
-| --------------------- | ------------------------------ | ----------- | ----------------------- | ----------------------------------------------- |
-| `simulation-data/`    | `envited-x:isSimulationData`   | MUST        | `envited-x:isOwner`     | Core simulation data (e.g., `.xodr`, `.xosc`)   |
-| `documentation/`      | `envited-x:isDocumentation`    | MUST        | `envited-x:isPublic`    | Documentation files (e.g., `.pdf`, `.txt`)      |
-| `metadata/`           | `envited-x:isMetadata`         | MUST        | `envited-x:isPublic`    | Domain metadata (e.g., `hdmap_instance.json`)   |
-| `media/`              | `envited-x:isMedia`            | MUST        | `envited-x:isPublic`    | Visualizations, images, GeoJSON, 3D previews    |
-| `validation-reports/` | `envited-x:isValidationReport` | RECOMMENDED | `envited-x:isPublic`    | Quality checker reports (e.g., `.xqar`, `.txt`) |
-| _(root)_              | `envited-x:isLicense`          | MUST        | `envited-x:isPublic`    | LICENSE file at the asset root                  |
-| _(root)_              | `envited-x:isManifest`         | MUST        | `envited-x:isPublic`    | `manifest_reference.json` at the asset root     |
+| Folder                | `envited-x` Category           | Required    | `envited-x` Access Role | Description                                            |
+| --------------------- | ------------------------------ | ----------- | ----------------------- | ------------------------------------------------------ |
+| `simulation-data/`    | `envited-x:isSimulationData`   | MUST        | `envited-x:isOwner`     | Core simulation data (for example, `.xodr`, `.xosc`)   |
+| `documentation/`      | `envited-x:isDocumentation`    | MUST        | `envited-x:isPublic`    | Documentation files (for example, `.pdf`, `.txt`)      |
+| `metadata/`           | `envited-x:isMetadata`         | MUST        | `envited-x:isPublic`    | Domain metadata (for example, `hdmap_instance.json`)   |
+| `media/`              | `envited-x:isMedia`            | MUST        | `envited-x:isPublic`    | Visualizations, images, GeoJSON, 3D previews           |
+| `validation-reports/` | `envited-x:isValidationReport` | RECOMMENDED | `envited-x:isPublic`    | Quality checker reports (for example, `.xqar`, `.txt`) |
+| _(root)_              | `envited-x:isLicense`          | MUST        | `envited-x:isPublic`    | LICENSE file at the asset root                         |
+| _(root)_              | `envited-x:isManifest`         | MUST        | `envited-x:isPublic`    | `manifest_reference.json` at the asset root            |
 
 > **Note:** The `envited-x` categories and access roles are formally defined in the [ENVITED-X Ontology][21] which extends the generic [Manifest Ontology][22].
 > The `envited-x:ExtendedLinkShape` constrains the allowed values for both `manifest:hasCategory` and `manifest:hasAccessRole`.
@@ -146,12 +146,12 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 
 #### CID v1
 
-Artifacts uploaded to IPFS e.g. using services like [Pinata][9] MUST use the content identifier version [CID v1][11].  
+Artifacts uploaded to IPFS, for example using services like [Pinata][9] MUST use the content identifier version [CID v1][11].  
 In Pinata this is achievable through the API using the `pinataOptions` parameter, as outlined in the [documentation][10].
 
 #### File Naming
 
-Uploaded file names MUST exclude extensions (e.g., use `file` instead of `file.json`) to avoid issues such as double extensions during downloads (e.g., `file.json.json`).
+Uploaded file names MUST exclude extensions (for example, use `file` instead of `file.json`) to avoid issues such as double extensions during downloads (for example, `file.json.json`).
 
 ### 3. Privacy Layer
 
@@ -294,29 +294,30 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 
 ## References
 
-- [Gaia-X 4 PLC-AAD Ontology Management Base][1]
-- [Gaia-X Ontology and SHACL shapes 2210][2]
+- [ASCS Ontology Management Base][1]
+- [Gaia-X Ontology and SHACL shapes][2]
 - [Gaia-X Trust Framework Schema][3]
 - [Gaia-X Trust Framework Shapes][4]
 - [GaiaX Compliant Claims Example][5]
-- [GaiaX 4 PLC-AAD Claim Compliance Provider][6]
+- [GaiaX Claim Compliance Provider][6]
 - [ASCS HD-Map Asset Example][7]
 - [IPFS][8]
-- [Pinata Documentation][10]
+- [Pinata][9]
+- [Pinata API Documentation][10]
+- [CID v1 Content Addressing][11]
 - [ENVITED-X Data Space Portal][12]
 - [EIP-712][13]
+- [SPDX License List][15]
 - [RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels][16]
 - [Gaia-X Policy Rules Compliance Document (Release 24.11)][17]
 - [Marketplace Contract Reference Implementation][18]
-- [ENVITED-X Simulation Asset Tools][20]
-- [ENVITED-X Ontology][21]
-- [Manifest Ontology][22]
+- [TZIP-21 Ontology][19]
 - [ENVITED-X Simulation Asset Tools][20]
 - [ENVITED-X Ontology][21]
 - [Manifest Ontology][22]
 
 [1]: https://github.com/ASCS-eV/ontology-management-base/
-[2]: https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/gx
+[2]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/gx
 [3]: https://registry.lab.gaia-x.eu/v1/api/trusted-schemas-registry/v2/schemas/gax-trust-framework
 [4]: https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#
 [5]: https://github.com/GAIA-X4PLC-AAD/gaia-x-compliant-claims-example
@@ -324,16 +325,16 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 [7]: https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.2.3
 [8]: https://ipfs.tech/
 [9]: https://pinata.cloud/
-[10]: https://docs.pinata.cloud/web3/pinning/pinata-metadata#pinataoptions
+[10]: https://docs.pinata.cloud/api-reference/endpoint/ipfs/pin-file-to-ipfs
 [11]: https://docs.ipfs.tech/concepts/content-addressing/#version-1-v1
 [12]: https://envited-x.net/
 [13]: https://eips.ethereum.org/EIPS/eip-712
 [14]: https://json-schema.org/understanding-json-schema/reference/string#dates-and-times
-[15]: https://softwareengineering.stackexchange.com/a/450839/443441
+[15]: https://spdx.org/licenses/
 [16]: https://datatracker.ietf.org/doc/html/rfc2119
 [17]: https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/
 [18]: https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/
-[19]: https://github.com/GAIA-X4PLC-AAD/ontology-management-base/tree/main/tzip21
+[19]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/tzip21
 [20]: https://github.com/openMSL/sl-5-8-asset-tools
 [21]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/envited-x
 [22]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/manifest

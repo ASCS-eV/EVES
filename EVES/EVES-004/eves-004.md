@@ -50,7 +50,7 @@ This specification distinguishes between two formal roles: **Editors** and **App
 
 #### 1.5 Standards Enforcers (Editors)
 
-- Verify that proposals align with overarching governance and standards (e.g., Gaia-X, W3C, Tezos TZIPs).
+- Verify that proposals align with overarching governance and standards (for example, Gaia-X, W3C, Tezos TZIPs).
 - Ensure interoperability within the ENVITED ecosystem.
 
 #### 1.6 Approvers
@@ -135,7 +135,7 @@ Approvers operate on top of the Editors’ responsibilities, taking an active ro
 
 1. **Application Process**:
    - Anyone interested in becoming an EVES Editor can open a discussion in the ENVITED GitHub organization.
-   - Tag the current editors group (e.g., `@eves-editors`) in the discussion for visibility.
+   - Tag the current editors group (for example, `@eves-editors`) in the discussion for visibility.
 
 2. **Eligibility**:
    - Applicants MUST demonstrate familiarity with the EVES process, template, and standards as defined in [EVES-001](../EVES-001/eves-001.md) and this document.
@@ -155,7 +155,7 @@ The following points clarify limits to the Editor and Approver roles:
 1. **Creation of New EVES**
    - Neither Editors nor Approvers drive the creation of new EVES; the community identifies needs, and authors propose solutions.
 2. **Technical Designs or Implementations**
-   - They do not craft or own the underlying technical designs (e.g., code libraries).
+   - They do not craft or own the underlying technical designs (for example, code libraries).
      The community or EVES authors lead the design, while Editors and Approvers review it for feasibility.
 3. **Promotion or Adoption**
    - They are not tasked with marketing or ensuring the adoption of specific EVES.

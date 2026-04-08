@@ -48,7 +48,7 @@ _-> This document, providing an overview of the repository._
 ## How to Use This Repository
 
 1. **Explore Specifications**:
-   - Navigate to `SUMMARY.md` to view an overview of the specifications specifications.
+   - Navigate to `SUMMARY.md` to view an overview of the specifications.
    - Check the EVES `status` for work in progress and contribute to discussions.
 
 2. **Propose a New EVES**:
