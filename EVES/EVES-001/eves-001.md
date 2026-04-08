@@ -64,7 +64,7 @@ Each EVES must pass through the following stages:
    - **Future Changes**: Only changes designated as a minor editorial update by Editors are allowed in this stage.
 
 5. **Deferred/Rejected**
-   - **Deferred**: The EVES is paused for future discussion (e.g., lack of resources, overshadowed by another proposal).
+   - **Deferred**: The EVES is paused for future discussion (for example, lack of resources, overshadowed by another proposal).
    - **Rejected**: Consensus cannot be reached, or the specification is fundamentally misaligned with ENVITED-X goals.
 
 6. **Superseded**
@@ -85,20 +85,20 @@ Each EVES must pass through the following stages:
 ### 2. EVES Numbering
 
 - EVES documents follow sequential numbering, starting from EVES-001, EVES-002, and so on.
-- Numbers must be unique and stable once assigned (i.e., no recycling of identifiers).
+- Numbers must be unique and stable once assigned (that is, no recycling of identifiers).
 
 ### 3. EVES Types
 
 Each EVES must declare one of the following **type** fields in its YAML header:
 
 1. **Standards**
-   - Defines technical specifications or protocols recommended for ecosystem adoption (e.g., data formats, APIs).
+   - Defines technical specifications or protocols recommended for ecosystem adoption (for example, data formats, APIs).
 
 2. **Informational**
    - Provides context, best practices, or reference material without strict normative requirements.
 
 3. **Process**
-   - Outlines procedural or governance rules applicable to the ENVITED community (e.g., this EVES-001).
+   - Outlines procedural or governance rules applicable to the ENVITED community (for example, this EVES-001).
 
 ### 4. Roles and Responsibilities
 
@@ -121,7 +121,7 @@ Each EVES must declare one of the following **type** fields in its YAML header:
 
 - A subset of EVES Editors with voting rights as full ASCS e.V. ENVITED members.
 - Provide the final decision on moving an EVES from Candidate to Final.
-- Must meet quorum requirements (e.g., at least two Approvers) to grant or deny Final status.
+- Must meet quorum requirements (for example, at least two Approvers) to grant or deny Final status.
 
 ### 4.5 Conflict Resolution
 

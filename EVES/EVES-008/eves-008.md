@@ -104,13 +104,13 @@ did:ethr:<chainIdHex>:<ethereum-address>
 
 Entity types and their DID patterns:
 
-| Entity                 | Example DID                      |
-| ---------------------- | -------------------------------- |
-| Participant (ASCS)     | `did:ethr:0x14a34:0x5091...bb03` |
-| Participant (e.g. BMW) | `did:ethr:0x14a34:0x9d27...1048` |
-| Natural person         | `did:ethr:0x14a34:0xb2F7...b39a` |
-| Infrastructure service | `did:ethr:0x14a34:0x4612...46d1` |
-| Program definition     | `did:ethr:0x14a34:0x28b9...422D` |
+| Entity                         | Example DID                      |
+| ------------------------------ | -------------------------------- |
+| Participant (ASCS)             | `did:ethr:0x14a34:0x5091...bb03` |
+| Participant (for example, BMW) | `did:ethr:0x14a34:0x9d27...1048` |
+| Natural person                 | `did:ethr:0x14a34:0xb2F7...b39a` |
+| Infrastructure service         | `did:ethr:0x14a34:0x4612...46d1` |
+| Program definition             | `did:ethr:0x14a34:0x28b9...422D` |
 
 **Key management**: Signing DID documents MUST expose P-256 keys as `JsonWebKey` verification methods.
 The primary signing key is published as `#controller`; optional secondary keys appear as `#delegate-N`.
@@ -151,7 +151,7 @@ Example credential `@context`:
 }
 ```
 
-The SimpulseID context uses `@vocab: simpulseid:` which resolves bare `@id` values to the `simpulseid:` namespace. W3C terms (e.g., `VerifiableCredential`, `issuer`, `validFrom`) remain bare; all domain types MUST use prefixed CURIEs (e.g., `simpulseid:ParticipantCredential`, `harbour:CRSetEntry`).
+The SimpulseID context uses `@vocab: simpulseid:` which resolves bare `@id` values to the `simpulseid:` namespace. W3C terms (for example, `VerifiableCredential`, `issuer`, `validFrom`) remain bare; all domain types MUST use prefixed CURIEs (for example, `simpulseid:ParticipantCredential`, `harbour:CRSetEntry`).
 
 #### 3.3 Schema and Ontology
 
@@ -202,8 +202,8 @@ Membership credentials MUST use `urn:uuid:` identifiers to avoid RDF graph merge
 
 **`member` vs `memberOf` convention**:
 
-- `schema:member` is used **on the membership object**, pointing **to the member** (e.g., `AscsBaseMembership.member = <BMW DID>`).
-- `schema:memberOf` is used **on the person**, pointing **to the organization** they belong to (e.g., `Administrator.memberOf = [<BMW DID>]`).
+- `schema:member` is used **on the membership object**, pointing **to the member** (for example, `AscsBaseMembership.member = <BMW DID>`).
+- `schema:memberOf` is used **on the person**, pointing **to the organization** they belong to (for example, `Administrator.memberOf = [<BMW DID>]`).
 
 Implementers MUST NOT interchange these properties.
 

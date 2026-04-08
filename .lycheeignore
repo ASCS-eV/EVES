@@ -1,0 +1,13 @@
+# Forward references to EVES specs not yet written
+EVES-009/eves-009.md
+
+# Placeholder/example URLs used in spec text (not real endpoints)
+https://assets.envited-x.net/
+https://metadata.envited-x.net/
+https://ipfs.envited-x.net/
+
+# GitLab blocks automated requests with 403
+https://gitlab.com/tezos/tzip/
+
+# Flaky external sites (intermittent connection resets in CI)
+https://www.conventionalcommits.org/
