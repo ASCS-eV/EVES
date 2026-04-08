@@ -1,21 +1,48 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$comment": "EVES-003 profile of TZIP-21 Rich Metadata. Deviations from upstream (gitlab.com/tezos/tzip): minter uses DID per EVES-008 instead of tzaddress, name is required. Upstream bug fixes: title moved inside definition (draft-07 $ref ignores siblings), RFC 1776 typo corrected to RFC 1766.",
+  "$comment": "EVES-003 profile of ERC-721 token metadata. Base fields (name, description, image) from the ERC-721 Metadata JSON Schema (EIP-721). Display fields (animation_url, external_url, background_color, attributes) from OpenSea Metadata Standards (de facto, no upstream schema). EVES extension fields (minter, creators, contributors, publishers, date, type, language, rights, rights_uri, identifier, formats) mirror TZIP-21 for cross-chain interoperability.",
   "$ref": "#/definitions/asset",
   "definitions": {
     "asset": {
-      "title": "TZIP-21 Rich Metadata (EVES-003 Profile)",
+      "title": "ERC-721 Token Metadata (EVES-003 Profile)",
       "type": "object",
       "additionalProperties": true,
-      "required": ["name"],
+      "required": [
+        "name",
+        "image"
+      ],
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Identifies the asset to which this NFT represents."
+        },
         "description": {
           "type": "string",
-          "description": "General notes, abstracts, or summaries about the contents of an asset."
+          "description": "Describes the asset to which this NFT represents."
+        },
+        "image": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "A URI pointing to a resource with mime type image/* representing the asset. Maps to TZIP-21 displayUri."
+        },
+        "animation_url": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "A URI pointing to the actual asset content (for example, asset.zip download URL). Maps to TZIP-21 artifactUri."
+        },
+        "external_url": {
+          "type": "string",
+          "format": "uri-reference",
+          "description": "A URI pointing to an external page with additional information about the asset (for example, domain metadata on IPFS). Maps to TZIP-21 externalUri."
+        },
+        "background_color": {
+          "type": "string",
+          "pattern": "^[0-9a-fA-F]{6}$",
+          "description": "Background color of the item on OpenSea. Must be a six-character hexadecimal without a pre-pended #."
         },
         "minter": {
           "type": "string",
-          "description": "The DID of the LegalEntity (OrganizationParticipant) responsible for minting the asset, as defined in EVES-008 (for example, did:ethr:<chainIdHex>:<address>)."
+          "description": "The DID of the LegalEntity (OrganizationParticipant) responsible for minting the asset, as defined in EVES-008 (for example, did:ethr:<chainIdHex>:<address>). EVES extension."
         },
         "creators": {
           "type": "array",
@@ -46,83 +73,26 @@
           "format": "date-time",
           "description": "A date associated with the creation or availability of the asset."
         },
-        "blockLevel": {
-          "type": "integer",
-          "description": "Chain block level associated with the creation or availability of the asset."
-        },
         "type": {
           "type": "string",
           "description": "A broad definition of the type of content of the asset."
         },
-        "tags": {
-          "type": "array",
-          "description": "A list of tags that describe the subject or content of the asset.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
-          }
-        },
-        "genres": {
-          "type": "array",
-          "description": "A list of genres that describe the subject or content of the asset.",
-          "uniqueItems": true,
-          "items": {
-            "type": "string"
-          }
-        },
         "language": {
           "type": "string",
-          "format": "https://tools.ietf.org/html/rfc1766",
-          "description": "The language of the intellectual content of the asset as defined in RFC 1766."
-        },
-        "identifier": {
-          "type": "string",
-          "description": "A string or number used to uniquely identify the asset. Ex. URL, URN, UUID, ISBN, etc."
+          "description": "The language of the intellectual content of the asset as defined in RFC 1766. EVES extension."
         },
         "rights": {
           "type": "string",
-          "description": "A statement about the asset rights."
+          "description": "A statement about the asset rights, for example, an SPDX license identifier."
         },
-        "rightsUri": {
+        "rights_uri": {
           "type": "string",
           "format": "uri-reference",
-          "description": "Links to a statement of rights."
+          "description": "Links to a statement of rights (for example, full license text or smart contract DID). Maps to TZIP-21 rightsUri. EVES extension."
         },
-        "artifactUri": {
+        "identifier": {
           "type": "string",
-          "format": "uri-reference",
-          "description": "A URI to the asset."
-        },
-        "displayUri": {
-          "type": "string",
-          "format": "uri-reference",
-          "description": "A URI to an image of the asset. Used for display purposes."
-        },
-        "thumbnailUri": {
-          "type": "string",
-          "format": "uri-reference",
-          "description": "A URI to an image of the asset for wallets and client applications to have a scaled down image to present to end-users. Reccomened maximum size of 350x350px."
-        },
-        "externalUri": {
-          "type": "string",
-          "format": "uri-reference",
-          "description": "A URI with additional information about the subject or content of the asset."
-        },
-        "isTransferable": {
-          "type": "boolean",
-          "description": "All tokens will be transferable by default to allow end-users to send them to other end-users. However, this field exists to serve in special cases where owners will not be able to transfer the token."
-        },
-        "isBooleanAmount": {
-          "type": "boolean",
-          "description": "Describes whether an account can have an amount of exactly 0 or 1. (The purpose of this field is for wallets to determine whether or not to display balance information and an amount field when transferring.)"
-        },
-        "shouldPreferSymbol": {
-          "type": "boolean",
-          "description": "Allows wallets to decide whether or not a symbol should be displayed in place of a name."
-        },
-        "ttl": {
-          "type": "integer",
-          "description": "The maximum amount of time in seconds the asset metadata should be cached."
+          "description": "A string or number used to uniquely identify the asset. Ex. URL, URN, UUID, ISBN, DID, etc."
         },
         "formats": {
           "type": "array",
@@ -135,14 +105,7 @@
           "items": {
             "$ref": "#/definitions/attribute"
           },
-          "description": "Custom attributes about the subject or content of the asset."
-        },
-        "assets": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/asset"
-          },
-          "description": "Facilitates the description of collections and other types of resources that contain multiple assets."
+          "description": "OpenSea-style attributes describing traits of the asset."
         }
       }
     },
@@ -190,21 +153,24 @@
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "name": {
+        "trait_type": {
           "type": "string",
-          "description": "Name of the attribute."
+          "description": "Name of the trait."
         },
         "value": {
-          "type": "string",
-          "description": "Value of the attribute."
+          "description": "Value of the trait.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "number" }
+          ]
         },
-        "type": {
+        "display_type": {
           "type": "string",
-          "description": "Type of the value. To be used for display purposes."
+          "description": "Display type hint for the trait (for example, number, boost_percentage, boost_number, date)."
         }
       },
       "required": [
-        "name",
+        "trait_type",
         "value"
       ]
     },

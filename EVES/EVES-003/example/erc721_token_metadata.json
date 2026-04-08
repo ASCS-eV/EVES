@@ -1,15 +1,51 @@
 {
-  "decimals": 0,
-  "isBooleanAmount": true,
   "name": "TestfeldNiedersachsen_ALKS_ODR_sample",
   "description": "simple hdmap example file on Testfeld Niedersachsen for ALKS scenario",
-  "tags": [
-    "GaiaX",
-    "ASCS",
-    "ENVITED-X",
-    "EVES",
-    "nft",
-    "ASAM OpenDRIVE 1.6"
+  "image": "ipfs://bafybeief5r2xgciehzhx6c4kbooifsnbjpiifjei36lpi3kzcdmpr2wvue",
+  "animation_url": "https://assets.envited-x.net/bafybeifo6ve5i6542vi6ruuflxdqtcmcisdtwlqefq2e5a33tljsaqxhpm",
+  "external_url": "ipfs://bafkreicuwg3s4uvei2iu2p5eobozghdodtwhwoi6qiawhwqj3nflrk6dxi",
+  "background_color": "111827",
+  "attributes": [
+    {
+      "trait_type": "Standard",
+      "value": "GaiaX"
+    },
+    {
+      "trait_type": "Publisher",
+      "value": "ASCS"
+    },
+    {
+      "trait_type": "Ecosystem",
+      "value": "ENVITED-X"
+    },
+    {
+      "trait_type": "Specification",
+      "value": "EVES"
+    },
+    {
+      "trait_type": "Token Type",
+      "value": "nft"
+    },
+    {
+      "trait_type": "Format",
+      "value": "ASAM OpenDRIVE 1.6"
+    },
+    {
+      "trait_type": "https://w3id.org/ascs-ev/envited-x/hdmap/v6/",
+      "value": "https://github.com/ASCS-eV/ontology-management-base/releases/tag/v0.1.6"
+    },
+    {
+      "trait_type": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/",
+      "value": "https://github.com/ASCS-eV/ontology-management-base/releases/tag/v0.1.6"
+    },
+    {
+      "trait_type": "https://w3id.org/gaia-x/development#",
+      "value": "https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/"
+    },
+    {
+      "trait_type": "https://w3id.org/ascs-ev/envited-x/georeference/v5/",
+      "value": "https://github.com/ASCS-eV/ontology-management-base/releases/tag/v0.1.6"
+    }
   ],
   "minter": "did:ethr:0x14a34:0x50916c8e454722d2357916d4250500102288bb03",
   "creators": [
@@ -21,13 +57,10 @@
   ],
   "date": "2025-02-17T00:00:00+00:00",
   "type": "EVES-003 https://github.com/ASCS-eV/EVES",
-  "rights": "MPL-2.0",
-  "rightsUri": "https://www.mozilla.org/en-US/MPL/2.0/",
   "language": "en",
-  "artifactUri": "https://assets.envited-x.net/bafybeifo6ve5i6542vi6ruuflxdqtcmcisdtwlqefq2e5a33tljsaqxhpm",
+  "rights": "MPL-2.0",
+  "rights_uri": "https://www.mozilla.org/en-US/MPL/2.0/",
   "identifier": "did:web:registry.gaia-x.eu:HdMap:DjHgK5ErTBow1Ya3J05tW9l12skGWgZn6kA9",
-  "externalUri": "ipfs://bafkreicuwg3s4uvei2iu2p5eobozghdodtwhwoi6qiawhwqj3nflrk6dxi",
-  "displayUri": "ipfs://bafybeief5r2xgciehzhx6c4kbooifsnbjpiifjei36lpi3kzcdmpr2wvue",
   "formats": [
     {
       "uri": "https://assets.envited-x.net/bafybeifo6ve5i6542vi6ruuflxdqtcmcisdtwlqefq2e5a33tljsaqxhpm",
@@ -67,28 +100,6 @@
       },
       "fileSize": 2397906,
       "fileName": "Testfeld_Niedersachsen_ALKS_..._impression-01.png"
-    }
-  ],
-  "attributes": [
-    {
-      "name": "https://w3id.org/ascs-ev/envited-x/hdmap/v6/",
-      "value": "https://github.com/ASCS-eV/ontology-management-base/releases/tag/v0.1.6",
-      "type": "uri"
-    },
-    {
-      "name": "https://w3id.org/ascs-ev/envited-x/envited-x/v3/",
-      "value": "https://github.com/ASCS-eV/ontology-management-base/releases/tag/v0.1.6",
-      "type": "uri"
-    },
-    {
-      "name": "https://w3id.org/gaia-x/development#",
-      "value": "https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/",
-      "type": "uri"
-    },
-    {
-      "name": "https://w3id.org/ascs-ev/envited-x/georeference/v5/",
-      "value": "https://github.com/ASCS-eV/ontology-management-base/releases/tag/v0.1.6",
-      "type": "uri"
     }
   ]
 }
