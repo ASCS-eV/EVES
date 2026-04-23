@@ -290,10 +290,10 @@ If additional non-public information needs to be stored in the database before m
 
 #### Synchronization and Security
 
-[EVES-007](../EVES-007/eves-007.md) defines the ENVITED-X Blockchain Identifier URN Schema.
+[EVES-007][31] defines the ENVITED-X Blockchain Identifier URN Schema.
 The synchronization between the smart contract as in the [Marketplace Contract Reference Implementation][18] and the ENVITED-X database relies on:
 
-1. The contract identifier using the [EVES-007](../EVES-007/eves-007.md) URN schema:
+1. The contract identifier using the [EVES-007][31] URN schema:
    - **Tezos** (current Ghostnet contract):
      `urn:blockchain:tezos:NetXnHfVqm9iesp:contract:KT1PCaD2kmgCHy15wQ1gpqZUy9RLxyBVJdTF`
    - **EVM** (Etherlink L2):
@@ -366,8 +366,19 @@ Attributes not in the table are static and the same for every mint as in the ðŸ“
 
 **Attributes mapping note:** TZIP-21 uses a flat `"tags"` string array and a separate `"attributes"` array with `name`/`value`/`type` objects.
 In ERC-721, both are merged into the OpenSea-style `"attributes"` array using `"trait_type"`/`"value"` objects.
-Each TZIP-21 tag becomes an attribute (for example, `{"trait_type": "Format", "value": "ASAM OpenDRIVE 1.6"}`),
-and each TZIP-21 attribute's `name`/`value` maps directly to `trait_type`/`value`
+
+The static TZIP-21 tags MUST be mapped to ERC-721 attributes using the following canonical `trait_type` names:
+
+| TZIP-21 tag value                        | ERC-721 `trait_type` |
+| ---------------------------------------- | -------------------- |
+| "GaiaX"                                  | "Standard"           |
+| "ASCS"                                   | "Publisher"          |
+| "ENVITED-X"                              | "Ecosystem"          |
+| "EVES"                                   | "Specification"      |
+| "nft"                                    | "Token Type"         |
+| format:formatType + " " + format:version | "Format"             |
+
+Each TZIP-21 ontology attribute's `name`/`value` maps directly to `trait_type`/`value`
 (for example, `{"trait_type": "https://w3id.org/ascs-ev/envited-x/hdmap/v6/", "value": "https://github.com/ASCS-eV/ontology-management-base/releases/tag/v0.1.6"}`).
 Using the full ontology IRI as `trait_type` ensures each attribute is unique and machine-parseable; the `type` field from TZIP-21 is omitted as it has no OpenSea equivalent.
 
@@ -377,7 +388,7 @@ For an HD-Map asset, the following ontology attributes are RECOMMENDED:
 - **Domain ontology** (for example, `hdmap/v6`): identifies the simulation asset type
 - **Ecosystem ontology** (`envited-x/v3`): identifies the asset as part of the ENVITED-X Data Space
 - **Gaia-X ontology** (`gx`): signals conformance with the Gaia-X Trust Framework for data space interoperability
-- **Georeference ontology** (`georeference/v5`): included when the asset contains geospatial reference data (OPTIONAL per the [hdmap SHACL shapes][21])
+- **Georeference ontology** (`georeference/v5`): included when the asset contains geospatial reference data (OPTIONAL per the [HD-Map Ontology SHACL shapes][30])
 
 The `value` for each ontology attribute SHOULD be the release URL of the [ASCS Ontology Management Base][1] version used, except for `gx` which references the [Gaia-X Policy Rules Compliance Document][17].
 
@@ -447,6 +458,8 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 - [ERC-7572: Contract-Level Metadata via contractURI()][27]
 - [EVES-008: ENVITED-X Identity and Credential Framework][28]
 - [RFC 1766: Tags for the Identification of Languages][29]
+- [HD-Map Ontology][30]
+- [EVES-007: ENVITED-X Blockchain Identifier URN Schema][31]
 
 [1]: https://github.com/ASCS-eV/ontology-management-base/
 [2]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/gx
@@ -477,3 +490,5 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 [27]: https://eips.ethereum.org/EIPS/eip-7572
 [28]: ../EVES-008/eves-008.md
 [29]: https://datatracker.ietf.org/doc/html/rfc1766
+[30]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/hdmap
+[31]: ../EVES-007/eves-007.md

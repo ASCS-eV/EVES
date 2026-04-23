@@ -9,6 +9,10 @@
       "additionalProperties": true,
       "required": ["name"],
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "Identifies the asset that this token represents."
+        },
         "description": {
           "type": "string",
           "description": "General notes, abstracts, or summaries about the contents of an asset."
