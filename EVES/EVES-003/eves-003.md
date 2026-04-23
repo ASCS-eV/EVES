@@ -66,20 +66,20 @@ All stages use the same `envited-x` and `manifest` ontology vocabulary to ensure
 ```
 
 - **Stage 1 — Preparation:** The user describes their input files in an `input_manifest.json` using the `envited-x` vocabulary. This partial manifest specifies file paths, categories, access roles, and MIME types.
-- **Stage 2 — Packaging:** Asset creation tooling (such as the [ENVITED-X Simulation Asset Tools][20]) processes the input manifest, computes CIDs and file sizes, generates additional artifacts (documentation, metadata, validation reports), and packages everything into an `asset.zip` with a complete `manifest_reference.json`.
+- **Stage 2 — Packaging:** Asset creation tooling (such as the [ENVITED-X Simulation Asset Tools][20]) processes the input manifest, computes CIDs and file sizes, generates additional artifacts, and packages everything into an `asset.zip` with a complete `manifest_reference.json`.
 - **Stage 3 — Publication:** The ENVITED-X portal uploads the asset, replaces local file paths with IPFS/HTTPS URLs, generates the final `envited-x_manifest.json`, and creates chain-specific token metadata files for minting.
 
 #### Example Files
 
 The 📁 `example/` folder contains files from each stage of this pipeline:
 
-| File | Stage | Role | Status |
-| ---- | ----- | ---- | ------ |
-| `input_manifest.json` | Preparation | User-provided partial manifest for asset tooling | Normative |
-| `bafybeifo6...zip` | Packaging | Example `asset.zip` from [hd-map-asset-example v0.2.3][7] | Informative |
-| `envited-x_manifest.json` | Publication | Final manifest with resolved IPFS/HTTPS URLs | Normative |
-| `tzip21_token_metadata.json` | Publication | Tezos TZIP-21 token metadata | Normative |
-| `erc721_token_metadata.json` | Publication | EVM ERC-721 token metadata | Normative |
+| File                         | Stage       | Role                                                      | Status      |
+| ---------------------------- | ----------- | --------------------------------------------------------- | ----------- |
+| `input_manifest.json`        | Preparation | User-provided partial manifest for asset tooling          | Normative   |
+| `bafybeifo6...zip`           | Packaging   | Example `asset.zip` from [hd-map-asset-example v0.2.3][7] | Informative |
+| `envited-x_manifest.json`    | Publication | Final manifest with resolved IPFS/HTTPS URLs              | Normative   |
+| `tzip21_token_metadata.json` | Publication | Tezos TZIP-21 token metadata                              | Normative   |
+| `erc721_token_metadata.json` | Publication | EVM ERC-721 token metadata                                | Normative   |
 
 > **Note:** The example `asset.zip` is from [hd-map-asset-example v0.2.3][7] and uses earlier ontology versions internally (`manifest/v4`, `envited-x/v2`).
 > The standalone example files reflect the current ontology versions (`manifest/v5`, `envited-x/v3`).
@@ -133,45 +133,41 @@ See 📁 `example/input_manifest.json` for a complete example.
 
 ```json
 {
-   "@context": [
-      "https://w3id.org/ascs-ev/envited-x/envited-x/v3/",
-      "https://w3id.org/ascs-ev/envited-x/manifest/v5/",
-      { "gx": "https://w3id.org/gaia-x/development#", "xsd": "http://www.w3.org/2001/XMLSchema#" }
-   ],
-   "@id": "did:web:registry.gaia-x.eu:HdMap:example",
-   "@type": "envited-x:Manifest",
-   "hasArtifacts": [
-      {
-         "@type": "manifest:Link",
-         "hasAccessRole": { "@type": "manifest:AccessRole", "@id": "envited-x:isOwner" },
-         "hasCategory": { "@type": "manifest:Category", "@id": "envited-x:isSimulationData" },
-         "hasFileMetadata": {
-            "@type": "manifest:FileMetadata",
-            "filePath": "my_map.xodr",
-            "mimeType": "application/x-xodr"
-         }
-      },
-      {
-         "@type": "manifest:Link",
-         "hasAccessRole": { "@type": "manifest:AccessRole", "@id": "envited-x:isPublic" },
-         "hasCategory": { "@type": "manifest:Category", "@id": "envited-x:isMedia" },
-         "hasFileMetadata": {
-            "@type": "manifest:FileMetadata",
-            "filePath": "impression-01.png",
-            "mimeType": "image/png"
-         }
+  "@context": ["https://w3id.org/ascs-ev/envited-x/envited-x/v3/", "https://w3id.org/ascs-ev/envited-x/manifest/v5/", { "gx": "https://w3id.org/gaia-x/development#", "xsd": "http://www.w3.org/2001/XMLSchema#" }],
+  "@id": "did:web:registry.gaia-x.eu:HdMap:example",
+  "@type": "envited-x:Manifest",
+  "hasArtifacts": [
+    {
+      "@type": "manifest:Link",
+      "hasAccessRole": { "@type": "manifest:AccessRole", "@id": "envited-x:isOwner" },
+      "hasCategory": { "@type": "manifest:Category", "@id": "envited-x:isSimulationData" },
+      "hasFileMetadata": {
+        "@type": "manifest:FileMetadata",
+        "filePath": "my_map.xodr",
+        "mimeType": "application/x-xodr"
       }
-   ],
-   "hasLicense": {
+    },
+    {
       "@type": "manifest:Link",
       "hasAccessRole": { "@type": "manifest:AccessRole", "@id": "envited-x:isPublic" },
-      "hasCategory": { "@type": "manifest:Category", "@id": "envited-x:isLicense" },
+      "hasCategory": { "@type": "manifest:Category", "@id": "envited-x:isMedia" },
       "hasFileMetadata": {
-         "@type": "manifest:FileMetadata",
-         "filePath": "https://www.mozilla.org/en-US/MPL/2.0/",
-         "mimeType": "text/html"
+        "@type": "manifest:FileMetadata",
+        "filePath": "impression-01.png",
+        "mimeType": "image/png"
       }
-   }
+    }
+  ],
+  "hasLicense": {
+    "@type": "manifest:Link",
+    "hasAccessRole": { "@type": "manifest:AccessRole", "@id": "envited-x:isPublic" },
+    "hasCategory": { "@type": "manifest:Category", "@id": "envited-x:isLicense" },
+    "hasFileMetadata": {
+      "@type": "manifest:FileMetadata",
+      "filePath": "https://www.mozilla.org/en-US/MPL/2.0/",
+      "mimeType": "text/html"
+    }
+  }
 }
 ```
 
