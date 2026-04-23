@@ -1,0 +1,30 @@
+name: SHACL Validation
+
+on:
+  pull_request:
+    paths:
+      - "EVES/**/example/*.json"
+      - ".github/workflows/shacl_validation.yml"
+
+jobs:
+  validate:
+    name: Validate JSON-LD against SHACL
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+
+      - name: Setup Python
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: "3.12"
+
+      # TODO: switch to @main once ASCS-eV/ontology-management-base#57 is merged
+      - name: Install ontology-management-base
+        run: pip install "ontology-management-base @ git+https://github.com/ASCS-eV/ontology-management-base.git@feat/http-artifact-resolution"
+
+      - name: Validate EVES-003 manifest
+        run: >
+          python -m src.tools.validators.validation_suite
+          --remote
+          --data-paths EVES/EVES-003/example/envited-x_manifest.json
