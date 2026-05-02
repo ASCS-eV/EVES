@@ -8,9 +8,12 @@
     "lint:links": "lychee --no-progress '**/*.md'",
     "lint:frontmatter": "node scripts/validate-frontmatter.mjs",
     "format": "prettier --write '**/*.md' '**/*.json' '**/*.yml' --ignore-path .prettierignore",
-    "format:check": "prettier --check '**/*.md' '**/*.json' '**/*.yml' --ignore-path .prettierignore"
+    "format:check": "prettier --check '**/*.md' '**/*.json' '**/*.yml' --ignore-path .prettierignore",
+    "validate:schemas": "ajv validate --strict=false -c ajv-formats -s EVES/EVES-003/tzip21-schemas/tzip21_token_metadata-schema.json -d EVES/EVES-003/example/tzip21_token_metadata.json && ajv validate --strict=false -c ajv-formats -s EVES/EVES-003/erc721-schemas/erc721_token_metadata-schema.json -d EVES/EVES-003/example/erc721_token_metadata.json"
   },
   "devDependencies": {
+    "ajv-cli": "^5.0.0",
+    "ajv-formats": "^3.0.1",
     "gray-matter": "^4.0.3",
     "markdownlint-cli": "^0.48.0",
     "prettier": "^3.8.3"
