@@ -13,6 +13,6 @@
   "devDependencies": {
     "gray-matter": "^4.0.3",
     "markdownlint-cli": "^0.48.0",
-    "prettier": "^3.5.0"
+    "prettier": "^3.8.3"
   }
 }
