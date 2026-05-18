@@ -68,7 +68,7 @@ The negotiation process follows the dataspace protocol state machine with the fo
   Access to the contracted asset is authorized only when the VC is valid and a corresponding registry entry is found and valid.
 
 - **TERMINATED:**  
-  If any error occurs (e.g., invalid signatures, mismatched payloads, or a timeout) or if either party cancels the negotiation, the process transitions to the terminated state.
+  If any error occurs (for example, invalid signatures, mismatched payloads, or a timeout) or if either party cancels the negotiation, the process transitions to the terminated state.
 
 ### 2. Detailed Process Flow Example
 
@@ -91,7 +91,7 @@ The negotiation process follows the dataspace protocol state machine with the fo
    The provider then records a successful entry in the decentralized registry on Etherlink — this registry entry (comprising the VC’s hash and UUID) confirms the agreement and allows the process to progress to the VERIFIED state.
 
 5. **Consumer Verification of Registry Entry (VERIFIED):**
-    The consumer verifies if the registry entry is correctly caught by the indexer automatically transitioning to the FINALIZED state.
+   The consumer verifies if the registry entry is correctly caught by the indexer automatically transitioning to the FINALIZED state.
 
 6. **Finalization (FINALIZED):**  
    Once the registry entry is confirmed, both parties can download the finalized contract VC from their respective systems.
@@ -105,15 +105,15 @@ The negotiation process follows the dataspace protocol state machine with the fo
 
 - **Verifiable Credential Format:**  
   The contract VC conforms to the SD-JWT VC specification (see [SD-JWT-based Verifiable Credentials (SD-JWT VC)](https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-00.html) and [OpenID for Verifiable Credential Issuance - draft 15](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html)).
-  It is intended for storage in wallets (e.g., Altme) and can be presented to endpoints running the [ssi-to-oidc-bridge](https://github.com/GAIA-X4PLC-AAD/ssi-to-oidc-bridge).
+  It is intended for storage in wallets (for example, Altme) and can be presented to endpoints running the [ssi-to-oidc-bridge](https://github.com/GAIA-X4PLC-AAD/ssi-to-oidc-bridge).
 
 - **Decentralized Registry and Scaling:**  
   Following the method outlined in [EVES-006](../EVES-006/eves-006.md) and inspired by [this paper](https://arxiv.org/pdf/2501.17089), a blockchain-based registry on Etherlink is used to store the hash and UUID of finalized VCs.
   Authorization to access assets is granted only when the presented VC is valid and a valid corresponding registry entry exists.
 
 - **Automation and Encrypted Inbox:**  
-  An encrypted inbox system — optionally secured with DID keys  - is used to exchange contract-related VCs.
-  The design minimizes manual interaction by automating transitions (e.g., from OFFERED to ACCEPTED under preset criteria) while still allowing explicit user confirmation when needed.
+  An encrypted inbox system — optionally secured with DID keys - is used to exchange contract-related VCs.
+  The design minimizes manual interaction by automating transitions (for example, from OFFERED to ACCEPTED under preset criteria) while still allowing explicit user confirmation when needed.
 
 - **State Machine Integration:**  
   The process adheres to the dataspace protocol state machine with the following states:  
@@ -168,27 +168,27 @@ Key privacy measures include:
 
 ### 7. References
 
-1. **Dataspace Protocol:**  
-   - [Dataspace Protocol – Official Knowledgebase](https://docs.internationaldataspaces.org/ids-knowledgebase/dataspace-protocol)  
+1. **Dataspace Protocol:**
+   - [Dataspace Protocol – Official Knowledgebase](https://docs.internationaldataspaces.org/ids-knowledgebase/dataspace-protocol)
    - [Eclipse Dataspace Protocol Editor's Draft](https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol/)
 
-2. **SD-JWT-based Verifiable Credentials:**  
+2. **SD-JWT-based Verifiable Credentials:**
    - [SD-JWT Specification](https://www.ietf.org/archive/id/draft-ietf-oauth-sd-jwt-vc-00.html)
 
-3. **OpenID for VC Issuance:**  
+3. **OpenID for VC Issuance:**
    - [OpenID for Verifiable Credential Issuance](https://openid.net/specs/openid-4-verifiable-credential-issuance-1_0.html)
 
-4. **SSI-to-OIDC Bridge:**  
+4. **SSI-to-OIDC Bridge:**
    - [ssi-to-oidc-bridge Repository](https://github.com/GAIA-X4PLC-AAD/ssi-to-oidc-bridge)
 
-5. **Scaling and Decentralized Registry:**  
-   - [EVES-006: ENVITED-X Scaling Architecture](../EVES-006/eves-006.md)  
+5. **Scaling and Decentralized Registry:**
+   - [EVES-006: ENVITED-X Scaling Architecture](../EVES-006/eves-006.md)
    - [Decentralized Registry Paper DRAFT](https://arxiv.org/pdf/2501.17089)
 
-6. **ODRL Standard:**  
+6. **ODRL Standard:**
    - [ODRL Information Model 2.2](https://www.w3.org/TR/odrl-model/)
 
-7. **Additional Guidance:**  
+7. **Additional Guidance:**
    - [Eclipse Dataspace Protocol – Contract Negotiation Protocol](https://github.com/eclipse-dataspace-protocol-base/DataspaceProtocol/tree/main/artifacts/src/main/resources/negotiation)
 
 ## Backwards Compatibility
@@ -205,14 +205,14 @@ Initial implementation steps include:
 
 2. **VC Generation and Signing:**  
    Implement services to generate SD-JWT VCs for contract offers and acceptances.
-   Both provider and consumer systems must support signing operations and storage (e.g., in wallets like Altme).
+   Both provider and consumer systems must support signing operations and storage (for example, in wallets like Altme).
 
 3. **Blockchain Registry Integration:**  
    Integrate with the decentralized registry on Etherlink to store the hash and UUID of finalized contract VCs.
    The provider must record a registry entry to transition the state from AGREED to FINALIZED.
 
 4. **Automated State Transitions:**  
-   Where possible, automate state transitions (e.g., from OFFERED to ACCEPTED or AGREED) while allowing manual intervention if necessary.
+   Where possible, automate state transitions (for example, from OFFERED to ACCEPTED or AGREED) while allowing manual intervention if necessary.
 
 5. **Operator Fee Management:**  
    The ENVITED-X Data Space operator reviews registry entries to verify successful contracts.
