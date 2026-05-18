@@ -76,14 +76,21 @@ Future EVES MAY define additional evidence types with different signature object
 
 This specification defines the first concrete evidence type using Verifiable Presentations:
 
-- The **challenge** is the cryptographic hash of the canonically serialized message. Implementations MUST use SHA-256 as the hash function. The message MUST be serialized using [RFC 8785 (JSON Canonicalization Scheme)](https://www.rfc-editor.org/rfc/rfc8785) or an equivalent deterministic serialization (sorted keys, no whitespace: `json.dumps(sort_keys=True, separators=(",",":"))`).
-- The **signature object** is a Verifiable Presentation (VP) where the challenge is bound to the VP. The binding mechanism depends on the VP format (see below).
+- The **challenge** is the cryptographic hash of the canonically serialized message.
+  Implementations MUST use SHA-256 as the hash function.
+  The message MUST be serialized using [RFC 8785 (JSON Canonicalization Scheme)](https://www.rfc-editor.org/rfc/rfc8785)
+  or an equivalent deterministic serialization (sorted keys, no whitespace: `json.dumps(sort_keys=True, separators=(",",":"))`).
+- The **signature object** is a Verifiable Presentation (VP) where the challenge is bound to the VP.
+  The binding mechanism depends on the VP format (see below).
 - The VP contains zero or more Verifiable Credentials (VCs). When VCs are present, they prove the Holder's identity and attributes. When no VCs are included, the VP serves as a pure consent proof — the Holder's DID binding alone demonstrates authorization.
 
 The challenge binding mechanism depends on the VP format:
 
 - **Simple VP (VC-JOSE-COSE)**: The challenge SHOULD be embedded in the VP's `nonce` field directly (e.g., `nonce = hash(message)` or a composite format like `<random> <action_type> <hash>`).
-- **SD-JWT VP**: The challenge is bound via the KB-JWT `transaction_data_hashes` array per [OID4VP Appendix B.3.3](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html). The VP `nonce` field carries a random value for replay prevention. This dual-binding approach separates replay prevention from message binding and supports multiple evidence items per VP.
+- **SD-JWT VP**: The challenge is bound via the KB-JWT `transaction_data_hashes` array
+  per [OID4VP Appendix B.3.3](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html).
+  The VP `nonce` field carries a random value for replay prevention.
+  This dual-binding approach separates replay prevention from message binding and supports multiple evidence items per VP.
 
 The VC format is not prescribed.
 SD-JWT VCs (see [SD-JWT-based Verifiable Credentials (RFC 9901)](https://www.rfc-editor.org/rfc/rfc9901)) are RECOMMENDED because selective disclosure allows Holders to redact unnecessary claims, minimizing personal data contained in the evidence.
@@ -150,7 +157,12 @@ For VP-based evidence, the Verifier MUST perform the following checks:
 1. **VP signature verification**: The VP signature is verified against the Holder's DID (see [W3C Decentralized Identifiers](https://www.w3.org/TR/did-core/)).
 2. **Credential verification**: Each VC inside the VP is independently verified, including issuer signature validation and format-specific integrity checks. For SD-JWT VCs, this includes disclosure hash validation per [RFC 9901](https://www.rfc-editor.org/rfc/rfc9901).
 3. **VC requirement check**: When VCs are present, they MUST satisfy the requirements that the Requester specified in the OID4VP request. When no VCs are present (pure consent VP), this check is skipped.
-4. **Challenge binding**: The VP MUST be bound to the claimed message. This binding MAY be achieved by setting the VP's `nonce` equal to `hash(message)`, or by using the OID4VP `transaction_data` mechanism ([Appendix B.3.3](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html)) where the KB-JWT `transaction_data_hashes` array contains `hash(transaction_data_param)`. For SD-JWT VPs, the KB-JWT `sd_hash` binding (RFC 9901 §4.3.1) MUST also be verified.
+4. **Challenge binding**: The VP MUST be bound to the claimed message.
+   This binding MAY be achieved by setting the VP's `nonce` equal to `hash(message)`,
+   or by using the OID4VP `transaction_data` mechanism
+   ([Appendix B.3.3](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html))
+   where the KB-JWT `transaction_data_hashes` array contains `hash(transaction_data_param)`.
+   For SD-JWT VPs, the KB-JWT `sd_hash` binding (RFC 9901 §4.3.1) MUST also be verified.
 5. **Holder verification** (OPTIONAL): If a specific Holder was expected, the VP subject MUST match the expected Holder's identifier.
 
 If any check fails, the evidence MUST be considered invalid.
