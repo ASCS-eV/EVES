@@ -3,7 +3,7 @@ eves-identifier: 009
 title: ENVITED-X Evidence-Based Consent Using Verifiable Presentations
 author: Felix Hoops (@flhps)
 discussions-to: https://github.com/ASCS-eV/EVES/issues/
-status: Draft
+status: Review
 type: Standards
 created: 2026-03-17
 requires: ["EVES-001", "EVES-002"]

@@ -3,7 +3,7 @@ eves-identifier: "010"
 title: ENVITED-X Credential Issuance Authorization via Embedded Evidence
 author: Felix Hoops (@flhps)
 discussions-to: https://github.com/ASCS-eV/EVES/issues/
-status: Draft
+status: Review
 type: Standards
 created: 2026-07-16
 requires: ["EVES-001", "EVES-002", "EVES-008", "EVES-009"]
