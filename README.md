@@ -20,5 +20,5 @@ The process on how to write, submit or change specifications in defined in [EVES
 | [006](./EVES/EVES-006/eves-006.md) | ENVITED-X Scaling Architecture                                    | Process   | Draft  |
 | [007](./EVES/EVES-007/eves-007.md) | ENVITED-X Blockchain Identifier URN Schema                        | Standards | Draft  |
 | [008](./EVES/EVES-008/eves-008.md) | ENVITED-X SimpulseID Credential and Identity Framework            | Standards | Draft  |
-| [009](./EVES/EVES-009/eves-009.md) | ENVITED-X Evidence-Based Consent Using Verifiable Presentations   | Standards | Draft  |
-| [010](./EVES/EVES-010/eves-010.md) | ENVITED-X Credential Issuance Authorization via Embedded Evidence | Standards | Draft  |
+| [009](./EVES/EVES-009/eves-009.md) | ENVITED-X Evidence-Based Consent Using Verifiable Presentations   | Standards | Review |
+| [010](./EVES/EVES-010/eves-010.md) | ENVITED-X Credential Issuance Authorization via Embedded Evidence | Standards | Review |

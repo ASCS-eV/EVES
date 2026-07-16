@@ -14,7 +14,7 @@ replaces: None
 
 This specification defines a protocol for generating and verifying cryptographic evidence of user consent in the ENVITED-X Data Space.
 It uses Verifiable Presentations (VPs) via OID4VP as the evidence format, binding consent to a specific action through a challenge-response mechanism.
-The protocol enables services to act on behalf of users (e.g., submitting blockchain transactions or finalizing contracts) while providing independently verifiable proof that the user authorized the action.
+The protocol enables services to act on behalf of users (for example, submitting blockchain transactions or finalizing contracts) while providing independently verifiable proof that the user authorized the action.
 
 ## Motivation
 
@@ -104,19 +104,22 @@ If any of these checks fail, the evidence MUST be considered invalid.
 ### 4. VP-Based Evidence (SD-JWT VC Profile)
 
 This specification defines the first concrete evidence type using Verifiable Presentations.
-This profile is defined **only** for Verifiable Credentials in the SD-JWT VC format (`dc+sd-jwt`, see [RFC 9901](https://www.rfc-editor.org/rfc/rfc9901)).
+This profile is defined **only** for Verifiable Credentials in the SD-JWT VC format (`dc+sd-jwt`, see [SD-JWT VC](https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/)).
+SD-JWT VC builds on the SD-JWT mechanism defined in [RFC 9901](https://www.rfc-editor.org/rfc/rfc9901).
 Verifiable Presentations using any other credential format are out of scope for this profile; a future EVES MAY define additional profiles for them.
 
 The profile is designed around a practical constraint: identity wallets do not produce arbitrary signatures.
 The only signature obtainable from a wallet is the Key Binding JWT (KB-JWT) of an OID4VP presentation.
 This profile therefore uses the KB-JWT as the signature object and carries the challenge in a field the wallet signs as part of every presentation:
 
-- The **challenge** is the SHA-256 hash of the message, computed over the exact bytes presented to the Holder.
+- The **challenge** is the SHA-256 hash of the message, computed over the exact bytes presented to the Holder and encoded as lowercase hexadecimal.
   The message is carried verbatim alongside the evidence and hashed as received; Verifiers MUST NOT re-render or normalize it.
   When a message must be regenerated from structured data rather than carried verbatim (for example, a JSON object), implementations SHOULD use a deterministic serialization
   such as [RFC 8785 (JSON Canonicalization Scheme)](https://www.rfc-editor.org/rfc/rfc8785) so that independent implementations derive an identical challenge.
 - The **signature object** is a Verifiable Presentation (VP) of one or more `dc+sd-jwt` credentials. The evidence is the VP's KB-JWT, and the challenge is carried in the KB-JWT key-binding `nonce`.
-- The VP contains zero or more Verifiable Credentials (VCs). When VCs are present, they prove the Holder's identity and attributes. When no VCs are included, the VP serves as a pure consent proof — the Holder's key binding alone demonstrates authorization.
+- The VP contains one or more Verifiable Credentials (VCs) that prove the Holder's identity and attributes.
+  Because a KB-JWT is only defined relative to a presented SD-JWT, every presentation includes at least one credential.
+  A consent-only interaction is a normal OID4VP interaction in which the Requester requests a minimal identity credential, for example a natural person credential.
 
 The challenge is bound to the evidence through the KB-JWT key-binding `nonce`.
 This is the binding mechanism that ties the VP to the specific action.
@@ -132,7 +135,7 @@ The Requester communicates what VCs are needed as part of the standard OID4VP fl
 
 The following sequence describes the VP-based evidence creation flow using [OpenID for Verifiable Presentations (OID4VP)](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html):
 
-1. The Requester displays a **message**, the **challenge** derived from it, and a way to verify this challenge. The Requester also provides an OID4VP Authorization Request, usually via QR-Code.
+1. The Requester displays a **message**, the **challenge** derived from it, and a way to verify this challenge. The Requester also provides an OID4VP Authorization Request, for example via QR code.
 2. The Holder ingests the request and the Holder's wallet downloads the request object containing the **challenge** and requested VCs.
 3. The Holder selects matching VCs, reviews the challenge, and provides consent.
 4. The wallet creates a VP with the challenge as the `nonce` and submits it via `direct_post` to the Requester.
@@ -156,10 +159,11 @@ sequenceDiagram
 
 For VP-based evidence, the Verifier MUST perform the following checks:
 
-1. **VP signature verification**: The VP signature is verified against the Holder's DID (see [W3C Decentralized Identifiers](https://www.w3.org/TR/did-core/)).
+1. **Key binding verification**: The KB-JWT signature is verified against the confirmation (`cnf`) key of the presented SD-JWT per [RFC 9901](https://www.rfc-editor.org/rfc/rfc9901).
+   When Holder keys are anchored in DID documents (see [W3C Decentralized Identifiers](https://www.w3.org/TR/did-core/)), the `cnf` key MUST correspond to a verification method of the Holder's DID.
 2. **Credential verification**: Each `dc+sd-jwt` credential inside the VP is independently verified, including issuer signature validation and disclosure hash validation per [RFC 9901](https://www.rfc-editor.org/rfc/rfc9901).
-3. **VC requirement check**: When VCs are present, they MUST satisfy the requirements that the Requester specified in the OID4VP request. When no VCs are present (pure consent VP), this check is skipped.
-4. **Challenge binding**: The KB-JWT key-binding `nonce` MUST equal `hash(message)`, and the KB-JWT `sd_hash` binding ([RFC 9901](https://www.rfc-editor.org/rfc/rfc9901) §4.3.1) MUST be verified. This binds the evidence to the specific action.
+3. **VC requirement check**: The presented VCs MUST satisfy the requirements that the Requester specified in the OID4VP request.
+4. **Challenge binding**: The KB-JWT key-binding `nonce` MUST equal the challenge derived from the message as defined in section 4, and the KB-JWT `sd_hash` binding ([RFC 9901](https://www.rfc-editor.org/rfc/rfc9901) §4.3.1) MUST be verified. This binds the evidence to the specific action.
 5. **Holder verification** (OPTIONAL): If a specific Holder was expected, the VP subject MUST match the expected Holder's identifier.
 
 If any check fails, the evidence MUST be considered invalid.
@@ -184,6 +188,10 @@ The following considerations are specific to the VP-based profile:
 
 - **Transport security**: OID4VP requests and responses MUST be transmitted over TLS. Implementations SHOULD use signed authorization requests to prevent tampering.
 - **Credential freshness**: Verifiers SHOULD check the revocation status of presented VCs.
+- **Trusted display**: The wallet displays only the challenge — an opaque hash — while the message itself is displayed by the Requester outside the wallet, for example on a website.
+  The binding between what the Holder read and what the wallet signed therefore depends on the honesty of the Requester's display.
+  Requesters MUST display the message together with the challenge and a way for the Holder to independently recompute the challenge from the message.
+  Moving the message display into the wallet requires the OID4VP `transaction_data` mechanism, which remains future work until wallet support exists (see section 1).
 
 ### 8. Privacy Considerations
 
@@ -194,7 +202,7 @@ The following consideration applies to the generic evidence model:
 The following considerations are specific to the VP-based profile:
 
 - **Selective disclosure**: Because the profile uses SD-JWT VCs, Holders present only the claims required by the policy. All other claims are redacted from the presentation.
-- **Consent-only evidence**: When the policy does not require identity attributes, implementations SHOULD use zero-VC VPs to minimize data exposure. The Holder's key binding alone provides proof of consent.
+- **Consent-only evidence**: When the policy does not require specific attributes, Requesters SHOULD request a minimal identity credential (for example, a natural person credential) and Holders SHOULD redact all claims not required by the policy.
 - **Storage protection**: Stored evidence contains credential data and MUST be protected with appropriate access controls. Access to stored evidence SHOULD be limited to authorized parties on a need-to-know basis.
 
 ## Backwards Compatibility
@@ -211,9 +219,10 @@ It is compatible with the existing VC, DID, and wallet infrastructure described 
 5. **W3C Decentralized Identifiers (DIDs)**: [Specification](https://www.w3.org/TR/did-core/)
 6. **EIP-4361 (Sign-In with Ethereum / SIWE)**: [Specification](https://eips.ethereum.org/EIPS/eip-4361)
 7. **RFC 2119**: [Key words for use in RFCs to Indicate Requirement Levels](https://www.rfc-editor.org/rfc/rfc2119)
-8. **RFC 9901 (SD-JWT-based Verifiable Credentials)**: [Specification](https://www.rfc-editor.org/rfc/rfc9901)
-9. **RFC 8785 (JSON Canonicalization Scheme)**: [Specification](https://www.rfc-editor.org/rfc/rfc8785)
-10. **EVES-010**: [ENVITED-X Credential Issuance Authorization via Embedded Evidence](../EVES-010/eves-010.md)
+8. **RFC 9901 (Selective Disclosure for JSON Web Tokens)**: [Specification](https://www.rfc-editor.org/rfc/rfc9901)
+9. **SD-JWT-based Verifiable Credentials (SD-JWT VC)**: [Specification](https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/)
+10. **RFC 8785 (JSON Canonicalization Scheme)**: [Specification](https://www.rfc-editor.org/rfc/rfc8785)
+11. **EVES-010**: [ENVITED-X Credential Issuance Authorization via Embedded Evidence](../EVES-010/eves-010.md)
 
 ## Implementation
 
