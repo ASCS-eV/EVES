@@ -307,8 +307,14 @@ This section defines how EVES-003 asset metadata (derived from the ENVITED-X man
 The minter MUST be a `simpulseid:OrganizationParticipant` (LegalEntity) identified by their `did:ethr` DID as defined in [EVES-008][28].
 The `did:ethr` identifier is anchored on Base (ERC-1056) and serves as the organizational identity regardless of the chain the token is minted on.
 The natural person performing the mint is linked to the organization through the `memberOf` credential property.
+Some of the information needs to be extracted from the `gx:LegalParticipant` via the SimpulseID `ParticipantCredential`.
 
-> **Note:** Some of the information needs to be extracted from the `gx:LegalParticipant` via the SimpulseID `ParticipantCredential`.
+> **Issue — `minter` is an unverified claim on-chain:**
+> The `minter` field is part of the off-chain metadata JSON, so it states the organization's `did:ethr` even when a different Ethereum address (for example, a gas relayer) submits the mint transaction; the transaction sender is trust-irrelevant.
+> The smart contract cannot verify this claim at mint time:
+> `did:ethr` DID document entries such as added signing keys are published as ERC-1056 `DIDAttributeChanged` events, and events are not readable from contract storage.
+> Matching the claimed `minter` DID against the submitted authorization evidence therefore happens off-chain at read time, by indexers that reconstruct the DID document from the event log.
+> On-chain verification would require a registry that mirrors the organization's key set in contract storage (a possible future extension together with P-256 signature verification via RIP-7212).
 
 #### ERC-721 Metadata (EVM)
 
