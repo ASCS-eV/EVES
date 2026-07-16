@@ -296,6 +296,14 @@ The synchronization between the smart contract as in the [Marketplace Contract R
 
 This section defines how EVES-003 asset metadata (derived from the ENVITED-X manifest and domain metadata) is mapped to ERC-721 token metadata.
 
+> **Issue — Metadata registration under discussion:**
+> The mechanism by which token metadata is registered on-chain is an open design question and intentionally left unspecified in this draft.
+> The current reference implementation direction is an evidence-based listing registry:
+> the ERC-721 token is minted to the registry contract itself upon submission of signed authorization evidence (for example, a key-binding JWT produced by an SSI wallet),
+> and the token binds a hash of a canonical metadata document together with its `ipfs://` URI.
+> Whether the full OpenSea-style document defined in this section is that registered document, or a minimal canonical core document that references it, is not yet decided.
+> The field mappings below remain normative for the content of the ERC-721 metadata; the registration and minting flow described in [§4 Step 4](#step-4-mint-token) is subject to change.
+
 The minter MUST be a `simpulseid:OrganizationParticipant` (LegalEntity) identified by their `did:ethr` DID as defined in [EVES-008][28].
 The `did:ethr` identifier is anchored on Base (ERC-1056) and serves as the organizational identity regardless of the chain the token is minted on.
 The natural person performing the mint is linked to the organization through the `memberOf` credential property.
