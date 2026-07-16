@@ -75,6 +75,10 @@ Implementations SHOULD include at minimum:
 
 [EIP-4361 (Sign-In with Ethereum)](https://eips.ethereum.org/EIPS/eip-4361) provides inspiration for structured message formats that include these elements.
 
+A message MAY commit to a set of actions instead of a single one, for example through a cryptographic commitment such as a Merkle root.
+A specification building on such messages MUST define how each individual action proves its inclusion in the commitment.
+[EVES-010](../EVES-010/eves-010.md) uses this pattern to authorize the issuance of many credentials with a single piece of evidence.
+
 Future EVES MAY define additional evidence types with different signature objects and challenge derivation mechanisms.
 For example, a future type could bind the challenge through the OID4VP `transaction_data` mechanism once the necessary sub-specification and wallet support exist.
 
@@ -103,9 +107,15 @@ This specification defines the first concrete evidence type using Verifiable Pre
 This profile is defined **only** for Verifiable Credentials in the SD-JWT VC format (`dc+sd-jwt`, see [RFC 9901](https://www.rfc-editor.org/rfc/rfc9901)).
 Verifiable Presentations using any other credential format are out of scope for this profile; a future EVES MAY define additional profiles for them.
 
-- The **challenge** is the SHA-256 hash of the serialized message.
-  When the message is a JSON object, implementations SHOULD canonicalize it before hashing — for example, using [RFC 8785 (JSON Canonicalization Scheme)](https://www.rfc-editor.org/rfc/rfc8785) — so that independent implementations derive an identical challenge for the same logical message.
-- The **signature object** is a Verifiable Presentation (VP) of one or more `dc+sd-jwt` credentials. The evidence is the VP's Key Binding JWT (KB-JWT), and the challenge is carried in the KB-JWT key-binding `nonce`.
+The profile is designed around a practical constraint: identity wallets do not produce arbitrary signatures.
+The only signature obtainable from a wallet is the Key Binding JWT (KB-JWT) of an OID4VP presentation.
+This profile therefore uses the KB-JWT as the signature object and carries the challenge in a field the wallet signs as part of every presentation:
+
+- The **challenge** is the SHA-256 hash of the message, computed over the exact bytes presented to the Holder.
+  The message is carried verbatim alongside the evidence and hashed as received; Verifiers MUST NOT re-render or normalize it.
+  When a message must be regenerated from structured data rather than carried verbatim (for example, a JSON object), implementations SHOULD use a deterministic serialization
+  such as [RFC 8785 (JSON Canonicalization Scheme)](https://www.rfc-editor.org/rfc/rfc8785) so that independent implementations derive an identical challenge.
+- The **signature object** is a Verifiable Presentation (VP) of one or more `dc+sd-jwt` credentials. The evidence is the VP's KB-JWT, and the challenge is carried in the KB-JWT key-binding `nonce`.
 - The VP contains zero or more Verifiable Credentials (VCs). When VCs are present, they prove the Holder's identity and attributes. When no VCs are included, the VP serves as a pure consent proof — the Holder's key binding alone demonstrates authorization.
 
 The challenge is bound to the evidence through the KB-JWT key-binding `nonce`.
@@ -126,7 +136,7 @@ The following sequence describes the VP-based evidence creation flow using [Open
 2. The Holder ingests the request and the Holder's wallet downloads the request object containing the **challenge** and requested VCs.
 3. The Holder selects matching VCs, reviews the challenge, and provides consent.
 4. The wallet creates a VP with the challenge as the `nonce` and submits it via `direct_post` to the Requester.
-5. The VP is stored as evidence by the Requester and may be used to trigger further actions.
+5. The Requester verifies the VP and retains it — or a derived artifact containing at least the KB-JWT and the verbatim message — as evidence, which may be used to trigger further actions.
 
 ```mermaid
 sequenceDiagram
@@ -154,6 +164,10 @@ For VP-based evidence, the Verifier MUST perform the following checks:
 
 If any check fails, the evidence MUST be considered invalid.
 
+These checks apply to a Verifier in possession of the complete VP — typically the Requester at presentation time.
+A specification that persists a derived evidence artifact containing only parts of the VP MUST define which of these checks its Verifiers perform instead and how.
+[EVES-010](../EVES-010/eves-010.md) defines such a derived artifact for credential issuance, retaining only the KB-JWT and the message.
+
 ### 7. Security Considerations
 
 The following considerations apply to the generic evidence model:
@@ -163,6 +177,7 @@ The following considerations apply to the generic evidence model:
 - **Deterministic challenge derivation**: Implementations MUST derive the challenge from the message deterministically. Otherwise two implementations could produce different challenges for the same logical message, breaking interoperability.
 - **Time-bounding**: Implementations SHOULD set an expiration on evidence requests to prevent stale requests from being fulfilled after an unreasonable delay.
 - **Holder binding**: The Requester MAY specify an expected Holder. If specified, the Verifier MUST check that the signature object's subject matches the expected Holder.
+- **Key rotation**: When Holder keys are anchored in a DID document that can change over time, Verifiers SHOULD resolve the DID document as of the evidence creation time. Otherwise, legitimate key rotation would retroactively invalidate previously created evidence.
 - **Policy immutability**: The policy associated with an evidence request MUST NOT be modified after the request is created. Changing the policy after the Holder has consented would invalidate the relationship between what was requested and what was approved.
 
 The following considerations are specific to the VP-based profile:
@@ -198,12 +213,11 @@ It is compatible with the existing VC, DID, and wallet infrastructure described 
 7. **RFC 2119**: [Key words for use in RFCs to Indicate Requirement Levels](https://www.rfc-editor.org/rfc/rfc2119)
 8. **RFC 9901 (SD-JWT-based Verifiable Credentials)**: [Specification](https://www.rfc-editor.org/rfc/rfc9901)
 9. **RFC 8785 (JSON Canonicalization Scheme)**: [Specification](https://www.rfc-editor.org/rfc/rfc8785)
+10. **EVES-010**: [ENVITED-X Credential Issuance Authorization via Embedded Evidence](../EVES-010/eves-010.md)
 
 ## Implementation
 
-Reference implementations exist in the following repositories:
+A reference implementation exists in **[harbour-credentials](https://github.com/reachhaven/harbour-credentials)** — a cryptographic library implementing SD-JWT VP issuance and verification, KB-JWT creation and verification, and challenge derivation.
+It provides Python and TypeScript implementations with feature parity.
 
-- **[harbour-credentials](https://github.com/reachhaven/harbour-credentials)** — Cryptographic library implementing the delegation challenge protocol, SD-JWT VP issuance and verification, and KB-JWT transaction data binding. Provides both Python and TypeScript implementations with feature parity.
-- **[simpulse-id-credentials](https://github.com/ASCS-eV/simpulse-id-credentials)** — Domain-specific credential framework for the ENVITED-X Data Space, using harbour-credentials for evidence VP creation with the `credential.issue` action type.
-
-The evidence protocol is deployed in the [ENVITED-X Data Space](https://staging.envited-x.net).
+[EVES-010](../EVES-010/eves-010.md) applies this evidence protocol to credential issuance; its implementation is deployed in the [ENVITED-X Data Space](https://staging.envited-x.net).
