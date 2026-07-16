@@ -1,0 +1,491 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>EVES-010: ENVITED-X Credential Issuance Authorization via Embedded Evidence · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="../gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="../gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="../gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="../gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    
+    <link rel="prev" href="../EVES-009/eves-009.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        <li class="header">Introduction</li>
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="../">
+            
+                <a href="../">
+            
+                    
+                    EVES GitHub Structure
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+        
+        <li class="header">EVES</li>
+        
+        
+    
+        <li class="chapter " data-level="2.1" data-path="../EVES-001/eves-001.html">
+            
+                <a href="../EVES-001/eves-001.html">
+            
+                    
+                    EVES-001: ENVITED-X Ecosystem Specification Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.2" data-path="../EVES-002/eves-002.html">
+            
+                <a href="../EVES-002/eves-002.html">
+            
+                    
+                    EVES-002: ENVITED-X Data Space Architecture Overview
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.3" data-path="../EVES-003/eves-003.html">
+            
+                <a href="../EVES-003/eves-003.html">
+            
+                    
+                    EVES-003: ENVITED-X Asset Definition and Upload Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.4" data-path="../EVES-004/eves-004.html">
+            
+                <a href="../EVES-004/eves-004.html">
+            
+                    
+                    EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.5" data-path="../EVES-005/eves-005.html">
+            
+                <a href="../EVES-005/eves-005.html">
+            
+                    
+                    EVES-005: ENVITED-X Contract Negotiation Process
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.6" data-path="../EVES-006/eves-006.html">
+            
+                <a href="../EVES-006/eves-006.html">
+            
+                    
+                    EVES-006: ENVITED-X Scaling Architecture
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.7" data-path="../EVES-007/eves-007.html">
+            
+                <a href="../EVES-007/eves-007.html">
+            
+                    
+                    EVES-007: ENVITED-X Blockchain Identifier URN Schema
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.8" data-path="../EVES-008/eves-008.html">
+            
+                <a href="../EVES-008/eves-008.html">
+            
+                    
+                    EVES-008: ENVITED-X SimpulseID Credential and Identity Framework
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="2.9" data-path="../EVES-009/eves-009.html">
+            
+                <a href="../EVES-009/eves-009.html">
+            
+                    
+                    EVES-009: ENVITED-X Evidence-Based Consent Using Verifiable Presentations
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="2.10" data-path="eves-010.html">
+            
+                <a href="eves-010.html">
+            
+                    
+                    EVES-010: ENVITED-X Credential Issuance Authorization via Embedded Evidence
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href=".." >EVES-010: ENVITED-X Credential Issuance Authorization via Embedded Evidence</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h2 id="abstract">Abstract</h2>
+<p>This specification applies the evidence protocol defined in <a href="../EVES-009/eves-009.html">EVES-009</a> to credential issuance.
+It defines how an authorizing organization approves the issuance of one or more credentials with a single wallet signature, and how each issued credential embeds a self-contained, independently verifiable record of that authorization in its <code>evidence</code> field.
+The authorization message commits to the whole batch through a Merkle root; each credential carries the authorization signature together with its own inclusion proof.</p>
+<h2 id="motivation">Motivation</h2>
+<p>In the ENVITED-X Data Space, credential proofs are executed by a signing service on behalf of sovereign issuers (see <a href="../EVES-008/eves-008.html">EVES-008</a>).
+The signing service executes the credential lifecycle but must not decide anything: every issuance requires provable authorization by the issuing organization.</p>
+<p>This creates two requirements in tension:</p>
+<ul>
+<li><strong>One signature</strong>: A common operation is an organization authorizing credentials for all of its members at once. The authorizing administrator should sign once, not once per credential.</li>
+<li><strong>Self-contained verification</strong>: Every issued credential must independently prove that it was covered by that authorization &#x2014; without access to the rest of the batch and without contacting the issuing infrastructure.</li>
+</ul>
+<p>This specification resolves the tension with a cryptographic commitment, using the multi-action message pattern from EVES-009:
+the administrator consents to a message committing to a Merkle root over the whole batch, and each issued credential carries an inclusion proof binding its own payload to that root.
+The resulting evidence is embedded in the credential itself and serves as a durable, non-repudiable audit trail of who approved the issuance.
+A signing service that issued a credential nobody authorized is detectable by any Verifier, because it cannot forge the administrator&apos;s wallet signature.</p>
+<h2 id="specification">Specification</h2>
+<h3 id="1-roles">1. Roles</h3>
+<p>This specification refines the EVES-009 roles for the issuance setting:</p>
+<ul>
+<li><strong>Authorizer</strong>: The issuing organization, identified by its DID. The authorization signature is made by a human administrator whose wallet key is a verification method of that DID. The Authorizer is the EVES-009 <strong>Holder</strong>.</li>
+<li><strong>Signing Service</strong>: The service that assembles the batch, obtains the authorization, embeds the evidence, and executes the credential proofs under a mandate from the issuer. The Signing Service is the EVES-009 <strong>Requester</strong>.</li>
+<li><strong>Intake Verifier</strong>: The OID4VP verifier endpoint that receives the administrator&apos;s presentation during the authorization ceremony and performs full EVES-009 verification.</li>
+<li><strong>Downstream Verifier</strong>: Any relying party that later verifies an issued credential and its embedded evidence in isolation.</li>
+</ul>
+<h3 id="2-authorization-message">2. Authorization Message</h3>
+<p>The authorization message is a human-readable text string following the EVES-009 message requirements, styled after <a href="https://eips.ethereum.org/EIPS/eip-4361" target="_blank">EIP-4361 (Sign-In with Ethereum)</a>.
+It is composed by the Signing Service, displayed verbatim to the administrator during the authorization ceremony (see the trusted-display consideration in section 6), and carried byte-exact in the evidence.</p>
+<p>The message MUST contain exactly one statement line matching the following template:</p>
+<pre><code class="lang-text">I authorize the issuance of &lt;N&gt; credential(s) committed to by Merkle root &lt;root&gt;.
+</code></pre>
+<p>Where <code>&lt;N&gt;</code> is the decimal batch size and <code>&lt;root&gt;</code> is the base64url-encoded (unpadded, 43 characters) SHA-256 Merkle root over the batch.
+Only <code>&lt;N&gt;</code> and <code>&lt;root&gt;</code> are variable; all other characters of the statement line, including the literal <code>credential(s)</code>, are fixed.
+Verifiers extract the root and the batch size only through this template.</p>
+<p>All other message content &#x2014; domain, Authorizer address, ceremony nonce, and timestamp &#x2014; is ceremony metadata.
+It is part of the hashed message but not interpreted by Verifiers.
+The ceremony nonce and timestamp inside the hashed message make every ceremony&apos;s challenge unique, satisfying the EVES-009 replay prevention requirement.</p>
+<p>Following the EVES-009 profile, the message is hashed exactly as received: the <strong>challenge</strong> is <code>SHA-256(message)</code> encoded as lowercase hexadecimal, and Verifiers MUST NOT re-render or normalize the message.</p>
+<h3 id="3-evidence-creation">3. Evidence Creation</h3>
+<ol>
+<li>The Signing Service computes a leaf hash for each credential payload in the batch. The leaf is computed over the payload with its <code>evidence</code> and <code>proof</code> members removed, so the leaf is independent of the evidence that later embeds the proof of its own inclusion.</li>
+<li>The Signing Service builds a Merkle tree over the leaves and composes the authorization message committing to its root (see section 2).</li>
+<li>The administrator provides consent through the EVES-009 VP-based flow: the Signing Service&apos;s interface displays the message and the challenge, and the wallet receives an
+OID4VP presentation request whose <code>nonce</code> is the challenge and responds by presenting the organization&apos;s LegalPersonCredential (see EVES-008) with a KB-JWT signed by the administrator&apos;s wallet key.</li>
+<li>The Intake Verifier performs full EVES-009 verification of the presentation (see section 5.1).</li>
+<li>For each credential in the batch, the Signing Service constructs an evidence object (see section 4) and embeds it in the credential&apos;s <code>evidence</code> array before the credential is signed as <code>dc+sd-jwt</code>.</li>
+</ol>
+<p>Only the KB-JWT is retained from the presentation.
+The presented credential itself is not carried in the evidence; the Authorizer&apos;s authority is verifiable through its DID document instead (see section 5.2).</p>
+<h3 id="4-evidence-structure">4. Evidence Structure</h3>
+<p>Each issued credential carries one evidence object with the following components:</p>
+<ul>
+<li><strong><code>authorizedBy</code></strong>: The Authorizer organization&apos;s DID.</li>
+<li><strong><code>authorization</code></strong>: The KB-JWT obtained in the authorization ceremony &#x2014; the EVES-009 signature object. Its <code>nonce</code> carries the challenge, and its <code>iat</code> timestamps the authorization.</li>
+<li><strong><code>authorizationMessage</code></strong>: The verbatim authorization message &#x2014; the EVES-009 message.</li>
+<li><strong><code>merkleProof</code></strong>: The credential&apos;s inclusion proof &#x2014; the ordered list of sibling digests from the credential&apos;s leaf up to the committed root.</li>
+</ul>
+<p>The exact Merkle tree construction, leaf encoding, and JSON-LD vocabulary follow the <a href="https://github.com/reachhaven/harbour-credentials" target="_blank">harbour-credentials</a> reference implementation (see Implementation).</p>
+<p>Because the issuer&apos;s <code>dc+sd-jwt</code> signature covers the credential payload including the <code>evidence</code> array, the embedded evidence is tamper-evident: it cannot be stripped or replaced without invalidating the credential.</p>
+<h3 id="5-verification">5. Verification</h3>
+<p>Verification happens at two distinct points in time, by two distinct parties, with different material available.</p>
+<h4 id="51-intake-verification">5.1 Intake Verification</h4>
+<p>The Intake Verifier holds the complete presentation and MUST perform the full EVES-009 VP-based verification, including credential verification, <code>sd_hash</code> validation, and challenge binding.
+Additionally, the Intake Verifier MUST reject an authorization whose KB-JWT <code>aud</code> is not its own identifier.</p>
+<p>The Intake Verifier MUST also reject an authorization whose KB-JWT <code>iat</code> deviates from the ceremony time by more than an acceptable clock skew,
+and MUST confirm that the signing key is a valid verification method of the Authorizer&apos;s DID document at ceremony time.
+These intake checks anchor <code>iat</code> to real time; Downstream Verifiers depend on them (see section 6).</p>
+<h4 id="52-downstream-verification">5.2 Downstream Verification</h4>
+<p>A Downstream Verifier verifies one issued credential and its evidence in isolation.
+It holds only the derived evidence artifact (see section 4), not the presentation, and MUST perform the following checks:</p>
+<ol>
+<li><strong>Authorization signature</strong>: The KB-JWT signature verifies against a verification method of the <code>authorizedBy</code> DID document, resolved as of the KB-JWT <code>iat</code>
+(see EVES-009 key rotation consideration). The KB-JWT <code>typ</code> header MUST be <code>kb+jwt</code>.</li>
+<li><strong>Challenge binding</strong>: The KB-JWT <code>nonce</code> MUST equal <code>SHA-256(authorizationMessage)</code> in lowercase hexadecimal encoding, computed over the message exactly as carried.</li>
+<li><strong>Commitment extraction</strong>: The message MUST contain exactly one statement line matching the template in section 2; the Merkle root is extracted from it.</li>
+<li><strong>Inclusion</strong>: The credential&apos;s leaf, recomputed from its payload with <code>evidence</code> and <code>proof</code> removed, MUST fold to the committed root through the <code>merkleProof</code> path.</li>
+<li><strong>Batch size consistency</strong>: The number of digests in <code>merkleProof</code> MUST NOT exceed <code>ceil(log2(&lt;N&gt;))</code>, where <code>&lt;N&gt;</code> is the batch size extracted from the statement line
+(zero digests when <code>&lt;N&gt;</code> is 1). This bounds the size of the committed tree by the batch size the administrator approved.</li>
+<li><strong>Issuer binding</strong>: When the issued credential is an EVES-008 identity credential, <code>authorizedBy</code> MUST equal the credential&apos;s <code>issuer</code>.</li>
+</ol>
+<p>If any check fails, the evidence MUST be considered invalid.</p>
+<p>A Downstream Verifier MUST treat the KB-JWT <code>sd_hash</code> and <code>aud</code> claims as opaque: the presentation they refer to is not available, and no verification decision may be based on them.
+This is the derived-artifact check profile required by EVES-009 section 6.</p>
+<h3 id="6-security-considerations">6. Security Considerations</h3>
+<p>The EVES-009 security considerations apply.
+In addition:</p>
+<ul>
+<li><strong>Replay across batches</strong>: The ceremony nonce and timestamp inside the hashed message guarantee a unique challenge per ceremony, so an authorization KB-JWT can never be replayed for a different batch &#x2014; even one committing to an identical root.</li>
+<li><strong>Historical key resolution</strong>: Downstream Verifiers MUST resolve the <code>authorizedBy</code> DID document as of the KB-JWT <code>iat</code>. Later key rotation or administrator offboarding does not retroactively invalidate evidence that was validly authorized.</li>
+<li><strong><code>iat</code> trust</strong>: The KB-JWT <code>iat</code> is asserted by the signer and cannot be independently verified by a Downstream Verifier: a compromised and later rotated key could sign evidence backdated into its validity window.
+The intake checks in section 5.1 anchor <code>iat</code> to the actual ceremony time, so downstream verification includes residual trust in the Signing Service having performed those checks before issuing.</li>
+<li><strong>Batch size understatement</strong>: Without the batch size consistency check in section 5.2, <code>&lt;N&gt;</code> would be verified by no one, and a malicious Signing Service could display a small batch size to the administrator while committing to a larger tree.
+The check bounds the size of the committed tree by the approved <code>&lt;N&gt;</code>.</li>
+<li><strong>Trusted display</strong>: Per the EVES-009 trusted-display consideration, the message and challenge are displayed by the Signing Service&apos;s interface rather than by the wallet.
+The administrator therefore relies on that interface to faithfully present the batch size and Merkle root being authorized.
+Adopting the OID4VP <code>transaction_data</code> mechanism, once wallet support exists, moves this display into the wallet and removes that reliance.</li>
+<li><strong>Audience binding</strong>: The intake <code>aud</code> check prevents an authorization obtained by one verifier from being forwarded to and accepted by another.</li>
+<li><strong>Unauthorized issuance detection</strong>: Because every Downstream Verifier checks the evidence, a Signing Service that issues credentials without authorization produces detectably invalid credentials &#x2014; it cannot forge the administrator&apos;s wallet signature.</li>
+<li><strong>Evidence integrity</strong>: The issuer signature over the credential covers the embedded evidence, making removal or substitution of evidence tamper-evident.</li>
+</ul>
+<h3 id="7-privacy-considerations">7. Privacy Considerations</h3>
+<p>The EVES-009 privacy considerations apply.
+In addition:</p>
+<ul>
+<li><strong>Message content</strong>: The authorization message SHOULD contain no personal data beyond the Authorizer&apos;s DID. The batch is referenced only through its Merkle root.</li>
+<li><strong>Batch opacity</strong>: An inclusion proof reveals the batch size and sibling digests, but not the contents of other credentials in the batch &#x2014; the digests are preimage-resistant hashes.</li>
+<li><strong>Evidence visibility</strong>: The evidence travels with the credential and is visible to every party the credential is presented to.
+It reveals the authorization ceremony metadata (Authorizer DID, batch size, timestamp) and nothing about the credential subject beyond what the credential itself discloses.</li>
+</ul>
+<h2 id="backwards-compatibility">Backwards Compatibility</h2>
+<p>This specification introduces a new mechanism and does not modify any existing EVES.
+It instantiates the EVES-009 evidence protocol for credential issuance and is compatible with the credential and identity framework defined in <a href="../EVES-008/eves-008.html">EVES-008</a>.</p>
+<h2 id="references">References</h2>
+<ol>
+<li><strong>EVES-001</strong>: <a href="../EVES-001/eves-001.html">ENVITED-X Ecosystem Specification Process</a></li>
+<li><strong>EVES-002</strong>: <a href="../EVES-002/eves-002.html">ENVITED-X Data Space Architecture Overview</a></li>
+<li><strong>EVES-008</strong>: <a href="../EVES-008/eves-008.html">ENVITED-X SimpulseID Credential and Identity Framework</a></li>
+<li><strong>EVES-009</strong>: <a href="../EVES-009/eves-009.html">ENVITED-X Evidence-Based Consent Using Verifiable Presentations</a></li>
+<li><strong>OpenID for Verifiable Presentations (OID4VP)</strong>: <a href="https://openid.net/specs/openid-4-verifiable-presentations-1_0.html" target="_blank">Specification</a></li>
+<li><strong>RFC 9901 (Selective Disclosure for JSON Web Tokens)</strong>: <a href="https://www.rfc-editor.org/rfc/rfc9901" target="_blank">Specification</a></li>
+<li><strong>SD-JWT-based Verifiable Credentials (SD-JWT VC)</strong>: <a href="https://datatracker.ietf.org/doc/draft-ietf-oauth-sd-jwt-vc/" target="_blank">Specification</a></li>
+<li><strong>W3C Decentralized Identifiers (DIDs)</strong>: <a href="https://www.w3.org/TR/did-core/" target="_blank">Specification</a></li>
+<li><strong>EIP-4361 (Sign-In with Ethereum / SIWE)</strong>: <a href="https://eips.ethereum.org/EIPS/eip-4361" target="_blank">Specification</a></li>
+<li><strong>RFC 2119</strong>: <a href="https://www.rfc-editor.org/rfc/rfc2119" target="_blank">Key words for use in RFCs to Indicate Requirement Levels</a></li>
+<li><strong>harbour-credentials</strong>: <a href="https://github.com/reachhaven/harbour-credentials" target="_blank">Reference implementation</a></li>
+</ol>
+<h2 id="implementation">Implementation</h2>
+<p>A reference implementation exists in <strong><a href="https://github.com/reachhaven/harbour-credentials" target="_blank">harbour-credentials</a></strong> (Python and TypeScript with feature parity), covering evidence creation, the authorization message grammar, Merkle tree construction, and both verification tiers.
+The mechanism is deployed in the <a href="https://staging.envited-x.net" target="_blank">ENVITED-X Data Space</a>, where the intake ceremony runs through the gatehouse signature API.</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="../EVES-009/eves-009.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page: EVES-009: ENVITED-X Evidence-Based Consent Using Verifiable Presentations">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"created":"2026-07-16T00:00:00.000Z","author":"Felix Hoops (@flhps)","requires":["EVES-001","EVES-002","EVES-008","EVES-009"],"status":"Review","eves-identifier":"010","title":"EVES-010: ENVITED-X Credential Issuance Authorization via Embedded Evidence","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/","replaces":"None","level":"2.10","depth":1,"previous":{"title":"EVES-009: ENVITED-X Evidence-Based Consent Using Verifiable Presentations","level":"2.9","depth":1,"path":"EVES-009/eves-009.md","ref":"./EVES-009/eves-009.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-010/eves-010.md","mtime":"2026-07-16T15:46:21.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-07-16T15:47:35.409Z"},"basePath":"..","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="../gitbook/gitbook.js"></script>
+    <script src="../gitbook/theme.js"></script>
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="../gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
