@@ -14,3 +14,5 @@
 - [EVES-006: ENVITED-X Scaling Architecture](./EVES-006/eves-006.md)
 - [EVES-007: ENVITED-X Blockchain Identifier URN Schema](./EVES-007/eves-007.md)
 - [EVES-008: ENVITED-X SimpulseID Credential and Identity Framework](./EVES-008/eves-008.md)
+- [EVES-009: ENVITED-X Evidence-Based Consent Using Verifiable Presentations](./EVES-009/eves-009.md)
+- [EVES-010: ENVITED-X Credential Issuance Authorization via Embedded Evidence](./EVES-010/eves-010.md)
