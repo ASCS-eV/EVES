@@ -14,7 +14,7 @@ replaces: None
 
 This specification defines the structure of an asset in the ENVITED-X Data Space and outlines the process for uploading assets to ensure compliance, security, and interoperability.
 It leverages existing specifications, such as the Gaia-X Trust Framework, the ENVITED-X Ontologies, and implements privacy layers, validation, and metadata mapping aligned with
-[Tezos TZIP-21](https://docs.tezos.com/architecture/governance/improvement-process#tzip-21-rich-contract-metadata) and [ERC-721][26] token metadata following the [OpenSea Metadata Standards][23].
+[ERC-721][26] token metadata following the [OpenSea Metadata Standards][23].
 
 ## Motivation
 
@@ -59,8 +59,8 @@ All stages use the same `envited-x` and `manifest` ontology vocabulary to ensure
 │  PREPARATION        │      │  PACKAGING               │      │  PUBLICATION                │
 │                     │      │                          │      │                             │
 │  input_manifest.json│─────▶│  asset.zip containing:   │─────▶│  envited-x_manifest.json    │
-│  (user-provided)    │      │  manifest_reference.json │      │  tzip21_token_metadata.json │
-│                     │ asset│  + all asset files       │portal│  erc721_token_metadata.json │
+│  (user-provided)    │      │  manifest_reference.json │      │  erc721_token_metadata.json │
+│                     │ asset│  + all asset files       │portal│                             │
 │                     │ tools│                          │upload│                             │
 └─────────────────────┘      └──────────────────────────┘      └─────────────────────────────┘
 ```
@@ -78,7 +78,6 @@ The 📁 `example/` folder contains files from each stage of this pipeline:
 | `input_manifest.json`        | Preparation | User-provided partial manifest for asset tooling          | Normative   |
 | `bafybeifo6...zip`           | Packaging   | Example `asset.zip` from [hd-map-asset-example v0.2.3][7] | Informative |
 | `envited-x_manifest.json`    | Publication | Final manifest with resolved IPFS/HTTPS URLs              | Normative   |
-| `tzip21_token_metadata.json` | Publication | Tezos TZIP-21 token metadata                              | Normative   |
 | `erc721_token_metadata.json` | Publication | EVM ERC-721 token metadata                                | Normative   |
 
 > **Note:** The example `asset.zip` is from [hd-map-asset-example v0.2.3][7] and uses earlier ontology versions internally (`manifest/v4`, `envited-x/v2`).
@@ -239,9 +238,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - Create `envited-x_manifest.json` (Stage 3: Publication) by replacing relative paths in `manifest_reference.json` with IPFS/envited-x.net URLs.
 - Replace the paths of items in `hasReferencedArtifacts` to the correct filePaths.
 - Replace `@id` from `manifest_reference.json` with generated database `UUID` in `envited-x_manifest.json`. This also applies for referenced artifacts.
-- Create the chain-specific token metadata file and map the metadata fields as defined in [§6 Token Metadata](#6-token-metadata):
-  - **Tezos (TZIP-21):** Create `tzip21_token_metadata.json` OPTIONALLY conforming to the [tzip21 ontology][19] as application/ld+json.
-  - **EVM (ERC-721):** Create `erc721_token_metadata.json` following the [OpenSea Metadata Standards][23].
+- Create `erc721_token_metadata.json` following the [OpenSea Metadata Standards][23] and map the metadata fields as defined in [§6 Token Metadata](#6-token-metadata).
 
 #### Step 3: Preview Data
 
@@ -253,12 +250,8 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - It is RECOMMENDED to use signed CIDs for the upload to IPFS according to [EIP-712][13].
 - Upload `isPublic` information and `envited-x_manifest.json` to IPFS.
 - It is RECOMMENDED to verify that CIDs from the IPFS service or software returns the same CIDs as the pre-calculation.
-- Upload the chain-specific token metadata file to IPFS:
-  - **Tezos:** Upload `tzip21_token_metadata.json`.
-  - **EVM:** Upload `erc721_token_metadata.json`.
-- Mint token with linked metadata:
-  - **Tezos:** Mint an FA2.1 token with the TZIP-21 metadata URI as the token metadata.
-  - **EVM:** Mint an [ERC-721][26] token where `tokenURI()` resolves to the ERC-721 metadata JSON on IPFS. The contract SHOULD implement [ERC-5192][25] for soulbound (non-transferable) tokens if applicable. The contract SHOULD emit [ERC-4906][24] `MetadataUpdate` events when metadata changes.
+- Upload `erc721_token_metadata.json` to IPFS.
+- Mint an [ERC-721][26] token where `tokenURI()` resolves to the ERC-721 metadata JSON on IPFS. The contract SHOULD implement [ERC-5192][25] for soulbound (non-transferable) tokens if applicable. The contract SHOULD emit [ERC-4906][24] `MetadataUpdate` events when metadata changes.
 - The wallet/SDK will provide feedback if a token was minted successfully.
 
 #### Step 5: Listener and Database Synchronization
@@ -266,7 +259,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - Use a listener to detect mint events and synchronize data with the ENVITED-X Data Space portal database.
 - A data space like the ENVITED-X Data Space MUST check if the asset was uploaded through its respective portal:
   - `UUID` from step 2) has an entry in the database.
-  - Confirm that `contract` + `CID` and `minter` of the token metadata file (`tzip21_token_metadata.json` or `erc721_token_metadata.json`) are the same as in the database.
+  - Confirm that `contract` + `CID` and `minter` of the `erc721_token_metadata.json` are the same as in the database.
   - Confirm that the entries `UUID` and `@id` of the asset are unique.
   - OPTIONALLY check if the EIP-712 signature of the token metadata file matches the user who initiated the mint (SHALL only be known to the respective portal).
 - If the asset is not yet in DB OPTIONALLY mark it as foreign asset and add the `publisher` information to the DB.
@@ -293,48 +286,19 @@ If additional non-public information needs to be stored in the database before m
 [EVES-007][31] defines the ENVITED-X Blockchain Identifier URN Schema.
 The synchronization between the smart contract as in the [Marketplace Contract Reference Implementation][18] and the ENVITED-X database relies on:
 
-1. The contract identifier using the [EVES-007][31] URN schema:
-   - **Tezos** (current Ghostnet contract):
-     `urn:blockchain:tezos:NetXnHfVqm9iesp:contract:KT1PCaD2kmgCHy15wQ1gpqZUy9RLxyBVJdTF`
-   - **EVM** (Etherlink L2):
-     `urn:blockchain:eip155:42793:contract:0x646B92C8f21e55DF67E766047E4bD7bEdF8DfA14`
-2. Search `CID` of the token metadata file (`tzip21_token_metadata.json` or `erc721_token_metadata.json`) and the complete `asset.zip` in database.
+1. The contract identifier using the [EVES-007][31] URN schema, for example (Etherlink L2):
+   `urn:blockchain:eip155:42793:contract:0x646B92C8f21e55DF67E766047E4bD7bEdF8DfA14`
+2. Search `CID` of the `erc721_token_metadata.json` and the complete `asset.zip` in database.
 3. Compare if signature on CID is a `user` belonging to the `member` and if member is owner of token.
 4. Check: Uniqueness of CID in database.
 
 ### 6. Token Metadata
 
-<a id="tzip-21-token-metadata"></a>
-
-This section defines how EVES-003 asset metadata is mapped to chain-specific token metadata formats.
-The core EVES-003 fields (derived from the ENVITED-X manifest and domain metadata) are identical regardless of target chain; only the serialization format differs.
+This section defines how EVES-003 asset metadata (derived from the ENVITED-X manifest and domain metadata) is mapped to ERC-721 token metadata.
 
 The minter MUST be a `simpulseid:OrganizationParticipant` (LegalEntity) identified by their `did:ethr` DID as defined in [EVES-008][28].
-The `did:ethr` identifier is anchored on Base (ERC-1056) and serves as the cross-chain organizational identity regardless of the target minting chain (Tezos or EVM).
+The `did:ethr` identifier is anchored on Base (ERC-1056) and serves as the organizational identity regardless of the chain the token is minted on.
 The natural person performing the mint is linked to the organization through the `memberOf` credential property.
-
-#### TZIP-21 Rich Metadata (Tezos)
-
-Attributes not in the table are static and the same for every mint as in the 📁 `example/tzip21_token_metadata.json` (Stage 3: Publication).
-Examples are the first five tags or "publishers", which is always ENVITED-X and the ASCS if the mint is conducted through the [website][12].
-
-| TZIP-21       | EVES-003                                                  | Comment                                                            |
-| ------------- | --------------------------------------------------------- | ------------------------------------------------------------------ |
-| "name"        | envited-x:hasResourceDescription → gx:name                |                                                                    |
-| "description" | envited-x:hasResourceDescription → gx:description         |                                                                    |
-| "tags"        | $TAG = format:formatType + " " + format:version           | "tags": ["GaiaX","ASCS","ENVITED-X","EVES","nft", "$TAG"]          |
-| "minter"      | LegalEntity DID from [EVES-008][28]                       | did:ethr:\<chainIdHex\>:\<address\> of the OrganizationParticipant |
-| "creators"    | Name of the company                                       | Taken from the company profile the user belongs to                 |
-| "date"        | [System date-time][14]                                    |                                                                    |
-| "language"    | Language of the asset content                             | [RFC 1766][29] language tag                                        |
-| "rights"      | envited-x:hasResourceDescription → gx:license             | [SPDX identifier][15]                                              |
-| "rightsUri"   | manifest:hasLicense → manifest:hasFileMetadata → filePath | Full license text URL OR policy smart contract DID                 |
-| "artifactUri" | <https://assets.envited-x.net/Asset-CID>                  |                                                                    |
-| "identifier"  | Simulation Asset @id                                      | Unique identifier from the domainMetadata.json                     |
-| "externalUri" | Uploaded domainMetadata.json to IPFS                      |                                                                    |
-| "displayUri"  | manifest:hasArtifacts → Link of category "isMedia"        | Always use the first media image                                   |
-| "formats"     | artifactUri, externalUri, displayUri, envited-x_manifest  |                                                                    |
-| "attributes"  | Ontology IRI + version URL                                | Domain, ecosystem, Gaia-X, and georeference ontologies             |
 
 > **Note:** Some of the information needs to be extracted from the `gx:LegalParticipant` via the SimpulseID `ParticipantCredential`.
 
@@ -347,11 +311,11 @@ Attributes not in the table are static and the same for every mint as in the �
 | ------------------ | --------------------------------------------------------- | ------------------------------------------------------------------- |
 | "name"             | envited-x:hasResourceDescription → gx:name                |                                                                     |
 | "description"      | envited-x:hasResourceDescription → gx:description         |                                                                     |
-| "image"            | manifest:hasArtifacts → Link of category "isMedia"        | Always use the first media image. Maps to TZIP-21 "displayUri"      |
-| "animation_url"    | <https://assets.envited-x.net/Asset-CID>                  | Maps to TZIP-21 "artifactUri"                                       |
-| "external_url"     | Uploaded domainMetadata.json to IPFS                      | Maps to TZIP-21 "externalUri"                                       |
+| "image"            | manifest:hasArtifacts → Link of category "isMedia"        | Always use the first media image                                    |
+| "animation_url"    | <https://assets.envited-x.net/Asset-CID>                  | URI of the actual asset content                                     |
+| "external_url"     | Uploaded domainMetadata.json to IPFS                      |                                                                     |
 | "background_color" | ENVITED-X brand background color                          | Six-character hex without `#` (OpenSea standard)                    |
-| "attributes"       | Tags + ontology attributes as trait_type/value pairs      | See mapping note below                                              |
+| "attributes"       | Static + ontology attributes as trait_type/value pairs    | See mapping note below                                              |
 | "minter"           | LegalEntity DID from [EVES-008][28]                       | did:ethr:\<chainIdHex\>:\<address\> (EVES extension)                |
 | "creators"         | Name of the company                                       | Taken from the company profile (EVES extension)                     |
 | "contributors"     | Contributing persons or organizations                     | (EVES extension)                                                    |
@@ -362,25 +326,24 @@ Attributes not in the table are static and the same for every mint as in the �
 | "rights"           | envited-x:hasResourceDescription → gx:license             | [SPDX identifier][15] (EVES extension)                              |
 | "rights_uri"       | manifest:hasLicense → manifest:hasFileMetadata → filePath | Full license text URL OR policy smart contract DID (EVES extension) |
 | "identifier"       | Simulation Asset @id                                      | Unique identifier from the domainMetadata.json (EVES extension)     |
-| "formats"          | artifactUri, externalUri, displayUri, envited-x_manifest  | (EVES extension, same structure as TZIP-21)                         |
+| "formats"          | artifactUri, externalUri, displayUri, envited-x_manifest  | (EVES extension)                                                    |
 
-**Attributes mapping note:** TZIP-21 uses a flat `"tags"` string array and a separate `"attributes"` array with `name`/`value`/`type` objects.
-In ERC-721, both are merged into the OpenSea-style `"attributes"` array using `"trait_type"`/`"value"` objects.
+**Attributes mapping note:** Ecosystem classification and ontology conformance are expressed in the OpenSea-style `"attributes"` array using `"trait_type"`/`"value"` objects.
 
-The static TZIP-21 tags MUST be mapped to ERC-721 attributes using the following canonical `trait_type` names:
+Every mint MUST include the following canonical static attributes:
 
-| TZIP-21 tag value                        | ERC-721 `trait_type` |
-| ---------------------------------------- | -------------------- |
-| "GaiaX"                                  | "Standard"           |
-| "ASCS"                                   | "Publisher"          |
-| "ENVITED-X"                              | "Ecosystem"          |
-| "EVES"                                   | "Specification"      |
-| "nft"                                    | "Token Type"         |
-| format:formatType + " " + format:version | "Format"             |
+| ERC-721 `trait_type` | Value                                    |
+| -------------------- | ---------------------------------------- |
+| "Standard"           | "GaiaX"                                  |
+| "Publisher"          | "ASCS"                                   |
+| "Ecosystem"          | "ENVITED-X"                              |
+| "Specification"      | "EVES"                                   |
+| "Token Type"         | "nft"                                    |
+| "Format"             | format:formatType + " " + format:version |
 
-Each TZIP-21 ontology attribute's `name`/`value` maps directly to `trait_type`/`value`
+Each ontology attribute uses the full ontology IRI as `trait_type` and the release URL as `value`
 (for example, `{"trait_type": "https://w3id.org/ascs-ev/envited-x/hdmap/v6/", "value": "https://github.com/ASCS-eV/ontology-management-base/releases/tag/v0.1.6"}`).
-Using the full ontology IRI as `trait_type` ensures each attribute is unique and machine-parseable; the `type` field from TZIP-21 is omitted as it has no OpenSea equivalent.
+Using the full ontology IRI as `trait_type` ensures each attribute is unique and machine-parseable.
 
 **Ontology attributes:** The attributes section SHOULD include all ontologies that the asset instance conforms to.
 For an HD-Map asset, the following ontology attributes are RECOMMENDED:
@@ -401,7 +364,6 @@ The `value` for each ontology attribute SHOULD be the release URL of the [ASCS O
 
 For EVM-based deployments, the marketplace contract SHOULD implement [ERC-7572][27] by exposing a `contractURI()` function
 that returns a URI to a JSON document describing the contract/collection.
-This has no TZIP-21 equivalent as Tezos handles collection-level metadata differently through FA2.1 contract storage.
 
 The `contractURI()` response SHOULD include at minimum:
 
@@ -419,10 +381,9 @@ The contract SHOULD emit a `ContractURIUpdated()` event as defined in [ERC-7572]
 
 ## Backwards Compatibility
 
-This specification introduces new processes for asset uploads and is fully compatible with existing ENVITED-X systems.
-No retroactive changes to previous assets are required.
-The addition of EVM/ERC-721 support is additive and does not alter the existing Tezos/TZIP-21 metadata path.
-Existing assets minted on Tezos remain valid without modification.
+This specification introduces new processes for asset uploads.
+Earlier revisions of this EVES defined a Tezos/TZIP-21 token metadata path; the ENVITED-X Data Space no longer uses Tezos, and that path has been removed.
+As this specification and all its deployments are still drafts, no backwards compatibility with previously minted Tezos assets is maintained.
 
 ## Future Improvements
 
@@ -447,7 +408,6 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 - [RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels][16]
 - [Gaia-X Policy Rules Compliance Document (Release 24.11)][17]
 - [Marketplace Contract Reference Implementation][18]
-- [TZIP-21 Ontology][19]
 - [ENVITED-X Simulation Asset Tools][20]
 - [ENVITED-X Ontology][21]
 - [Manifest Ontology][22]
@@ -479,7 +439,6 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 [16]: https://datatracker.ietf.org/doc/html/rfc2119
 [17]: https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/
 [18]: https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/
-[19]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/tzip21
 [20]: https://github.com/openMSL/sl-5-8-asset-tools
 [21]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/envited-x
 [22]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/manifest

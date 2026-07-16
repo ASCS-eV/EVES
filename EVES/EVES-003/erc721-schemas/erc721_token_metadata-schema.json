@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$comment": "EVES-003 profile of ERC-721 token metadata. Base fields (name, description, image) from the ERC-721 Metadata JSON Schema (EIP-721). Display fields (animation_url, external_url, background_color, attributes) from OpenSea Metadata Standards (de facto, no upstream schema). EVES extension fields (minter, creators, contributors, publishers, date, type, language, rights, rights_uri, identifier, formats) mirror TZIP-21 for cross-chain interoperability.",
+  "$comment": "EVES-003 profile of ERC-721 token metadata. Base fields (name, description, image) from the ERC-721 Metadata JSON Schema (EIP-721). Display fields (animation_url, external_url, background_color, attributes) from OpenSea Metadata Standards (de facto, no upstream schema). EVES extension fields (minter, creators, contributors, publishers, date, type, language, rights, rights_uri, identifier, formats) follow Dublin Core naming conventions.",
   "$ref": "#/definitions/asset",
   "definitions": {
     "asset": {
@@ -23,17 +23,17 @@
         "image": {
           "type": "string",
           "format": "uri-reference",
-          "description": "A URI pointing to a resource with mime type image/* representing the asset. Maps to TZIP-21 displayUri."
+          "description": "A URI pointing to a resource with mime type image/* representing the asset."
         },
         "animation_url": {
           "type": "string",
           "format": "uri-reference",
-          "description": "A URI pointing to the actual asset content (for example, asset.zip download URL). Maps to TZIP-21 artifactUri."
+          "description": "A URI pointing to the actual asset content (for example, asset.zip download URL)."
         },
         "external_url": {
           "type": "string",
           "format": "uri-reference",
-          "description": "A URI pointing to an external page with additional information about the asset (for example, domain metadata on IPFS). Maps to TZIP-21 externalUri."
+          "description": "A URI pointing to an external page with additional information about the asset (for example, domain metadata on IPFS)."
         },
         "background_color": {
           "type": "string",
@@ -88,7 +88,7 @@
         "rights_uri": {
           "type": "string",
           "format": "uri-reference",
-          "description": "Links to a statement of rights (for example, full license text or smart contract DID). Maps to TZIP-21 rightsUri. EVES extension."
+          "description": "Links to a statement of rights (for example, full license text or smart contract DID). EVES extension."
         },
         "identifier": {
           "type": "string",
