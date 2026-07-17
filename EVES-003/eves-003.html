@@ -288,7 +288,8 @@
                                 
                                 <h2 id="abstract">Abstract</h2>
 <p>This specification defines the structure of an asset in the ENVITED-X Data Space and outlines the process for uploading assets to ensure compliance, security, and interoperability.
-It leverages existing specifications, such as the Gaia-X Trust Framework, the Gaia-X 4 PLC-AAD Ontologies, and implements privacy layers, validation, and metadata mapping aligned with <a href="https://docs.tezos.com/architecture/governance/improvement-process#tzip-21-rich-contract-metadata" target="_blank">Tezos TZIP-21</a>.</p>
+It leverages existing specifications, such as the Gaia-X Trust Framework, the ENVITED-X Ontologies, and implements privacy layers, validation, and metadata mapping aligned with
+<a href="https://eips.ethereum.org/EIPS/eip-721" target="_blank">ERC-721</a> token metadata following the <a href="https://docs.opensea.io/docs/metadata-standards" target="_blank">OpenSea Metadata Standards</a>.</p>
 <h2 id="motivation">Motivation</h2>
 <p>Standardizing the definition and upload process for digital assets <code>SimulationAssets</code> in the ENVITED-X Data Space ensures:</p>
 <ul>
@@ -298,12 +299,13 @@ It leverages existing specifications, such as the Gaia-X Trust Framework, the Ga
 </ul>
 <p>This EVES addresses the need for clear guidelines to onboard assets and synchronize data with ENVITED-X systems.</p>
 <h2 id="specification">Specification</h2>
+<p>The key words &quot;MUST&quot;, &quot;MUST NOT&quot;, &quot;REQUIRED&quot;, &quot;SHALL&quot;, &quot;SHALL NOT&quot;, &quot;SHOULD&quot;, &quot;SHOULD NOT&quot;, &quot;RECOMMENDED&quot;, &quot;MAY&quot;, and &quot;OPTIONAL&quot; in this document are to be interpreted as described in <a href="https://datatracker.ietf.org/doc/html/rfc2119" target="_blank">RFC 2119</a>.</p>
 <h3 id="1-digital-asset-definition">1. Digital Asset Definition</h3>
 <p>The <code>envited-x:SimulationAsset</code> defines a digital asset within the domain of simulation including the core simulation data and all necessary files for describing, evaluating, and visualizing the dataset.
-All simulation assets MUST be derived from a common <code>envited-x</code> ontology defined in the <a href="https://github.com/ASCS-eV/ontology-management-base/" target="_blank">Gaia-X 4 PLC-AAD Ontology Management Base</a>.
-A data space portal SHALL display the currently supported version of the ontologies such as: <code>https://ontologies.envited-x.net/envited-x/v2/ontology#</code>.
+All simulation assets MUST be derived from a common <code>envited-x</code> ontology defined in the <a href="https://github.com/ASCS-eV/ontology-management-base/" target="_blank">ASCS Ontology Management Base</a>.
+A data space portal SHALL display the currently supported version of the ontologies such as: <code>https://w3id.org/ascs-ev/envited-x/envited-x/v3/</code>.
 Each simulation asset SHALL be compliant with the <a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/gx" target="_blank">Gaia-X Ontology and SHACL shapes 2210</a>.
-The <code>gx</code> turtle shacle shapes are derived from the <a href="https://registry.lab.gaia-x.eu/v1/api/trusted-schemas-registry/v2/schemas/gax-trust-framework" target="_blank">Gaia-X Trust Framework Schema</a> and the respective application/ld+json <a href="https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#" target="_blank">Gaia-X Trust Framework Shapes</a>.
+The <code>gx</code> turtle SHACL shapes are derived from the <a href="https://registry.lab.gaia-x.eu/v1/api/trusted-schemas-registry/v2/schemas/gax-trust-framework" target="_blank">Gaia-X Trust Framework Schema</a> and the respective application/ld+json <a href="https://registry.lab.gaia-x.eu/v1/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#" target="_blank">Gaia-X Trust Framework Shapes</a>.
 A <a href="https://github.com/GAIA-X4PLC-AAD/gaia-x-compliant-claims-example" target="_blank">GaiaX Compliant Claims Example</a> MAY be generated using the <a href="https://github.com/GAIA-X4PLC-AAD/claim-compliance-provider" target="_blank">GaiaX 4 PLC-AAD Claim Compliance Provider</a>.</p>
 <p>The example implementation in the &#x1F4C1; <code>example/</code> folder is based on release v0.2.3 of the <a href="https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.2.3" target="_blank">ASCS HD-Map Asset Example</a>.</p>
 <p>Asset examples can be found in the following repositories:</p>
@@ -313,6 +315,67 @@ A <a href="https://github.com/GAIA-X4PLC-AAD/gaia-x-compliant-claims-example" ta
 <li><a href="https://github.com/ASCS-eV/scenario-asset-example" target="_blank">Scenario Asset Example</a></li>
 <li><a href="https://github.com/ASCS-eV/ositrace-asset-example/tree/main" target="_blank">OSI-Trace Asset Example</a></li>
 </ul>
+<h3 id="1a-asset-lifecycle-overview">1a. Asset Lifecycle Overview</h3>
+<p>An <code>envited-x:SimulationAsset</code> progresses through three stages from creation to publication.
+All stages use the same <code>envited-x</code> and <code>manifest</code> ontology vocabulary to ensure consistency and machine-readability throughout.</p>
+<pre><code class="lang-text">&#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;      &#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;      &#x250C;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2510;
+&#x2502;  Stage 1:           &#x2502;      &#x2502;  Stage 2:                &#x2502;      &#x2502;  Stage 3:                   &#x2502;
+&#x2502;  PREPARATION        &#x2502;      &#x2502;  PACKAGING               &#x2502;      &#x2502;  PUBLICATION                &#x2502;
+&#x2502;                     &#x2502;      &#x2502;                          &#x2502;      &#x2502;                             &#x2502;
+&#x2502;  input_manifest.json&#x2502;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x25B6;&#x2502;  asset.zip containing:   &#x2502;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x25B6;&#x2502;  envited-x_manifest.json    &#x2502;
+&#x2502;  (user-provided)    &#x2502;      &#x2502;  manifest_reference.json &#x2502;      &#x2502;  erc721_token_metadata.json &#x2502;
+&#x2502;                     &#x2502; asset&#x2502;  + all asset files       &#x2502;portal&#x2502;                             &#x2502;
+&#x2502;                     &#x2502; tools&#x2502;                          &#x2502;upload&#x2502;                             &#x2502;
+&#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;      &#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;      &#x2514;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2500;&#x2518;
+</code></pre>
+<ul>
+<li><strong>Stage 1 &#x2014; Preparation:</strong> The user describes their input files in an <code>input_manifest.json</code> using the <code>envited-x</code> vocabulary. This partial manifest specifies file paths, categories, access roles, and MIME types.</li>
+<li><strong>Stage 2 &#x2014; Packaging:</strong> Asset creation tooling (such as the <a href="https://github.com/openMSL/sl-5-8-asset-tools" target="_blank">ENVITED-X Simulation Asset Tools</a>) processes the input manifest, computes CIDs and file sizes, generates additional artifacts, and packages everything into an <code>asset.zip</code> with a complete <code>manifest_reference.json</code>.</li>
+<li><strong>Stage 3 &#x2014; Publication:</strong> The ENVITED-X portal uploads the asset, replaces local file paths with IPFS/HTTPS URLs, generates the final <code>envited-x_manifest.json</code>, and creates chain-specific token metadata files for minting.</li>
+</ul>
+<h4 id="example-files">Example Files</h4>
+<p>The &#x1F4C1; <code>example/</code> folder contains files from each stage of this pipeline:</p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Stage</th>
+<th>Role</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>input_manifest.json</code></td>
+<td>Preparation</td>
+<td>User-provided partial manifest for asset tooling</td>
+<td>Normative</td>
+</tr>
+<tr>
+<td><code>bafybeifo6...zip</code></td>
+<td>Packaging</td>
+<td>Example <code>asset.zip</code> from <a href="https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.2.3" target="_blank">hd-map-asset-example v0.2.3</a></td>
+<td>Informative</td>
+</tr>
+<tr>
+<td><code>envited-x_manifest.json</code></td>
+<td>Publication</td>
+<td>Final manifest with resolved IPFS/HTTPS URLs</td>
+<td>Normative</td>
+</tr>
+<tr>
+<td><code>erc721_token_metadata.json</code></td>
+<td>Publication</td>
+<td>EVM ERC-721 token metadata</td>
+<td>Normative</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p><strong>Note:</strong> The example <code>asset.zip</code> is from <a href="https://github.com/ASCS-eV/hd-map-asset-example/releases/tag/v0.2.3" target="_blank">hd-map-asset-example v0.2.3</a> and uses earlier ontology versions internally (<code>manifest/v4</code>, <code>envited-x/v2</code>).
+The standalone example files reflect the current ontology versions (<code>manifest/v5</code>, <code>envited-x/v3</code>).
+A future release of the HD-Map Asset Example will align both.</p>
+</blockquote>
 <h3 id="1b-asset-preparation">1b. Asset Preparation</h3>
 <p>Before uploading, an asset MUST be organized into a well-defined folder structure and described by an input manifest.
 Tooling such as the <a href="https://github.com/openMSL/sl-5-8-asset-tools" target="_blank">ENVITED-X Simulation Asset Tools</a> MAY automate the creation of a conformant <code>asset.zip</code> from user-provided input files and an <code>input_manifest.json</code>.</p>
@@ -384,9 +447,9 @@ Tooling such as the <a href="https://github.com/openMSL/sl-5-8-asset-tools" targ
 <p><strong>Note:</strong> The <code>envited-x</code> categories and access roles are formally defined in the <a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/envited-x" target="_blank">ENVITED-X Ontology</a> which extends the generic <a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/manifest" target="_blank">Manifest Ontology</a>.
 The <code>envited-x:ExtendedLinkShape</code> constrains the allowed values for both <code>manifest:hasCategory</code> and <code>manifest:hasAccessRole</code>.</p>
 </blockquote>
-<h4 id="input-manifest-inputmanifestjson">Input Manifest (<code>input_manifest.json</code>)</h4>
-<p>An <code>input_manifest.json</code> is a partial <code>envited-x:Manifest</code> in JSON-LD that describes the user-provided input files before the asset creation pipeline processes them.
-It uses the same vocabulary as the final <code>manifest_reference.json</code> but omits computed fields (<code>cid</code>, <code>fileSize</code>, <code>timestamp</code>, <code>hasDimensions</code>, <code>filename</code>).</p>
+<h4 id="input-manifest-inputmanifestjson-&#x2014;-stage-1-preparation">Input Manifest (<code>input_manifest.json</code>) &#x2014; Stage 1: Preparation</h4>
+<p>An <code>input_manifest.json</code> is a partial <code>envited-x:Manifest</code> in JSON-LD that describes the user-provided input files before the asset creation pipeline processes them (see <a href="#1a-asset-lifecycle-overview">&#xA7;1a</a>).
+It uses the same <code>envited-x</code> and <code>manifest</code> vocabulary as the final <code>manifest_reference.json</code> but omits computed fields (<code>cid</code>, <code>fileSize</code>, <code>timestamp</code>, <code>hasDimensions</code>, <code>filename</code>) and structural entries (<code>hasManifestReference</code>, <code>iri</code>) that are generated by the pipeline.</p>
 <p>Each entry (a <code>manifest:Link</code>) MUST specify:</p>
 <ul>
 <li><code>manifest:hasCategory</code> &#x2014; one of the categories defined in the <code>envited-x</code> ontology</li>
@@ -398,58 +461,59 @@ It uses the same vocabulary as the final <code>manifest_reference.json</code> bu
 </li>
 </ul>
 <h5 id="two-stage-validation">Two-Stage Validation</h5>
-<p>Asset creation tooling SHOULD implement a two-stage validation approach:</p>
+<p>Asset creation tooling SHOULD implement a two-stage validation approach (see also <a href="#step-1-client-side-pre-validation">&#xA7;4 Step 1</a> for portal-side validation):</p>
 <ol>
 <li><strong>Input validation (fail fast):</strong> Each <code>manifest:Link</code> in the <code>input_manifest.json</code> SHOULD be validated against <code>manifest:LinkShape</code> and <code>envited-x:ExtendedLinkShape</code> before the pipeline runs. This catches invalid categories, missing access roles, or malformed file metadata early.</li>
 <li><strong>Output validation (completeness):</strong> The completed <code>manifest_reference.json</code> MUST be validated against the full <code>envited-x:ManifestShape</code>, which requires at least one artifact per core category (<code>isSimulationData</code>, <code>isDocumentation</code>, <code>isMetadata</code>, <code>isMedia</code>).</li>
 </ol>
-<h5 id="example-inputmanifestjson">Example <code>input_manifest.json</code></h5>
+<h5 id="example-inputmanifestjson-&#x2014;-stage-1-preparation">Example <code>input_manifest.json</code> &#x2014; Stage 1: Preparation</h5>
 <p>See &#x1F4C1; <code>example/input_manifest.json</code> for a complete example.</p>
 <pre><code class="lang-json">{
-  <span class="hljs-string">&quot;@context&quot;</span>: [<span class="hljs-string">&quot;https://w3id.org/ascs-ev/envited-x/manifest/v5/&quot;</span>, { <span class="hljs-string">&quot;envited-x&quot;</span>: <span class="hljs-string">&quot;https://w3id.org/ascs-ev/envited-x/envited-x/v3/&quot;</span> }],
+  <span class="hljs-string">&quot;@context&quot;</span>: [<span class="hljs-string">&quot;https://w3id.org/ascs-ev/envited-x/envited-x/v3/&quot;</span>, <span class="hljs-string">&quot;https://w3id.org/ascs-ev/envited-x/manifest/v5/&quot;</span>, { <span class="hljs-string">&quot;gx&quot;</span>: <span class="hljs-string">&quot;https://w3id.org/gaia-x/development#&quot;</span>, <span class="hljs-string">&quot;xsd&quot;</span>: <span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema#&quot;</span> }],
   <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;did:web:registry.gaia-x.eu:HdMap:example&quot;</span>,
   <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;envited-x:Manifest&quot;</span>,
   <span class="hljs-string">&quot;hasArtifacts&quot;</span>: [
     {
-      <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;Link&quot;</span>,
-      <span class="hljs-string">&quot;hasCategory&quot;</span>: { <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isSimulationData&quot;</span> },
-      <span class="hljs-string">&quot;hasAccessRole&quot;</span>: { <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isOwner&quot;</span> },
+      <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;manifest:Link&quot;</span>,
+      <span class="hljs-string">&quot;hasAccessRole&quot;</span>: { <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;manifest:AccessRole&quot;</span>, <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isOwner&quot;</span> },
+      <span class="hljs-string">&quot;hasCategory&quot;</span>: { <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;manifest:Category&quot;</span>, <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isSimulationData&quot;</span> },
       <span class="hljs-string">&quot;hasFileMetadata&quot;</span>: {
-        <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;FileMetadata&quot;</span>,
+        <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;manifest:FileMetadata&quot;</span>,
         <span class="hljs-string">&quot;filePath&quot;</span>: <span class="hljs-string">&quot;my_map.xodr&quot;</span>,
-        <span class="hljs-string">&quot;mimeType&quot;</span>: <span class="hljs-string">&quot;application/xml&quot;</span>
+        <span class="hljs-string">&quot;mimeType&quot;</span>: <span class="hljs-string">&quot;application/x-xodr&quot;</span>
       }
     },
     {
-      <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;Link&quot;</span>,
-      <span class="hljs-string">&quot;hasCategory&quot;</span>: { <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isMedia&quot;</span> },
-      <span class="hljs-string">&quot;hasAccessRole&quot;</span>: { <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isPublic&quot;</span> },
+      <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;manifest:Link&quot;</span>,
+      <span class="hljs-string">&quot;hasAccessRole&quot;</span>: { <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;manifest:AccessRole&quot;</span>, <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isPublic&quot;</span> },
+      <span class="hljs-string">&quot;hasCategory&quot;</span>: { <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;manifest:Category&quot;</span>, <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isMedia&quot;</span> },
       <span class="hljs-string">&quot;hasFileMetadata&quot;</span>: {
-        <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;FileMetadata&quot;</span>,
+        <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;manifest:FileMetadata&quot;</span>,
         <span class="hljs-string">&quot;filePath&quot;</span>: <span class="hljs-string">&quot;impression-01.png&quot;</span>,
         <span class="hljs-string">&quot;mimeType&quot;</span>: <span class="hljs-string">&quot;image/png&quot;</span>
       }
     }
   ],
   <span class="hljs-string">&quot;hasLicense&quot;</span>: {
-    <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;Link&quot;</span>,
-    <span class="hljs-string">&quot;hasCategory&quot;</span>: { <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isLicense&quot;</span> },
-    <span class="hljs-string">&quot;hasAccessRole&quot;</span>: { <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isPublic&quot;</span> },
+    <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;manifest:Link&quot;</span>,
+    <span class="hljs-string">&quot;hasAccessRole&quot;</span>: { <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;manifest:AccessRole&quot;</span>, <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isPublic&quot;</span> },
+    <span class="hljs-string">&quot;hasCategory&quot;</span>: { <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;manifest:Category&quot;</span>, <span class="hljs-string">&quot;@id&quot;</span>: <span class="hljs-string">&quot;envited-x:isLicense&quot;</span> },
     <span class="hljs-string">&quot;hasFileMetadata&quot;</span>: {
-      <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;FileMetadata&quot;</span>,
-      <span class="hljs-string">&quot;filePath&quot;</span>: <span class="hljs-string">&quot;LICENSE&quot;</span>,
-      <span class="hljs-string">&quot;mimeType&quot;</span>: <span class="hljs-string">&quot;text/plain&quot;</span>
+      <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;manifest:FileMetadata&quot;</span>,
+      <span class="hljs-string">&quot;filePath&quot;</span>: <span class="hljs-string">&quot;https://www.mozilla.org/en-US/MPL/2.0/&quot;</span>,
+      <span class="hljs-string">&quot;mimeType&quot;</span>: <span class="hljs-string">&quot;text/html&quot;</span>
     }
   }
 }
 </code></pre>
-<p>The asset creation pipeline enriches this into a full <code>manifest_reference.json</code> by:</p>
+<p>The asset creation pipeline (Stage 2: Packaging) enriches this into a full <code>manifest_reference.json</code> by:</p>
 <ol>
 <li>Computing <code>manifest:cid</code> (IPFS CIDv1) for each file</li>
 <li>Computing <code>manifest:fileSize</code> and <code>manifest:timestamp</code></li>
 <li>Extracting <code>manifest:hasDimensions</code> for images</li>
 <li>Adding generated artifacts (documentation, metadata, validation reports)</li>
 <li>Adding the self-referencing <code>manifest:hasManifestReference</code> entry</li>
+<li>Adding <code>manifest:iri</code> to the license link (required by <code>envited-x:LicenseLinkReferenceShape</code>)</li>
 </ol>
 <h3 id="2-pinata-ipfs-and-cid-management">2. Pinata IPFS and CID Management</h3>
 <p>It is RECOMMENDED to use <a href="https://ipfs.tech/" target="_blank">IPFS</a> within the ENVITED-X Data Space for making public data available.
@@ -490,8 +554,8 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <p>The following process is implemented in the <a href="https://envited-x.net/" target="_blank">ENVITED-X Data Space</a> portal developed by the Automotive Solution Center for Simulation e.V.</p>
 <h4 id="step-1-client-side-pre-validation">Step 1: Client-Side Pre-Validation</h4>
 <ul>
-<li>Verify that an <code>input_manifest.json</code> was used during asset preparation (see <a href="#1b-asset-preparation">&#xA7;1b</a>):<ol>
-<li>Each <code>manifest:Link</code> in the input SHOULD have been validated against <code>manifest:LinkShape</code> and <code>envited-x:ExtendedLinkShape</code>.</li>
+<li>Verify that an <code>input_manifest.json</code> was used during asset preparation (see <a href="#1b-asset-preparation">&#xA7;1b</a> and <a href="#two-stage-validation">Two-Stage Validation</a>):<ol>
+<li>Each <code>manifest:Link</code> in the input SHOULD have been validated against <code>manifest:LinkShape</code> and <code>envited-x:ExtendedLinkShape</code> as described in <a href="#two-stage-validation">&#xA7;1b</a>.</li>
 </ol>
 </li>
 <li>Drag and drop <code>asset.zip</code> into the upload field.</li>
@@ -524,14 +588,14 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <li>Store <code>isRegistered</code> metadata at <code>https://metadata.envited-x.net/Asset-CID</code>.</li>
 <li>Store <code>isPublic</code> metadata at <code>https://ipfs.envited-x.net/Asset-CID/Data-CID</code>.</li>
 <li>Calculate CIDs for all <code>isPublic</code> data.</li>
-<li>Create <code>envited-x_manifest.json</code> by replacing relative paths in <code>manifest_reference.json</code> with IPFS/envited-x.net URLs.</li>
+<li>Create <code>envited-x_manifest.json</code> (Stage 3: Publication) by replacing relative paths in <code>manifest_reference.json</code> with IPFS/envited-x.net URLs.</li>
 <li>Replace the paths of items in <code>hasReferencedArtifacts</code> to the correct filePaths.</li>
 <li>Replace <code>@id</code> from <code>manifest_reference.json</code> with generated database <code>UUID</code> in <code>envited-x_manifest.json</code>. This also applies for referenced artifacts.</li>
-<li>Create <code>tzip21_token_metadata.json</code> and map the metadata fields OPTIONALLY use an application/ld+json conform to the <a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/tzip21" target="_blank">tzip21 ontology</a>.</li>
+<li>Create <code>erc721_token_metadata.json</code> following the <a href="https://docs.opensea.io/docs/metadata-standards" target="_blank">OpenSea Metadata Standards</a> and map the metadata fields as defined in <a href="#6-token-metadata">&#xA7;6 Token Metadata</a>.</li>
 </ul>
 <h4 id="step-3-preview-data">Step 3: Preview Data</h4>
 <ul>
-<li><strong>TBD</strong>: Define visualization and preview mechanisms for uploaded data.</li>
+<li>Visualization and preview mechanisms for uploaded data are portal-specific and not specified in this revision.</li>
 <li>If a user triggers the &quot;delete asset&quot; button then all data stored in Step 2) is deleted.</li>
 </ul>
 <h4 id="step-4-mint-token">Step 4: Mint Token</h4>
@@ -539,8 +603,9 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <li>It is RECOMMENDED to use signed CIDs for the upload to IPFS according to <a href="https://eips.ethereum.org/EIPS/eip-712" target="_blank">EIP-712</a>.</li>
 <li>Upload <code>isPublic</code> information and <code>envited-x_manifest.json</code> to IPFS.</li>
 <li>It is RECOMMENDED to verify that CIDs from the IPFS service or software returns the same CIDs as the pre-calculation.</li>
-<li>Upload <code>tzip21_token_metadata.json</code> to IPFS.</li>
-<li>Mint token with linked metadata.</li>
+<li>Upload <code>erc721_token_metadata.json</code> to IPFS.</li>
+<li>Mint an <a href="https://eips.ethereum.org/EIPS/eip-721" target="_blank">ERC-721</a> token where <code>tokenURI()</code> resolves to the ERC-721 metadata JSON on IPFS. The contract SHOULD implement <a href="https://eips.ethereum.org/EIPS/eip-5192" target="_blank">ERC-5192</a> for soulbound (non-transferable) tokens if applicable. The contract SHOULD emit <a href="https://eips.ethereum.org/EIPS/eip-4906" target="_blank">ERC-4906</a> <code>MetadataUpdate</code> events when metadata changes.</li>
+<li>The mint transaction MAY be submitted by a relayer on behalf of the user; signed authorization evidence links the registration to the minting organization&apos;s identity (see <a href="#6-token-metadata">&#xA7;6 Token Metadata</a>).</li>
 <li>The wallet/SDK will provide feedback if a token was minted successfully.</li>
 </ul>
 <h4 id="step-5-listener-and-database-synchronization">Step 5: Listener and Database Synchronization</h4>
@@ -548,9 +613,9 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <li>Use a listener to detect mint events and synchronize data with the ENVITED-X Data Space portal database.</li>
 <li>A data space like the ENVITED-X Data Space MUST check if the asset was uploaded through its respective portal:<ul>
 <li><code>UUID</code> from step 2) has an entry in the database.</li>
-<li>Confirm that <code>contract</code> + <code>CID</code> and <code>minter</code> of tzip21_token_metadata.json are the same as in the database.</li>
+<li>Confirm that <code>contract</code> + <code>CID</code> and <code>minter</code> of the <code>erc721_token_metadata.json</code> are the same as in the database.</li>
 <li>Confirm that the entries <code>UUID</code> and <code>@id</code> of the asset are unique.</li>
-<li>OPTIONALLY check if the EIP-712 signature of the tzip21_token_metadata.json matches the user who initiated the mint (SHALL only be known to the respective portal).</li>
+<li>OPTIONALLY check if the EIP-712 signature of the token metadata file matches the user who initiated the mint (SHALL only be known to the respective portal).</li>
 </ul>
 </li>
 <li>If the asset is not yet in DB OPTIONALLY mark it as foreign asset and add the <code>publisher</code> information to the DB.</li>
@@ -561,7 +626,7 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <h4 id="id-and-cid-as-the-primary-identifier">@id and CID as the Primary Identifier</h4>
 <ul>
 <li>The CID of the uploaded <code>asset.zip</code> serves as the unique identifier detecting identical datasets across all systems.</li>
-<li>In addition the unique identifier <code>@id</code> of the <code>envied-x:SimulationAsset</code> in the <code>domainMetadata.json</code> SHALL be used for identification of the digital assets.</li>
+<li>In addition the unique identifier <code>@id</code> of the <code>envited-x:SimulationAsset</code> in the <code>domainMetadata.json</code> SHALL be used for identification of the digital assets.</li>
 <li>The CIDs MAY be signed by the user according to EIP-712.</li>
 <li>A UUID MUST be generated for the <code>envited-x_manifest.json</code> pre-mint to link the asset with the ENVITED-X database securely.</li>
 <li>The DID of the member associated with the user minting the asset MUST be known.</li>
@@ -573,19 +638,35 @@ IPFS is a peer-to-peer content delivery network built around the innovation of c
 <p><a href="../EVES-007/eves-007.html">EVES-007</a> defines the ENVITED-X Blockchain Identifier URN Schema.
 The synchronization between the smart contract as in the <a href="https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/" target="_blank">Marketplace Contract Reference Implementation</a> and the ENVITED-X database relies on:</p>
 <ol>
-<li>The contract identifier on Tezos (current Ghostnet contract):<br><code>urn:blockchain:tezos:NetXnHfVqm9iesp:contract:KT1PCaD2kmgCHy15wQ1gpqZUy9RLxyBVJdTF</code></li>
-<li>Search <code>CID</code> of <code>tzip21_token_metadata.json</code> and the complete <code>asset.zip</code> in database.</li>
+<li>The contract identifier using the <a href="../EVES-007/eves-007.html">EVES-007</a> URN schema, for example (Etherlink L2):
+<code>urn:blockchain:eip155:42793:contract:0x646B92C8f21e55DF67E766047E4bD7bEdF8DfA14</code></li>
+<li>Search <code>CID</code> of the <code>erc721_token_metadata.json</code> and the complete <code>asset.zip</code> in database.</li>
 <li>Compare if signature on CID is a <code>user</code> belonging to the <code>member</code> and if member is owner of token.</li>
 <li>Check: Uniqueness of CID in database.</li>
 </ol>
-<h3 id="tzip-21-token-metadata">TZIP-21 Token Metadata</h3>
-<h4 id="tzip-21-rich-metadata-mapping">TZIP-21 Rich Metadata Mapping</h4>
-<p>Attributes not in the table are static and the same for every mint as in the &#x1F4C1; <code>example/tzip21_token_metadata.json</code>.
-Examples are the first five tags or &quot;publishers&quot;, which is always ENVITED-X and the ASCS if the mint is conducted through the <a href="https://envited-x.net/" target="_blank">website</a>.</p>
+<h3 id="6-token-metadata">6. Token Metadata</h3>
+<p>This section defines how EVES-003 asset metadata (derived from the ENVITED-X manifest and domain metadata) is mapped to ERC-721 token metadata.</p>
+<p>Token metadata is registered on-chain through an evidence-based listing registry:
+the minted ERC-721 token records the minting organization&apos;s DID, a hash of the canonical metadata document, and the metadata URI.
+The registration is accompanied by signed authorization evidence (for example, a key-binding JWT produced by an SSI wallet as defined in <a href="../EVES-008/eves-008.html">EVES-008</a>) that links the mint to the organization&apos;s identity.
+The exact registration flow and the precise structure of the registered document follow the reference implementation and may be refined in a future revision of this EVES;
+the field mappings below are normative for the content of the ERC-721 metadata.</p>
+<p>The minter MUST be a <code>simpulseid:OrganizationParticipant</code> (LegalEntity) identified by their <code>did:ethr</code> DID as defined in <a href="../EVES-008/eves-008.html">EVES-008</a>.
+The <code>did:ethr</code> identifier is anchored on Base (ERC-1056) and serves as the organizational identity regardless of the chain the token is minted on.
+The natural person performing the mint is linked to the organization through the <code>memberOf</code> credential property.
+Some of the information needs to be extracted from the <code>gx:LegalParticipant</code> via the SimpulseID <code>ParticipantCredential</code>.</p>
+<p>The <code>minter</code> field is part of the off-chain metadata JSON and therefore states the organization&apos;s DID as a claim:
+a different Ethereum address (for example, a gas relayer) may submit the mint transaction, so the transaction sender carries no trust semantics.
+The smart contract does not verify this claim at mint time.
+Instead, consuming systems verify the claimed <code>minter</code> DID against an ecosystem root of trust &#x2014; such as the key material anchored in the organization&apos;s <code>did:ethr</code> DID document or credentials issued by a trust anchor &#x2014; when reading the token.
+Where and when in the asset lifecycle this verification takes place remains open in this revision (see <a href="#future-improvements">Future Improvements</a>).</p>
+<h4 id="erc-721-metadata-evm">ERC-721 Metadata (EVM)</h4>
+<p>ERC-721 token metadata follows the <a href="https://docs.opensea.io/docs/metadata-standards" target="_blank">OpenSea Metadata Standards</a> which extend the minimal <a href="https://eips.ethereum.org/EIPS/eip-721" target="_blank">ERC-721</a> <code>tokenURI()</code> JSON schema with additional fields.
+Attributes not in the table are static and the same for every mint as in the &#x1F4C1; <code>example/erc721_token_metadata.json</code> (Stage 3: Publication).</p>
 <table>
 <thead>
 <tr>
-<th>TZIP-21</th>
+<th>ERC-721 / OpenSea</th>
 <th>EVES-003</th>
 <th>Comment</th>
 </tr>
@@ -593,87 +674,176 @@ Examples are the first five tags or &quot;publishers&quot;, which is always ENVI
 <tbody>
 <tr>
 <td>&quot;name&quot;</td>
-<td>envited-x:DataResource:gx:name</td>
+<td>envited-x:hasResourceDescription &#x2192; gx:name</td>
 <td></td>
 </tr>
 <tr>
 <td>&quot;description&quot;</td>
-<td>envited-x:DataResource:gx:description</td>
+<td>envited-x:hasResourceDescription &#x2192; gx:description</td>
 <td></td>
 </tr>
 <tr>
-<td>&quot;tags&quot;</td>
-<td>$TAG = format:formatType + &quot; &quot; + format:version</td>
-<td>&quot;tags&quot;: [&quot;GaiaX&quot;,&quot;ASCS&quot;,&quot;ENVITED-X&quot;,&quot;EVES&quot;,&quot;nft&quot;, &quot;$TAG&quot;]</td>
+<td>&quot;image&quot;</td>
+<td>manifest:hasArtifacts &#x2192; Link of category &quot;isMedia&quot;</td>
+<td>Always use the first media image</td>
 </tr>
 <tr>
-<td>&quot;minter&quot;</td>
-<td>Member DID (CAIP-10) associated with user</td>
-<td>Returned by the View from the SimpulseID revocation registry</td>
-</tr>
-<tr>
-<td>&quot;creators&quot;</td>
-<td>Name of the company</td>
-<td>Taken from the company profile the user belongs to</td>
-</tr>
-<tr>
-<td>&quot;date&quot;</td>
-<td><a href="https://json-schema.org/understanding-json-schema/reference/string#dates-and-times" target="_blank">System date-time</a></td>
-<td></td>
-</tr>
-<tr>
-<td>&quot;rights&quot;</td>
-<td>manifest:hasLicense:gx:license</td>
-<td><a href="https://spdx.org/licenses/" target="_blank">SPDX identifier</a></td>
-</tr>
-<tr>
-<td>&quot;rightsUri&quot;</td>
-<td>manifest:hasLicense:licenseData:hasFileMetadata:filePath</td>
-<td>Full os license text URL OR policy smart contract did</td>
-</tr>
-<tr>
-<td>&quot;artifactUri&quot;</td>
+<td>&quot;animation_url&quot;</td>
 <td><a href="https://assets.envited-x.net/Asset-CID" target="_blank">https://assets.envited-x.net/Asset-CID</a></td>
-<td></td>
+<td>URI of the actual asset content</td>
 </tr>
 <tr>
-<td>&quot;identifier&quot;</td>
-<td>Simulation Asset @id</td>
-<td>Unique identifier from the domainMetadata.json</td>
-</tr>
-<tr>
-<td>&quot;externalUri&quot;</td>
+<td>&quot;external_url&quot;</td>
 <td>Uploaded domainMetadata.json to IPFS</td>
 <td></td>
 </tr>
 <tr>
-<td>&quot;displayUri&quot;</td>
-<td>&quot;manifest:hasArtifacts:Link&quot; of category &quot;isMedia&quot;</td>
-<td>Always use the first media image</td>
+<td>&quot;background_color&quot;</td>
+<td>ENVITED-X brand background color</td>
+<td>Six-character hex without <code>#</code> (OpenSea standard)</td>
+</tr>
+<tr>
+<td>&quot;attributes&quot;</td>
+<td>Static + ontology attributes as trait_type/value pairs</td>
+<td>See mapping note below</td>
+</tr>
+<tr>
+<td>&quot;minter&quot;</td>
+<td>LegalEntity DID from <a href="../EVES-008/eves-008.html">EVES-008</a></td>
+<td>did:ethr:\<chainidhex\>:\<address\> (EVES extension)</address\></chainidhex\></td>
+</tr>
+<tr>
+<td>&quot;creators&quot;</td>
+<td>Name of the company</td>
+<td>Taken from the company profile (EVES extension)</td>
+</tr>
+<tr>
+<td>&quot;contributors&quot;</td>
+<td>Contributing persons or organizations</td>
+<td>(EVES extension)</td>
+</tr>
+<tr>
+<td>&quot;publishers&quot;</td>
+<td>Name of the publishing organizations</td>
+<td>(EVES extension)</td>
+</tr>
+<tr>
+<td>&quot;date&quot;</td>
+<td><a href="https://json-schema.org/understanding-json-schema/reference/string#dates-and-times" target="_blank">System date-time</a></td>
+<td>(EVES extension)</td>
+</tr>
+<tr>
+<td>&quot;type&quot;</td>
+<td>&quot;EVES-003&quot; + EVES URL</td>
+<td>(EVES extension)</td>
+</tr>
+<tr>
+<td>&quot;language&quot;</td>
+<td>Language of the asset content</td>
+<td><a href="https://datatracker.ietf.org/doc/html/rfc1766" target="_blank">RFC 1766</a> language tag (EVES extension)</td>
+</tr>
+<tr>
+<td>&quot;rights&quot;</td>
+<td>envited-x:hasResourceDescription &#x2192; gx:license</td>
+<td><a href="https://spdx.org/licenses/" target="_blank">SPDX identifier</a> (EVES extension)</td>
+</tr>
+<tr>
+<td>&quot;rights_uri&quot;</td>
+<td>manifest:hasLicense &#x2192; manifest:hasFileMetadata &#x2192; filePath</td>
+<td>Full license text URL OR policy smart contract DID (EVES extension)</td>
+</tr>
+<tr>
+<td>&quot;identifier&quot;</td>
+<td>Simulation Asset @id</td>
+<td>Unique identifier from the domainMetadata.json (EVES extension)</td>
 </tr>
 <tr>
 <td>&quot;formats&quot;</td>
 <td>artifactUri, externalUri, displayUri, envited-x_manifest</td>
-<td></td>
-</tr>
-<tr>
-<td>&quot;attributes&quot;</td>
-<td>Reverse domain notation for ontologies + URL</td>
-<td>All ontologies from top level nodes in files referenced in formats section</td>
+<td>(EVES extension)</td>
 </tr>
 </tbody>
 </table>
-<p><strong>&gt;Note:</strong> Some of the information need to be extracted from the <code>gx:LegalParticipant</code>.</p>
+<p><strong>Attributes mapping note:</strong> Ecosystem classification and ontology conformance are expressed in the OpenSea-style <code>&quot;attributes&quot;</code> array using <code>&quot;trait_type&quot;</code>/<code>&quot;value&quot;</code> objects.</p>
+<p>Every mint MUST include the following canonical static attributes:</p>
+<table>
+<thead>
+<tr>
+<th>ERC-721 <code>trait_type</code></th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&quot;Standard&quot;</td>
+<td>&quot;GaiaX&quot;</td>
+</tr>
+<tr>
+<td>&quot;Publisher&quot;</td>
+<td>&quot;ASCS&quot;</td>
+</tr>
+<tr>
+<td>&quot;Ecosystem&quot;</td>
+<td>&quot;ENVITED-X&quot;</td>
+</tr>
+<tr>
+<td>&quot;Specification&quot;</td>
+<td>&quot;EVES&quot;</td>
+</tr>
+<tr>
+<td>&quot;Token Type&quot;</td>
+<td>&quot;nft&quot;</td>
+</tr>
+<tr>
+<td>&quot;Format&quot;</td>
+<td>format:formatType + &quot; &quot; + format:version</td>
+</tr>
+</tbody>
+</table>
+<p>Each ontology attribute uses the full ontology IRI as <code>trait_type</code> and the release URL as <code>value</code>
+(for example, <code>{&quot;trait_type&quot;: &quot;https://w3id.org/ascs-ev/envited-x/hdmap/v6/&quot;, &quot;value&quot;: &quot;https://github.com/ASCS-eV/ontology-management-base/releases/tag/v0.1.6&quot;}</code>).
+Using the full ontology IRI as <code>trait_type</code> ensures each attribute is unique and machine-parseable.</p>
+<p><strong>Ontology attributes:</strong> The attributes section SHOULD include all ontologies that the asset instance conforms to.
+For an HD-Map asset, the following ontology attributes are RECOMMENDED:</p>
+<ul>
+<li><strong>Domain ontology</strong> (for example, <code>hdmap/v6</code>): identifies the simulation asset type</li>
+<li><strong>Ecosystem ontology</strong> (<code>envited-x/v3</code>): identifies the asset as part of the ENVITED-X Data Space</li>
+<li><strong>Gaia-X ontology</strong> (<code>gx</code>): signals conformance with the Gaia-X Trust Framework for data space interoperability</li>
+<li><strong>Georeference ontology</strong> (<code>georeference/v5</code>): included when the asset contains geospatial reference data (OPTIONAL per the <a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/hdmap" target="_blank">HD-Map Ontology SHACL shapes</a>)</li>
+</ul>
+<p>The <code>value</code> for each ontology attribute SHOULD be the release URL of the <a href="https://github.com/ASCS-eV/ontology-management-base/" target="_blank">ASCS Ontology Management Base</a> version used, except for <code>gx</code> which references the <a href="https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/" target="_blank">Gaia-X Policy Rules Compliance Document</a>.</p>
+<blockquote>
+<p><strong>Note:</strong> Fields marked as &quot;(EVES extension)&quot; are not part of the base ERC-721 or OpenSea standard but are defined by EVES-003
+for interoperability with the ENVITED-X Data Space.
+Marketplaces will display <code>name</code>, <code>description</code>, <code>image</code>, <code>animation_url</code>, <code>external_url</code>, and <code>attributes</code> natively;
+EVES extension fields are consumed by the ENVITED-X portal.</p>
+</blockquote>
+<h4 id="erc-7572-contract-level-metadata-evm">ERC-7572 Contract-Level Metadata (EVM)</h4>
+<p>For EVM-based deployments, the marketplace contract SHOULD implement <a href="https://eips.ethereum.org/EIPS/eip-7572" target="_blank">ERC-7572</a> by exposing a <code>contractURI()</code> function
+that returns a URI to a JSON document describing the contract/collection.</p>
+<p>The <code>contractURI()</code> response SHOULD include at minimum:</p>
+<ul>
+<li><code>name</code>: the collection name (for example, &quot;ENVITED-X Simulation Assets&quot;)</li>
+<li><code>description</code>: a description of the collection</li>
+<li><code>image</code>: a collection image/logo URI</li>
+<li><code>external_link</code>: URL to the ENVITED-X Data Space portal</li>
+</ul>
+<p>The contract SHOULD emit a <code>ContractURIUpdated()</code> event as defined in <a href="https://eips.ethereum.org/EIPS/eip-7572" target="_blank">ERC-7572</a> when the contract-level metadata is changed.</p>
 <h4 id="custom-spdx-license-identifier">Custom SPDX license identifier</h4>
 <ul>
 <li>Custom license in a LICENSE file in the asset.zip root folder: &quot;LicenseRef-Custom-Commercial-Agreement&quot;</li>
 <li>Custom license in a smart contract as json-ld ODRL policy: &quot;LicenseRef-Policy-Smart-Contract&quot;</li>
 </ul>
 <h2 id="backwards-compatibility">Backwards Compatibility</h2>
-<p>This specification introduces new processes for asset uploads and is fully compatible with existing ENVITED-X systems.
-No retroactive changes to previous assets are required.</p>
+<p>This specification introduces new processes for asset uploads.
+Earlier revisions of this EVES defined a Tezos/TZIP-21 token metadata path; the ENVITED-X Data Space no longer uses Tezos, and that path has been removed.
+As this specification and all its deployments are still drafts, no backwards compatibility with previously minted Tezos assets is maintained.</p>
 <h2 id="future-improvements">Future Improvements</h2>
-<p>The compatibility with the current release of the <a href="https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/" target="_blank">Gaia-X Policy Rules Compliance Document (Release 24.11)</a> is <strong>to be implemented</strong> in a future update of this EVES.</p>
+<ul>
+<li>The compatibility with the current release of the <a href="https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/" target="_blank">Gaia-X Policy Rules Compliance Document (Release 24.11)</a> is to be implemented in a future update of this EVES.</li>
+<li>The point in the asset lifecycle at which minted tokens and the claimed <code>minter</code> identity are verified against an ecosystem root of trust, and the components responsible for this verification, will be specified in a future revision of this EVES.</li>
+<li>On-chain verification of the minting organization&apos;s key material (for example, through P-256 signature verification via <a href="https://github.com/ethereum/RIPs/blob/master/RIPS/rip-7212.md" target="_blank">RIP-7212</a>) is a possible future extension.</li>
+</ul>
 <h2 id="references">References</h2>
 <ul>
 <li><a href="https://github.com/ASCS-eV/ontology-management-base/" target="_blank">ASCS Ontology Management Base</a></li>
@@ -693,10 +863,19 @@ No retroactive changes to previous assets are required.</p>
 <li><a href="https://datatracker.ietf.org/doc/html/rfc2119" target="_blank">RFC 2119: Key Words for Use in RFCs to Indicate Requirement Levels</a></li>
 <li><a href="https://docs.gaia-x.eu/policy-rules-committee/compliance-document/24.11/" target="_blank">Gaia-X Policy Rules Compliance Document (Release 24.11)</a></li>
 <li><a href="https://github.com/ASCS-eV/smart-contracts/tree/main/contracts/marketplace/" target="_blank">Marketplace Contract Reference Implementation</a></li>
-<li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/tzip21" target="_blank">TZIP-21 Ontology</a></li>
 <li><a href="https://github.com/openMSL/sl-5-8-asset-tools" target="_blank">ENVITED-X Simulation Asset Tools</a></li>
 <li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/envited-x" target="_blank">ENVITED-X Ontology</a></li>
 <li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/manifest" target="_blank">Manifest Ontology</a></li>
+<li><a href="https://docs.opensea.io/docs/metadata-standards" target="_blank">OpenSea Metadata Standards</a></li>
+<li><a href="https://eips.ethereum.org/EIPS/eip-4906" target="_blank">ERC-4906: EIP-721 Metadata Update Extension</a></li>
+<li><a href="https://eips.ethereum.org/EIPS/eip-5192" target="_blank">ERC-5192: Minimal Soulbound NFTs</a></li>
+<li><a href="https://eips.ethereum.org/EIPS/eip-721" target="_blank">ERC-721: Non-Fungible Token Standard</a></li>
+<li><a href="https://eips.ethereum.org/EIPS/eip-7572" target="_blank">ERC-7572: Contract-Level Metadata via contractURI()</a></li>
+<li><a href="../EVES-008/eves-008.html">EVES-008: ENVITED-X Identity and Credential Framework</a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc1766" target="_blank">RFC 1766: Tags for the Identification of Languages</a></li>
+<li><a href="https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/hdmap" target="_blank">HD-Map Ontology</a></li>
+<li><a href="../EVES-007/eves-007.html">EVES-007: ENVITED-X Blockchain Identifier URN Schema</a></li>
+<li><a href="https://github.com/ethereum/RIPs/blob/master/RIPS/rip-7212.md" target="_blank">RIP-7212: Precompile for secp256r1 Curve Support</a></li>
 </ul>
 
                                 
@@ -741,7 +920,7 @@ No retroactive changes to previous assets are required.</p>
     <script>
         var gitbook = gitbook || [];
         gitbook.push(function() {
-            gitbook.page.hasChanged({"page":{"created":"2024-11-19T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001"],"status":"Review","eves-identifier":3,"title":"EVES-003: ENVITED-X Asset Definition and Upload Process","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/4","replaces":"None","level":"2.3","depth":1,"next":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"EVES-004/eves-004.md","ref":"./EVES-004/eves-004.md","articles":[]},"previous":{"title":"EVES-002: ENVITED-X Data Space Architecture Overview","level":"2.2","depth":1,"path":"EVES-002/eves-002.md","ref":"./EVES-002/eves-002.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-003/eves-003.md","mtime":"2026-04-08T08:38:53.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-07-16T15:47:35.409Z"},"basePath":"..","book":{"language":""}});
+            gitbook.page.hasChanged({"page":{"created":"2024-11-19T00:00:00.000Z","author":"Carlo van Driesten (@jdsika)","requires":["EVES-001","EVES-007","EVES-008"],"status":"Review","eves-identifier":3,"title":"EVES-003: ENVITED-X Asset Definition and Upload Process","type":"Standards","discussions-to":"https://github.com/ASCS-eV/EVES/issues/4","replaces":"None","level":"2.3","depth":1,"next":{"title":"EVES-004: ENVITED-X Roles and Responsibilities of EVES Editors","level":"2.4","depth":1,"path":"EVES-004/eves-004.md","ref":"./EVES-004/eves-004.md","articles":[]},"previous":{"title":"EVES-002: ENVITED-X Data Space Architecture Overview","level":"2.2","depth":1,"path":"EVES-002/eves-002.md","ref":"./EVES-002/eves-002.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css","website":"styles/website.css"}},"file":{"path":"EVES-003/eves-003.md","mtime":"2026-07-17T15:49:22.000Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2026-07-17T15:50:37.679Z"},"basePath":"..","book":{"language":""}});
         });
     </script>
 </div>
