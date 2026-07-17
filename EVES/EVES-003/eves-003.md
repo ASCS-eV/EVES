@@ -242,7 +242,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 
 #### Step 3: Preview Data
 
-- **TBD**: Define visualization and preview mechanisms for uploaded data.
+- Visualization and preview mechanisms for uploaded data are portal-specific and not specified in this revision.
 - If a user triggers the "delete asset" button then all data stored in Step 2) is deleted.
 
 #### Step 4: Mint Token
@@ -252,6 +252,7 @@ The following process is implemented in the [ENVITED-X Data Space][12] portal de
 - It is RECOMMENDED to verify that CIDs from the IPFS service or software returns the same CIDs as the pre-calculation.
 - Upload `erc721_token_metadata.json` to IPFS.
 - Mint an [ERC-721][26] token where `tokenURI()` resolves to the ERC-721 metadata JSON on IPFS. The contract SHOULD implement [ERC-5192][25] for soulbound (non-transferable) tokens if applicable. The contract SHOULD emit [ERC-4906][24] `MetadataUpdate` events when metadata changes.
+- The mint transaction MAY be submitted by a relayer on behalf of the user; signed authorization evidence links the registration to the minting organization's identity (see [§6 Token Metadata](#6-token-metadata)).
 - The wallet/SDK will provide feedback if a token was minted successfully.
 
 #### Step 5: Listener and Database Synchronization
@@ -296,25 +297,22 @@ The synchronization between the smart contract as in the [Marketplace Contract R
 
 This section defines how EVES-003 asset metadata (derived from the ENVITED-X manifest and domain metadata) is mapped to ERC-721 token metadata.
 
-> **Issue — Metadata registration under discussion:**
-> The mechanism by which token metadata is registered on-chain is an open design question and intentionally left unspecified in this draft.
-> The current reference implementation direction is an evidence-based listing registry:
-> the ERC-721 token is minted to the registry contract itself upon submission of signed authorization evidence (for example, a key-binding JWT produced by an SSI wallet),
-> and the token binds a hash of a canonical metadata document together with its `ipfs://` URI.
-> Whether the full OpenSea-style document defined in this section is that registered document, or a minimal canonical core document that references it, is not yet decided.
-> The field mappings below remain normative for the content of the ERC-721 metadata; the registration and minting flow described in [§4 Step 4](#step-4-mint-token) is subject to change.
+Token metadata is registered on-chain through an evidence-based listing registry:
+the minted ERC-721 token records the minting organization's DID, a hash of the canonical metadata document, and the metadata URI.
+The registration is accompanied by signed authorization evidence (for example, a key-binding JWT produced by an SSI wallet as defined in [EVES-008][28]) that links the mint to the organization's identity.
+The exact registration flow and the precise structure of the registered document follow the reference implementation and may be refined in a future revision of this EVES;
+the field mappings below are normative for the content of the ERC-721 metadata.
 
 The minter MUST be a `simpulseid:OrganizationParticipant` (LegalEntity) identified by their `did:ethr` DID as defined in [EVES-008][28].
 The `did:ethr` identifier is anchored on Base (ERC-1056) and serves as the organizational identity regardless of the chain the token is minted on.
 The natural person performing the mint is linked to the organization through the `memberOf` credential property.
 Some of the information needs to be extracted from the `gx:LegalParticipant` via the SimpulseID `ParticipantCredential`.
 
-> **Issue — `minter` is an unverified claim on-chain:**
-> The `minter` field is part of the off-chain metadata JSON, so it states the organization's `did:ethr` even when a different Ethereum address (for example, a gas relayer) submits the mint transaction; the transaction sender is trust-irrelevant.
-> The smart contract cannot verify this claim at mint time:
-> `did:ethr` DID document entries such as added signing keys are published as ERC-1056 `DIDAttributeChanged` events, and events are not readable from contract storage.
-> Matching the claimed `minter` DID against the submitted authorization evidence therefore happens off-chain at read time, by indexers that reconstruct the DID document from the event log.
-> On-chain verification would require a registry that mirrors the organization's key set in contract storage (a possible future extension together with P-256 signature verification via RIP-7212).
+The `minter` field is part of the off-chain metadata JSON and therefore states the organization's DID as a claim:
+a different Ethereum address (for example, a gas relayer) may submit the mint transaction, so the transaction sender carries no trust semantics.
+The smart contract does not verify this claim at mint time.
+Instead, consuming systems verify the claimed `minter` DID against an ecosystem root of trust — such as the key material anchored in the organization's `did:ethr` DID document or credentials issued by a trust anchor — when reading the token.
+Where and when in the asset lifecycle this verification takes place remains open in this revision (see [Future Improvements](#future-improvements)).
 
 #### ERC-721 Metadata (EVM)
 
@@ -401,7 +399,9 @@ As this specification and all its deployments are still drafts, no backwards com
 
 ## Future Improvements
 
-The compatibility with the current release of the [Gaia-X Policy Rules Compliance Document (Release 24.11)][17] is **to be implemented** in a future update of this EVES.
+- The compatibility with the current release of the [Gaia-X Policy Rules Compliance Document (Release 24.11)][17] is to be implemented in a future update of this EVES.
+- The point in the asset lifecycle at which minted tokens and the claimed `minter` identity are verified against an ecosystem root of trust, and the components responsible for this verification, will be specified in a future revision of this EVES.
+- On-chain verification of the minting organization's key material (for example, through P-256 signature verification via [RIP-7212][32]) is a possible future extension.
 
 ## References
 
@@ -434,6 +434,7 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 - [RFC 1766: Tags for the Identification of Languages][29]
 - [HD-Map Ontology][30]
 - [EVES-007: ENVITED-X Blockchain Identifier URN Schema][31]
+- [RIP-7212: Precompile for secp256r1 Curve Support][32]
 
 [1]: https://github.com/ASCS-eV/ontology-management-base/
 [2]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/gx
@@ -465,3 +466,4 @@ The compatibility with the current release of the [Gaia-X Policy Rules Complianc
 [29]: https://datatracker.ietf.org/doc/html/rfc1766
 [30]: https://github.com/ASCS-eV/ontology-management-base/tree/main/artifacts/hdmap
 [31]: ../EVES-007/eves-007.md
+[32]: https://github.com/ethereum/RIPs/blob/master/RIPS/rip-7212.md
