@@ -169,7 +169,7 @@ Key privacy measures include:
 ### 7. References
 
 1. **Dataspace Protocol:**
-   - [Dataspace Protocol – Official Knowledgebase](https://docs.internationaldataspaces.org/ids-knowledgebase/dataspace-protocol)
+   - [Dataspace Protocol – IDSA Specification Repository](https://github.com/International-Data-Spaces-Association/ids-specification)
    - [Eclipse Dataspace Protocol Editor's Draft](https://eclipse-dataspace-protocol-base.github.io/DataspaceProtocol/)
 
 2. **SD-JWT-based Verifiable Credentials:**
