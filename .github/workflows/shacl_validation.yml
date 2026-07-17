@@ -19,9 +19,8 @@ jobs:
         with:
           python-version: "3.12"
 
-      # TODO: switch to @main once ASCS-eV/ontology-management-base#57 is merged
       - name: Install ontology-management-base
-        run: pip install "ontology-management-base @ git+https://github.com/ASCS-eV/ontology-management-base.git@feat/http-artifact-resolution"
+        run: pip install "ontology-management-base @ git+https://github.com/ASCS-eV/ontology-management-base.git@main"
 
       # Only envited-x_manifest.json is validated — input_manifest.json is a
       # partial Stage 1 input format that intentionally omits hasManifestReference
